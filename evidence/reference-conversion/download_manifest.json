@@ -1,0 +1,64 @@
+[
+  {
+    "file": "ACCC_Targeting_Scams_2025.pdf",
+    "url": "https://www.accc.gov.au/system/files/targeting-scams-report-2025.pdf",
+    "status": "converted_markdown_retained_original_pdf_removed_by_user",
+    "previous_status": "failed",
+    "previous_error": "HTTP Error 403: Forbidden",
+    "markdown": "references/accc/Targeting_Scams_2025.md",
+    "removed_local_source": "references/accc/Targeting_Scams_2025.pdf"
+  },
+  {
+    "file": "ACCC_Publication.html",
+    "url": "https://www.accc.gov.au/about-us/publications/serial-publications/targeting-scams-reports-on-scams-activity/targeting-scams-report-of-the-national-anti-scam-centre-on-scams-data-and-activity-2025",
+    "status": "not_required_report_provided_by_user",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "file": "UNSW_AI_Guidance.html",
+    "url": "https://www.unsw.edu.au/student/managing-your-studies/academic-skills-support/toolkit/ai",
+    "final_url": "https://www.unsw.edu.au/student/managing-your-studies/academic-skills-support/toolkit/ai",
+    "content_type": "text/html;charset=utf-8",
+    "bytes": 297379,
+    "status": "removed_by_user",
+    "removed_local_path": "references/unsw/originals/UNSW_AI_Guidance.html",
+    "previous_download_status": "downloaded",
+    "removed_date": "2026-10-13"
+  },
+  {
+    "file": "UNSW_Special_Consideration.html",
+    "url": "https://www.unsw.edu.au/student/managing-your-studies/academic-life/special-consideration",
+    "final_url": "https://www.unsw.edu.au/student/managing-your-studies/academic-life/special-consideration",
+    "content_type": "text/html;charset=utf-8",
+    "bytes": 395705,
+    "status": "removed_by_user",
+    "removed_local_path": "references/unsw/originals/UNSW_Special_Consideration.html",
+    "previous_download_status": "downloaded",
+    "removed_date": "2026-10-13"
+  },
+  {
+    "file": "Time_Zone_Converter.html",
+    "url": "https://www.timeanddate.com/worldclock/converter.html",
+    "status": "excluded_by_user",
+    "error": "HTTP Error 403: Forbidden",
+    "previous_status": "failed"
+  },
+  {
+    "file": "Australia_DST.html",
+    "url": "https://greenwichmeantime.com/time-zone/australia/daylight-saving-time/",
+    "status": "excluded_by_user",
+    "error": "HTTP Error 403: Forbidden",
+    "previous_status": "failed"
+  },
+  {
+    "file": "UNSW_AI_Framework.png",
+    "url": "https://www.unsw.edu.au/content/dam/images/cs-comms/stakeholders/2025-01-ai-content/2025-01-ai-content-0001.png",
+    "final_url": "https://www.unsw.edu.au/content/dam/images/cs-comms/stakeholders/2025-01-ai-content/2025-01-ai-content-0001.png",
+    "content_type": "image/png",
+    "bytes": 379288,
+    "status": "removed_by_user",
+    "removed_local_path": "references/unsw/originals/UNSW_AI_Framework.png",
+    "previous_download_status": "downloaded",
+    "removed_date": "2026-10-13"
+  }
+]

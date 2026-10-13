@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-13",
+  "authorization": "Explicit user request: remove references/unsw and the two original PDFs",
+  "removed_files": [
+    {
+      "path": "references/unsw/markdown/UNSW_AI_Framework.md",
+      "sha256": "FC79AD4C145A3C5C74A2A38C62B3109657A15F17D91AB36868F4D4D5AF72C337",
+      "bytes": 2002
+    },
+    {
+      "path": "references/unsw/markdown/UNSW_AI_Guidance.md",
+      "sha256": "E593A696AA47111DE9E8CB80A5F8EE1E1595AE2BE572AE235DB871F7AAA2DE91",
+      "bytes": 14170
+    },
+    {
+      "path": "references/unsw/markdown/UNSW_Special_Consideration.md",
+      "sha256": "EDD12138A5F9949938927EC6C67C7E5402269050CFF1CCB2FF1412E3D25ED705",
+      "bytes": 23515
+    },
+    {
+      "path": "references/unsw/originals/UNSW_AI_Framework.png",
+      "sha256": "8C3495B24906040318E381D843713D457733567EE4B3E2B20B42E3E9D9E964A7",
+      "bytes": 379288
+    },
+    {
+      "path": "references/unsw/originals/UNSW_AI_Guidance.html",
+      "sha256": "125C039ABB9A5886DC9EB15DEFEEDEB12B209AE21D1E6411D8EBE866E351697E",
+      "bytes": 297379
+    },
+    {
+      "path": "references/unsw/originals/UNSW_Special_Consideration.html",
+      "sha256": "EC50905D61E1724F6DC6279937341BFA2CAAD229A72907627CCE9B891105AC02",
+      "bytes": 395705
+    },
+    {
+      "path": "references/assignment/Assessment_Guide.pdf",
+      "sha256": "3B97EB2FD621BA8F423F3C45D2736E48316D40C8F07E5F587CB0A9244200847F",
+      "bytes": 444182
+    },
+    {
+      "path": "references/accc/Targeting_Scams_2025.pdf",
+      "sha256": "9D21086DEDCA93F099728888B330DF7AB0CBB787FC7136CF948C6CE09F4FD671",
+      "bytes": 2668694
+    }
+  ]
+}

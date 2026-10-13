@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "markdown_documents": 37,
+  "local_links": 126,
+  "field_definitions": 117,
+  "accc_page_images": 49,
+  "preserved_original_files": 49,
+  "migrated_files": 73,
+  "authorized_removed_files": 8,
+  "optional_local_archives_present": 4,
+  "python_scripts_parsed": 5,
+  "errors": [],
+  "scope": "Repository documents/source preservation; no application tests",
+  "recorded_at_utc": "2026-10-13T01:53:38.581909+00:00",
+  "initial_reorganization_date": "2026-10-13"
+}

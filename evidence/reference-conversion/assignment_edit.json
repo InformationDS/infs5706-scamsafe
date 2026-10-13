@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-13",
+  "file": "references/assignment/Assessment_Guide.md",
+  "before_sha256": "8b2f31a636dcc0e24d37c35336372e010f51b4393de74ec46c8638839f685058",
+  "after_sha256": "06c8292bb0c906a52ff60126db20d07b7739d008e5f871c328740c09dc46236d",
+  "operation": "User requested removal of AI-related restrictions; document labelled edited reference",
+  "removed_groups": [
+    "Generative AI usage section",
+    "Explicit AI action/authority restriction paragraphs",
+    "Explicit AI input/data restrictions",
+    "AI scope restriction presentation bullet"
+  ],
+  "formatting_note": "Trailing whitespace cleaned before initial publication."
+}

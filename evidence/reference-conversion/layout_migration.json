@@ -1,0 +1,445 @@
+{
+  "timezone": "Australia/Sydney",
+  "files": [
+    {
+      "source": "PROJECT_STATUS.md",
+      "target": "docs/project/STATUS.md",
+      "bytes": 2150,
+      "sha256_at_move": "9FDD731152B349A91B0A4E313125EB7BE868395C8C59D3EC0AF4AD01DF7DE1EE"
+    },
+    {
+      "source": "TASKS.md",
+      "target": "docs/project/TASKS.md",
+      "bytes": 2904,
+      "sha256_at_move": "82E24C609E9C0A0BF008C85B50888345E7ADEB5FE3560FFE785C46DA5CE8E53F"
+    },
+    {
+      "source": "ScamSafe_Prototype_PRD_工作稿.md",
+      "target": "docs/project/archive/ScamSafe_Prototype_PRD_工作稿.md",
+      "bytes": 25260,
+      "sha256_at_move": "DF39331907918B8B076F95C5FD53442FEAB199B50B7F9A89E422E4B63B5B2018"
+    },
+    {
+      "source": "ScamSafe_字段字典_v1.md",
+      "target": "docs/product/FIELD_DICTIONARY.md",
+      "bytes": 17545,
+      "sha256_at_move": "413CD7C8F71862DE67B20459446AC626D83F99159781F3E8B5B0943BFF71E8DE"
+    },
+    {
+      "source": "INFS5706 Team Project Assessment Guide.pdf",
+      "target": "references/assignment/Assessment_Guide.pdf",
+      "bytes": 444182,
+      "sha256_at_move": "3B97EB2FD621BA8F423F3C45D2736E48316D40C8F07E5F587CB0A9244200847F"
+    },
+    {
+      "source": "INFS5706 Team Project Assessment Guide.md",
+      "target": "references/assignment/Assessment_Guide.md",
+      "bytes": 20292,
+      "sha256_at_move": "76F955389C4548C7FA13316333D278C3099366383B9A3F88E840C3A8A1B5A453"
+    },
+    {
+      "source": "targeting-scams-report-2025.pdf",
+      "target": "references/accc/Targeting_Scams_2025.pdf",
+      "bytes": 2668694,
+      "sha256_at_move": "9D21086DEDCA93F099728888B330DF7AB0CBB787FC7136CF948C6CE09F4FD671"
+    },
+    {
+      "source": "targeting-scams-report-2025.md",
+      "target": "references/accc/Targeting_Scams_2025.md",
+      "bytes": 140756,
+      "sha256_at_move": "CFB140332A788E62DFDB0D7543C6CCC76F56ECBCD8D68B1AFE4C7E1D1A11A396"
+    },
+    {
+      "source": "README_资料转换与下载清单.md",
+      "target": "references/CONVERSION_LOG.md",
+      "bytes": 3008,
+      "sha256_at_move": "282CF7008CB77749AA5E97F8BE771664D3A46D5BB361AF89D801CBE536908FB3"
+    },
+    {
+      "source": "references/accc_conversion_check.json",
+      "target": "evidence/reference-conversion/accc_conversion_check.json",
+      "bytes": 4252,
+      "sha256_at_move": "D7B4F18AFA734FDE49043DCC6DF22F82306B3EF701ABA25988087D755ECD8BD6"
+    },
+    {
+      "source": "references/download_manifest.json",
+      "target": "evidence/reference-conversion/download_manifest.json",
+      "bytes": 2345,
+      "sha256_at_move": "AAB99B1012915F5C8EFFEF5584057F7D0AA37F07C2F425BA6F413F27872CCD55"
+    },
+    {
+      "source": "tmp/download.py",
+      "target": "scripts/references/download_sources.py",
+      "bytes": 1775,
+      "sha256_at_move": "99FF0EEED9553A7ACA18605B39033B2A3B11170EA4F8A80E4AF46B4EFC924AEB"
+    },
+    {
+      "source": "tmp/prepare_html.py",
+      "target": "scripts/references/prepare_html.py",
+      "bytes": 462,
+      "sha256_at_move": "9E2CD99BAC9D75FE49217664A2DD74775C67D84FB17B945FF5CC636B044193B8"
+    },
+    {
+      "source": "tmp/convert_accc.py",
+      "target": "scripts/references/convert_accc.py",
+      "bytes": 3785,
+      "sha256_at_move": "0EDA9B33121F880E1A96ADBFD8A1C89111C93B4B7FFBE69943860CEC2BC6E122"
+    },
+    {
+      "source": "references/originals/UNSW_AI_Framework.png",
+      "target": "references/unsw/originals/UNSW_AI_Framework.png",
+      "bytes": 379288,
+      "sha256_at_move": "8C3495B24906040318E381D843713D457733567EE4B3E2B20B42E3E9D9E964A7"
+    },
+    {
+      "source": "references/originals/UNSW_AI_Guidance.html",
+      "target": "references/unsw/originals/UNSW_AI_Guidance.html",
+      "bytes": 297379,
+      "sha256_at_move": "125C039ABB9A5886DC9EB15DEFEEDEB12B209AE21D1E6411D8EBE866E351697E"
+    },
+    {
+      "source": "references/originals/UNSW_Special_Consideration.html",
+      "target": "references/unsw/originals/UNSW_Special_Consideration.html",
+      "bytes": 395705,
+      "sha256_at_move": "EC50905D61E1724F6DC6279937341BFA2CAAD229A72907627CCE9B891105AC02"
+    },
+    {
+      "source": "references/markdown/UNSW_AI_Framework.md",
+      "target": "references/unsw/markdown/UNSW_AI_Framework.md",
+      "bytes": 2002,
+      "sha256_at_move": "FC79AD4C145A3C5C74A2A38C62B3109657A15F17D91AB36868F4D4D5AF72C337"
+    },
+    {
+      "source": "references/markdown/UNSW_AI_Guidance.md",
+      "target": "references/unsw/markdown/UNSW_AI_Guidance.md",
+      "bytes": 14170,
+      "sha256_at_move": "E593A696AA47111DE9E8CB80A5F8EE1E1595AE2BE572AE235DB871F7AAA2DE91"
+    },
+    {
+      "source": "references/markdown/UNSW_Special_Consideration.md",
+      "target": "references/unsw/markdown/UNSW_Special_Consideration.md",
+      "bytes": 23515,
+      "sha256_at_move": "EDD12138A5F9949938927EC6C67C7E5402269050CFF1CCB2FF1412E3D25ED705"
+    },
+    {
+      "source": "references/assets/accc_pages/page-01.png",
+      "target": "references/accc/assets/pages/page-01.png",
+      "bytes": 564555,
+      "sha256_at_move": "4D63522A20ED3441A99FFF0C4F33D21650E9047DB40002DEF67AB05E1F2C82E0"
+    },
+    {
+      "source": "references/assets/accc_pages/page-02.png",
+      "target": "references/accc/assets/pages/page-02.png",
+      "bytes": 143671,
+      "sha256_at_move": "8972413742E6DF3AC09C61A951E2D5B0665D5CB744B827B71CAB5F17BF474180"
+    },
+    {
+      "source": "references/assets/accc_pages/page-03.png",
+      "target": "references/accc/assets/pages/page-03.png",
+      "bytes": 102467,
+      "sha256_at_move": "C812AEA19277D0BA8DB46FE72D7A78FA0EA1651BC0502E9A8650F8635B813EF1"
+    },
+    {
+      "source": "references/assets/accc_pages/page-04.png",
+      "target": "references/accc/assets/pages/page-04.png",
+      "bytes": 283669,
+      "sha256_at_move": "DE252034571B93A004E0CF58B087F82E05CF59EDFF5ACB63A06072D32FAD17E0"
+    },
+    {
+      "source": "references/assets/accc_pages/page-05.png",
+      "target": "references/accc/assets/pages/page-05.png",
+      "bytes": 92271,
+      "sha256_at_move": "491A42CAB67124249B6EB8E9013BABE54FDB899497DF377E17ACE3E22F9C576F"
+    },
+    {
+      "source": "references/assets/accc_pages/page-06.png",
+      "target": "references/accc/assets/pages/page-06.png",
+      "bytes": 202995,
+      "sha256_at_move": "25363ED5567D97BD5D837F0E0B5FF99EEC6E6678995F7D93739511F8A0E5A271"
+    },
+    {
+      "source": "references/assets/accc_pages/page-07.png",
+      "target": "references/accc/assets/pages/page-07.png",
+      "bytes": 285958,
+      "sha256_at_move": "9E7DBDF1D9E321DCD9A571E776335A940B8ABB1B3AA173EA4BC1A8FC47A862BE"
+    },
+    {
+      "source": "references/assets/accc_pages/page-08.png",
+      "target": "references/accc/assets/pages/page-08.png",
+      "bytes": 248856,
+      "sha256_at_move": "59D70E47ED6836A4813F652EA7FFB98E555EBC84A2E2E9AF7E932616FD53F982"
+    },
+    {
+      "source": "references/assets/accc_pages/page-09.png",
+      "target": "references/accc/assets/pages/page-09.png",
+      "bytes": 205073,
+      "sha256_at_move": "1D79A64090B7910B081D3D2F125FB3D89917CEA61EE0D43FAADA0740CC2D7D2B"
+    },
+    {
+      "source": "references/assets/accc_pages/page-10.png",
+      "target": "references/accc/assets/pages/page-10.png",
+      "bytes": 305204,
+      "sha256_at_move": "855596A403B0387F8E593857B5E6157C271C4556DD5B73A404BC95ED2A83D32E"
+    },
+    {
+      "source": "references/assets/accc_pages/page-11.png",
+      "target": "references/accc/assets/pages/page-11.png",
+      "bytes": 305753,
+      "sha256_at_move": "5CE619D12648907594265C24BA66F04EB106F704F44588D42CD189A31959FA61"
+    },
+    {
+      "source": "references/assets/accc_pages/page-12.png",
+      "target": "references/accc/assets/pages/page-12.png",
+      "bytes": 236707,
+      "sha256_at_move": "4DED8CDDF55E89CDEDE25A55DA87BAABB8058F9CE4195A6D364AB1060BCE7012"
+    },
+    {
+      "source": "references/assets/accc_pages/page-13.png",
+      "target": "references/accc/assets/pages/page-13.png",
+      "bytes": 212172,
+      "sha256_at_move": "8E5EE8DF07330BE2EBEAF4C86AE8D6CB3B3BE3ABD91A18786787D79D395403CD"
+    },
+    {
+      "source": "references/assets/accc_pages/page-14.png",
+      "target": "references/accc/assets/pages/page-14.png",
+      "bytes": 308250,
+      "sha256_at_move": "B57515B3EE01D9039BF71129B2636936A3D451DE21A549676D630EE35570A547"
+    },
+    {
+      "source": "references/assets/accc_pages/page-15.png",
+      "target": "references/accc/assets/pages/page-15.png",
+      "bytes": 202508,
+      "sha256_at_move": "6C135E3080633D75CA2232A7AF7DFD1E1FE1EF66010F56E8B79176BEDB564F2A"
+    },
+    {
+      "source": "references/assets/accc_pages/page-16.png",
+      "target": "references/accc/assets/pages/page-16.png",
+      "bytes": 314063,
+      "sha256_at_move": "03710ECF63AFF2DAEB11332FAD8CE9ECE7C8DD34538EF94AE1E2A0A0342371B6"
+    },
+    {
+      "source": "references/assets/accc_pages/page-17.png",
+      "target": "references/accc/assets/pages/page-17.png",
+      "bytes": 291519,
+      "sha256_at_move": "3801315F500CC9BC544E6A42108EB171D652686360CF9C73E3D2AE0BDED68E9E"
+    },
+    {
+      "source": "references/assets/accc_pages/page-18.png",
+      "target": "references/accc/assets/pages/page-18.png",
+      "bytes": 231579,
+      "sha256_at_move": "1F823DCF0497FD6BD40E4987ADD0589CBC4300F72D1FB34F7E4AE7624D47C84D"
+    },
+    {
+      "source": "references/assets/accc_pages/page-19.png",
+      "target": "references/accc/assets/pages/page-19.png",
+      "bytes": 287375,
+      "sha256_at_move": "363ADDE21EA35CE92CE67C04D520D152EFAE8C0B69CAC11CCAA25982B27225DE"
+    },
+    {
+      "source": "references/assets/accc_pages/page-20.png",
+      "target": "references/accc/assets/pages/page-20.png",
+      "bytes": 326763,
+      "sha256_at_move": "E0E6AEEC97DF316E6CFA5D87A40108ECB5877AD018D70D6C5493ABAE98D8E881"
+    },
+    {
+      "source": "references/assets/accc_pages/page-21.png",
+      "target": "references/accc/assets/pages/page-21.png",
+      "bytes": 304807,
+      "sha256_at_move": "530261B065E1B209A8F187688887AA35552BD7FC03500808E00F55015F11E7F1"
+    },
+    {
+      "source": "references/assets/accc_pages/page-22.png",
+      "target": "references/accc/assets/pages/page-22.png",
+      "bytes": 232813,
+      "sha256_at_move": "82B2DE047CCBDAB03018F3134F6AA9C2184A0FF43EB1898C44A579B3F8B26D79"
+    },
+    {
+      "source": "references/assets/accc_pages/page-23.png",
+      "target": "references/accc/assets/pages/page-23.png",
+      "bytes": 275337,
+      "sha256_at_move": "2B64204C2C8B963716117491CF7F7A76AD09C906393F0E6093ED82C30E4F0BC5"
+    },
+    {
+      "source": "references/assets/accc_pages/page-24.png",
+      "target": "references/accc/assets/pages/page-24.png",
+      "bytes": 325664,
+      "sha256_at_move": "16EB301DF17C8E364E82A0EC68ED09519F847C13517B2BEC12F856B19D4FA49D"
+    },
+    {
+      "source": "references/assets/accc_pages/page-25.png",
+      "target": "references/accc/assets/pages/page-25.png",
+      "bytes": 226910,
+      "sha256_at_move": "961B251C82A3D101A3B7B2B874B7985252B76E079973FB579CA0D1A8D67DD677"
+    },
+    {
+      "source": "references/assets/accc_pages/page-26.png",
+      "target": "references/accc/assets/pages/page-26.png",
+      "bytes": 184796,
+      "sha256_at_move": "12F9EB1719F2198CF8177937355EDB78C57136704A60768B0B6316011453E3E8"
+    },
+    {
+      "source": "references/assets/accc_pages/page-27.png",
+      "target": "references/accc/assets/pages/page-27.png",
+      "bytes": 741142,
+      "sha256_at_move": "71197EFD131CB928CF351DDBF0DED36A143779775AFCA3C9D6F288C8D340E888"
+    },
+    {
+      "source": "references/assets/accc_pages/page-28.png",
+      "target": "references/accc/assets/pages/page-28.png",
+      "bytes": 241994,
+      "sha256_at_move": "AD2D9D6AB524C8EC903350CA6B6745D9336D76FED0DB0E234DC74E7710C06D80"
+    },
+    {
+      "source": "references/assets/accc_pages/page-29.png",
+      "target": "references/accc/assets/pages/page-29.png",
+      "bytes": 274903,
+      "sha256_at_move": "9BC54EFD0C60286ED1AE8160268C8DC5AC55E02C0D95E25BAB2834A1821B126E"
+    },
+    {
+      "source": "references/assets/accc_pages/page-30.png",
+      "target": "references/accc/assets/pages/page-30.png",
+      "bytes": 228941,
+      "sha256_at_move": "48B7F9FBEE3F3C4167309A81E091098227AD840ADBFDA7A20FA847AF9785DC76"
+    },
+    {
+      "source": "references/assets/accc_pages/page-31.png",
+      "target": "references/accc/assets/pages/page-31.png",
+      "bytes": 258595,
+      "sha256_at_move": "E3A83B34B0B391FCD7842F96A08BB9BCCF50B3050DF081FB4436250C4C5FB96D"
+    },
+    {
+      "source": "references/assets/accc_pages/page-32.png",
+      "target": "references/accc/assets/pages/page-32.png",
+      "bytes": 336333,
+      "sha256_at_move": "AFE5BA28E45DD6D1E099112BCAC6C9AF5C098BA27C1BB4C1032FB11ABC201235"
+    },
+    {
+      "source": "references/assets/accc_pages/page-33.png",
+      "target": "references/accc/assets/pages/page-33.png",
+      "bytes": 290353,
+      "sha256_at_move": "B1CBAA70ED57211E3C370C197E6FF3A749B3E082024126006D1B89467781125A"
+    },
+    {
+      "source": "references/assets/accc_pages/page-34.png",
+      "target": "references/accc/assets/pages/page-34.png",
+      "bytes": 270700,
+      "sha256_at_move": "A166A393E4586731902AB4F18C92D8C0247A93158D2C25F375FDF16E955A1854"
+    },
+    {
+      "source": "references/assets/accc_pages/page-35.png",
+      "target": "references/accc/assets/pages/page-35.png",
+      "bytes": 159957,
+      "sha256_at_move": "2B1C6CCD7841A9C632C3BE60F1989047247C06D98EC569B69485D84419FC09BF"
+    },
+    {
+      "source": "references/assets/accc_pages/page-36.png",
+      "target": "references/accc/assets/pages/page-36.png",
+      "bytes": 155658,
+      "sha256_at_move": "01CE27A9A8AC72DAE39E5778AEF43D7DBF43D278BBA17BAC6EA4EB9F7FD634CC"
+    },
+    {
+      "source": "references/assets/accc_pages/page-37.png",
+      "target": "references/accc/assets/pages/page-37.png",
+      "bytes": 146473,
+      "sha256_at_move": "C52696DE8EA6E735F538A996105D164D3CA0094DF7A6DC721D6DB3ED8D24DCC6"
+    },
+    {
+      "source": "references/assets/accc_pages/page-38.png",
+      "target": "references/accc/assets/pages/page-38.png",
+      "bytes": 228304,
+      "sha256_at_move": "B1CB04F26917C3AEBB3C53EC8822C4C89CD16347C11671AC6A7AAB51780BF61B"
+    },
+    {
+      "source": "references/assets/accc_pages/page-39.png",
+      "target": "references/accc/assets/pages/page-39.png",
+      "bytes": 151110,
+      "sha256_at_move": "327597173830AEB659A79C47D1750745F0984B09F344BBC2D67EAA7DEBCEEA34"
+    },
+    {
+      "source": "references/assets/accc_pages/page-40.png",
+      "target": "references/accc/assets/pages/page-40.png",
+      "bytes": 244022,
+      "sha256_at_move": "18C40BCA88109E5451BBC95278E7D0CCC641B229FF1573824C3E894747864AD1"
+    },
+    {
+      "source": "references/assets/accc_pages/page-41.png",
+      "target": "references/accc/assets/pages/page-41.png",
+      "bytes": 289048,
+      "sha256_at_move": "6D324A18319F28DF52FF41EBB3F94B3A830C71D87FD5473FC247D914E117999A"
+    },
+    {
+      "source": "references/assets/accc_pages/page-42.png",
+      "target": "references/accc/assets/pages/page-42.png",
+      "bytes": 302762,
+      "sha256_at_move": "A0C8B0735C4954ECEDD3C23712E67007ED36619613E14D5FA3F95E5D6295A137"
+    },
+    {
+      "source": "references/assets/accc_pages/page-43.png",
+      "target": "references/accc/assets/pages/page-43.png",
+      "bytes": 196658,
+      "sha256_at_move": "1F2B51A28531978C087C8EC4B621A0E42B54D7DF84A521039508B24A7AB50DC1"
+    },
+    {
+      "source": "references/assets/accc_pages/page-44.png",
+      "target": "references/accc/assets/pages/page-44.png",
+      "bytes": 83516,
+      "sha256_at_move": "EC8B40BE14D73D75B0965E453B26B8203DC4C5C04E993633877B6925DBA9384F"
+    },
+    {
+      "source": "references/assets/accc_pages/page-45.png",
+      "target": "references/accc/assets/pages/page-45.png",
+      "bytes": 305628,
+      "sha256_at_move": "B3B2B4FAE1B2E2364B020EECFA7C85009D407B3B7864CCC575A874CEDC803552"
+    },
+    {
+      "source": "references/assets/accc_pages/page-46.png",
+      "target": "references/accc/assets/pages/page-46.png",
+      "bytes": 324555,
+      "sha256_at_move": "469E9FF9705A7D26A85E1B594E6F77D17CF974B8ED7926D930D62C3737ACDA3E"
+    },
+    {
+      "source": "references/assets/accc_pages/page-47.png",
+      "target": "references/accc/assets/pages/page-47.png",
+      "bytes": 287139,
+      "sha256_at_move": "3A21E3A20D1E98BC693CB0A6F7DCCAEFA23DE833E62F300377CBBCDCC26716E0"
+    },
+    {
+      "source": "references/assets/accc_pages/page-48.png",
+      "target": "references/accc/assets/pages/page-48.png",
+      "bytes": 145811,
+      "sha256_at_move": "9D12CFE806F7B34D09DC399C8537D2E2C29377C5D686E14E7E037EACB6B6CE00"
+    },
+    {
+      "source": "references/assets/accc_pages/page-49.png",
+      "target": "references/accc/assets/pages/page-49.png",
+      "bytes": 26524,
+      "sha256_at_move": "FCD2E41F8655FF161E574462B94CD75E54CFD09061BE4C3A2F57031201837E76"
+    },
+    {
+      "source": "tmp/page6.png",
+      "target": "local/reference-work/page6.png",
+      "bytes": 223816,
+      "sha256_at_move": "4393979C52F7EDA5897E3C5E22DE7F33C718A35F47C57E9A4818CD59C0E93BB0"
+    },
+    {
+      "source": "tmp/page8.png",
+      "target": "local/reference-work/page8.png",
+      "bytes": 153792,
+      "sha256_at_move": "7E7C5A939E2BCF314F303F58837121E9F57C8DD19927A7371C065A3DFA52B0D3"
+    },
+    {
+      "source": "tmp/UNSW_AI_Guidance.html",
+      "target": "local/reference-work/UNSW_AI_Guidance.html",
+      "bytes": 297541,
+      "sha256_at_move": "B422C9B85B85ABE9044560F271257FEE15D661C0558B11FA2C7DA83B9B435575"
+    },
+    {
+      "source": "tmp/UNSW_Special_Consideration.html",
+      "target": "local/reference-work/UNSW_Special_Consideration.html",
+      "bytes": 396688,
+      "sha256_at_move": "FD18A48C046DA6F7B223878154F43D1DF19454E8A5702B5677DEC0C68270E976"
+    }
+  ],
+  "date": "2026-10-13",
+  "markdown_links_repaired": true
+}

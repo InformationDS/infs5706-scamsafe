@@ -1,0 +1,24 @@
+# Local scratch work, case exports and caches
+/local/
+/tmp/
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+dist/
+build/
+coverage/
+.next/
+.vite/
+.DS_Store
+Thumbs.db
+*.log
+# Secrets and machine-specific configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
