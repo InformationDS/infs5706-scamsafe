@@ -7,7 +7,7 @@ Before GitHub setup this file is a temporary task index. Once Issues exist, link
 | TASK-001 | Collaboration rules, reading entry and initial progress snapshot | Done: documentation prepared | Current session | Existing requirements |
 | TASK-002 | Consolidated formal PRD, decision summary and architecture outline | Done: specifications and architecture notes prepared | Current session | Accepted product decisions |
 | TASK-003 | Proposed directory layout, link migration and reference index | Done: local layout reorganized and checked | Current session | TASK-002, authorized reorganization |
-| TASK-004 | GitHub repository and collaboration templates/setup | In progress: public repository creation and initial push | Current session | TASK-003, owner InformationDS |
+| TASK-004 | GitHub repository and collaboration templates/setup | Public repository and initial push complete; member access/Issues pending | Current session | TASK-003, owner InformationDS |
 | TASK-005 | Shared data contracts and configured roles/permissions | Not started | Unassigned | TASK-002 |
 | TASK-006 | Reviewed synthetic guidelines and 15 evaluation cases | Not started | Unassigned | TASK-005 |
 | TASK-007 | Dual-area workflow interface | Not started | Unassigned | TASK-005, implementation choice |
@@ -57,3 +57,10 @@ Relevant commit / PR / evidence:
 - 作业指南已标为编辑参考版本；索引、引用、工具入口和校验脚本已更新。
 - 此为资料维护，不涉及应用实现或既有产品业务权限的改动。
 - 验证结果见 evidence/reference-conversion/repository_check.json。
+
+## TASK-004 初始发布交接（2026-10-13）
+
+- 创建公开仓库并成功推送 main，地址：https://github.com/InformationDS/infs5706-scamsafe。
+- 100 个跟踪文件包含规格、资料、说明和模板；本地临时目录未上传。
+- 已检查上传清单、常见密钥模式、文档链接、资料哈希与 diff 格式；无应用验收结果。
+- 成员邀请及任务 Issue 仍待配置；有对应 Issue 前，本任务索引继续作为临时入口。

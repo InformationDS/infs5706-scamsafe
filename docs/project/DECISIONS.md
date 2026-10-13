@@ -40,3 +40,7 @@
 ## 资料精简（2026-10-13）
 
 用户明确要求删除 UNSW 资料目录及两份原始 PDF，并删去作业指南 Markdown 中 AI 相关限制。已执行；当前指南标为编辑参考版本，所有引用转向保留的 Markdown。既有产品 PRD 的业务要求未在本次资料清理中变更。
+
+## GitHub 发布（2026-10-13）
+
+用户明确要求新建公开仓库并上传。已在 InformationDS 下创建 [infs5706-scamsafe](https://github.com/InformationDS/infs5706-scamsafe)，main 为默认分支；仅上传项目内被 Git 跟踪的文件，local/ 保持忽略。公开性由 GitHub 查询核实。成员写入权限、Issues、保护规则与 CI 尚未配置。

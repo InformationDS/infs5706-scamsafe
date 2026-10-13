@@ -59,4 +59,11 @@ python scripts/maintenance/check_repository.py
 
 ## GitHub 状态
 
-按用户要求，正在账号 `InformationDS` 下创建公开仓库 `infs5706-scamsafe` 并推送初始项目。小组成员用户名及协作权限待提供；实际创建与推送状态见项目进度。
+公开仓库：[InformationDS/infs5706-scamsafe](https://github.com/InformationDS/infs5706-scamsafe)，默认分支为 `main`。初始项目已推送，包含规格、参考资料、协作规则和模板；应用尚未实现。
+
+```text
+git clone https://github.com/InformationDS/infs5706-scamsafe.git
+cd infs5706-scamsafe
+```
+
+小组成员用户名及写入权限待提供；公开读取不等于获得写入权限。Issues、分支保护和 CI 尚未配置，成员先按 CONTRIBUTING.md 的任务与 PR 流程协作。

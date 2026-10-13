@@ -48,6 +48,6 @@ When paths change during an authorized reorganization, update this reading order
 
 The initial directory reorganization is complete. README.md describes the actual layout. Current requirements are in docs/product/PRD.md; the archived discussion draft is historical context, not a second authoritative PRD.
 
-The app/server/data/test directories contain planning notes, not implemented runtime code or executed application tests. GitHub repository setup and model integration remain pending.
+The app/server/data/test directories contain planning notes, not implemented runtime code or executed application tests. The public GitHub repository is https://github.com/InformationDS/infs5706-scamsafe with default branch main. Collaborator write access, Issues and CI remain pending, as does model integration. Until corresponding Issues exist, docs/project/TASKS.md remains the temporary task index.
 
 For documentation checks, run `python scripts/maintenance/check_repository.py` from the repository root. Do not run migration or download scripts as startup steps.

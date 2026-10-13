@@ -9,12 +9,12 @@ Snapshot date: 2026-10-13, Australia/Sydney.
 - Accepted product decisions consolidated in [PRD](../product/PRD.md); discussion draft archived.
 - [Field dictionary](../product/FIELD_DICTIONARY.md) defines 117 fields; it is not an implemented schema.
 - Actual directory layout, reference index, collaboration rules, AI reading entry, task index, architecture/contract notes and team responsibility placeholders prepared.
-- Issue and PR templates prepared locally; no remote GitHub configuration exists.
+- Public repository [InformationDS/infs5706-scamsafe](https://github.com/InformationDS/infs5706-scamsafe) created with main as default branch; initial project pushed, including Issue and PR templates.
 - Initial migration moved 73 files, with matching hashes at move time; 8 files were subsequently removed by explicit request. Removal paths and edit hashes are recorded in evidence/reference-conversion.
 
 ## Not yet implemented / executed
 
-- GitHub repository, collaborator access, Issues, branches, PRs and CI.
+- Collaborator write access, task Issues, feature branches/PRs, branch protection and CI; repository creation and initial main push are complete.
 - Application, model integration, machine-readable schemas, configured roles and reviewed synthetic guidelines.
 - Full data and reviewed expected results for the 15 planned cases; no application tests have run.
 - Runtime history/export, deployment and demonstration recording.
@@ -31,7 +31,7 @@ Directory/Markdown/source checks: run `python scripts/maintenance/check_reposito
 
 ## Active handoff
 
-TASK-002 and TASK-003 complete local specification/layout work. TASK-004 is currently creating and uploading a public repository under InformationDS, explicitly authorized by the user. Member access and Issues remain pending. Detailed scope and validation are in [TASKS.md](TASKS.md).
+TASK-002 and TASK-003 complete local specification/layout work. TASK-004 has completed public repository creation and initial main push, explicitly authorized by the user. Member access, Issues and review enforcement remain pending. Detailed scope and validation are in [TASKS.md](TASKS.md).
 
 ## Update convention
 

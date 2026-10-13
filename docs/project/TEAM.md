@@ -1,6 +1,6 @@
 # 小组成员与工作范围
 
-GitHub 用户名、负责人及审核人尚未提供，不预设成员人数或身份。
+仓库归属：[InformationDS/infs5706-scamsafe](https://github.com/InformationDS/infs5706-scamsafe)，已公开。其他成员的 GitHub 用户名、任务负责人及审核人尚未提供，不预设成员人数或身份。
 
 | 工作范围 | 主要交付 | 负责人 | 审核人 |
 |---|---|---|---|
