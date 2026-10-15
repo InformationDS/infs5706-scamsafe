@@ -1,6 +1,12 @@
 # Project status
 
-Snapshot date: 2026-10-13, Australia/Sydney.
+Snapshot date: 2026-10-15, Australia/Sydney. Branch-specific additions below are pending review, not completed implementation on main.
+
+## Branch work pending review
+
+- On docs/team-execution-rules, [TEAM_EXECUTION.md](TEAM_EXECUTION.md) defines a six-person draft division, 24 work packages, nine milestone gates, interface ownership, review pairs and GitHub/AI execution conventions.
+- TEAM.md and TASKS.md link the proposed A–F roles; actual member mapping and Issue assignment are not yet confirmed.
+- [Handoff templates](handoffs/README.md) support per-work-package updates; no application code, schemas, model tests or runtime features were added by this documentation work.
 
 ## Completed
 

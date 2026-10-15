@@ -6,7 +6,7 @@
 
 ## 从哪里开始
 
-- 小组成员：[当前进展](docs/project/STATUS.md) → [任务与依赖](docs/project/TASKS.md) → [协作规则](CONTRIBUTING.md)。
+- 小组成员：[当前进展](docs/project/STATUS.md) → [六人分工与执行规则](docs/project/TEAM_EXECUTION.md) → [任务与依赖](docs/project/TASKS.md) → [协作规则](CONTRIBUTING.md)。
 - AI 助手：[AGENTS.md](AGENTS.md) → [AI 项目入口](AI_START_HERE.md) → 当前进展与分配的任务。
 - 产品：[正式 PRD](docs/product/PRD.md)、[字段字典](docs/product/FIELD_DICTIONARY.md)。
 - 开发：[架构与模块职责](docs/architecture/README.md)、[接口约定](docs/architecture/CONTRACTS.md)。

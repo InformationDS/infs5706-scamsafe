@@ -10,6 +10,8 @@ This is the INFS5706 team project prototype for a fictional cross-sector ScamSaf
 4. [Current PRD](docs/product/PRD.md)
 5. [Field dictionary](docs/product/FIELD_DICTIONARY.md), relevant sections only
 
+For team implementation, read your A–F role, work package, interface ownership and milestone in [TEAM_EXECUTION.md](docs/project/TEAM_EXECUTION.md). Role codes are a proposed division until actual members are mapped. Maintain your own [handoff record](docs/project/handoffs/README.md); A aggregates STATUS.md during integration.
+
 ## Accepted product summary
 
 - Users: authorized frontline employees from different Alliance member sectors. Each case starts with a configured organization/role selection.

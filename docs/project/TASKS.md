@@ -8,12 +8,16 @@ Before GitHub setup this file is a temporary task index. Once Issues exist, link
 | TASK-002 | Consolidated formal PRD, decision summary and architecture outline | Done: specifications and architecture notes prepared | Current session | Accepted product decisions |
 | TASK-003 | Proposed directory layout, link migration and reference index | Done: local layout reorganized and checked | Current session | TASK-002, authorized reorganization |
 | TASK-004 | GitHub repository and collaboration templates/setup | Public repository and initial push complete; member access/Issues pending | Current session | TASK-003, owner InformationDS |
-| TASK-005 | Shared data contracts and configured roles/permissions | Not started | Unassigned | TASK-002 |
-| TASK-006 | Reviewed synthetic guidelines and 15 evaluation cases | Not started | Unassigned | TASK-005 |
-| TASK-007 | Dual-area workflow interface | Not started | Unassigned | TASK-005, implementation choice |
-| TASK-008 | Model integration, extraction/classification/follow-up/recommendations | Not started | Unassigned | TASK-005, TASK-006, model access |
-| TASK-009 | Version-aware reviews, history and Markdown/PDF export | Not started | Unassigned | TASK-005, TASK-007 |
-| TASK-010 | Integrated verification and prototype handoff | Not started | Unassigned | TASK-006 through TASK-009 |
+| TASK-005 | Shared data contracts and configured roles/permissions | Not started | Proposed A (contracts), D (roles) | TASK-002 |
+| TASK-006 | Reviewed synthetic guidelines and 15 evaluation cases | Not started | Proposed D (guidelines), F (cases) | TASK-005 |
+| TASK-007 | Dual-area workflow interface | Not started | Proposed B | TASK-005, implementation choice |
+| TASK-008 | Model integration, extraction/classification/follow-up/recommendations | Not started | Proposed C (intake), D (guidance) | TASK-005, TASK-006, model access |
+| TASK-009 | Version-aware reviews, history and Markdown/PDF export | Not started | Proposed A (state), E (records/export) | TASK-005, TASK-007 |
+| TASK-010 | Integrated verification and prototype handoff | Not started | Proposed A (integration), F (verification) | TASK-006 through TASK-009 |
+| TASK-011 | Shared project scaffold, startup and environment example | Not started | Proposed A | TASK-002, implementation choice |
+| TASK-012 | Six-person execution rules and handoff templates | Draft prepared on docs/team-execution-rules; pending review | Current session | User request, accepted product scope |
+
+Proposed A–F owners are role placeholders, not actual Issue assignments. The 24 detailed work packages A-01 through F-04, sequence and acceptance criteria are in [TEAM_EXECUTION.md](TEAM_EXECUTION.md). Actual names and usernames are recorded in [TEAM.md](TEAM.md) when available.
 
 ## Starting a task
 
