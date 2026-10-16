@@ -1,7 +1,6 @@
 ---
-source: course assignment guide, locally edited reference
-original_pdf_retained: false
-edited: 2026-10-13
+source: course assignment guide
+reference_status: edited excerpt, not the complete official guide
 title: ASSESSMENT GUIDE
 pages: 9
 ---
@@ -10,7 +9,7 @@ pages: 9
 
 # ASSESSMENT GUIDE
 
-> Edited project reference, updated at the user's request on 2026-10-13. This Markdown omits selected AI-related restriction text and is not a complete, unmodified official guide. The original PDF is no longer retained locally.
+> Project reference excerpt. This is not the complete official guide; use the course's official materials for authoritative assessment requirements.
 
 ## Team Project
 
@@ -248,8 +247,8 @@ The use of speaker notes, cue cards, phones or other speaking aids is not permit
 |Justification and critical evaluation of decisions (35%)|Convincingly justifies the selected AI approach, organisational design, boundaries and human responsibilities. Evaluates assumptions, limitations, alternatives and responsible-AI implications with sound judgement.|Provides clear justification for the principal decisions and addresses relevant assumptions, limitations and alternatives, with minor gaps.|Provides plausible explanations for the principal decisions, but evaluation of limitations, alternatives or implications is uneven.|Provides limited or generic justification and shows little critical evaluation of assumptions, limitations or responsible-AI implications.|Cannot credibly justify major decisions or recognise material limitations, responsibilities or risks.|
 |Responsiveness and team coherence (30%)|Responds directly and coherently to challenging or unexpected questions. Adapts the proposed design where appropriate, identifies relevant authority and implications, and maintains a coordinated team position.|Responds effectively to questions and maintains a coherent team position, with minor gaps in adaptation or coordination.|Responds reasonably to most questions, although some answers are incomplete, repetitive or uneven across the team.|Provides basic or weakly connected responses and shows limited ability to address follow-up questions or changing circumstances.|Cannot respond meaningfully, proposes unsafe action or fails to maintain a coherent professional position.|
 
-## Conversion notes
+## Reference notes
 
-Initially converted from a 9-page PDF on 2026-10-12. On 2026-10-13, selected AI-related restriction text was removed at the user's request. Page markers refer to the original PDF, not completeness of this edited copy. Decorative graphics and original layout are not reproduced.
+Page markers identify source pagination; they do not indicate completeness of this excerpt. Decorative graphics and source layout are not reproduced.
 
 Additional embedded link on PDF page 2: [Australian daylight saving time](https://greenwichmeantime.com/time-zone/australia/daylight-saving-time/).

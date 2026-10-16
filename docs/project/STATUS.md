@@ -1,44 +1,30 @@
-# Project status
+# 当前集成状态
 
-Snapshot date: 2026-10-15, Australia/Sydney. Branch-specific additions below are pending review, not completed implementation on main.
+更新：2026-10-17，Australia/Sydney。维护人：A。这里只汇总实际状态；任务负责人和执行进度见[任务入口](TASKS.md)。
 
-## Branch work pending review
+## 当前能做什么
 
-- On docs/team-execution-rules, [TEAM_EXECUTION.md](TEAM_EXECUTION.md) defines a six-person draft division, 24 work packages, nine milestone gates, interface ownership, review pairs and GitHub/AI execution conventions.
-- TEAM.md and TASKS.md link the proposed A–F roles; actual member mapping and Issue assignment are not yet confirmed.
-- [Handoff templates](handoffs/README.md) support per-work-package updates; no application code, schemas, model tests or runtime features were added by this documentation work.
+- A 补齐真实成员、工作副本与交付方式后，可按首批任务卡安排起始稿核对和限定修改；仅 Git PR 另需基线及分支。成员不用从空白设计提示、指引或验收标准。
+- A 先确定统一技术与运行条件，建立可运行骨架并跑通单例，再按实际入口发布小代码任务；内容核对可同时推进，不等待全部 15 例完成。
+- 目前没有应用启动命令，不要把资料检查当作启动或功能验收。
 
-## Completed
+## 已有材料
 
-- Assignment guide and ACCC Markdown retained. The assignment Markdown is now an edited reference; the UNSW directory and two original PDFs were removed on 2026-10-13 at the user's request. ACCC page images remain.
-- ACCC report includes 49 page markers and linked page images.
-- Accepted product decisions consolidated in [PRD](../product/PRD.md); discussion draft archived.
-- [Field dictionary](../product/FIELD_DICTIONARY.md) defines 117 fields; it is not an implemented schema.
-- Actual directory layout, reference index, collaboration rules, AI reading entry, task index, architecture/contract notes and team responsibility placeholders prepared.
-- Public repository [InformationDS/infs5706-scamsafe](https://github.com/InformationDS/infs5706-scamsafe) created with main as default branch; initial project pushed, including Issue and PR templates.
-- Initial migration moved 73 files, with matching hashes at move time; 8 files were subsequently removed by explicit request. Removal paths and edit hashes are recorded in evidence/reference-conversion.
+- PRD、字段字典、参考资料和目录结构。
+- 分工、任务卡，以及界面、提示、岗位／指引、排版和 T09 输入／预期起始稿。
+- PRD、字段字典、完整教学样例与契约要求包含无有效指引、结束后补充、多记录、金额汇总和旧请求返回的规则。
+- 起始稿、教学角色／指引与 T09 预期均未获内容审核或任务验收，不是运行配置或应用测试结果；完整的 T01–T15 输入和预期尚未交付。
 
-## Not yet implemented / executed
+## 尚未实现／验证
 
-- Collaborator write access, task Issues, feature branches/PRs, branch protection and CI; repository creation and initial main push are complete.
-- Application, model integration, machine-readable schemas, configured roles and reviewed synthetic guidelines.
-- Full data and reviewed expected results for the 15 planned cases; no application tests have run.
-- Runtime history/export, deployment and demonstration recording.
+- 应用、模型适配、共享机器结构、保存恢复、导出与自动化测试。
+- 真实模型全流程、15 例应用验收、独立运行与部署。
+- 技术栈、模型服务及预算、运行环境、交付日期仍需 A 确定。成员真实姓名／账号、任务指派、工作副本与交付方式尚待补齐；采用 Git PR 时再补分支基线。首批卡尚不可直接领取。
 
-## Dependencies needing team input
+## 协作设施
 
-- Repository owner is verified as InformationDS; members' GitHub usernames remain to be provided.
-- Model interface, budget, technical constraints, implementation deadline and delivery environment.
-- Task ownership and peer review assignments.
+仓库：[InformationDS/infs5706-scamsafe](https://github.com/InformationDS/infs5706-scamsafe)。成员权限、Issue、默认分支、保护规则和 CI 的实际状态由 A 在分配 Git PR 任务前核实。某任务没有已核实的 Issue 链接，就使用本地任务卡，不凭仓库存在推定 Issue 已建立。
 
-## Latest verification
+## 资料验证
 
-Directory/Markdown/source checks: run `python scripts/maintenance/check_repository.py` from the root. The latest actual result is recorded in [repository_check.json](../../evidence/reference-conversion/repository_check.json). This check concerns repository materials, not application behavior.
-
-## Active handoff
-
-TASK-002 and TASK-003 complete local specification/layout work. TASK-004 has completed public repository creation and initial main push, explicitly authorized by the user. Member access, Issues and review enforcement remain pending. Detailed scope and validation are in [TASKS.md](TASKS.md).
-
-## Update convention
-
-Keep this file concise and date meaningful updates. Separate planned, implemented and verified states. Once GitHub exists, link Issues/PRs rather than maintaining a second ownership/status board. Preserve other members' updates; label branch-only work explicitly.
+资料检查结果见 [repository_check.json](../../evidence/reference-conversion/repository_check.json)。检查命令为根目录的 `python scripts/maintenance/check_repository.py`，差异格式检查使用 `git diff --check`。这些检查只覆盖资料结构、链接、来源和差异格式，不代表应用行为验收通过。

@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-17",
+  "authorization": "User requested removal of prior-version narratives and historical project documents",
+  "removed_files": [
+    {
+      "path": "docs/project/archive/ScamSafe_Prototype_PRD_工作稿.md",
+      "sha256": "FD5A4CD57725CC3C690FEFAD13EAAC5BC6AEDDCC70354D4230CF2BE34AE84881",
+      "bytes": 25429
+    },
+    {
+      "path": "docs/project/archive/TASK_HISTORY.md",
+      "sha256": "EDECAEC9830F95446F8F729C8405FCA10562AA927797633DE3987A0F11FB09E2",
+      "bytes": 2709
+    },
+    {
+      "path": "docs/project/REORGANIZATION.md",
+      "sha256": "7D128E06FAD9899EEC12F52C399061121928A19EA8270AA4CB4829E1655AB785",
+      "bytes": 2451
+    },
+    {
+      "path": "docs/project/DECISIONS.md",
+      "sha256": "5ACDF52B0A3C4B8AE0FDD9208EE7A394930604986E0A8634508B64ED145030C5",
+      "bytes": 8443
+    },
+    {
+      "path": "docs/project/handoffs/TASK-012.md",
+      "sha256": "BEB3E1AF8044453148D25ED7FAC859449523A59E356000230C32508ACBE4E4A9",
+      "bytes": 1833
+    },
+    {
+      "path": "references/CONVERSION_LOG.md",
+      "sha256": "EB982D8B180E2AA88318D21361E1F7B32C0F72890972252B4E4C8DE2E898D347",
+      "bytes": 1289
+    }
+  ]
+}

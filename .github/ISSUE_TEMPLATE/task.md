@@ -1,23 +1,28 @@
 ---
-name: Team task
-about: Define an implementation or documentation task
+name: 小组任务
+about: 为已准备的任务卡记录负责人、状态和执行结果
 title: "[TASK] "
 ---
 
-## Task ID and owner
+<!-- 先由 A 填好仓库任务卡，再创建 Issue。范围、步骤和验收始终维护在任务卡，不复制到这里。 -->
 
-## Outcome and scope
+## 任务与执行状态
 
-## Requirements / contracts
+- 任务编号、任务卡链接：
+- 负责人（真实成员；未指派就说明）：
+- 状态：待指派／进行中／待审核／已验收
+- 阻塞：无／缺少什么、需要谁提供
 
-Link relevant PRD sections, field definitions and interfaces.
+本 Issue 是本任务负责人、状态和实际结果的唯一记录；记录管理按任务卡链接的 TEAM_EXECUTION「任务说明与执行记录」执行。任务范围、步骤和验收条件留在任务卡；调整时交 A 确认，在此链接变更即可。
 
-## Dependencies and affected members
+## 执行结果
 
-## Acceptance criteria
+按任务卡逐项执行后填写；阻塞时记录输入、操作、预期、实际现象和已有尝试。
 
-State observable outcomes and required validation.
+- 改动文件及具体结果：
+- 实际验证和证据（模拟／真实模型／未执行）：
+- 剩余问题：
+- 分支／PR：
+- 审核人、审核类型与结论：
 
-## Progress / handoff
-
-Branch, PR, results, remaining work.
+只生成文件、agent 声称通过或代码合并不等于已验收；完成标准见任务卡。

@@ -1,7 +1,5 @@
-# 按工作包交接
+# 按需交接
 
-每位成员维护自己的工作包文件，使用 [TEMPLATE.md](TEMPLATE.md)。分工和执行规则见 [TEAM_EXECUTION.md](../TEAM_EXECUTION.md)。
+日常进度、验证结果和剩余问题只写在任务的唯一记录中：有对应 Issue 就写 Issue，没有就写本地任务卡。无需另建交接文件或重复修改 STATUS。
 
-文件名使用工作包编号，例如 `C-02.md`；这是未来示例，不表示已提交实现。注明分支和提交，未合并的功能不能标为 main 已具备。
-
-GitHub Issue 存在时以其负责人和状态为准，本目录保存可随代码审阅的交接证据。汇总 STATUS.md 由 A 在集成时维护，避免多人争改同一份长日志。
+只有跨任务接手需要独立说明时，才使用 [TEMPLATE](TEMPLATE.md)。以具体任务编号命名，并从任务记录链接过来。交接只描述交付内容及接手动作，不成为第二份状态表。项目能力看 [STATUS](../STATUS.md)，分工看 [TEAM_EXECUTION](../TEAM_EXECUTION.md)。

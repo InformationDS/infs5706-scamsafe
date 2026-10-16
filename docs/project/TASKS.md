@@ -1,70 +1,34 @@
-# Task registry and handoff
+# 当前任务入口
 
-Before GitHub setup this file is a temporary task index. Once Issues exist, link each task to its Issue; Issue ownership and status become authoritative. This file is not a lock and cannot prevent two people working in separate clones from taking the same task.
+本文件只维护任务链接和依赖；负责人、状态和结果的位置见 [TEAM_EXECUTION](TEAM_EXECUTION.md#任务说明与执行记录)。A–F 的真实成员映射见 [TEAM](TEAM.md)。
 
-| Task | Deliverable | Current state | Owner | Depends on |
-|---|---|---|---|---|
-| TASK-001 | Collaboration rules, reading entry and initial progress snapshot | Done: documentation prepared | Current session | Existing requirements |
-| TASK-002 | Consolidated formal PRD, decision summary and architecture outline | Done: specifications and architecture notes prepared | Current session | Accepted product decisions |
-| TASK-003 | Proposed directory layout, link migration and reference index | Done: local layout reorganized and checked | Current session | TASK-002, authorized reorganization |
-| TASK-004 | GitHub repository and collaboration templates/setup | Public repository and initial push complete; member access/Issues pending | Current session | TASK-003, owner InformationDS |
-| TASK-005 | Shared data contracts and configured roles/permissions | Not started | Proposed A (contracts), D (roles) | TASK-002 |
-| TASK-006 | Reviewed synthetic guidelines and 15 evaluation cases | Not started | Proposed D (guidelines), F (cases) | TASK-005 |
-| TASK-007 | Dual-area workflow interface | Not started | Proposed B | TASK-005, implementation choice |
-| TASK-008 | Model integration, extraction/classification/follow-up/recommendations | Not started | Proposed C (intake), D (guidance) | TASK-005, TASK-006, model access |
-| TASK-009 | Version-aware reviews, history and Markdown/PDF export | Not started | Proposed A (state), E (records/export) | TASK-005, TASK-007 |
-| TASK-010 | Integrated verification and prototype handoff | Not started | Proposed A (integration), F (verification) | TASK-006 through TASK-009 |
-| TASK-011 | Shared project scaffold, startup and environment example | Not started | Proposed A | TASK-002, implementation choice |
-| TASK-012 | Six-person execution rules and handoff templates | Draft prepared on docs/team-execution-rules; pending review | Current session | User request, accepted product scope |
+## 首批准备任务
 
-Proposed A–F owners are role placeholders, not actual Issue assignments. The 24 detailed work packages A-01 through F-04, sequence and acceptance criteria are in [TEAM_EXECUTION.md](TEAM_EXECUTION.md). Actual names and usernames are recorded in [TEAM.md](TEAM.md) when available.
+所有卡仍待 A 指派真实成员，并填好交付信息。B–F 的任务是在卡内指定的已填起始稿上补充或核对；起始稿存在不等于已审核。下面交付的都是准备材料，完成后不代表应用功能已实现。
 
-## Starting a task
+| 任务卡 | 建议角色 | 本次交付 | 开工输入 |
+|---|---|---|---|
+| [TASK-011-01](tasks/TASK-011-01.md) | A | 统一技术与运行方案 | PRD、当前限制；缺少条件逐项记录 |
+| [TASK-007-01](tasks/TASK-007-01.md) | B | 核对并补充一个案件的界面操作稿 | 已填操作稿、完整样例、指定 PRD 规则 |
+| [TASK-008-01](tasks/TASK-008-01.md) | C | 核对基础提示，每次只调整一处并记录差异 | 已填基础提示、固定输入与预期、指定字段定义 |
+| [TASK-006-01](tasks/TASK-006-01.md) | D | 逐项核对样例岗位、权限和指引 | 已填核对稿、完整样例中的合成条目 |
+| [TASK-009-01](tasks/TASK-009-01.md) | E | 在固定正文上调整排版并核对内容 | 已填排版稿、完整样例的两份英文目标草稿 |
+| [TASK-006-02](tasks/TASK-006-02.md) | F | 核对 T09 检查稿的输入、步骤和预期 | 已填检查稿、完整样例、指定 PRD 规则；标准缺失交 A |
 
-- Identify the task and read its dependencies and applicable requirements.
-- Confirm ownership through the human/team's agreed coordination channel before overlapping another member's scope.
-- Once GitHub exists, use a task branch and link the Issue in the PR. Shared schema changes need clear review and downstream impact notes.
-- If ownership, dependencies or contracts are inconsistent, record the discrepancy and resolve it with the responsible member/human before dependent edits.
+这些文稿任务不需要等待应用运行。角色、指引和预期由 A 确认后才能作为开发依据；成员核对稿不自动变成已批准配置。新业务规则或验收标准由 A 决定，成员记录具体疑问。
 
-## Handoff format
+近期由 A 先完成 TASK-011-01 的必要技术决定，接着建立可启动骨架并接通一个固定案件；同时成员可核对起始稿。骨架相关检查实际通过后，A 才发布带有真实入口和已验证步骤的小代码任务。不等待全部准备稿或 15 例齐备才开发；先跑通单例，再扩展案例和验收。
 
-```text
-Task / Issue:
-Owner and branch:
-Changed files:
-Behavior or requirement changed:
-Validation actually performed and results:
-Mocks vs real dependencies:
-Remaining issues / dependencies:
-Next step:
-Relevant commit / PR / evidence:
-```
+## 后续开发范围
 
-## TASK-001 handoff (2026-10-12, historical)
+本表是路线，不是可领取任务。A 完成技术决策后，用[任务卡模板](tasks/TEMPLATE.md)拆出单一交付、填入真实文件与已验证命令，再发布到上表。一次只开放当前依赖已就绪的小任务。
 
-- Scope: removed member-AI usage restrictions from the authored PRD introduction; established repository reading, modification and update conventions.
-- Files: AGENTS.md, AI_START_HERE.md, PROJECT_STATUS.md, TASKS.md and the existing PRD working draft.
-- Validation: local document references and current-state claims are checked during this document task. No application behavior was tested.
-- Directory layout, GitHub and runtime work: not executed.
-
-## TASK-002 / TASK-003 handoff (2026-10-13)
-
-- Scope: consolidated the formal PRD, architecture/contract notes, project decision log and team responsibilities; migrated 73 existing files into the agreed layout.
-- Files: root entry/rules, docs/, references/, scripts/, evidence/, module/data/test directory notes and .github templates.
-- Preservation: all moved files matched SHA256 at move time; original PDFs, PNGs and HTML are checked for continued byte preservation. Links and relocated tool paths were repaired.
-- Validation: `python scripts/maintenance/check_repository.py`; detailed output saved in evidence/reference-conversion/repository_check.json after the final check.
-- Handoff: GitHub is not created; no application code, machine-readable schemas, reviewed guidelines, complete cases or application tests exist yet. Model/hosting constraints and team ownership remain pending.
-
-## 后续资料清理交接（2026-10-13）
-
-- 用户明确要求的 8 个文件已删除；删除清单记录路径及哈希，不存储文件内容。
-- 作业指南已标为编辑参考版本；索引、引用、工具入口和校验脚本已更新。
-- 此为资料维护，不涉及应用实现或既有产品业务权限的改动。
-- 验证结果见 evidence/reference-conversion/repository_check.json。
-
-## TASK-004 初始发布交接（2026-10-13）
-
-- 创建公开仓库并成功推送 main，地址：https://github.com/InformationDS/infs5706-scamsafe。
-- 100 个跟踪文件包含规格、资料、说明和模板；本地临时目录未上传。
-- 已检查上传清单、常见密钥模式、文档链接、资料哈希与 diff 格式；无应用验收结果。
-- 成员邀请及任务 Issue 仍待配置；有对应 Issue 前，本任务索引继续作为临时入口。
+| 工作方向编号 | 后续范围 | 开始条件 | 功能完成条件 |
+|---|---|---|---|
+| TASK-011 | 统一运行骨架与说明 | TASK-011-01 的技术决定已确定 | 第二台电脑能按实际说明启动；外部阻塞可定位 |
+| TASK-005 | 共享结构、角色配置接入 | 统一技术方案、样例字段语义 | 同一样例通过结构校验；配置和代码含义一致 |
+| TASK-006 | 合成指引、T01–T15 案例与预期 | 文稿准备可先做；机器化接入等待共享结构 | 全部内容被审核、可追溯；不是测试通过声明 |
+| TASK-007 | 工作台和交互 | 可运行骨架、共享样例、指定组件入口 | 按 PRD 操作可完成界面流程并接入实际服务 |
+| TASK-008 | 模型和分析流程 | 模型适配可先做；提取依赖结构；建议依赖已审核指引 | 真实模型输出可校验，失败路径和规则有实际验证 |
+| TASK-009 | 状态／审核、保存与导出 | 基础状态和结构由 A 提供；排版可先用固定样例 | 审核失效、刷新恢复、同内容复制和双格式输出通过 |
+| TASK-010 | 全流程验收与运行交付 | 单例集成可先做；全量验收等待全部案例及功能 | 15 例及交互变体实际执行；缺陷与复测可查；独立环境运行 |

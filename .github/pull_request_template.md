@@ -1,20 +1,25 @@
-## Task / Issue
+## 对应任务
 
-Task ID and related Issue:
+任务编号、Issue 或本地任务卡链接：
 
-## Problem and resulting behavior
+## 本次改动
 
-Describe the concrete change, including affected requirements or shared contracts.
+具体问题、改后能观察的结果、改动文件。若影响公共结构或规则，说明 A 已确认的变化。
 
-## Validation performed
+## 实际检查
 
-Commands, observed results and evidence links. Identify real-model vs mock runs. If not tested, say why.
+列出实际执行的命令或操作、预期与实际结果、证据位置。明确模拟／真实模型／未执行；只链接已有详细结果，不重复维护状态。
 
-## Handoff
+## 待处理事项
 
-Remaining issues, dependencies, affected consumers and next step.
+剩余问题、受影响任务和所需帮助；没有则写无。任务状态只更新对应 Issue，没有 Issue 时更新本地任务卡。
 
-- [ ] Scope is focused; other members' work is preserved.
-- [ ] Relevant specifications/contracts and progress links are updated.
-- [ ] No credentials or local case data are committed.
-- [ ] Another member has reviewed the change before merge.
+## 审核记录
+
+- 内容／操作核对人及结果：
+- A 技术审核结果（纯内容改动写不适用）：
+- A 为技术改动作者时：作者实际检查记录＋F 独立操作结果；不写成非技术成员已完成技术签核。
+
+- [ ] 只改任务允许范围，保留他人改动。
+- [ ] 实际结果和未执行项已记录，未提交凭证或本地案件记录。
+- [ ] 已完成适用审核；合并仍由 A 按授权处理。

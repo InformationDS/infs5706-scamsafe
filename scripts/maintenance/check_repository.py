@@ -1,4 +1,4 @@
-"""Read-only checks for project documents and migrated reference files."""
+"""Checks for project documents and source-file integrity."""
 from pathlib import Path
 from urllib.parse import unquote
 import argparse, ast, hashlib, json, re, sys
@@ -38,9 +38,12 @@ def check(root):
     if len(pictures)!=49:
         errors.append(f'Expected 49 ACCC page images, found {len(pictures)}')
     migration=json.loads((root/'evidence/reference-conversion/layout_migration.json').read_text(encoding='utf-8-sig'))
-    removals_path=root/'evidence/reference-conversion/user_requested_removals.json'
-    removals=json.loads(removals_path.read_text(encoding='utf-8-sig')) if removals_path.exists() else {'removed_files':[]}
-    removed_paths={row['path'] for row in removals['removed_files']}
+    removed_paths=set()
+    for name in ('user_requested_removals.json','document_cleanup.json'):
+        removals_path=root/'evidence/reference-conversion'/name
+        if removals_path.exists():
+            removals=json.loads(removals_path.read_text(encoding='utf-8-sig'))
+            removed_paths.update(row['path'] for row in removals['removed_files'])
     for removed in removed_paths:
         if (root/removed).exists():
             errors.append(f'User-requested deletion reappeared: {removed}')
