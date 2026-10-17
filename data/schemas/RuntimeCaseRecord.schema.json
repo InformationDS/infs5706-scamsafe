@@ -1,0 +1,2147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 2
+    },
+    "synthetic": {
+      "type": "boolean",
+      "const": true
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "mock",
+        "live"
+      ]
+    },
+    "contentApproval": {
+      "type": "string",
+      "const": "pending"
+    },
+    "caseId": {
+      "type": "string"
+    },
+    "evaluationId": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "stage": {
+      "type": "string"
+    },
+    "role": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "version": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991
+            },
+            "organisation": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "permissions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "recipients": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "title"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "contentApproval": {
+              "type": "string",
+              "const": "approved"
+            },
+            "enabled": {
+              "type": "boolean",
+              "const": true
+            },
+            "synthetic": {
+              "type": "boolean",
+              "const": true
+            },
+            "approvalRef": {
+              "type": "string",
+              "const": "BUSINESS-BASELINE-01"
+            },
+            "excludedActions": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "recipientResponsibilities": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "version",
+            "organisation",
+            "title",
+            "permissions",
+            "recipients",
+            "contentApproval",
+            "enabled",
+            "synthetic",
+            "approvalRef",
+            "excludedActions",
+            "recipientResponsibilities"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "version": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991
+            },
+            "organisation": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "permissions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "recipients": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "title"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "contentApproval": {
+              "type": "string",
+              "const": "pending"
+            },
+            "enabled": {
+              "type": "boolean",
+              "const": false
+            },
+            "synthetic": {
+              "type": "boolean",
+              "const": true
+            }
+          },
+          "required": [
+            "id",
+            "version",
+            "organisation",
+            "title",
+            "permissions",
+            "recipients",
+            "contentApproval",
+            "enabled",
+            "synthetic"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fieldId": {
+            "type": "string",
+            "enum": [
+              "A01",
+              "A02",
+              "A03",
+              "A04",
+              "A05",
+              "A06",
+              "A07",
+              "A08",
+              "B01",
+              "B02",
+              "B03",
+              "B04",
+              "B05",
+              "B06",
+              "B07",
+              "C01",
+              "C02",
+              "C03",
+              "C04",
+              "C05",
+              "C06",
+              "C07",
+              "C08",
+              "D01",
+              "D02",
+              "D03",
+              "D04",
+              "D05",
+              "E01",
+              "E02",
+              "E03",
+              "E04",
+              "E05",
+              "E06",
+              "E07",
+              "E08",
+              "E09",
+              "F01",
+              "F02",
+              "F03",
+              "F04",
+              "F05",
+              "F06",
+              "F07",
+              "G01",
+              "G02",
+              "G03",
+              "G04",
+              "G05",
+              "H01",
+              "H02",
+              "H03",
+              "H04",
+              "H05",
+              "H06",
+              "H07",
+              "H08",
+              "H09",
+              "H10",
+              "I01",
+              "I02",
+              "I03",
+              "I04",
+              "I05",
+              "I06",
+              "J01",
+              "J02",
+              "J03",
+              "J04",
+              "J05",
+              "K01",
+              "K02",
+              "K03",
+              "K04",
+              "K05",
+              "K06",
+              "K07",
+              "L01",
+              "L02",
+              "L03",
+              "L04",
+              "L05",
+              "L06",
+              "L07",
+              "M01",
+              "M02",
+              "M03",
+              "M04",
+              "M05",
+              "M06",
+              "M07",
+              "M08",
+              "M09",
+              "M10",
+              "N01",
+              "N02",
+              "N03",
+              "N04",
+              "N05",
+              "N06",
+              "O01",
+              "O02",
+              "O03",
+              "O04",
+              "O05",
+              "O06",
+              "O07",
+              "O08",
+              "O09",
+              "P01",
+              "P02",
+              "P03",
+              "P04",
+              "P05",
+              "P06",
+              "P07",
+              "P08"
+            ]
+          },
+          "recordId": {
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "version": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "extracted",
+              "missing",
+              "unclear",
+              "conflict",
+              "not-applicable"
+            ]
+          },
+          "reviewStatus": {
+            "type": "string",
+            "enum": [
+              "unreviewed",
+              "checked",
+              "corrected"
+            ]
+          },
+          "sourceIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "sourceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "value",
+                "sourceIds"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "sourceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "value",
+                "reason",
+                "sourceIds"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "fieldId",
+          "value",
+          "version",
+          "status",
+          "reviewStatus",
+          "sourceIds",
+          "candidates",
+          "history"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "basedOnCaseVersion": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "mock",
+            "model"
+          ]
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gaps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fieldId": {
+                "type": "string",
+                "enum": [
+                  "A01",
+                  "A02",
+                  "A03",
+                  "A04",
+                  "A05",
+                  "A06",
+                  "A07",
+                  "A08",
+                  "B01",
+                  "B02",
+                  "B03",
+                  "B04",
+                  "B05",
+                  "B06",
+                  "B07",
+                  "C01",
+                  "C02",
+                  "C03",
+                  "C04",
+                  "C05",
+                  "C06",
+                  "C07",
+                  "C08",
+                  "D01",
+                  "D02",
+                  "D03",
+                  "D04",
+                  "D05",
+                  "E01",
+                  "E02",
+                  "E03",
+                  "E04",
+                  "E05",
+                  "E06",
+                  "E07",
+                  "E08",
+                  "E09",
+                  "F01",
+                  "F02",
+                  "F03",
+                  "F04",
+                  "F05",
+                  "F06",
+                  "F07",
+                  "G01",
+                  "G02",
+                  "G03",
+                  "G04",
+                  "G05",
+                  "H01",
+                  "H02",
+                  "H03",
+                  "H04",
+                  "H05",
+                  "H06",
+                  "H07",
+                  "H08",
+                  "H09",
+                  "H10",
+                  "I01",
+                  "I02",
+                  "I03",
+                  "I04",
+                  "I05",
+                  "I06",
+                  "J01",
+                  "J02",
+                  "J03",
+                  "J04",
+                  "J05",
+                  "K01",
+                  "K02",
+                  "K03",
+                  "K04",
+                  "K05",
+                  "K06",
+                  "K07",
+                  "L01",
+                  "L02",
+                  "L03",
+                  "L04",
+                  "L05",
+                  "L06",
+                  "L07",
+                  "M01",
+                  "M02",
+                  "M03",
+                  "M04",
+                  "M05",
+                  "M06",
+                  "M07",
+                  "M08",
+                  "M09",
+                  "M10",
+                  "N01",
+                  "N02",
+                  "N03",
+                  "N04",
+                  "N05",
+                  "N06",
+                  "O01",
+                  "O02",
+                  "O03",
+                  "O04",
+                  "O05",
+                  "O06",
+                  "O07",
+                  "O08",
+                  "O09",
+                  "P01",
+                  "P02",
+                  "P03",
+                  "P04",
+                  "P05",
+                  "P06",
+                  "P07",
+                  "P08"
+                ]
+              },
+              "recordId": {
+                "type": "string"
+              },
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "version": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "extracted",
+                  "missing",
+                  "unclear",
+                  "conflict",
+                  "not-applicable"
+                ]
+              },
+              "reviewStatus": {
+                "type": "string",
+                "enum": [
+                  "unreviewed",
+                  "checked",
+                  "corrected"
+                ]
+              },
+              "sourceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "candidates": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "sourceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "sourceIds"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "history": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "reason": {
+                      "type": "string"
+                    },
+                    "sourceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "reason",
+                    "sourceIds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "fieldId",
+              "value",
+              "version",
+              "status",
+              "reviewStatus",
+              "sourceIds",
+              "candidates",
+              "history"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "guidanceStatus": {
+          "type": "string",
+          "const": "unapproved"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "not": {}
+          }
+        }
+      },
+      "required": [
+        "version",
+        "basedOnCaseVersion",
+        "source",
+        "types",
+        "reasons",
+        "alternatives",
+        "gaps",
+        "facts",
+        "guidanceStatus",
+        "recommendations"
+      ],
+      "additionalProperties": false
+    },
+    "followUp": {
+      "type": "object",
+      "properties": {
+        "rounds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "totalQuestions": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9
+        },
+        "stopped": {
+          "type": "boolean"
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "round": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "target": {
+                "type": "object",
+                "properties": {
+                  "fieldId": {
+                    "type": "string",
+                    "enum": [
+                      "A01",
+                      "A02",
+                      "A03",
+                      "A04",
+                      "A05",
+                      "A06",
+                      "A07",
+                      "A08",
+                      "B01",
+                      "B02",
+                      "B03",
+                      "B04",
+                      "B05",
+                      "B06",
+                      "B07",
+                      "C01",
+                      "C02",
+                      "C03",
+                      "C04",
+                      "C05",
+                      "C06",
+                      "C07",
+                      "C08",
+                      "D01",
+                      "D02",
+                      "D03",
+                      "D04",
+                      "D05",
+                      "E01",
+                      "E02",
+                      "E03",
+                      "E04",
+                      "E05",
+                      "E06",
+                      "E07",
+                      "E08",
+                      "E09",
+                      "F01",
+                      "F02",
+                      "F03",
+                      "F04",
+                      "F05",
+                      "F06",
+                      "F07",
+                      "G01",
+                      "G02",
+                      "G03",
+                      "G04",
+                      "G05",
+                      "H01",
+                      "H02",
+                      "H03",
+                      "H04",
+                      "H05",
+                      "H06",
+                      "H07",
+                      "H08",
+                      "H09",
+                      "H10",
+                      "I01",
+                      "I02",
+                      "I03",
+                      "I04",
+                      "I05",
+                      "I06",
+                      "J01",
+                      "J02",
+                      "J03",
+                      "J04",
+                      "J05",
+                      "K01",
+                      "K02",
+                      "K03",
+                      "K04",
+                      "K05",
+                      "K06",
+                      "K07",
+                      "L01",
+                      "L02",
+                      "L03",
+                      "L04",
+                      "L05",
+                      "L06",
+                      "L07",
+                      "M01",
+                      "M02",
+                      "M03",
+                      "M04",
+                      "M05",
+                      "M06",
+                      "M07",
+                      "M08",
+                      "M09",
+                      "M10",
+                      "N01",
+                      "N02",
+                      "N03",
+                      "N04",
+                      "N05",
+                      "N06",
+                      "O01",
+                      "O02",
+                      "O03",
+                      "O04",
+                      "O05",
+                      "O06",
+                      "O07",
+                      "O08",
+                      "O09",
+                      "P01",
+                      "P02",
+                      "P03",
+                      "P04",
+                      "P05",
+                      "P06",
+                      "P07",
+                      "P08"
+                    ]
+                  },
+                  "recordId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "fieldId"
+                ],
+                "additionalProperties": false
+              },
+              "text": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "answered",
+                  "unknown",
+                  "not-applicable",
+                  "skipped"
+                ]
+              },
+              "answer": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "history": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "status"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "id",
+              "round",
+              "target",
+              "text",
+              "reason",
+              "status",
+              "answer",
+              "history"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "rounds",
+        "totalQuestions",
+        "stopped",
+        "questions"
+      ],
+      "additionalProperties": false
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "summary",
+              "handover"
+            ]
+          },
+          "version": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "dependencies": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "contentApproval": {
+            "type": "string",
+            "const": "pending"
+          },
+          "recipient": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "title"
+            ],
+            "additionalProperties": false
+          },
+          "recommendationIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "employeeEdited": {
+            "type": "boolean"
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "previous": {
+                  "type": "string"
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "actor": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "previous",
+                "reason",
+                "actor"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "version",
+          "title",
+          "body",
+          "dependencies",
+          "contentApproval",
+          "employeeEdited",
+          "history"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stage": {
+            "type": "string",
+            "enum": [
+              "first",
+              "final"
+            ]
+          },
+          "objectId": {
+            "type": "string"
+          },
+          "objectVersion": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "dependencies": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "simulated": {
+            "type": "boolean"
+          },
+          "actor": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reviewedAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          }
+        },
+        "required": [
+          "stage",
+          "objectId",
+          "objectVersion",
+          "dependencies",
+          "simulated",
+          "actor",
+          "reviewedAt"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "saved": {
+      "type": "boolean"
+    },
+    "needsFactConfirmation": {
+      "type": "boolean"
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "responsibleRole": {
+            "type": "string",
+            "minLength": 1
+          },
+          "step": {
+            "type": "string",
+            "minLength": 1
+          },
+          "priority": {
+            "type": "object",
+            "properties": {
+              "order": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "order",
+              "reason"
+            ],
+            "additionalProperties": false
+          },
+          "dependencies": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "factRefs": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fieldId": {
+                  "type": "string",
+                  "enum": [
+                    "A01",
+                    "A02",
+                    "A03",
+                    "A04",
+                    "A05",
+                    "A06",
+                    "A07",
+                    "A08",
+                    "B01",
+                    "B02",
+                    "B03",
+                    "B04",
+                    "B05",
+                    "B06",
+                    "B07",
+                    "C01",
+                    "C02",
+                    "C03",
+                    "C04",
+                    "C05",
+                    "C06",
+                    "C07",
+                    "C08",
+                    "D01",
+                    "D02",
+                    "D03",
+                    "D04",
+                    "D05",
+                    "E01",
+                    "E02",
+                    "E03",
+                    "E04",
+                    "E05",
+                    "E06",
+                    "E07",
+                    "E08",
+                    "E09",
+                    "F01",
+                    "F02",
+                    "F03",
+                    "F04",
+                    "F05",
+                    "F06",
+                    "F07",
+                    "G01",
+                    "G02",
+                    "G03",
+                    "G04",
+                    "G05",
+                    "H01",
+                    "H02",
+                    "H03",
+                    "H04",
+                    "H05",
+                    "H06",
+                    "H07",
+                    "H08",
+                    "H09",
+                    "H10",
+                    "I01",
+                    "I02",
+                    "I03",
+                    "I04",
+                    "I05",
+                    "I06",
+                    "J01",
+                    "J02",
+                    "J03",
+                    "J04",
+                    "J05",
+                    "K01",
+                    "K02",
+                    "K03",
+                    "K04",
+                    "K05",
+                    "K06",
+                    "K07",
+                    "L01",
+                    "L02",
+                    "L03",
+                    "L04",
+                    "L05",
+                    "L06",
+                    "L07",
+                    "M01",
+                    "M02",
+                    "M03",
+                    "M04",
+                    "M05",
+                    "M06",
+                    "M07",
+                    "M08",
+                    "M09",
+                    "M10",
+                    "N01",
+                    "N02",
+                    "N03",
+                    "N04",
+                    "N05",
+                    "N06",
+                    "O01",
+                    "O02",
+                    "O03",
+                    "O04",
+                    "O05",
+                    "O06",
+                    "O07",
+                    "O08",
+                    "O09",
+                    "P01",
+                    "P02",
+                    "P03",
+                    "P04",
+                    "P05",
+                    "P06",
+                    "P07",
+                    "P08"
+                  ]
+                },
+                "recordId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fieldId"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "guidelineRefs": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "id",
+                "version"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "limits": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "accepted",
+              "modified",
+              "rejected"
+            ]
+          },
+          "decisionReason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "simulated": {
+            "type": "boolean"
+          },
+          "contentApproval": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved"
+            ]
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "previous": {
+                  "type": "string"
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "actor": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "previous",
+                "reason",
+                "actor"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "responsibleRole",
+          "step",
+          "priority",
+          "dependencies",
+          "factRefs",
+          "guidelineRefs",
+          "limits",
+          "decision",
+          "decisionReason",
+          "simulated",
+          "contentApproval",
+          "history"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "model",
+            "save",
+            "stale"
+          ]
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "message"
+      ],
+      "additionalProperties": false
+    },
+    "roleRevision": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "guidanceRevision": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "guidelines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "contentApproval": {
+            "type": "string",
+            "const": "approved"
+          },
+          "enabled": {
+            "type": "boolean",
+            "const": true
+          },
+          "synthetic": {
+            "type": "boolean",
+            "const": true
+          },
+          "roleId": {
+            "type": "string"
+          },
+          "required": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "target": {
+                  "type": "object",
+                  "properties": {
+                    "fieldId": {
+                      "type": "string",
+                      "enum": [
+                        "A01",
+                        "A02",
+                        "A03",
+                        "A04",
+                        "A05",
+                        "A06",
+                        "A07",
+                        "A08",
+                        "B01",
+                        "B02",
+                        "B03",
+                        "B04",
+                        "B05",
+                        "B06",
+                        "B07",
+                        "C01",
+                        "C02",
+                        "C03",
+                        "C04",
+                        "C05",
+                        "C06",
+                        "C07",
+                        "C08",
+                        "D01",
+                        "D02",
+                        "D03",
+                        "D04",
+                        "D05",
+                        "E01",
+                        "E02",
+                        "E03",
+                        "E04",
+                        "E05",
+                        "E06",
+                        "E07",
+                        "E08",
+                        "E09",
+                        "F01",
+                        "F02",
+                        "F03",
+                        "F04",
+                        "F05",
+                        "F06",
+                        "F07",
+                        "G01",
+                        "G02",
+                        "G03",
+                        "G04",
+                        "G05",
+                        "H01",
+                        "H02",
+                        "H03",
+                        "H04",
+                        "H05",
+                        "H06",
+                        "H07",
+                        "H08",
+                        "H09",
+                        "H10",
+                        "I01",
+                        "I02",
+                        "I03",
+                        "I04",
+                        "I05",
+                        "I06",
+                        "J01",
+                        "J02",
+                        "J03",
+                        "J04",
+                        "J05",
+                        "K01",
+                        "K02",
+                        "K03",
+                        "K04",
+                        "K05",
+                        "K06",
+                        "K07",
+                        "L01",
+                        "L02",
+                        "L03",
+                        "L04",
+                        "L05",
+                        "L06",
+                        "L07",
+                        "M01",
+                        "M02",
+                        "M03",
+                        "M04",
+                        "M05",
+                        "M06",
+                        "M07",
+                        "M08",
+                        "M09",
+                        "M10",
+                        "N01",
+                        "N02",
+                        "N03",
+                        "N04",
+                        "N05",
+                        "N06",
+                        "O01",
+                        "O02",
+                        "O03",
+                        "O04",
+                        "O05",
+                        "O06",
+                        "O07",
+                        "O08",
+                        "O09",
+                        "P01",
+                        "P02",
+                        "P03",
+                        "P04",
+                        "P05",
+                        "P06",
+                        "P07",
+                        "P08"
+                      ]
+                    },
+                    "recordId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "fieldId"
+                  ],
+                  "additionalProperties": false
+                },
+                "allowedValues": {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "target",
+                "allowedValues"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "requiredContext": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "allowedUnknown": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fieldId": {
+                  "type": "string",
+                  "enum": [
+                    "A01",
+                    "A02",
+                    "A03",
+                    "A04",
+                    "A05",
+                    "A06",
+                    "A07",
+                    "A08",
+                    "B01",
+                    "B02",
+                    "B03",
+                    "B04",
+                    "B05",
+                    "B06",
+                    "B07",
+                    "C01",
+                    "C02",
+                    "C03",
+                    "C04",
+                    "C05",
+                    "C06",
+                    "C07",
+                    "C08",
+                    "D01",
+                    "D02",
+                    "D03",
+                    "D04",
+                    "D05",
+                    "E01",
+                    "E02",
+                    "E03",
+                    "E04",
+                    "E05",
+                    "E06",
+                    "E07",
+                    "E08",
+                    "E09",
+                    "F01",
+                    "F02",
+                    "F03",
+                    "F04",
+                    "F05",
+                    "F06",
+                    "F07",
+                    "G01",
+                    "G02",
+                    "G03",
+                    "G04",
+                    "G05",
+                    "H01",
+                    "H02",
+                    "H03",
+                    "H04",
+                    "H05",
+                    "H06",
+                    "H07",
+                    "H08",
+                    "H09",
+                    "H10",
+                    "I01",
+                    "I02",
+                    "I03",
+                    "I04",
+                    "I05",
+                    "I06",
+                    "J01",
+                    "J02",
+                    "J03",
+                    "J04",
+                    "J05",
+                    "K01",
+                    "K02",
+                    "K03",
+                    "K04",
+                    "K05",
+                    "K06",
+                    "K07",
+                    "L01",
+                    "L02",
+                    "L03",
+                    "L04",
+                    "L05",
+                    "L06",
+                    "L07",
+                    "M01",
+                    "M02",
+                    "M03",
+                    "M04",
+                    "M05",
+                    "M06",
+                    "M07",
+                    "M08",
+                    "M09",
+                    "M10",
+                    "N01",
+                    "N02",
+                    "N03",
+                    "N04",
+                    "N05",
+                    "N06",
+                    "O01",
+                    "O02",
+                    "O03",
+                    "O04",
+                    "O05",
+                    "O06",
+                    "O07",
+                    "O08",
+                    "O09",
+                    "P01",
+                    "P02",
+                    "P03",
+                    "P04",
+                    "P05",
+                    "P06",
+                    "P07",
+                    "P08"
+                  ]
+                },
+                "recordId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fieldId"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "step": {
+            "type": "string"
+          },
+          "limits": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "onMismatch": {
+            "type": "string"
+          },
+          "humanEscalation": {
+            "type": "string"
+          },
+          "approvalRef": {
+            "type": "string",
+            "const": "BUSINESS-BASELINE-01"
+          },
+          "validity": {
+            "type": "string",
+            "const": "current"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "contentApproval",
+          "enabled",
+          "synthetic",
+          "roleId",
+          "required",
+          "requiredContext",
+          "allowedUnknown",
+          "step",
+          "limits",
+          "onMismatch",
+          "humanEscalation",
+          "approvalRef",
+          "validity"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "guidanceStatus": {
+      "type": "string",
+      "enum": [
+        "available",
+        "none",
+        "stale"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "narrative",
+              "answer",
+              "correction"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "target": {
+            "type": "object",
+            "properties": {
+              "fieldId": {
+                "type": "string",
+                "enum": [
+                  "A01",
+                  "A02",
+                  "A03",
+                  "A04",
+                  "A05",
+                  "A06",
+                  "A07",
+                  "A08",
+                  "B01",
+                  "B02",
+                  "B03",
+                  "B04",
+                  "B05",
+                  "B06",
+                  "B07",
+                  "C01",
+                  "C02",
+                  "C03",
+                  "C04",
+                  "C05",
+                  "C06",
+                  "C07",
+                  "C08",
+                  "D01",
+                  "D02",
+                  "D03",
+                  "D04",
+                  "D05",
+                  "E01",
+                  "E02",
+                  "E03",
+                  "E04",
+                  "E05",
+                  "E06",
+                  "E07",
+                  "E08",
+                  "E09",
+                  "F01",
+                  "F02",
+                  "F03",
+                  "F04",
+                  "F05",
+                  "F06",
+                  "F07",
+                  "G01",
+                  "G02",
+                  "G03",
+                  "G04",
+                  "G05",
+                  "H01",
+                  "H02",
+                  "H03",
+                  "H04",
+                  "H05",
+                  "H06",
+                  "H07",
+                  "H08",
+                  "H09",
+                  "H10",
+                  "I01",
+                  "I02",
+                  "I03",
+                  "I04",
+                  "I05",
+                  "I06",
+                  "J01",
+                  "J02",
+                  "J03",
+                  "J04",
+                  "J05",
+                  "K01",
+                  "K02",
+                  "K03",
+                  "K04",
+                  "K05",
+                  "K06",
+                  "K07",
+                  "L01",
+                  "L02",
+                  "L03",
+                  "L04",
+                  "L05",
+                  "L06",
+                  "L07",
+                  "M01",
+                  "M02",
+                  "M03",
+                  "M04",
+                  "M05",
+                  "M06",
+                  "M07",
+                  "M08",
+                  "M09",
+                  "M10",
+                  "N01",
+                  "N02",
+                  "N03",
+                  "N04",
+                  "N05",
+                  "N06",
+                  "O01",
+                  "O02",
+                  "O03",
+                  "O04",
+                  "O05",
+                  "O06",
+                  "O07",
+                  "O08",
+                  "O09",
+                  "P01",
+                  "P02",
+                  "P03",
+                  "P04",
+                  "P05",
+                  "P06",
+                  "P07",
+                  "P08"
+                ]
+              },
+              "recordId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "fieldId"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "text"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "instanceId": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "synthetic",
+    "mode",
+    "contentApproval",
+    "caseId",
+    "evaluationId",
+    "version",
+    "stage",
+    "role",
+    "facts",
+    "analysis",
+    "followUp",
+    "outputs",
+    "reviews",
+    "saved",
+    "needsFactConfirmation",
+    "recommendations",
+    "roleRevision",
+    "guidanceRevision",
+    "guidelines",
+    "guidanceStatus",
+    "sources",
+    "instanceId"
+  ],
+  "additionalProperties": false
+}

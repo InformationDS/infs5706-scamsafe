@@ -1,0 +1,16 @@
+
+> scamsafe-foundation@0.1.0 check:module
+> tsx tests/module-browser.ts intake evidence/task-results/A01/run-03/intake
+
+D:\BaiduSyncdisk\UNSW\INFS5706\GroupAssignment\tests\module-browser.ts:102
+if (failure) throw new Error(failure);
+                   ^
+
+Error: TimeoutError: page.waitForURL: Timeout 30000ms exceeded.
+=========================== logs ===========================
+waiting for navigation until "commit"
+============================================================
+    at <anonymous> (D:\BaiduSyncdisk\UNSW\INFS5706\GroupAssignment\tests\module-browser.ts:102:20)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v24.15.0

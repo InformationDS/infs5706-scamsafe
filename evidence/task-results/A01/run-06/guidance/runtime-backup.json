@@ -1,0 +1,630 @@
+{
+  "kind": "ScamSafe runtime backup",
+  "schemaVersion": 2,
+  "record": {
+    "schemaVersion": 2,
+    "synthetic": true,
+    "mode": "mock",
+    "contentApproval": "pending",
+    "caseId": "EXAMPLE-01",
+    "evaluationId": "T09",
+    "version": 3,
+    "stage": "corrected",
+    "role": {
+      "id": "EX-ROLE-01",
+      "version": 1,
+      "organisation": "SYN Bank A",
+      "title": "Intake Officer",
+      "permissions": [
+        "Record synthetic case",
+        "Check facts",
+        "Prepare local drafts",
+        "Prepare human assessment requests as local drafts"
+      ],
+      "recipients": [
+        {
+          "id": "HANDOVER-BANK",
+          "title": "SYN Bank A / designated human review team"
+        },
+        {
+          "id": "HANDOVER-TELCO",
+          "title": "SYN Telco B / designated human intake team"
+        }
+      ],
+      "contentApproval": "approved",
+      "enabled": true,
+      "synthetic": true,
+      "approvalRef": "BUSINESS-BASELINE-01",
+      "excludedActions": [
+        "Account or transaction operations",
+        "Freezing funds",
+        "Promising refunds or recovery",
+        "Telecom account or number changes",
+        "Sending handovers or assessment requests"
+      ],
+      "recipientResponsibilities": {
+        "HANDOVER-BANK": "Human verification and assessment of reported unfamiliar debits, credential exposure and transaction information; the prototype only prepares a local draft.",
+        "HANDOVER-TELCO": "Human assessment of whether the reported SMS concern falls within the mobile provider remit; do not assume the provider sent the SMS or that SIM swapping occurred. Local draft only; sharing permission unverified."
+      }
+    },
+    "facts": [
+      {
+        "fieldId": "A07",
+        "value": "I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n\nI opened the link at verify-bank.example and entered my online banking password and a one-time code.\n\nAt 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n\nI use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n\nI have the text message on my phone, but I have not provided any material to the employee.",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S1",
+          "S2",
+          "S3",
+          "S4",
+          "S5"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "B01",
+        "value": "Person concerned",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S1",
+          "S2",
+          "S3",
+          "S4",
+          "S5"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "C02",
+        "recordId": "CONTACT-01",
+        "value": "16 October 2026 09:00 Australia/Sydney",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S1"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "C03",
+        "recordId": "CONTACT-01",
+        "value": "SMS",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S1"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "C04",
+        "recordId": "CONTACT-01",
+        "value": "Claims to be SYN Bank A",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S1"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "C06",
+        "recordId": "CONTACT-01",
+        "value": "verify-bank.example",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S2"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "C08",
+        "recordId": "CONTACT-01",
+        "value": null,
+        "version": 1,
+        "status": "missing",
+        "reviewStatus": "checked",
+        "sourceIds": [],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "D04",
+        "recordId": "EVENT-01",
+        "value": "Opened the link and entered banking password and one-time code categories; no secret values recorded.",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S2"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "E01",
+        "value": "Reported debit",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S3"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "E02",
+        "recordId": "TX-01",
+        "value": "TX-01",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S3"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "E03",
+        "recordId": "TX-01",
+        "value": null,
+        "version": 1,
+        "status": "missing",
+        "reviewStatus": "checked",
+        "sourceIds": [],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "E04",
+        "recordId": "TX-01",
+        "value": 250,
+        "version": 3,
+        "status": "extracted",
+        "reviewStatus": "corrected",
+        "sourceIds": [
+          "S3"
+        ],
+        "candidates": [],
+        "history": [
+          {
+            "value": 2000,
+            "reason": "The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000.",
+            "sourceIds": [
+              "S3"
+            ]
+          },
+          {
+            "value": 200,
+            "reason": "MOCK preview correction to 250",
+            "sourceIds": [
+              "S3"
+            ]
+          }
+        ]
+      },
+      {
+        "fieldId": "E05",
+        "recordId": "TX-01",
+        "value": "AUD",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S3"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "E06",
+        "recordId": "TX-01",
+        "value": null,
+        "version": 1,
+        "status": "missing",
+        "reviewStatus": "checked",
+        "sourceIds": [],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "E07",
+        "recordId": "TX-01",
+        "value": "SYN Bank A",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S3"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "E08",
+        "recordId": "TX-01",
+        "value": null,
+        "version": 1,
+        "status": "missing",
+        "reviewStatus": "checked",
+        "sourceIds": [],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "E09",
+        "recordId": "TX-01",
+        "value": null,
+        "version": 1,
+        "status": "missing",
+        "reviewStatus": "checked",
+        "sourceIds": [],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "F01",
+        "value": true,
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S2"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "F02",
+        "value": [
+          "Banking password",
+          "One-time code"
+        ],
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S2"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "F03",
+        "value": "Linked page",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S2"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "F05",
+        "value": "SYN Bank A online banking",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S2",
+          "S3"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "F06",
+        "value": [
+          "Unfamiliar debit"
+        ],
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S3"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "F07",
+        "value": "16 October 2026 09:30 Australia/Sydney",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S3"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "J02",
+        "recordId": "EVID-01",
+        "value": "Text message",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S5"
+        ],
+        "candidates": [],
+        "history": []
+      },
+      {
+        "fieldId": "J04",
+        "recordId": "EVID-01",
+        "value": "Reported available on phone; not provided or verified",
+        "version": 1,
+        "status": "extracted",
+        "reviewStatus": "checked",
+        "sourceIds": [
+          "S5"
+        ],
+        "candidates": [],
+        "history": []
+      }
+    ],
+    "analysis": {
+      "version": 1,
+      "basedOnCaseVersion": 1,
+      "source": "mock",
+      "types": [
+        "Suspected phishing"
+      ],
+      "reasons": [
+        "CONTACT-01: reported bank impersonation SMS; EVENT-01: reported credential entry."
+      ],
+      "alternatives": [
+        "Sender identity and the debit's connection to the SMS are unverified."
+      ],
+      "gaps": [
+        "Transaction time",
+        "Payment method",
+        "Recipient",
+        "Continuing contact"
+      ],
+      "facts": [],
+      "guidanceStatus": "unapproved",
+      "recommendations": []
+    },
+    "followUp": {
+      "rounds": 0,
+      "totalQuestions": 0,
+      "stopped": false,
+      "questions": []
+    },
+    "outputs": [],
+    "reviews": [
+      {
+        "stage": "first",
+        "objectId": "facts",
+        "objectVersion": 2,
+        "dependencies": {
+          "case": 2
+        },
+        "simulated": true,
+        "actor": "MOCK-STAFF",
+        "reviewedAt": "2026-10-17T00:00:00.000Z"
+      }
+    ],
+    "saved": true,
+    "needsFactConfirmation": true,
+    "recommendations": [],
+    "roleRevision": 1,
+    "guidanceRevision": 1,
+    "guidelines": [
+      {
+        "id": "EX-G01",
+        "version": 1,
+        "contentApproval": "approved",
+        "enabled": true,
+        "synthetic": true,
+        "roleId": "EX-ROLE-01",
+        "required": [
+          {
+            "target": {
+              "fieldId": "F06"
+            },
+            "allowedValues": [
+              [
+                "Unfamiliar debit"
+              ]
+            ]
+          },
+          {
+            "target": {
+              "fieldId": "E07",
+              "recordId": "TX-01"
+            },
+            "allowedValues": [
+              "SYN Bank A"
+            ]
+          },
+          {
+            "target": {
+              "fieldId": "E09",
+              "recordId": "TX-01"
+            },
+            "allowedValues": [
+              null,
+              "reported pending"
+            ]
+          }
+        ],
+        "requiredContext": [
+          "F06 abnormal debit refers specifically to TX-01",
+          "No unresolved E09 conflict"
+        ],
+        "allowedUnknown": [
+          {
+            "fieldId": "E04",
+            "recordId": "TX-01"
+          },
+          {
+            "fieldId": "E05",
+            "recordId": "TX-01"
+          },
+          {
+            "fieldId": "E09",
+            "recordId": "TX-01"
+          }
+        ],
+        "step": "Prepare a local internal human assessment record.",
+        "limits": [
+          "Approved synthetic prototype guidance only; no authority for real-world action.",
+          "EXAMPLE-01 teaching target TX-01 only.",
+          "E09 conflicts, reported completed and payment requested are outside this teaching entry.",
+          "The human specialist decides further assessment; no freeze, refund or recovery promised."
+        ],
+        "onMismatch": "Omit this step and preserve missing or conflicting facts for human review.",
+        "humanEscalation": "A designated bank human specialist decides further assessment; the intake role performs no account or transaction action.",
+        "approvalRef": "BUSINESS-BASELINE-01",
+        "validity": "current"
+      },
+      {
+        "id": "EX-G02",
+        "version": 1,
+        "contentApproval": "approved",
+        "enabled": true,
+        "synthetic": true,
+        "roleId": "EX-ROLE-01",
+        "required": [
+          {
+            "target": {
+              "fieldId": "C03",
+              "recordId": "CONTACT-01"
+            },
+            "allowedValues": [
+              "SMS"
+            ]
+          }
+        ],
+        "requiredContext": [
+          "S4 explicitly identifies SYN Telco B as the person's mobile service provider",
+          "Configuration includes corresponding human intake responsibilities"
+        ],
+        "allowedUnknown": [
+          {
+            "fieldId": "C08",
+            "recordId": "CONTACT-01"
+          },
+          {
+            "fieldId": "J04",
+            "recordId": "EVID-01"
+          },
+          {
+            "fieldId": "O07"
+          }
+        ],
+        "step": "Prepare a local SYN Telco B human intake draft.",
+        "limits": [
+          "Approved synthetic prototype guidance only; no authority for real-world action.",
+          "Also requires S4 to explicitly identify SYN Telco B as the person's mobile provider and configured human intake responsibilities; this limited draft is not a runtime matcher.",
+          "Unknown sharing permission permits local drafting only; no sharing or verification asserted.",
+          "Do not infer SIM swapping or change a mobile service."
+        ],
+        "onMismatch": "Omit this step and preserve missing or conflicting facts for human review.",
+        "humanEscalation": "The receiving human intake team verifies whether the concern falls within its remit; sharing permission remains unverified.",
+        "approvalRef": "BUSINESS-BASELINE-01",
+        "validity": "current"
+      },
+      {
+        "id": "EX-G03",
+        "version": 1,
+        "contentApproval": "approved",
+        "enabled": true,
+        "synthetic": true,
+        "roleId": "EX-ROLE-01",
+        "required": [
+          {
+            "target": {
+              "fieldId": "C03",
+              "recordId": "CONTACT-01"
+            },
+            "allowedValues": [
+              "SMS"
+            ]
+          }
+        ],
+        "requiredContext": [
+          "Existing corresponding SMS clues have source references"
+        ],
+        "allowedUnknown": [
+          {
+            "fieldId": "J04",
+            "recordId": "EVID-01"
+          }
+        ],
+        "step": "Optionally prepare a separate summary of existing SMS clues for human assessment.",
+        "limits": [
+          "Approved synthetic prototype guidance only; no authority for real-world action.",
+          "Also requires existing SMS clues and source references; this limited draft is not a runtime matcher.",
+          "The employee may decline duplicate preparation; rejection retains facts and gaps.",
+          "Do not request new materials or claim the SMS is verified."
+        ],
+        "onMismatch": "Omit this step and preserve missing or conflicting facts for human review.",
+        "humanEscalation": "Human staff decide whether a separate existing-clue summary is useful; no new materials are required.",
+        "approvalRef": "BUSINESS-BASELINE-01",
+        "validity": "current"
+      }
+    ],
+    "guidanceStatus": "available",
+    "sources": [
+      {
+        "id": "S1",
+        "kind": "narrative",
+        "text": "I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification."
+      },
+      {
+        "id": "S2",
+        "kind": "narrative",
+        "text": "I opened the link at verify-bank.example and entered my online banking password and a one-time code."
+      },
+      {
+        "id": "S3",
+        "kind": "narrative",
+        "text": "At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed."
+      },
+      {
+        "id": "S4",
+        "kind": "narrative",
+        "text": "I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet."
+      },
+      {
+        "id": "S5",
+        "kind": "narrative",
+        "text": "I have the text message on my phone, but I have not provided any material to the employee."
+      },
+      {
+        "id": "CORRECTION-01",
+        "kind": "correction",
+        "text": "The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000.",
+        "target": {
+          "fieldId": "E04",
+          "recordId": "TX-01"
+        }
+      }
+    ],
+    "instanceId": "73601c5f-390d-4f85-ba94-050fc8eace31"
+  }
+}

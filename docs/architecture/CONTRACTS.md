@@ -1,10 +1,10 @@
 # 共享数据与模块接口
 
-本文件描述实际公共基座。产品规则以 [PRD](../product/PRD.md) 为准，字段语义以 [FIELD_DICTIONARY](../product/FIELD_DICTIONARY.md) 为准。当前仅支持合成开发数据。data/business/ 是独立的已批准配置包；原 CaseRecord／fixtures 仍为 pending、岗位停用、审核为模拟，不能直接开展正式业务验收。
+本文件描述实际公共基座。产品规则以 [PRD](../product/PRD.md) 为准，字段语义以 [FIELD_DICTIONARY](../product/FIELD_DICTIONARY.md) 为准。当前仅支持合成开发数据。A01另提供schemaVersion 2的运行案件、模块端口及独立预览，实际定义见[模块运行契约](MODULE_CONTRACTS.md)；下文v1单例契约保留兼容，不作为v2结构。data/business/ 是独立的已批准配置包；原 CaseRecord／fixtures 仍为 pending、岗位停用、审核为模拟，不能直接开展正式业务验收。
 
 ## 唯一结构与字段映射
 
-入口为 shared/index.ts；Zod 定义在 shared/schema.ts，程序操作在 shared/core.ts。`npm run schemas` 生成 data/schemas/ 中九个 JSON Schema；运行时仍须 Zod 和核心函数执行跨字段／依赖检查。
+入口为 shared/index.ts；Zod 定义在 shared/schema.ts，程序操作在 shared/core.ts。`npm run schemas` 生成 data/schemas/ 中九个v1及两个runtime v2 JSON Schema；运行时仍须 Zod 和核心函数执行跨字段／依赖检查。
 
 | 对象 | 实际关键属性 | 字典关系与限制 |
 |---|---|---|

@@ -1,0 +1,13 @@
+test_current_plan_is_parallel (test_parallel_tasks.ParallelPlanTests.test_current_plan_is_parallel) ... ok
+test_missing_module_at_integration_is_rejected (test_parallel_tasks.ParallelPlanTests.test_missing_module_at_integration_is_rejected) ... ok
+test_peer_dependency_is_rejected (test_parallel_tasks.ParallelPlanTests.test_peer_dependency_is_rejected) ... ok
+test_shared_write_is_rejected (test_parallel_tasks.ParallelPlanTests.test_shared_write_is_rejected) ... ok
+test_changed_snapshot_is_rejected (test_source_snapshot.SourceSnapshotTests.test_changed_snapshot_is_rejected) ... ok
+test_current_document_edits_do_not_rewrite_historical_hashes (test_source_snapshot.SourceSnapshotTests.test_current_document_edits_do_not_rewrite_historical_hashes) ... ok
+test_missing_snapshot_is_rejected (test_source_snapshot.SourceSnapshotTests.test_missing_snapshot_is_rejected) ... ok
+test_remapping_to_current_or_external_source_is_rejected (test_source_snapshot.SourceSnapshotTests.test_remapping_to_current_or_external_source_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.517s
+
+OK

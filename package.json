@@ -15,7 +15,8 @@
     "fixtures": "tsx shared/write-fixtures.ts",
     "browser:install": "playwright install chromium",
     "check:browser": "tsx tests/browser-check.ts",
-    "check:business": "tsx scripts/maintenance/check-business.ts"
+    "check:business": "tsx scripts/maintenance/check-business.ts",
+    "check:module": "tsx tests/module-browser.ts"
   },
   "dependencies": {
     "dotenv": "^18.0.8",

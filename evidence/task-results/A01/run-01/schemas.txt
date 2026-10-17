@@ -1,0 +1,3 @@
+
+> scamsafe-foundation@0.1.0 schemas
+> tsx shared/write-schemas.ts

@@ -1,0 +1,58 @@
+[
+  {
+    "file": "evidence\\task-results\\A01\\run-05\\guidance\\no-guidance.pdf",
+    "pages": 1,
+    "syntheticMock": true,
+    "amount200": true,
+    "noVersionPlaceholder": true
+  },
+  {
+    "file": "evidence\\task-results\\A01\\run-05\\guidance\\retry-same-snapshot.pdf",
+    "pages": 1,
+    "syntheticMock": true,
+    "amount200": true,
+    "noVersionPlaceholder": true
+  },
+  {
+    "file": "evidence\\task-results\\A01\\run-05\\intake\\no-guidance.pdf",
+    "pages": 1,
+    "syntheticMock": true,
+    "amount200": true,
+    "noVersionPlaceholder": true
+  },
+  {
+    "file": "evidence\\task-results\\A01\\run-05\\intake\\retry-same-snapshot.pdf",
+    "pages": 1,
+    "syntheticMock": true,
+    "amount200": true,
+    "noVersionPlaceholder": true
+  },
+  {
+    "file": "evidence\\task-results\\A01\\run-05\\model\\no-guidance.pdf",
+    "pages": 1,
+    "syntheticMock": true,
+    "amount200": true,
+    "noVersionPlaceholder": true
+  },
+  {
+    "file": "evidence\\task-results\\A01\\run-05\\model\\retry-same-snapshot.pdf",
+    "pages": 1,
+    "syntheticMock": true,
+    "amount200": true,
+    "noVersionPlaceholder": true
+  },
+  {
+    "file": "evidence\\task-results\\A01\\run-05\\outputs\\no-guidance.pdf",
+    "pages": 1,
+    "syntheticMock": true,
+    "amount200": true,
+    "noVersionPlaceholder": true
+  },
+  {
+    "file": "evidence\\task-results\\A01\\run-05\\outputs\\retry-same-snapshot.pdf",
+    "pages": 1,
+    "syntheticMock": true,
+    "amount200": true,
+    "noVersionPlaceholder": true
+  }
+]

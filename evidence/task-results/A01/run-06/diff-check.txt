@@ -1,0 +1,17 @@
+warning: in the working copy of 'app/src/main.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/architecture/CONTRACTS.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/architecture/RUNBOOK.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/project/FOUNDATION_READINESS.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/project/STATUS.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/project/tasks/A01.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/project/tasks/A02.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/project/tasks/A03.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/project/tasks/B01.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/project/tasks/C01.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/project/tasks/D01.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/project/tasks/E01.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/project/tasks/F01.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/project/tasks/F02.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'package.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'shared/export-schemas.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'shared/index.ts', LF will be replaced by CRLF the next time Git touches it

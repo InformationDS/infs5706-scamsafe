@@ -126,3 +126,25 @@ Python 检查只验证来源和仓库资料，不代替 npm 检查或业务验�
 依赖／下载失败先记录网络和错误；MODEL_NOT_CONFIGURED 表示本地配置缺项；MODEL_INVALID_OUTPUT 表示返回结构或来源不合格；MODEL_TIMEOUT 不算成功；PDF_UNAVAILABLE 要检查本机 Chromium。导出 409 时先处理当前事实、保存及模拟审核，不能删校验绕过。IndexedDB 不可用或保存失败时保留当前页面和输入，尝试 JSON 备份并交 A 处理。
 
 任务内浏览器检查使用独立输出目录，例如 `npm run check:browser -- evidence/task-results/F01/run-01/browser`（Windows用npm.cmd）。目录须位于项目evidence内，检查完成会写入该目录，不覆盖evidence/preparation的基座证据；无参数命令只供A维护基座证据，成员不执行；任何复测先选新的批次目录。任务卡已给出各自目录，执行结果只在对应卡记录。
+
+## A01 四模块公共起点
+
+工作包 `A01-20261017-01` 使用同一完整源码副本（包括未提交的新文件），实际包及哈希见[A01执行记录](../project/tasks/A01.md#唯一执行记录)。不要只发当前远端链接。依赖沿用现有锁文件与Node 24，不重新选技术。
+
+根目录运行 `npm run dev`，分别打开 `http://127.0.0.1:5173/?module=intake`、`/?module=model`、`/?module=guidance`、`/?module=outputs`；构建运行仍是 `npm run build` 后 `npm start`，地址改为4310。四个页面各自可启动，当前业务模块未安装，显示可操作MOCK substitute。
+
+Fixed runtime variant选T09／corrected／stale／partial／unknown／limit／stopped／rejected／role-stale／guidance-stale／no-guidance／single-edit／save-error／output-error后点Reset fixed input。重置不删已保存案件；有未保存修改时使用Save and continue、Discard changes and continue或Cancel。点Save runtime case成功后才为Saved，刷新恢复该模块最近成功保存的案；Saved case可列出和打开其他案。备份用Download runtime backup／Import runtime backup，格式v2；未保存时禁止导入，同号先确认。
+
+PDF操作：选no-guidance，Reset fixed input，Save runtime case，再Download MOCK pdf或Open MOCK PDF；均为实际本机Chromium生成文件。无指引仅摘要可用。选output-error默认模拟输出失败，失败后取消Simulate output failure即可同版本重试。mock服务不会连接提供商，即使机器已有真实API设置。浏览器内置PDF查看器不是普通网页；自动化记录弹出窗口及PDF文件，并使用Poppler渲染逐页观察，不能根据网页load事件推断文件损坏。
+
+```sh
+npm run check
+npm run check:business
+npm run build
+npm run check:module -- intake evidence/task-results/A01/manual-01/intake
+npm run check:module -- model evidence/task-results/A01/manual-01/model
+npm run check:module -- guidance evidence/task-results/A01/manual-01/guidance
+npm run check:module -- outputs evidence/task-results/A01/manual-01/outputs
+```
+
+Windows使用npm.cmd；复测使用新目录，不能覆盖既有result.json。四模块检查自行启动独立临时mock服务，无需另开npm start。检查公共MOCK控件、重置、保存恢复、备份、迟到请求、失败与PDF，不等于B/C/D/E业务通过。真实模块入口、props、服务注册与依赖约定见[MODULE_CONTRACTS](MODULE_CONTRACTS.md)。不需要API密钥；真实模型、macOS及第二电脑未执行。

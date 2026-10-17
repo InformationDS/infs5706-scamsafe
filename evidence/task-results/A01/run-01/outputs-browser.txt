@@ -1,0 +1,18 @@
+
+> scamsafe-foundation@0.1.0 check:module
+> tsx tests/module-browser.ts outputs evidence/task-results/A01/run-04/outputs
+
+D:\BaiduSyncdisk\UNSW\INFS5706\GroupAssignment\tests\module-browser.ts:102
+if (failure) throw new Error(failure);
+                   ^
+
+Error: TimeoutError: page.screenshot: Timeout 10000ms exceeded.
+Call log:
+  - taking page screenshot
+  - waiting for fonts to load...
+  - fonts loaded
+
+    at <anonymous> (D:\BaiduSyncdisk\UNSW\INFS5706\GroupAssignment\tests\module-browser.ts:102:20)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v24.15.0

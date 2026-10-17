@@ -1,0 +1,13 @@
+{
+  "module": "intake",
+  "browser": "156.0.8078.4",
+  "checks": [
+    "independent URL starts with explicit MOCK substitute",
+    "save commits, refresh restores facts/history",
+    "delayed old 2000 proposal cannot overwrite current 250"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": "TimeoutError: locator.selectOption: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Saved case', { exact: true })\u001b[22m\n",
+  "scope": "A01 MOCK foundation only"
+}

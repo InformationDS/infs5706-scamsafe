@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "scope": "Draft source integrity only; no model, app, content approval or export verification",
+  "package": "data/evaluation/baseline/T09.source.json",
+  "errors": []
+}

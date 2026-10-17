@@ -1,0 +1,22 @@
+{
+  "packageId": "A01-20261017-01",
+  "scope": "Independent MOCK starts, not executed business acceptance. No second approved role or new risk rule is introduced.",
+  "riskNoticeRules": [],
+  "riskNoticeScope": "No explicit notice trigger entries in the approved package; do not invent notices or scores.",
+  "variants": [
+    {"id":"T09","start":"intake","source":"data/business/T09.json input S1-S5","actions":["Load initial narrative"],"expected":"E04/TX-01 = 2000; no actual review; no rounds","forbidden":"Claim verified loss or actual review"},
+    {"id":"corrected","start":"corrected","source":"data/business/T09.json correction","actions":["Reanalyze original narrative"],"expected":"Current 200; 2000 history and conflict candidate retained","forbidden":"Replace employee 200 with 2000"},
+    {"id":"stale","start":"corrected","source":"PRD 6; T09 expectedChecks","actions":["Start delayed analysis","Change current amount to 250 before return"],"expected":"Current 250; old response rejected by case/instance/version/request/settings/dependencies","forbidden":"Old response changes facts or revives review"},
+    {"id":"partial","start":"partial","source":"data/business/T09.json questions/answers","actions":["Load Q1 answered; Q2/Q3 pending"],"expected":"1 round, 3 questions; Q1 reported pending","forbidden":"Start another round or invent answers"},
+    {"id":"unknown","start":"stopped","source":"data/business/T09.json answers","actions":["Load Q2/Q3 unknown"],"expected":"Null remains unknown; gaps retained","forbidden":"Unknown becomes false or zero"},
+    {"id":"limit","start":"stopped","source":"PRD 4.2; mock-only synthetic missing-target questions","actions":["Load independently pre-counted 3 rounds / 9 questions"],"expected":"3 rounds, 9 stable IDs; no next round","forbidden":"Reset or duplicate counts; claim these are approved business questions"},
+    {"id":"stopped","start":"partial","source":"PRD 4.2","actions":["Load employee-stop state with unanswered questions skipped"],"expected":"1 round / 3 questions; stopped; facts and gaps retained","forbidden":"Invent answers or restart questioning"},
+    {"id":"rejected","start":"handover","source":"data/business/T09.json REC-03 and expectedChecks","actions":["Load post-review rejection variant"],"expected":"REC-03 rejected with reason; TELCO invalidated; BANK remains current","forbidden":"Reintroduce rejected step or erase facts"},
+    {"id":"role-stale","start":"handover","source":"PRD 4.4; no second approved role","actions":["Load simulated permission revision"],"expected":"Facts, first review and counts retained; role-dependent output stale","forbidden":"Add an approved role or reset counts"},
+    {"id":"guidance-stale","start":"handover","source":"PRD 4.3-4.4","actions":["Load simulated guidance revision"],"expected":"Guidance-dependent outputs stale","forbidden":"Export obsolete handovers"},
+    {"id":"no-guidance","start":"no-guidance","source":"data/business/T09.json factualSummary and bodyConditions","actions":["Load independent no-guidance summary"],"expected":"Insufficient approved guidance; human review required; summary only; simulated review can enable mock local output","forbidden":"Recommendations, agency routes or recipient drafts"},
+    {"id":"single-edit","start":"handover","source":"PRD 4.4","actions":["Load mock bank-only edit"],"expected":"BANK employeeEdited history, stale review; TELCO remains current","forbidden":"Invalidate unrelated TELCO or discard original bank body"},
+    {"id":"save-error","start":"corrected","source":"PRD 4.5-6","actions":["Enable save failure","Save","Disable failure and retry"],"expected":"Failure keeps input unsaved; retry commits before saved indication","forbidden":"Switch case after failed save"},
+    {"id":"output-error","start":"handover","source":"PRD 6","actions":["Enable output failure","Export PDF","Disable failure and retry same snapshot"],"expected":"Failure retains body/reviews; retry same object version","forbidden":"Clear review or claim output succeeded on failure"}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "packageId": "A01-20261017-01",
+  "archive": "local/delivery/A01/ScamSafe-A01-20261017-01.zip",
+  "sha256": "fe356839e20cad38fc1bdb9dc5aa791860511d3ecf2f5da29e2e9a3d943537c7",
+  "bytes": 18720807,
+  "sourceFiles": 440,
+  "zipIntegrity": "passed",
+  "allSourceHashesMatch": true,
+  "excludedCredentialsLocalDependenciesAndBuild": true,
+  "sent": false
+}

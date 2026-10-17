@@ -1,0 +1,188 @@
+
+> scamsafe-foundation@0.1.0 check
+> tsc --noEmit && tsx --test tests/*.test.ts
+
+✔ approved baseline preserves fixed inputs, boundaries and conditional expected decisions (17.9743ms)
+✔ business schemas reject pending guidance and invalid approved references (4.1118ms)
+✔ modified content fails the approved artifact hash check (22.3675ms)
+✖ approved business API is distinct from legacy mock case approval (25.0944ms)
+✔ all fixed states validate without business approval or enabled roles (37.4153ms)
+✔ case entrypoints require complete handovers and a configured teaching recipient (6.9115ms)
+✔ single-case fact semantics reject wrong types and missing record targets while preserving false versus unknown (5.0821ms)
+✔ manual amount correction is preserved as model conflict and history survives (1.3567ms)
+✔ model cannot impersonate employee review or invent source references (1.5153ms)
+✔ equal analysis with changed request provenance does not change content or review (1.9722ms)
+✔ unknown amount is separate; independent transactions group by currency and state (1.5086ms)
+✔ partial answer retains round; stop and later answer update original without new count (1.7935ms)
+✔ rounds require display and save and enforce 3 per round, 3 rounds, 9 total (2.1141ms)
+✔ dependency invalidation is per object and old reviews remain as history (4.0631ms)
+✔ snapshot gate blocks unsaved, stale review, modified body and requires explicit simulated marker (12.3668ms)
+✔ old case and superseded same-version requests cannot overwrite facts or reviews (2.2944ms)
+✔ summary and handover contracts keep recipient and recommendation boundaries explicit (4.8107ms)
+✔ recommendation schema requires traceable simulated decisions without enabling business content (6.5651ms)
+✔ settings DTO never returns keys; blank preserves and explicit clear removes credentials (4.911ms)
+✔ settings validation rejects incomplete live mode, unsafe URLs, unknown fields and invalid headers (1.7262ms)
+✔ local atomic persistence restores after restart and explicit cleared key overrides env fallback (20.4964ms)
+✖ failed persistence returns safe 503 and retains last settings in memory (26.6089ms)
+✖ settings routes enforce host/origin, strict input and never echo secrets (6.9554ms)
+✖ saved settings immediately route real adapter to local fake provider without external calls (6.2922ms)
+✖ health exposes configuration status, never credential values (20.8064ms)
+✖ mock analysis is deterministic and rejects arbitrary modified facts and client configuration (16.7129ms)
+✖ mock fault responses preserve supplied case and identify timeout/invalid separately (6.3893ms)
+✖ foreign origins and DNS rebinding hosts cannot call local API (6.4704ms)
+✖ Markdown export requires current saved simulated review (11.1804ms)
+✖ OpenAI-compatible adapter uses a local fake provider, validates output, and redacts external errors (7.036ms)
+✖ missing live configuration makes no provider call (4.5988ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 20
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2105.3805
+
+✖ failing tests:
+
+test at tests\business.test.ts:45:1
+✖ approved business API is distinct from legacy mock case approval (25.0944ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:11856
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 11856
+    }
+  }
+
+test at tests\model-settings.test.ts:80:1
+✖ failed persistence returns safe 503 and retains last settings in memory (26.6089ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:11848
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 11848
+    }
+  }
+
+test at tests\model-settings.test.ts:92:1
+✖ settings routes enforce host/origin, strict input and never echo secrets (6.9554ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:11852
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 11852
+    }
+  }
+
+test at tests\model-settings.test.ts:114:1
+✖ saved settings immediately route real adapter to local fake provider without external calls (6.2922ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:11857
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 11857
+    }
+  }
+
+test at tests\server.test.ts:24:1
+✖ health exposes configuration status, never credential values (20.8064ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:11849
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 11849
+    }
+  }
+
+test at tests\server.test.ts:32:1
+✖ mock analysis is deterministic and rejects arbitrary modified facts and client configuration (16.7129ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:11854
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 11854
+    }
+  }
+
+test at tests\server.test.ts:49:1
+✖ mock fault responses preserve supplied case and identify timeout/invalid separately (6.3893ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:11861
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 11861
+    }
+  }
+
+test at tests\server.test.ts:62:1
+✖ foreign origins and DNS rebinding hosts cannot call local API (6.4704ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:11863
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 11863
+    }
+  }
+
+test at tests\server.test.ts:76:1
+✖ Markdown export requires current saved simulated review (11.1804ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:11865
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 11865
+    }
+  }
+
+test at tests\server.test.ts:102:1
+✖ OpenAI-compatible adapter uses a local fake provider, validates output, and redacts external errors (7.036ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:11868
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 11868
+    }
+  }
+
+test at tests\server.test.ts:150:1
+✖ missing live configuration makes no provider call (4.5988ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:11870
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 11870
+    }
+  }

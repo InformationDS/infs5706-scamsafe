@@ -1,0 +1,5 @@
+
+> scamsafe-foundation@0.1.0 check:module
+> tsx tests/module-browser.ts intake evidence/task-results/A01/run-06/intake
+
+intake: 11 browser checks passed; providerRequests=0. Evidence: D:\BaiduSyncdisk\UNSW\INFS5706\GroupAssignment\evidence\task-results\A01\run-06\intake
