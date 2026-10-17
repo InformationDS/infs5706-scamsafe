@@ -1,0 +1,43 @@
+
+> scamsafe-foundation@0.1.0 check
+> tsc --noEmit && tsx --test tests/*.test.ts
+
+✔ approved baseline preserves fixed inputs, boundaries and conditional expected decisions (18.6608ms)
+✔ business schemas reject pending guidance and invalid approved references (5.1139ms)
+✔ modified content fails the approved artifact hash check (20.9532ms)
+✔ approved business API is distinct from legacy mock case approval (52.915ms)
+✔ all fixed states validate without business approval or enabled roles (36.6996ms)
+✔ case entrypoints require complete handovers and a configured teaching recipient (9.3616ms)
+✔ single-case fact semantics reject wrong types and missing record targets while preserving false versus unknown (4.7965ms)
+✔ manual amount correction is preserved as model conflict and history survives (1.416ms)
+✔ model cannot impersonate employee review or invent source references (1.3277ms)
+✔ equal analysis with changed request provenance does not change content or review (1.9885ms)
+✔ unknown amount is separate; independent transactions group by currency and state (1.4103ms)
+✔ partial answer retains round; stop and later answer update original without new count (1.1715ms)
+✔ rounds require display and save and enforce 3 per round, 3 rounds, 9 total (1.9626ms)
+✔ dependency invalidation is per object and old reviews remain as history (3.2798ms)
+✔ snapshot gate blocks unsaved, stale review, modified body and requires explicit simulated marker (9.0497ms)
+✔ old case and superseded same-version requests cannot overwrite facts or reviews (1.7047ms)
+✔ summary and handover contracts keep recipient and recommendation boundaries explicit (3.5526ms)
+✔ recommendation schema requires traceable simulated decisions without enabling business content (5.5613ms)
+✔ settings DTO never returns keys; blank preserves and explicit clear removes credentials (4.7752ms)
+✔ settings validation rejects incomplete live mode, unsafe URLs, unknown fields and invalid headers (1.4292ms)
+✔ local atomic persistence restores after restart and explicit cleared key overrides env fallback (19.3019ms)
+✔ failed persistence returns safe 503 and retains last settings in memory (75.6813ms)
+✔ settings routes enforce host/origin, strict input and never echo secrets (31.9814ms)
+✔ saved settings immediately route real adapter to local fake provider without external calls (72.044ms)
+✔ health exposes configuration status, never credential values (36.0631ms)
+✔ mock analysis is deterministic and rejects arbitrary modified facts and client configuration (115.724ms)
+✔ mock fault responses preserve supplied case and identify timeout/invalid separately (13.6544ms)
+✔ foreign origins and DNS rebinding hosts cannot call local API (12.3055ms)
+✔ Markdown export requires current saved simulated review (30.9186ms)
+✔ OpenAI-compatible adapter uses a local fake provider, validates output, and redacts external errors (361.194ms)
+✔ missing live configuration makes no provider call (5.5503ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2685.8579

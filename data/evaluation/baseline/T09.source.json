@@ -1,0 +1,66 @@
+{
+  "purpose": "Source comparison only; not a runtime contract or approved expectation",
+  "evaluationId": "T09",
+  "caseId": "EXAMPLE-01",
+  "synthetic": true,
+  "approvals": {
+    "role": "pending",
+    "input": "pending",
+    "correction": "pending",
+    "questionsAndAnswers": "pending",
+    "guidelines": "pending",
+    "factualSummary": "pending",
+    "recommendations": "pending",
+    "handoverBodies": "pending"
+  },
+  "sourceHashes": {
+    "docs/product/examples/WORKED_CASE.md": "fa652e4c5c45b33dcc8d6b3441c695b93d2ff74badd3da0fd21155eaa58ee8fe",
+    "docs/product/PRD.md": "df1a0f23889c8513810a9e9f236896f8f4fc482faff41b0a5a75655b418e880c",
+    "docs/product/FIELD_DICTIONARY.md": "b7c434aa9a3340e3137ac02a5208b7298d1400dd41daf8f2c8f7c001ecbedf91",
+    "data/evaluation/cases/T09.md": "62386bd8b43cae680aec8dbe492404a1d0ba673d2e1bbf4404ad1336f9bdbeaf",
+    "data/evaluation/expected/T09.md": "eaa06dd9840b1d2832fe35559e4a1d67763c99eca2f21b39a10f6ea50dfa6d90",
+    "data/roles/EXAMPLE_ROLE_DRAFT.md": "bc860b5858c202ea61bf556779e4a3c9b02ce1396d055bd17e6bd94bc51ad3a9",
+    "data/guidelines/EXAMPLE_GUIDELINES_DRAFT.md": "efe57756e124a349907ff905b8f8bd2567f6bec39577f8049dd250b138b055e6"
+  },
+  "segments": [
+    {
+      "id": "narrative",
+      "source": "docs/product/examples/WORKED_CASE.md",
+      "text": "> S1. I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n>\n> S2. I opened the link at verify-bank.example and entered my online banking password and a one-time code.\n>\n> S3. At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n>\n> S4. I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n>\n> S5. I have the text message on my phone, but I have not provided any material to the employee."
+    },
+    {
+      "id": "correction",
+      "source": "docs/product/examples/WORKED_CASE.md",
+      "text": "“The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000.”"
+    },
+    {
+      "id": "answer1",
+      "source": "docs/product/examples/WORKED_CASE.md",
+      "text": "“The app says pending.”"
+    },
+    {
+      "id": "answer2",
+      "source": "docs/product/examples/WORKED_CASE.md",
+      "text": "“I do not know whether there were more messages. I cannot identify the recipient from the app.”"
+    },
+    {
+      "id": "summary",
+      "source": "docs/product/examples/WORKED_CASE.md",
+      "text": "> **Synthetic training case — EXAMPLE-01 — case version: [current integer version]. Insufficient approved guidance; human review required. Local factual summary only.**\n>\n> The person reports receiving an SMS claiming to be SYN Bank A, opening verify-bank.example and entering a banking password and a one-time code. No secret values are recorded. They report noticing an unfamiliar debit at 09:30 on 16 October 2026. The employee corrected the amount from AUD 2,000 to AUD 200; the person later described it as pending. These statements support suspected phishing, but the sender's identity and the debit's connection to the SMS are unverified.\n>\n> The person uses SYN Telco B and reported no prior contact with either organisation before intake. They say the SMS remains on their phone; no material was supplied or verified. Transaction time, payment method, recipient and continuing contact remain unknown. Questioning ended after one round of three questions. No subsequent action or delivery is recorded. This summary provides no specific handling recommendation or recipient handover."
+    },
+    {
+      "id": "questions",
+      "source": "docs/product/examples/WORKED_CASE.md",
+      "text": "| Q1 | Is the debit shown as pending or completed? / E09 / TX-01 | 交易状态影响银行记录和人工评估 |\n| Q2 | Has the sender contacted you again? / C08 / CONTACT-01 | 判断该次接触是否仍在继续 |\n| Q3 | Does the bank app identify the recipient of the debit? / E08 / TX-01 | 收款对象影响银行人工评估记录，当前未提供 |"
+    }
+  ],
+  "sourceSnapshots": {
+    "docs/product/examples/WORKED_CASE.md": "evidence/preparation/source-snapshot/docs/product/examples/WORKED_CASE.md.txt",
+    "docs/product/PRD.md": "evidence/preparation/source-snapshot/docs/product/PRD.md.txt",
+    "docs/product/FIELD_DICTIONARY.md": "evidence/preparation/source-snapshot/docs/product/FIELD_DICTIONARY.md.txt",
+    "data/evaluation/cases/T09.md": "evidence/preparation/source-snapshot/data/evaluation/cases/T09.md.txt",
+    "data/evaluation/expected/T09.md": "evidence/preparation/source-snapshot/data/evaluation/expected/T09.md.txt",
+    "data/roles/EXAMPLE_ROLE_DRAFT.md": "evidence/preparation/source-snapshot/data/roles/EXAMPLE_ROLE_DRAFT.md.txt",
+    "data/guidelines/EXAMPLE_GUIDELINES_DRAFT.md": "evidence/preparation/source-snapshot/data/guidelines/EXAMPLE_GUIDELINES_DRAFT.md.txt"
+  }
+}

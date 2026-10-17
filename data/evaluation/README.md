@@ -1,7 +1,8 @@
-# 固定合成评估集
+# 固定合成评估输入
 
-首版 15 个案例，覆盖计划见 [验收计划](../../tests/README.md)。`cases/` 保存初始案例及补问答案；`expected/` 保存团队审核的预期结果，按案例编号关联。
+当前T09批准输入、回答、事实及正文预期见[业务包](../business/README.md)。A01先建立prototype.json，提供T09和无指引及关键独立变体；四模块用固定替身并行开发，A02集成后F01观察、F02复测。新输入在实际产生并审阅前不当作已批准。
 
-[T09 输入起始稿](cases/T09.md)与[预期起始稿](expected/T09.md)供 TASK-006-02 核对，文件存在不等于已批准或已经执行。评估集的完成情况见[当前状态](../../docs/project/STATUS.md)；合成评估结果不得代替真实场景准确率。
+- [cases/](cases/README.md)、[expected/](expected/README.md)：可读输入和独立预期。
+- [baseline/](baseline/README.md)：来源原文及哈希，保留pending身份，不是实际审核或执行结果。
 
-[EXAMPLE-01](../../docs/product/examples/WORKED_CASE.md) 是独立的教学目标稿，展示输入、人工更正、部分回答、拒绝建议和输出一致性。对应 T09（网络钓鱼缺失／冲突变体），待团队审核后纳入 15 例评估集；不视为已执行测试。
+完整十五例编号与扩展覆盖见[测试计划](../../tests/README.md)，后续由A组织补充并审阅，不作为首个原型集成前置。不得从模型输出反推预期。执行结果放evidence/task-results/任务号/批次/，不放本目录。

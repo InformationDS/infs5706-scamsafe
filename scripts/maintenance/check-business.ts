@@ -1,0 +1,14 @@
+import { loadBusinessBaseline } from '../../server/src/business';
+import { sourceText } from '../../shared/source-text';
+import { makeFixture, fixedQuestions } from '../../shared/fixtures';
+import assert from 'node:assert/strict';
+const bundle = loadBusinessBaseline();
+assert.equal(bundle.baseline.input, sourceText.narrative);
+assert.equal(bundle.baseline.correction.text, sourceText.correction);
+assert.equal(bundle.baseline.correction.from, 2000);
+assert.equal(bundle.baseline.correction.to, 200);
+assert.deepEqual(bundle.baseline.answers.map(answer => answer.text), [sourceText.answer1, sourceText.answer2]);
+assert.deepEqual(bundle.baseline.questions, fixedQuestions.map(({ id, target, text, reason }) => ({ id, target, text, reason })));
+assert.deepEqual(bundle.baseline.expectedFacts, makeFixture('stopped').facts);
+assert.deepEqual(bundle.baseline.bodies, { factualSummary: sourceText.summary, sharedSummary: sourceText.sharedSummary, bank: sourceText.bank, telecom: sourceText.telco });
+console.log(JSON.stringify({ status: 'passed', scope: 'Approved synthetic content, source agreement, hashes and references only; not application acceptance', approvalId: bundle.approval.id, role: bundle.role.id, guidelines: bundle.guidelines.map(g => g.id), evaluationId: bundle.baseline.evaluationId, expectedChecks: bundle.baseline.expectedChecks.length, execution: bundle.baseline.execution }, null, 2));

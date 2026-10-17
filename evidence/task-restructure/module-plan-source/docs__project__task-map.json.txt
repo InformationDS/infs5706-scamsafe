@@ -1,0 +1,715 @@
+{
+  "scope": "Task dependency and file metadata only; task instructions and execution record are maintained in each task card.",
+  "tasks": [
+    {
+      "id": "A01",
+      "title": "接入获批业务配置与运行数据结构",
+      "role": "A",
+      "dependencies": [],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-09"
+      ],
+      "reads": [
+        "shared/schema.ts",
+        "shared/core.ts",
+        "shared/business.ts",
+        "server/src/business.ts",
+        "data/business/T09.json",
+        "data/business/role.json",
+        "data/business/guidelines.json",
+        "docs/architecture/CONTRACTS.md"
+      ],
+      "writes": [
+        "shared/schema.ts",
+        "shared/core.ts",
+        "shared/index.ts",
+        "shared/business.ts",
+        "shared/export-schemas.ts",
+        "shared/write-schemas.ts",
+        "server/src/business.ts",
+        "tests/core.test.ts",
+        "tests/business.test.ts",
+        "docs/architecture/CONTRACTS.md",
+        "data/schemas/AnalysisEnvelope.schema.json",
+        "data/schemas/AnalysisResult.schema.json",
+        "data/schemas/CaseRecord.schema.json",
+        "data/schemas/ExportSnapshot.schema.json",
+        "data/schemas/Guideline.schema.json",
+        "data/schemas/HandoverDraft.schema.json",
+        "data/schemas/Recommendation.schema.json",
+        "data/schemas/RoleProfile.schema.json",
+        "data/schemas/Summary.schema.json",
+        "data/business/schemas/ApprovedGuideline.schema.json",
+        "data/business/schemas/ApprovedRole.schema.json",
+        "data/business/schemas/BusinessApproval.schema.json",
+        "data/business/schemas/BusinessBaseline.schema.json",
+        "data/business/schemas/BusinessCase.schema.json"
+      ],
+      "creates": [
+        "shared/workflow.ts",
+        "tests/workflow.test.ts",
+        "data/schemas/RuntimeCaseRecord.schema.json",
+        "data/schemas/RuntimeExportSnapshot.schema.json"
+      ],
+      "gate": ""
+    },
+    {
+      "id": "A02",
+      "title": "接通分析、事实核对与补问控制器",
+      "role": "A",
+      "dependencies": [
+        "A01",
+        "C01"
+      ],
+      "requirements": [
+        "FR-02",
+        "FR-03",
+        "FR-04",
+        "FR-05",
+        "FR-12"
+      ],
+      "reads": [
+        "server/src/model.ts",
+        "server/src/app.ts",
+        "server/prompts/intake.txt",
+        "shared/core.ts",
+        "app/src/Workbench.tsx",
+        "data/business/T09.json",
+        "tests/README.md"
+      ],
+      "writes": [
+        "shared/schema.ts",
+        "shared/workflow.ts",
+        "shared/core.ts",
+        "shared/index.ts",
+        "server/src/model.ts",
+        "server/src/app.ts",
+        "server/prompts/intake.txt",
+        "app/src/Workbench.tsx",
+        "tests/core.test.ts",
+        "tests/server.test.ts",
+        "tests/workflow.test.ts",
+        "docs/architecture/CONTRACTS.md",
+        "shared/write-schemas.ts",
+        "shared/export-schemas.ts",
+        "data/schemas/RuntimeCaseRecord.schema.json",
+        "data/schemas/RuntimeExportSnapshot.schema.json",
+        "data/schemas/AnalysisEnvelope.schema.json",
+        "data/schemas/AnalysisResult.schema.json",
+        "data/schemas/CaseRecord.schema.json",
+        "data/schemas/ExportSnapshot.schema.json",
+        "data/schemas/Guideline.schema.json",
+        "data/schemas/HandoverDraft.schema.json",
+        "data/schemas/Recommendation.schema.json",
+        "data/schemas/RoleProfile.schema.json",
+        "data/schemas/Summary.schema.json",
+        "data/business/schemas/ApprovedGuideline.schema.json",
+        "data/business/schemas/ApprovedRole.schema.json",
+        "data/business/schemas/BusinessApproval.schema.json",
+        "data/business/schemas/BusinessBaseline.schema.json",
+        "data/business/schemas/BusinessCase.schema.json"
+      ],
+      "creates": [
+        "app/src/useWorkflow.ts",
+        "tests/workflow-browser.ts"
+      ],
+      "gate": "A01 公共运行结构已验收；C01 给出实际提示检查记录。控制器浏览器入口及故障开关由本卡建立，不是当前已存在功能。"
+    },
+    {
+      "id": "A03",
+      "title": "实现指引匹配、建议选择与岗位重算",
+      "role": "A",
+      "dependencies": [
+        "A01",
+        "D01"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-06",
+        "FR-07",
+        "FR-09"
+      ],
+      "reads": [
+        "data/business/role.json",
+        "data/business/guidelines.json",
+        "data/business/T09.json",
+        "shared/business.ts",
+        "shared/core.ts",
+        "docs/product/examples/APPROVED_BASELINE.md"
+      ],
+      "writes": [
+        "shared/workflow.ts",
+        "shared/schema.ts",
+        "shared/core.ts",
+        "shared/index.ts",
+        "tests/workflow.test.ts",
+        "docs/architecture/CONTRACTS.md",
+        "shared/write-schemas.ts",
+        "shared/export-schemas.ts",
+        "data/schemas/RuntimeCaseRecord.schema.json",
+        "data/schemas/RuntimeExportSnapshot.schema.json",
+        "data/schemas/AnalysisEnvelope.schema.json",
+        "data/schemas/AnalysisResult.schema.json",
+        "data/schemas/CaseRecord.schema.json",
+        "data/schemas/ExportSnapshot.schema.json",
+        "data/schemas/Guideline.schema.json",
+        "data/schemas/HandoverDraft.schema.json",
+        "data/schemas/Recommendation.schema.json",
+        "data/schemas/RoleProfile.schema.json",
+        "data/schemas/Summary.schema.json",
+        "data/business/schemas/ApprovedGuideline.schema.json",
+        "data/business/schemas/ApprovedRole.schema.json",
+        "data/business/schemas/BusinessApproval.schema.json",
+        "data/business/schemas/BusinessBaseline.schema.json",
+        "data/business/schemas/BusinessCase.schema.json"
+      ],
+      "creates": [
+        "shared/guidance.ts",
+        "tests/guidance.test.ts"
+      ],
+      "gate": ""
+    },
+    {
+      "id": "A04",
+      "title": "接通运行摘要、草稿与有效审核快照",
+      "role": "A",
+      "dependencies": [
+        "A02",
+        "A03",
+        "E01"
+      ],
+      "requirements": [
+        "FR-08",
+        "FR-09",
+        "FR-10"
+      ],
+      "reads": [
+        "shared/export.ts",
+        "shared/core.ts",
+        "server/src/app.ts",
+        "app/src/export/OutputPanel.tsx",
+        "data/business/T09.json",
+        "tests/README.md"
+      ],
+      "writes": [
+        "shared/workflow.ts",
+        "shared/schema.ts",
+        "shared/core.ts",
+        "shared/export.ts",
+        "server/src/app.ts",
+        "app/src/export/OutputPanel.tsx",
+        "tests/workflow.test.ts",
+        "tests/server.test.ts",
+        "docs/architecture/CONTRACTS.md",
+        "shared/write-schemas.ts",
+        "shared/export-schemas.ts",
+        "data/schemas/RuntimeCaseRecord.schema.json",
+        "data/schemas/RuntimeExportSnapshot.schema.json",
+        "data/schemas/AnalysisEnvelope.schema.json",
+        "data/schemas/AnalysisResult.schema.json",
+        "data/schemas/CaseRecord.schema.json",
+        "data/schemas/ExportSnapshot.schema.json",
+        "data/schemas/Guideline.schema.json",
+        "data/schemas/HandoverDraft.schema.json",
+        "data/schemas/Recommendation.schema.json",
+        "data/schemas/RoleProfile.schema.json",
+        "data/schemas/Summary.schema.json",
+        "data/business/schemas/ApprovedGuideline.schema.json",
+        "data/business/schemas/ApprovedRole.schema.json",
+        "data/business/schemas/BusinessApproval.schema.json",
+        "data/business/schemas/BusinessBaseline.schema.json",
+        "data/business/schemas/BusinessCase.schema.json"
+      ],
+      "creates": [
+        "shared/outputs.ts",
+        "tests/outputs.test.ts"
+      ],
+      "gate": ""
+    },
+    {
+      "id": "A05",
+      "title": "实现多案件本地历史与备份恢复",
+      "role": "A",
+      "dependencies": [
+        "A01"
+      ],
+      "requirements": [
+        "FR-11"
+      ],
+      "reads": [
+        "app/src/storage.ts",
+        "shared/schema.ts",
+        "shared/core.ts",
+        "docs/architecture/RUNBOOK.md"
+      ],
+      "writes": [
+        "app/src/storage.ts",
+        "shared/workflow.ts",
+        "tests/workflow.test.ts",
+        "docs/architecture/CONTRACTS.md",
+        "docs/architecture/RUNBOOK.md"
+      ],
+      "creates": [
+        "tests/storage-browser.ts"
+      ],
+      "gate": ""
+    },
+    {
+      "id": "A07",
+      "title": "准备完整十五例与受控业务变体",
+      "role": "A",
+      "dependencies": [],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-03",
+        "FR-05",
+        "FR-06",
+        "FR-07",
+        "FR-08",
+        "FR-09",
+        "FR-10",
+        "FR-11"
+      ],
+      "reads": [
+        "tests/README.md",
+        "data/business/T09.json",
+        "data/business/role.json",
+        "data/business/guidelines.json",
+        "data/evaluation/baseline/T09.source.json",
+        "docs/product/examples/APPROVED_BASELINE.md",
+        "shared/business.ts"
+      ],
+      "writes": [
+        "shared/business.ts",
+        "shared/write-schemas.ts",
+        "scripts/maintenance/check-business.ts",
+        "tests/business.test.ts",
+        "data/evaluation/README.md",
+        "data/evaluation/cases/README.md",
+        "data/evaluation/expected/README.md",
+        "data/business/schemas/BusinessApproval.schema.json",
+        "data/business/schemas/ApprovedRole.schema.json",
+        "data/business/schemas/ApprovedGuideline.schema.json",
+        "data/business/schemas/BusinessCase.schema.json",
+        "data/business/schemas/BusinessBaseline.schema.json"
+      ],
+      "creates": [
+        "data/evaluation/suite.json",
+        "data/evaluation/suite.schema.json",
+        "data/business/evaluation-config.json",
+        "data/business/evaluation-approval.json",
+        "docs/project/checklists/D02.md"
+      ],
+      "gate": ""
+    },
+    {
+      "id": "B01",
+      "title": "完善固定状态的工作台展示与操作提示",
+      "role": "B",
+      "dependencies": [],
+      "requirements": [
+        "FR-02",
+        "FR-03",
+        "FR-05",
+        "FR-12"
+      ],
+      "reads": [
+        "app/src/Workbench.tsx",
+        "app/src/components/CasePanel.tsx",
+        "app/src/components/AnalysisPanel.tsx",
+        "app/src/components/ModelSettings.tsx",
+        "app/src/style.css",
+        "data/fixtures/partial.json",
+        "data/fixtures/stale.json",
+        "docs/architecture/RUNBOOK.md"
+      ],
+      "writes": [
+        "app/src/components/CasePanel.tsx",
+        "app/src/components/AnalysisPanel.tsx",
+        "app/src/style.css"
+      ],
+      "creates": [],
+      "gate": ""
+    },
+    {
+      "id": "B02",
+      "title": "完善运行案件事实区的展示",
+      "role": "B",
+      "dependencies": [
+        "B01",
+        "A06",
+        "E02"
+      ],
+      "requirements": [
+        "FR-02",
+        "FR-04"
+      ],
+      "reads": [
+        "app/src/components/CasePanel.tsx",
+        "data/business/T09.json",
+        "docs/architecture/RUNBOOK.md",
+        "docs/architecture/ACCEPTANCE_RUNBOOK.md"
+      ],
+      "writes": [
+        "app/src/components/CasePanel.tsx",
+        "app/src/style.css"
+      ],
+      "creates": [],
+      "gate": "A06最小完整界面和E02排版已验收；A指定事实区局部修改及目标画面后指派。"
+    },
+    {
+      "id": "C01",
+      "title": "核对分析提示与固定返回结构",
+      "role": "C",
+      "dependencies": [],
+      "requirements": [
+        "FR-02",
+        "FR-03",
+        "FR-05"
+      ],
+      "reads": [
+        "server/prompts/intake.txt",
+        "data/business/T09.json",
+        "data/fixtures/intake.json",
+        "docs/architecture/RUNBOOK.md"
+      ],
+      "writes": [
+        "server/prompts/intake.txt"
+      ],
+      "creates": [],
+      "gate": ""
+    },
+    {
+      "id": "C02",
+      "title": "核对真实模型的十五例分析效果",
+      "role": "C",
+      "dependencies": [
+        "A06",
+        "A07",
+        "D02"
+      ],
+      "requirements": [
+        "FR-02",
+        "FR-03",
+        "FR-05",
+        "FR-12"
+      ],
+      "reads": [
+        "server/prompts/intake.txt",
+        "docs/architecture/RUNBOOK.md",
+        "tests/README.md",
+        "docs/product/examples/APPROVED_BASELINE.md",
+        "data/evaluation/suite.json",
+        "docs/architecture/ACCEPTANCE_RUNBOOK.md"
+      ],
+      "writes": [
+        "server/prompts/intake.txt"
+      ],
+      "creates": [],
+      "gate": "A06、A07、D02验收；真实部分另需用户已在产品配置并主动执行，未发生前不得标为真实验收通过。"
+    },
+    {
+      "id": "D01",
+      "title": "核对已批准岗位、指引与单例引用",
+      "role": "D",
+      "dependencies": [],
+      "requirements": [
+        "FR-01",
+        "FR-06",
+        "FR-07",
+        "FR-08"
+      ],
+      "reads": [
+        "data/business/README.md",
+        "data/business/role.json",
+        "data/business/guidelines.json",
+        "data/business/T09.json",
+        "data/business/approval.json",
+        "docs/product/examples/APPROVED_BASELINE.md"
+      ],
+      "writes": [],
+      "creates": [],
+      "gate": ""
+    },
+    {
+      "id": "D02",
+      "title": "核对十五例固定输入和参考预期",
+      "role": "D",
+      "dependencies": [
+        "A07"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-03",
+        "FR-05",
+        "FR-06",
+        "FR-07",
+        "FR-08",
+        "FR-09"
+      ],
+      "reads": [
+        "tests/README.md",
+        "docs/product/examples/APPROVED_BASELINE.md",
+        "data/evaluation/suite.json",
+        "data/evaluation/suite.schema.json",
+        "data/business/evaluation-config.json",
+        "data/business/evaluation-approval.json",
+        "docs/project/checklists/D02.md"
+      ],
+      "writes": [],
+      "creates": [],
+      "gate": "A07交付的完整套件、schema和实际审批记录存在，A指定待核对的具体条目。"
+    },
+    {
+      "id": "E01",
+      "title": "完善固定快照的预览和双格式排版",
+      "role": "E",
+      "dependencies": [
+        "B01"
+      ],
+      "requirements": [
+        "FR-10"
+      ],
+      "reads": [
+        "app/src/export/OutputPanel.tsx",
+        "shared/export.ts",
+        "app/src/style.css",
+        "data/fixtures/reviewed.json",
+        "data/fixtures/handover.json",
+        "tests/browser-check.ts",
+        "docs/architecture/RUNBOOK.md"
+      ],
+      "writes": [
+        "app/src/export/OutputPanel.tsx",
+        "app/src/style.css",
+        "shared/export.ts"
+      ],
+      "creates": [],
+      "gate": "B01已验收并由A集成CSS；使用A重新发放的完整副本。"
+    },
+    {
+      "id": "E02",
+      "title": "核对运行审核快照的输出体验",
+      "role": "E",
+      "dependencies": [
+        "A04",
+        "E01",
+        "A06"
+      ],
+      "requirements": [
+        "FR-08",
+        "FR-09",
+        "FR-10"
+      ],
+      "reads": [
+        "app/src/export/OutputPanel.tsx",
+        "shared/export.ts",
+        "docs/architecture/CONTRACTS.md",
+        "data/business/T09.json",
+        "docs/architecture/ACCEPTANCE_RUNBOOK.md"
+      ],
+      "writes": [
+        "app/src/export/OutputPanel.tsx",
+        "app/src/style.css",
+        "shared/export.ts"
+      ],
+      "creates": [],
+      "gate": "A06实际可操作页面及逐步检查说明已验收；A发放有效、失效、无指引三条运行步骤。"
+    },
+    {
+      "id": "F01",
+      "title": "执行两系统公共基座独立运行检查",
+      "role": "F",
+      "dependencies": [],
+      "requirements": [
+        "FR-10",
+        "FR-11",
+        "FR-12"
+      ],
+      "reads": [
+        "docs/architecture/RUNBOOK.md",
+        "evidence/preparation/README.md",
+        "tests/browser-check.ts"
+      ],
+      "writes": [],
+      "creates": [],
+      "gate": ""
+    },
+    {
+      "id": "A06",
+      "title": "集成单例全流程与受控故障入口",
+      "role": "A",
+      "dependencies": [
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "C01",
+        "D01",
+        "A07",
+        "D02"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-03",
+        "FR-04",
+        "FR-05",
+        "FR-06",
+        "FR-07",
+        "FR-08",
+        "FR-09",
+        "FR-10",
+        "FR-11",
+        "FR-12"
+      ],
+      "reads": [
+        "app/src/Workbench.tsx",
+        "server/src/app.ts",
+        "tests/browser-check.ts",
+        "docs/architecture/CONTRACTS.md",
+        "docs/architecture/RUNBOOK.md",
+        "data/business/T09.json",
+        "data/evaluation/suite.json",
+        "docs/project/checklists/D02.md"
+      ],
+      "writes": [
+        "app/src/Workbench.tsx",
+        "app/src/useWorkflow.ts",
+        "app/src/storage.ts",
+        "server/src/app.ts",
+        "tests/workflow-browser.ts",
+        "tests/storage-browser.ts",
+        "package.json",
+        "docs/architecture/CONTRACTS.md",
+        "docs/architecture/RUNBOOK.md",
+        "docs/project/STATUS.md",
+        "docs/project/FOUNDATION_READINESS.md",
+        "app/src/components/CasePanel.tsx",
+        "app/src/components/AnalysisPanel.tsx",
+        "app/src/style.css",
+        "app/src/export/OutputPanel.tsx"
+      ],
+      "creates": [
+        "tests/acceptance-controls.ts",
+        "docs/architecture/ACCEPTANCE_RUNBOOK.md",
+        "app/src/components/ConversationPanel.tsx",
+        "app/src/components/ReviewPanel.tsx",
+        "app/src/components/HistoryPanel.tsx",
+        "docs/project/checklists/F02.md"
+      ],
+      "gate": "公共逻辑、完整案例及D02对照表已验收；A接通最小完整界面和验收入口，不等待B02或E02。"
+    },
+    {
+      "id": "F02",
+      "title": "执行十五例与关键交互验收",
+      "role": "F",
+      "dependencies": [
+        "A06",
+        "A07",
+        "C02",
+        "D02",
+        "E02",
+        "F01",
+        "B02"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-03",
+        "FR-04",
+        "FR-05",
+        "FR-06",
+        "FR-07",
+        "FR-08",
+        "FR-09",
+        "FR-10",
+        "FR-11",
+        "FR-12"
+      ],
+      "reads": [
+        "tests/README.md",
+        "docs/architecture/RUNBOOK.md",
+        "docs/architecture/ACCEPTANCE_RUNBOOK.md",
+        "docs/project/checklists/F02.md",
+        "data/evaluation/suite.json"
+      ],
+      "writes": [],
+      "creates": [],
+      "gate": "所有依赖已验收且真实模型结果可定位；若真实模型未执行，可做mock部分但不能完成本卡正式验收。"
+    },
+    {
+      "id": "F03",
+      "title": "复测缺陷并给出独立验收结论",
+      "role": "F",
+      "dependencies": [
+        "F02"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-03",
+        "FR-04",
+        "FR-05",
+        "FR-06",
+        "FR-07",
+        "FR-08",
+        "FR-09",
+        "FR-10",
+        "FR-11",
+        "FR-12"
+      ],
+      "reads": [
+        "tests/README.md",
+        "docs/project/STATUS.md"
+      ],
+      "writes": [],
+      "creates": [],
+      "gate": ""
+    },
+    {
+      "id": "A08",
+      "title": "整理可运行项目和最终交付说明",
+      "role": "A",
+      "dependencies": [
+        "F03"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-03",
+        "FR-04",
+        "FR-05",
+        "FR-06",
+        "FR-07",
+        "FR-08",
+        "FR-09",
+        "FR-10",
+        "FR-11",
+        "FR-12"
+      ],
+      "reads": [
+        "README.md",
+        "docs/architecture/RUNBOOK.md",
+        "docs/project/STATUS.md",
+        "docs/project/FOUNDATION_READINESS.md",
+        "deliverables/README.md"
+      ],
+      "writes": [
+        "README.md",
+        "docs/architecture/RUNBOOK.md",
+        "docs/project/STATUS.md",
+        "docs/project/FOUNDATION_READINESS.md",
+        "deliverables/README.md"
+      ],
+      "creates": [
+        "deliverables/LOCAL_DELIVERY.md"
+      ],
+      "gate": ""
+    }
+  ]
+}

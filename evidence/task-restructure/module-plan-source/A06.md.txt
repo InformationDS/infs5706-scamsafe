@@ -1,0 +1,86 @@
+# A06：集成单例全流程与受控故障入口
+
+## 目标与责任
+
+目标：集成单例全流程与受控故障入口，只完成本卡范围。建议角色：A；实际成员由 A 人工指派。产品规则：FR-01, FR-02, FR-03, FR-04, FR-05, FR-06, FR-07, FR-08, FR-09, FR-10, FR-11, FR-12，以卡内指定PRD条款为准。
+
+## 开工条件
+
+依赖：[A02](A02.md)、[A03](A03.md)、[A04](A04.md)、[A05](A05.md)、[C01](C01.md)、[D01](D01.md)、[A07](A07.md)、[D02](D02.md)
+
+公共逻辑、完整案例及D02对照表已验收；A接通最小完整界面和验收入口，不等待B02或E02。
+
+A 指派时在下方唯一执行记录确认工作副本实际绝对路径；Windows 可使用当前项目目录，macOS 使用成员自己的项目根目录。没有完整文件、存在未交接改动或检查失败时保留现场，交 A 判断。不得按远端文件存在推定本地新增文件已发布。
+
+## 必读与固定输入
+
+- [AGENTS.md](../../../AGENTS.md)
+- [docs/project/STATUS.md](../../../docs/project/STATUS.md)
+- [PRD](../../product/PRD.md)：只读第3节、4.1–4.5、第5–6节；逐条对照集成行为。
+- [app/src/Workbench.tsx](../../../app/src/Workbench.tsx)
+- [server/src/app.ts](../../../server/src/app.ts)
+- [tests/browser-check.ts](../../../tests/browser-check.ts)
+- [docs/architecture/CONTRACTS.md](../../../docs/architecture/CONTRACTS.md)
+- [docs/architecture/RUNBOOK.md](../../../docs/architecture/RUNBOOK.md)
+- [data/business/T09.json](../../../data/business/T09.json)
+
+字段只查字典对应项。前置卡新建文件在验收后读取，缺失时停止相关步骤，不按计划路径推定已存在。
+
+固定案例套件及D02对照表由A07/D02验收后交付：data/evaluation/suite.json、docs/project/checklists/D02.md。用这些已确定输入编排F02步骤，不自行补缺失的案例预期。
+
+## 允许修改与交付
+
+现有文件：`app/src/Workbench.tsx`、`app/src/useWorkflow.ts`、`app/src/storage.ts`、`server/src/app.ts`、`tests/workflow-browser.ts`、`tests/storage-browser.ts`、`package.json`、`docs/architecture/CONTRACTS.md`、`docs/architecture/RUNBOOK.md`、`docs/project/STATUS.md`、`docs/project/FOUNDATION_READINESS.md`、`app/src/components/CasePanel.tsx`、`app/src/components/AnalysisPanel.tsx`、`app/src/style.css`、`app/src/export/OutputPanel.tsx`
+
+本卡新建产物（当前不要求存在）：`tests/acceptance-controls.ts`、`docs/architecture/ACCEPTANCE_RUNBOOK.md`、`app/src/components/ConversationPanel.tsx`、`app/src/components/ReviewPanel.tsx`、`app/src/components/HistoryPanel.tsx`、`docs/project/checklists/F02.md`
+
+检查截图、日志和脱敏输出可新建于 `evidence/task-results/A06/`。只更新本卡“唯一执行记录”；不更新其他卡状态、TASKS或STATUS（仅本卡允许范围列出时可改STATUS）。禁止将密钥、.env、local/或实际个人信息交付。
+
+交付方式：文件交A，按[CONTRIBUTING](../../../CONTRIBUTING.md)收集允许差异、本卡和证据；不执行Git交付。
+
+## 顺序步骤
+
+1. 逐项集成已验收公共逻辑及B01／E01基础展示。由A创建ConversationPanel、ReviewPanel、HistoryPanel，在Workbench接通自由描述、更正、补问、建议决定、最终审核、历史和输出；成员不补事件绑定或设计阶段切换。
+2. 实际走通T09：角色→输入→提取更正→首次审核→部分回答／未知／结束→建议与拒绝→摘要两稿→对象最终审核→导出→刷新恢复；独立走通无指引摘要路径。当前固定fixture不代替运行工作流。
+3. 在tests/acceptance-controls.ts提供生成失败、无效返回、保存失败、复制／MD／PDF失败、旧请求释放、零题／上限、角色与指引变体的实际操作入口；不混入普通岗位权限。
+4. 创建ACCEPTANCE_RUNBOOK，逐行填写实际命令、URL、固定输入、按钮顺序、观察位置、确定预期和重置方式。必须有输出对象编辑、重新审核、单稿失效及另一稿不失效的可操作步骤，供E02直接照做。给B02预填三种事实状态的目标截图与局部改动目标。给C02提供同一T09及无指引变体的简短实际操作顺序，写在本运行说明内，不另建十五例比较模板；不能用基座固定状态冒充完整运行流程。
+5. 将新检查接入package scripts，运行核心、服务、构建、基座及业务浏览器检查；证据写本卡目录。在docs/project/checklists/F02.md给F02按tests/README每项准备已填检查行（案例与变体ID、起点、精确动作、观察位置、预期、证据名；实际结果空白），不要求F拆测试计划。保留真实模型及跨系统未执行状态；不伪造员工操作或独立验收。
+
+## 固定检查与预期
+
+| 输入／操作 | 应观察到的结果 |
+|---|---|
+| T09完整与无指引路径 | 界面、模型适配、状态、审核、存储与输出使用同一运行案件；不是只演示固定fixture |
+| tests/README所有故障 | 均有可照做入口和预期，F不需改公共代码造故障 |
+| API设置与恢复 | 配置不进案件，旧请求丢弃；失败不伪装通过 |
+
+命令从本副本项目根目录执行；Windows使用npm.cmd，macOS使用npm。只执行本卡步骤要求的检查；需要浏览器时先构建并安装Chromium。前置新建命令由A实际验证后填工作包，成员不猜命令。
+
+## 停止、审核与完成条件
+
+缺输入、接口冲突或需要范围外修改时，保留现场并停止受影响步骤，按[AGENTS](../../../AGENTS.md)报告具体缺项；不自行补架构、改业务规则或标准答案。
+
+成员填写实际观察，A审核技术与集成。本卡要求的交付与检查有证据、相关问题解决且A确认后才标已验收；不继承基座通过结论。
+
+证据写evidence/task-results/A06/run-01/；复测使用run-02等新批次，保留首次失败。
+
+## 工作包与交付门槛
+
+由A按[发放清单](../WORK_PACKAGE.md)填入本卡真实值；未填完整不指派。实际状态仍只记下方唯一执行记录。
+
+- 工作包编号／基础副本编号：待A发放时填写。
+- 文件基线：待A逐个填写允许文件SHA256；新建文件记本卡创建。
+- 依赖验收位置与副本：待A填写；无依赖写不适用。
+- 本次固定输入／目标画面／A已执行入口及证据：见本卡检查表；实际副本验证待A填写。
+- 交付渠道：待A指定；本机收集到local/delivery/A06/。
+
+## 唯一执行记录
+
+- 实际成员：待 A 人工指派（A 角色卡由项目发起人负责，执行前确认）。
+- 状态：待指派；本卡尚未执行。
+- 工作副本：待指派时记录实际绝对路径；不允许 agent 猜测另一台电脑路径。
+- 本次系统／浏览器／Node版本：待实际操作者记录。
+- 对应 Issue：无；当前以本卡记录为准。
+- 实际修改与检查：未执行。
+- 模拟／真实模型／内容审核：未执行；不继承公共基座的通过结论。
+- 问题、证据和 A 验收：未执行。

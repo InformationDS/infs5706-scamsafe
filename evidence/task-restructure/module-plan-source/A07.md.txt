@@ -1,0 +1,85 @@
+# A07：准备完整十五例与受控业务变体
+
+## 目标与责任
+
+目标：准备完整十五例与受控业务变体，只完成本卡范围。建议角色：A；实际成员由 A 人工指派。产品规则：FR-01, FR-02, FR-03, FR-05, FR-06, FR-07, FR-08, FR-09, FR-10, FR-11，以卡内指定PRD条款为准。
+
+## 开工条件
+
+依赖：无开发任务依赖；使用当前已验证公共基座。
+
+技术输入已具备；A 指派实际成员并提供完整工作副本后可开工。
+
+A 指派时在下方唯一执行记录确认工作副本实际绝对路径；Windows 可使用当前项目目录，macOS 使用成员自己的项目根目录。没有完整文件、存在未交接改动或检查失败时保留现场，交 A 判断。不得按远端文件存在推定本地新增文件已发布。
+
+## 必读与固定输入
+
+- [AGENTS.md](../../../AGENTS.md)
+- [docs/project/STATUS.md](../../../docs/project/STATUS.md)
+- [PRD](../../product/PRD.md)：只读4.1–4.5、第7节及tests/README固定编号映射。
+- [tests/README.md](../../../tests/README.md)
+- [data/business/T09.json](../../../data/business/T09.json)
+- [data/business/role.json](../../../data/business/role.json)
+- [data/business/guidelines.json](../../../data/business/guidelines.json)
+- [data/evaluation/baseline/T09.source.json](../../../data/evaluation/baseline/T09.source.json)
+- [docs/product/examples/APPROVED_BASELINE.md](../../../docs/product/examples/APPROVED_BASELINE.md)
+- [shared/business.ts](../../../shared/business.ts)
+
+字段只查字典对应项。前置卡新建文件在验收后读取，缺失时停止相关步骤，不按计划路径推定已存在。
+
+## 允许修改与交付
+
+现有文件：`shared/business.ts`、`shared/write-schemas.ts`、`scripts/maintenance/check-business.ts`、`tests/business.test.ts`、`data/evaluation/README.md`、`data/evaluation/cases/README.md`、`data/evaluation/expected/README.md`、`data/business/schemas/BusinessApproval.schema.json`、`data/business/schemas/ApprovedRole.schema.json`、`data/business/schemas/ApprovedGuideline.schema.json`、`data/business/schemas/BusinessCase.schema.json`、`data/business/schemas/BusinessBaseline.schema.json`
+
+本卡新建产物（当前不要求存在）：`data/evaluation/suite.json`、`data/evaluation/suite.schema.json`、`data/business/evaluation-config.json`、`data/business/evaluation-approval.json`、`docs/project/checklists/D02.md`
+
+检查截图、日志和脱敏输出可新建于 `evidence/task-results/A07/`。只更新本卡“唯一执行记录”；不更新其他卡状态、TASKS或STATUS（仅本卡允许范围列出时可改STATUS）。禁止将密钥、.env、local/或实际个人信息交付。
+
+交付方式：文件交A，按[CONTRIBUTING](../../../CONTRIBUTING.md)收集允许差异、本卡和证据；不执行Git交付。
+
+## 顺序步骤
+
+1. 按 tests/README.md 固定映射填写 T01–T15；T09 复用批准包，不把 source pending 或教学审核变为执行证据。为其他14例写实际合成叙述、分轮答案、允许未知／冲突、角色和指引配置引用。
+2. 每例给出预先计算的事实与来源、可接受分类及理由、禁止内容、建议／接收方边界和输出检查；T06 明列多笔交易、币种与状态，给参考分组值。不能从模型输出反推标准答案。
+3. 为 T09 给出更正200与250、拒绝建议、双稿修改、结束后补充、上限、零问题、保存／导出失败、旧请求、输入指令干扰的固定步骤与预期；T10明列持续远程访问的简单风险关注提示、报告来源及合成指引条件；未核对标记、依据冲突／失效也给固定预期，不计算风险分数。
+4. 为 T14 建立受限岗位及明确允许／排除动作；T15 给无匹配、未审核、失效、冲突及恢复有效配置的受控变体。评估配置与生产有效配置分离，禁止恶意变体进入正常岗位选择。
+5. 同时交付docs/project/checklists/D02.md，按15例预填位置、原文、来源、参考值、配置版本和禁止内容，不预填实际一致；D只核对给定项。schema 校验15个唯一编号、来源／配置交叉引用与必需覆盖；生成具体审批清单，由 A 逐项检查新增事实规则和参考结果后登记真实批准范围及哈希。未实际审阅的新增内容保持待审核，不能沿用 T09 总批准登记。
+
+## 固定检查与预期
+
+| 输入／操作 | 应观察到的结果 |
+|---|---|
+| suite.json | 正好T01–T15；五类完整／变体、混合、其他、信息不足、权限、无指引均有固定输入 |
+| T06／T09／T10／T14／T15 | 交互输入、答案、预期、故障及角色／指引版本都具体可定位 |
+| 内容批准 | 只登记实际经 A 内容检查的项目；批准不等于模型或程序通过 |
+
+命令从本副本项目根目录执行；Windows使用npm.cmd，macOS使用npm。只执行本卡步骤要求的检查；需要浏览器时先构建并安装Chromium。前置新建命令由A实际验证后填工作包，成员不猜命令。
+
+## 停止、审核与完成条件
+
+缺输入、接口冲突或需要范围外修改时，保留现场并停止受影响步骤，按[AGENTS](../../../AGENTS.md)报告具体缺项；不自行补架构、改业务规则或标准答案。
+
+成员填写实际观察，A审核技术与集成。本卡要求的交付与检查有证据、相关问题解决且A确认后才标已验收；不继承基座通过结论。
+
+证据写evidence/task-results/A07/run-01/；复测使用run-02等新批次，保留首次失败。
+
+## 工作包与交付门槛
+
+由A按[发放清单](../WORK_PACKAGE.md)填入本卡真实值；未填完整不指派。实际状态仍只记下方唯一执行记录。
+
+- 工作包编号／基础副本编号：待A发放时填写。
+- 文件基线：待A逐个填写允许文件SHA256；新建文件记本卡创建。
+- 依赖验收位置与副本：待A填写；无依赖写不适用。
+- 本次固定输入／目标画面／A已执行入口及证据：见本卡检查表；实际副本验证待A填写。
+- 交付渠道：待A指定；本机收集到local/delivery/A07/。
+
+## 唯一执行记录
+
+- 实际成员：待 A 人工指派（A 角色卡由项目发起人负责，执行前确认）。
+- 状态：待指派；本卡尚未执行。
+- 工作副本：待指派时记录实际绝对路径；不允许 agent 猜测另一台电脑路径。
+- 本次系统／浏览器／Node版本：待实际操作者记录。
+- 对应 Issue：无；当前以本卡记录为准。
+- 实际修改与检查：未执行。
+- 模拟／真实模型／内容审核：未执行；不继承公共基座的通过结论。
+- 问题、证据和 A 验收：未执行。

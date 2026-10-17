@@ -1,0 +1,88 @@
+# A02：接通分析、事实核对与补问控制器
+
+## 目标与责任
+
+目标：接通分析、事实核对与补问控制器，只完成本卡范围。建议角色：A；实际成员由 A 人工指派。产品规则：FR-02, FR-03, FR-04, FR-05, FR-12，以卡内指定PRD条款为准。
+
+## 开工条件
+
+依赖：[A01](A01.md)、[C01](C01.md)
+
+A01 公共运行结构已验收；C01 给出实际提示检查记录。控制器浏览器入口及故障开关由本卡建立，不是当前已存在功能。
+
+A 指派时在下方唯一执行记录确认工作副本实际绝对路径；Windows 可使用当前项目目录，macOS 使用成员自己的项目根目录。没有完整文件、存在未交接改动或检查失败时保留现场，交 A 判断。不得按远端文件存在推定本地新增文件已发布。
+
+## 必读与固定输入
+
+- [AGENTS.md](../../../AGENTS.md)
+- [docs/project/STATUS.md](../../../docs/project/STATUS.md)
+- [PRD](../../product/PRD.md)：只读FR-02/03/04/05/12、4.1、4.2、风险关注提示、第6节。
+- [server/src/model.ts](../../../server/src/model.ts)
+- [server/src/app.ts](../../../server/src/app.ts)
+- [server/prompts/intake.txt](../../../server/prompts/intake.txt)
+- [shared/core.ts](../../../shared/core.ts)
+- [app/src/Workbench.tsx](../../../app/src/Workbench.tsx)
+- [data/business/T09.json](../../../data/business/T09.json)
+- [tests/README.md](../../../tests/README.md)
+
+字段只查字典对应项。前置卡新建文件在验收后读取，缺失时停止相关步骤，不按计划路径推定已存在。
+
+## 允许修改与交付
+
+现有文件：`shared/schema.ts`、`shared/workflow.ts`、`shared/core.ts`、`shared/index.ts`、`server/src/model.ts`、`server/src/app.ts`、`server/prompts/intake.txt`、`app/src/Workbench.tsx`、`tests/core.test.ts`、`tests/server.test.ts`、`tests/workflow.test.ts`、`docs/architecture/CONTRACTS.md`、`shared/write-schemas.ts`、`shared/export-schemas.ts`、`data/schemas/RuntimeCaseRecord.schema.json`、`data/schemas/RuntimeExportSnapshot.schema.json`、`data/schemas/AnalysisEnvelope.schema.json`、`data/schemas/AnalysisResult.schema.json`、`data/schemas/CaseRecord.schema.json`、`data/schemas/ExportSnapshot.schema.json`、`data/schemas/Guideline.schema.json`、`data/schemas/HandoverDraft.schema.json`、`data/schemas/Recommendation.schema.json`、`data/schemas/RoleProfile.schema.json`、`data/schemas/Summary.schema.json`、`data/business/schemas/ApprovedGuideline.schema.json`、`data/business/schemas/ApprovedRole.schema.json`、`data/business/schemas/BusinessApproval.schema.json`、`data/business/schemas/BusinessBaseline.schema.json`、`data/business/schemas/BusinessCase.schema.json`
+
+本卡新建产物（当前不要求存在）：`app/src/useWorkflow.ts`、`tests/workflow-browser.ts`
+
+检查截图、日志和脱敏输出可新建于 `evidence/task-results/A02/`。只更新本卡“唯一执行记录”；不更新其他卡状态、TASKS或STATUS（仅本卡允许范围列出时可改STATUS）。禁止将密钥、.env、local/或实际个人信息交付。
+
+交付方式：文件交A，按[CONTRIBUTING](../../../CONTRIBUTING.md)收集允许差异、本卡和证据；不执行Git交付。
+
+## 顺序步骤
+
+1. 使用 A01 的运行案件结构，给自由描述、补充来源、模型提议和补问提议定义严格服务响应；模型不能提交岗位、批准、审核或任意字段。新增问题字段必须有 schema 和错误路径，不能只改提示。
+2. 在公共控制器接通提取→员工更正与首次核对→补问。人工更正金额 200 优先；模型重读 2000 时留候选冲突。员工可更正疑似类型并保留依据／历史；用现有groupAmounts按币种和交易状态给出报告值汇总，要求付款不计已付款，未知金额／币种单列，不换汇、不写确认损失。只有实质变化才递增相关版本；首次核对后的直接修改需确认变化，普通回答不逐轮首次审核。
+3. 问题带稳定 ID、字段＋记录目标及原因；当前轮部分处理不新开轮。只有成功展示且保存计数，失败／重试幂等，零题不计数；3轮／9题上限、未知不重复问、提前结束与后补答案都由程序控制。
+4. 模型请求绑定案件、事实、角色、指引、设置和当前请求身份；较旧响应不得覆盖更正、计数或审核。超时／解析失败保留输入和已保存结果，API 设置保存仍不自动分析。
+5. 导出 useWorkflow 的命令与选择器供 A06 接入界面；给 tests/workflow-browser.ts 建立可执行浏览器入口，固定有效／无效／延迟返回由本地假提供商提供，记录准确运行命令。真实调用仅用户在产品中主动执行。
+
+共享结构变化后执行 `npm run schemas`，核对data/schemas生成差异与本卡契约同步；只交实际受影响文件。未改结构不为刷新时间戳重写生成物。
+
+## 固定检查与预期
+
+| 输入／操作 | 应观察到的结果 |
+|---|---|
+| T09：2000→员工200→重新分析原文 | 当前200，候选2000有来源；员工决定前不消除冲突 |
+| 三题只答Q1，再刷新 | 仍同轮，Q2/Q3待处理；计数不重复 |
+| 未知／结束／后补答案／第9题 | 不换措辞重复问，不重置计数；上限后仍能处理已展示题 |
+| 生成失败／保存失败／旧响应 | 不消耗新轮次；未保存可重试，旧响应不得覆盖新状态 |
+
+命令从本副本项目根目录执行；Windows使用npm.cmd，macOS使用npm。只执行本卡步骤要求的检查；需要浏览器时先构建并安装Chromium。前置新建命令由A实际验证后填工作包，成员不猜命令。
+
+## 停止、审核与完成条件
+
+缺输入、接口冲突或需要范围外修改时，保留现场并停止受影响步骤，按[AGENTS](../../../AGENTS.md)报告具体缺项；不自行补架构、改业务规则或标准答案。
+
+成员填写实际观察，A审核技术与集成。本卡要求的交付与检查有证据、相关问题解决且A确认后才标已验收；不继承基座通过结论。
+
+证据写evidence/task-results/A02/run-01/；复测使用run-02等新批次，保留首次失败。
+
+## 工作包与交付门槛
+
+由A按[发放清单](../WORK_PACKAGE.md)填入本卡真实值；未填完整不指派。实际状态仍只记下方唯一执行记录。
+
+- 工作包编号／基础副本编号：待A发放时填写。
+- 文件基线：待A逐个填写允许文件SHA256；新建文件记本卡创建。
+- 依赖验收位置与副本：待A填写；无依赖写不适用。
+- 本次固定输入／目标画面／A已执行入口及证据：见本卡检查表；实际副本验证待A填写。
+- 交付渠道：待A指定；本机收集到local/delivery/A02/。
+
+## 唯一执行记录
+
+- 实际成员：待 A 人工指派（A 角色卡由项目发起人负责，执行前确认）。
+- 状态：待指派；本卡尚未执行。
+- 工作副本：待指派时记录实际绝对路径；不允许 agent 猜测另一台电脑路径。
+- 本次系统／浏览器／Node版本：待实际操作者记录。
+- 对应 Issue：无；当前以本卡记录为准。
+- 实际修改与检查：未执行。
+- 模拟／真实模型／内容审核：未执行；不继承公共基座的通过结论。
+- 问题、证据和 A 验收：未执行。

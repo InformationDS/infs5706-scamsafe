@@ -1,0 +1,25 @@
+Date: 2026-10-17 Australia/Sydney
+Scope: Regression checks for documentation, prompt responsibility text and source preservation changes.
+
+1. npm.cmd run check (sandbox)
+   Type checking ran; 31 program tests: 20 passed, 11 failed.
+   Failures reported connect EACCES to local 127.0.0.1 temporary test ports.
+   Example: tests/business.test.ts, fetch failed, connect EACCES 127.0.0.1:1421.
+   These failures are retained here; no tests were deleted or weakened.
+
+2. npm.cmd run check (approved execution with localhost connectivity)
+   Exit code 0. Tests 31, pass 31, fail 0, skipped 0.
+   Local fake provider only; no real MiMo or external model requests.
+
+3. npm.cmd run build
+   Exit code 0. Type checking and Vite production build passed.
+   122 modules transformed. Build artifacts remain ignored in dist/.
+
+4. python -m unittest discover -s tests/maintenance -v
+   4 source-preservation tests passed:
+   - Current documents may change without rewriting fixed source hashes.
+   - Changed snapshot is rejected.
+   - Unexpected snapshot mapping is rejected.
+   - Missing snapshot is rejected.
+
+Not executed in this optimization: browser/PDF, real model, macOS, second-computer acceptance, or the 19 development tasks.

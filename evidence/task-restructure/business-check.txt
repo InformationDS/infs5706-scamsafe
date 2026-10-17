@@ -1,0 +1,18 @@
+
+> scamsafe-foundation@0.1.0 check:business
+> tsx scripts/maintenance/check-business.ts
+
+{
+  "status": "passed",
+  "scope": "Approved synthetic content, source agreement, hashes and references only; not application acceptance",
+  "approvalId": "BUSINESS-BASELINE-01",
+  "role": "EX-ROLE-01",
+  "guidelines": [
+    "EX-G01",
+    "EX-G02",
+    "EX-G03"
+  ],
+  "evaluationId": "T09",
+  "expectedChecks": 10,
+  "execution": "not-executed"
+}

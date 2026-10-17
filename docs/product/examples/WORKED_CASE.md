@@ -2,7 +2,7 @@
 
 用途：让成员使用同一个案件讨论界面、提示词和验收。产品规则以 [PRD](../PRD.md) 为准，字段含义见[字段字典](../FIELD_DICTIONARY.md)。这是合成教学样例，不是程序输入格式、已审核评估数据或测试通过记录；不要求成员照表创建 schema。
 
-**使用门槛：**下文角色和指引均未获团队审核，不能当作已生效配置。若运行时已有可用角色、但没有有效指引，按第 4.1 节只生成事实摘要，不能输出第 5–6 节的具体建议和接收方稿。第 5–6 节仅供团队审核有指引路径；只有角色、指引和预期结果分别审核后，才能用于对应验收。第 7 节列出各路径的待执行检查。EXAMPLE-01 拟映射为 T09（网络钓鱼缺失／冲突变体），作为 15 个评估案例之一，待团队审核后纳入。
+**使用范围：**本例T09／EXAMPLE-01的有限业务内容已批准，当前登记和条件见[批准基准](APPROVED_BASELINE.md)及data/business/。本例说明输入、人工操作与参考输出，不是运行配置或员工实际审核记录。无有效适用指引的变体只走第4.1节事实摘要路径；有指引路径仍须员工实际核对。原始来源字节另存于evidence/preparation/source-snapshot/，不从其中领取任务。
 
 ## 1. 选择角色并输入
 
@@ -71,9 +71,9 @@ S4 的 SYN Telco B 保留为叙述中的服务背景，供通信接收方判断�
 
 此后若主动补充收款对象，更新 Q3 的原回答及 E08 / TX-01 并保留历史，不新增问题或计数，不自动恢复补问；相关输出更新后需审核。若另有 TX-02，其 E08 是不同目标，但本案已经主动结束，仍不能因此新增补问。已更正的金额 AUD 200 保持保护。
 
-## 4. 拟审核的有限合成指引
+## 4. 有限合成指引参考
 
-所有行的审核状态均为 **Draft / not approved**，没有实际生效日期。只描述教学记录与人工评估边界，不构成真实业务处理规则。未来要启用，必须先审核当前岗位权限及接收方职责配置；下表任一必需条件不满足时，不输出对应步骤，不用未知或类型标签代替满足。
+下列条目作为有限合成内容已批准，实际状态与条件由data/business/加载。只描述本地记录与人工评估边界，不构成真实机构操作授权。运行时仍检查当前岗位与接收方配置；下表任一必需条件不满足时，不输出对应步骤，不用未知或类型标签代替满足。
 
 | 编号／版本 | 必须满足 | 允许未知及限制 | 负责岗位、拟定步骤及边界 |
 |---|---|---|---|
@@ -83,9 +83,9 @@ S4 的 SYN Telco B 保留为叙述中的服务背景，供通信接收方判断�
 
 例如 EX-G01 在 E04 未知时仍可准备注明金额未知的记录；若 E07 未知、E09 有冲突或显示据报已完成，则不匹配该指引，保留原因供人工核实。此教学条目不覆盖所有交易状态，不能为匹配它而修改事实。
 
-### 4.1 没有有效指引时的当前目标路径
+### 4.1 没有有效指引时的事实摘要路径
 
-以第 3 节结束后的事实为输入，显示 **“Insufficient approved guidance; human review required”**，不创建 REC-01–03 或 HANDOVER-BANK／TELCO。可生成以下统一摘要草稿；此处的正文同样待团队审核，并非当前已审核运行数据：
+以第 3 节结束后的事实为输入，显示 **“Insufficient approved guidance; human review required”**，不创建 REC-01–03 或 HANDOVER-BANK／TELCO。可生成以下统一摘要草稿；此处正文是已批准的条件性参考，仍须员工实际审核当前输出，不是已发生的审核记录：
 
 > **Synthetic training case — EXAMPLE-01 — case version: [current integer version]. Insufficient approved guidance; human review required. Local factual summary only.**
 >
@@ -93,11 +93,11 @@ S4 的 SYN Telco B 保留为叙述中的服务背景，供通信接收方判断�
 >
 > The person uses SYN Telco B and reported no prior contact with either organisation before intake. They say the SMS remains on their phone; no material was supplied or verified. Transaction time, payment method, recipient and continuing contact remain unknown. Questioning ended after one round of three questions. No subsequent action or delivery is recorded. This summary provides no specific handling recommendation or recipient handover.
 
-员工核对最新事实／分析及此摘要后完成最终审核；不要求选择接收方或接受建议。审核有效后可本地预览、复制并导出 Markdown／PDF，文件名包含 `EXAMPLE-01`、`summary` 和具体整数版本。若有效指引日后获配置，再生成第 5–6 节输出并单独完成对应最终审核，不能继承事实摘要的通过状态。
+员工核对最新事实／分析及此摘要后完成最终审核；不要求选择接收方或接受建议。审核有效后可本地预览、复制并导出 Markdown／PDF，文件名包含 `EXAMPLE-01`、`summary` 和具体整数版本。若该变体恢复有效适用指引，再生成第 5–6 节输出并单独完成对应最终审核，不能继承事实摘要的通过状态。
 
 ## 5. 目标建议与最终审核操作
 
-本节仅演示“前述配置和指引日后获审核”的目标行为。当前仓库不得显示它们为已批准建议。
+本节为当前批准内容的参考行为。业务内容批准不等于员工已接受建议、已完成最终审核或程序已实现；实际建议从data/business/加载并按当前事实匹配。
 
 | 建议 | 事实／指引依据 | 优先级、依赖与审核操作 |
 |---|---|---|
@@ -138,7 +138,7 @@ The person uses SYN Telco B and reported no prior contact with either organisati
 | 输入并首次更正，再重新分析 | 当前金额仍为 AUD 200；2000 可在原文／更正历史或新冲突候选中出现，但不能替换当前值；不显示已确认损失 |
 | 第一轮只回答 Q1 后刷新 | 仍为 1 轮、3 问；Q1 已回答，Q2/Q3 待回答；金额更正和角色均保留 |
 | 回答剩余问题并主动结束 | 未知项保留，无第 2 轮，不重复追问 Q2/Q3；最终审核可核对新增变化 |
-| 以当前未审核 EX-G 指引尝试生成建议 | 显示无有效指引提示；不生成 REC-01–03 或接收方稿，可继续事实／分类／补问，并最终审核事实摘要后本地复制和导出 |
+| 使用未审核EX-G指引的负向变体尝试生成建议 | 显示无有效指引提示；不生成 REC-01–03 或接收方稿，可继续事实／分类／补问，并最终审核事实摘要后本地复制和导出 |
 | 主动结束后又主动补充 Q3 的答案 | 更新原 Q3 和 E08 / TX-01，保留原未知历史；仍为 1 轮、3 问，不恢复补问；相关输出需重新审核 |
 | 新金额更正保存后，旧分析请求晚返回 | 当前金额、更正、计数与审核状态均不被旧结果覆盖；旧结果标为过期 |
 | 在获审核的指引前提下拒绝 REC-03 | 保留拒绝原因和 REC-01/02 的接受选择；电信初稿移除另备摘要步骤并待核对，银行稿不因该步骤变化而失效；若原电信稿已最终审核，则其审核失效 |

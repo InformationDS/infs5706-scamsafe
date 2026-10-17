@@ -1,0 +1,89 @@
+# A04：接通运行摘要、草稿与有效审核快照
+
+## 目标与责任
+
+目标：接通运行摘要、草稿与有效审核快照，只完成本卡范围。建议角色：A；实际成员由 A 人工指派。产品规则：FR-08, FR-09, FR-10，以卡内指定PRD条款为准。
+
+## 开工条件
+
+依赖：[A02](A02.md)、[A03](A03.md)、[E01](E01.md)
+
+依赖卡须由 A 验收；核对实际产物和检查记录后开工。
+
+A 指派时在下方唯一执行记录确认工作副本实际绝对路径；Windows 可使用当前项目目录，macOS 使用成员自己的项目根目录。没有完整文件、存在未交接改动或检查失败时保留现场，交 A 判断。不得按远端文件存在推定本地新增文件已发布。
+
+## 必读与固定输入
+
+- [AGENTS.md](../../../AGENTS.md)
+- [docs/project/STATUS.md](../../../docs/project/STATUS.md)
+- [PRD](../../product/PRD.md)：只读FR-08/09/10、4.3无指引分支、4.4。
+- [shared/export.ts](../../../shared/export.ts)
+- [shared/core.ts](../../../shared/core.ts)
+- [server/src/app.ts](../../../server/src/app.ts)
+- [app/src/export/OutputPanel.tsx](../../../app/src/export/OutputPanel.tsx)
+- [data/business/T09.json](../../../data/business/T09.json)
+- [tests/README.md](../../../tests/README.md)
+
+字段只查字典对应项。前置卡新建文件在验收后读取，缺失时停止相关步骤，不按计划路径推定已存在。
+
+## 允许修改与交付
+
+现有文件：`shared/workflow.ts`、`shared/schema.ts`、`shared/core.ts`、`shared/export.ts`、`server/src/app.ts`、`app/src/export/OutputPanel.tsx`、`tests/workflow.test.ts`、`tests/server.test.ts`、`docs/architecture/CONTRACTS.md`、`shared/write-schemas.ts`、`shared/export-schemas.ts`、`data/schemas/RuntimeCaseRecord.schema.json`、`data/schemas/RuntimeExportSnapshot.schema.json`、`data/schemas/AnalysisEnvelope.schema.json`、`data/schemas/AnalysisResult.schema.json`、`data/schemas/CaseRecord.schema.json`、`data/schemas/ExportSnapshot.schema.json`、`data/schemas/Guideline.schema.json`、`data/schemas/HandoverDraft.schema.json`、`data/schemas/Recommendation.schema.json`、`data/schemas/RoleProfile.schema.json`、`data/schemas/Summary.schema.json`、`data/business/schemas/ApprovedGuideline.schema.json`、`data/business/schemas/ApprovedRole.schema.json`、`data/business/schemas/BusinessApproval.schema.json`、`data/business/schemas/BusinessBaseline.schema.json`、`data/business/schemas/BusinessCase.schema.json`
+
+本卡新建产物（当前不要求存在）：`shared/outputs.ts`、`tests/outputs.test.ts`
+
+检查截图、日志和脱敏输出可新建于 `evidence/task-results/A04/`。只更新本卡“唯一执行记录”；不更新其他卡状态、TASKS或STATUS（仅本卡允许范围列出时可改STATUS）。禁止将密钥、.env、local/或实际个人信息交付。
+
+交付方式：文件交A，按[CONTRIBUTING](../../../CONTRIBUTING.md)收集允许差异、本卡和证据；不执行Git交付。
+
+## 顺序步骤
+
+1. 以 T09 bodies 和 bodyConditions 作为参考预期，不直接当已审核结果加载；实现统一摘要、银行稿、电信稿的生成、编辑和版本依赖。无指引只生成事实摘要。
+2. 内容重算保留员工修改，给出差异待确认，不静默覆盖。拒绝建议从相关待执行内容移除，保留事实与拒绝记录；接收方来自有效配置。
+3. 实现仅首次核对和最终审核两个阶段；最终审核按对象与依赖绑定；选定摘要／草稿引用的建议也须具有当前有效的最终审核，不能只检查正文对象。事实／分类／权限／指引／引用建议变化只使依赖对象失效；重复相同分析和纯排版不使审核失效。
+4. 服务端重新构建并验证运行快照后输出；复制、Markdown、PDF 共用固定正文。阻止未保存、待确认变化、无审核或过期审核导出，输出失败保留审核与预览可原版本重试。
+5. 提供已保存且已审核的运行快照固定构造方法与 tests/outputs.test.ts；记录生成方式给 A06，E02通过A06页面操作，禁止伪造审核人／已送达状态。运行核心、服务、构建和浏览器检查。
+
+共享结构变化后执行 `npm run schemas`，核对data/schemas生成差异与本卡契约同步；只交实际受影响文件。未改结构不为刷新时间戳重写生成物。
+
+人工修改采用PRD 4.4的轻量规则：保留原内容及Employee edited标记，修改后重新审核；不自行新增语义审查、自动风险评分或人工文字逐句指引拦截。系统生成建议仍遵守既有匹配规则。
+
+## 固定检查与预期
+
+| 输入／操作 | 应观察到的结果 |
+|---|---|
+| 修改银行稿或其接收方 | 银行稿需重审；无依赖变化的电信稿保持有效 |
+| 事实／指引变化及拒绝建议 | 受影响对象审核失效，拒绝动作不作为待执行项复活 |
+| 无指引最终审核 | 只核对事实摘要，不要求不存在的建议或接收方 |
+| 复制／MD／PDF／失败重试 | 相同正文、案件号及版本；过期与未保存均阻断，失败不改源内容 |
+
+命令从本副本项目根目录执行；Windows使用npm.cmd，macOS使用npm。只执行本卡步骤要求的检查；需要浏览器时先构建并安装Chromium。前置新建命令由A实际验证后填工作包，成员不猜命令。
+
+## 停止、审核与完成条件
+
+缺输入、接口冲突或需要范围外修改时，保留现场并停止受影响步骤，按[AGENTS](../../../AGENTS.md)报告具体缺项；不自行补架构、改业务规则或标准答案。
+
+成员填写实际观察，A审核技术与集成。本卡要求的交付与检查有证据、相关问题解决且A确认后才标已验收；不继承基座通过结论。
+
+证据写evidence/task-results/A04/run-01/；复测使用run-02等新批次，保留首次失败。
+
+## 工作包与交付门槛
+
+由A按[发放清单](../WORK_PACKAGE.md)填入本卡真实值；未填完整不指派。实际状态仍只记下方唯一执行记录。
+
+- 工作包编号／基础副本编号：待A发放时填写。
+- 文件基线：待A逐个填写允许文件SHA256；新建文件记本卡创建。
+- 依赖验收位置与副本：待A填写；无依赖写不适用。
+- 本次固定输入／目标画面／A已执行入口及证据：见本卡检查表；实际副本验证待A填写。
+- 交付渠道：待A指定；本机收集到local/delivery/A04/。
+
+## 唯一执行记录
+
+- 实际成员：待 A 人工指派（A 角色卡由项目发起人负责，执行前确认）。
+- 状态：待指派；本卡尚未执行。
+- 工作副本：待指派时记录实际绝对路径；不允许 agent 猜测另一台电脑路径。
+- 本次系统／浏览器／Node版本：待实际操作者记录。
+- 对应 Issue：无；当前以本卡记录为准。
+- 实际修改与检查：未执行。
+- 模拟／真实模型／内容审核：未执行；不继承公共基座的通过结论。
+- 问题、证据和 A 验收：未执行。

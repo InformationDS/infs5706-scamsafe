@@ -1,0 +1,27 @@
+{
+  "checkedDate": "2026-10-17",
+  "timezone": "Australia/Sydney",
+  "branch": "main",
+  "initialHead": "9d141e8755ff7221f7472d7242ffe83596e66044",
+  "initialWorkingTree": "clean",
+  "versions": {
+    "node": "v24.15.0",
+    "npm": "11.12.1",
+    "python": "Python 3.14.6"
+  },
+  "browserExecutablesFound": [
+    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+  ],
+  "applicationStarted": true,
+  "dependenciesInstalled": true,
+  "realModelCalled": false,
+  "contentApproved": true,
+  "published": false,
+  "platformVerified": "Windows",
+  "macOSVerified": false,
+  "dependencyLockSha256": "c79b6f9ebf1a4b7edc925f4e5630ce1fce1c8f52bb5e19435f536e9bd214a096",
+  "contentApprovalRef": "BUSINESS-BASELINE-01",
+  "contentApprovalScope": "Existing synthetic T09 baseline, role, receivers, EX-G01-03 and reference expectations only",
+  "staffCaseReviewsPerformed": false
+}

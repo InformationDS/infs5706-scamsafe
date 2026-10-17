@@ -1,0 +1,31 @@
+{
+  "id": "BUSINESS-BASELINE-01",
+  "contentVersion": 1,
+  "status": "approved",
+  "approvedBy": "A (user in this conversation)",
+  "approvedOn": "2026-10-17",
+  "authority": "Direct user instruction in this conversation",
+  "userInstruction": "你直接完成所有的业务内容，我都批准",
+  "scope": [
+    "SYN Bank A / Intake Officer and local-only permissions",
+    "Bank and telecom synthetic human receiver responsibilities",
+    "EX-G01 v1, EX-G02 v1 and EX-G03 v1 conditions, unknowns, steps and boundaries",
+    "T09 / EXAMPLE-01 fixed input, correction, questions and answers",
+    "Reference facts, recommendations and expected accept/reject choices",
+    "No-guidance summary and shared/bank/telecom reference bodies",
+    "The ten existing T09 expected checks and their independent variation requirements"
+  ],
+  "limitations": [
+    "Content approval only; not automatic product first/final employee review or application acceptance",
+    "Synthetic prototype only; no sending, account operations or real institution authorization",
+    "No real-model calls, provider charges or deployment authorized",
+    "Original PRD and existing task cards remain unchanged",
+    "New cases, second roles and new business rules outside this baseline are not pre-approved"
+  ],
+  "artifacts": {
+    "data/business/role.json": "8a712acd019165716488ee48314588a5701948537cb1331c9e751627dd779282",
+    "data/business/guidelines.json": "9eca7326cecc9c5b1c2d3caeb1acaa3170c8d1ab1e5b6843e078f884d24928f1",
+    "data/business/T09.json": "8b3d67a05921fbb34ce5efe133eda7600445b4ab00ef3f88f89bbfd17c7d854e"
+  },
+  "hashNormalization": "utf8-lf"
+}

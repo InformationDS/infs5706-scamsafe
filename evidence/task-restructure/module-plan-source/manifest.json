@@ -1,0 +1,132 @@
+[
+  {
+    "source": "docs/project/tasks/A01.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/A01.md.txt",
+    "sha256": "3faa4592c707e16e9cb03753b6c49fb3a3ab7300dd5dfac66f2bca5be61a47ee"
+  },
+  {
+    "source": "docs/project/tasks/A02.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/A02.md.txt",
+    "sha256": "5aedc3084ddde2b6a912560e6f13cad28cc6c21ccdc6804c45460081ae33c42b"
+  },
+  {
+    "source": "docs/project/tasks/A03.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/A03.md.txt",
+    "sha256": "436c526eb71ed6eb4d49f49bb21e4dcc398a6ee65a01e32276b2a471be91bf1a"
+  },
+  {
+    "source": "docs/project/tasks/A04.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/A04.md.txt",
+    "sha256": "c2cd0346a95530c7fc26bcf79e65ec71193c153fdc13d8b24f0cf5174a3a39b0"
+  },
+  {
+    "source": "docs/project/tasks/A05.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/A05.md.txt",
+    "sha256": "f3fd313dfa996d161467880c3a165194671d466b2fc1d4d28f1c88c6cbec4972"
+  },
+  {
+    "source": "docs/project/tasks/A06.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/A06.md.txt",
+    "sha256": "9573104a8f36e36ffdda4c47ef10bc1e09d412d12af128ee3ba346f6bc96e62d"
+  },
+  {
+    "source": "docs/project/tasks/A07.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/A07.md.txt",
+    "sha256": "f24f75fcfcd0db21603dbf87240d85df9da02be790a3bb87714ce04d8a40cc6f"
+  },
+  {
+    "source": "docs/project/tasks/A08.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/A08.md.txt",
+    "sha256": "850b68f266c4a73ca22394ea083108ad3b3e8db00de4ec8f01173e3478c75c2e"
+  },
+  {
+    "source": "docs/project/tasks/B01.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/B01.md.txt",
+    "sha256": "9df2e5008584209cd3cc0debd308389d2f3d57999df842d7b9d7a37c3f594748"
+  },
+  {
+    "source": "docs/project/tasks/B02.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/B02.md.txt",
+    "sha256": "80a4147053339283752650b1c858cc2eeef45429f38849c9ecc0d9fbc27365ca"
+  },
+  {
+    "source": "docs/project/tasks/C01.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/C01.md.txt",
+    "sha256": "05971447e7a539fae03c66a62cc0ae53650355541cb604846b94b1afcbdcec1a"
+  },
+  {
+    "source": "docs/project/tasks/C02.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/C02.md.txt",
+    "sha256": "0fa70aabc530ed0f967946f7921518c1f019d20eb72bdccd3ec776edd6094be5"
+  },
+  {
+    "source": "docs/project/tasks/D01.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/D01.md.txt",
+    "sha256": "3000c4458384edfdcdc9e9b4e90567e4ccf49d06e7c66a90baf9921d8a7c750d"
+  },
+  {
+    "source": "docs/project/tasks/D02.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/D02.md.txt",
+    "sha256": "1a59bf04d96e2162d94ac6d823f9e19ec70d3bd7a599ad3c5b8fe360b965c674"
+  },
+  {
+    "source": "docs/project/tasks/E01.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/E01.md.txt",
+    "sha256": "80291162691804d80a0b9ae017d09b180631cca406daa23bfe10812e2726fdac"
+  },
+  {
+    "source": "docs/project/tasks/E02.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/E02.md.txt",
+    "sha256": "9e98f1d791c96c94375f6cda0462ddd39cd6299eba62f3873e423797b4635392"
+  },
+  {
+    "source": "docs/project/tasks/F01.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/F01.md.txt",
+    "sha256": "fb88fd38d822081b58a1183aab48a95eb7a44e2d6fb1d271999f7f7d27aa1c0e"
+  },
+  {
+    "source": "docs/project/tasks/F02.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/F02.md.txt",
+    "sha256": "1dc16cf7f68b236ac3445df37f4220a32ca23183e3eb4f9b85b4de458c5b91bd"
+  },
+  {
+    "source": "docs/project/tasks/F03.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/F03.md.txt",
+    "sha256": "18bfdde2fe5445c2d501cde34cec8e387c3bbaa4ca413c08d4040ba57671cad3"
+  },
+  {
+    "source": "docs/project/task-map.json",
+    "snapshot": "evidence/task-restructure/module-plan-source/docs__project__task-map.json.txt",
+    "sha256": "4fc62307ec5a9bb58d59daa95acb79863b7559414e6694f1e0ec990fe73dc9a5"
+  },
+  {
+    "source": "docs/project/TASKS.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/docs__project__TASKS.md.txt",
+    "sha256": "797149e68ad7842638fc4bae54b034ad9a255ec7bc73ecedfb071b42c8dcf40b"
+  },
+  {
+    "source": "docs/project/TEAM_EXECUTION.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/docs__project__TEAM_EXECUTION.md.txt",
+    "sha256": "eae9d97986303acccc678b9748ed966b1e63a768464c9f7bf1b66ae750b4cf59"
+  },
+  {
+    "source": "docs/project/reviews/2026-10-17-documentation-review.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/docs__project__reviews__2026-10-17-documentation-review.md.txt",
+    "sha256": "ee3ba76c2357c23c9345c959ee9270ade717b0b05ca4d2ac083b41e3ec7e4e7e"
+  },
+  {
+    "source": "docs/project/reviews/2026-10-17-documentation-rereview.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/docs__project__reviews__2026-10-17-documentation-rereview.md.txt",
+    "sha256": "8f5abbb064e9776cdcd8966656ad07907ef16836512dcca9ebc612654b055ce9"
+  },
+  {
+    "source": "evidence/task-restructure/README.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/evidence__task-restructure__README.md.txt",
+    "sha256": "250f8a45604e325973f4e56fced02fa64b7984bc4d3f3dbedab54d3598044507"
+  },
+  {
+    "source": "evidence/documentation-optimization/README.md",
+    "snapshot": "evidence/task-restructure/module-plan-source/evidence__documentation-optimization__README.md.txt",
+    "sha256": "20a2c437514159ed1ddcf36d7fb8168500ac8079024e00cb3f8ccd989b846c4b"
+  }
+]

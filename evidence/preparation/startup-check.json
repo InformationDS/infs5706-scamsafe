@@ -1,0 +1,29 @@
+{
+  "checkedDate": "2026-10-17",
+  "timezone": "Australia/Sydney",
+  "built": {
+    "command": "npm.cmd start",
+    "url": "http://127.0.0.1:4310/",
+    "pageStatus": 200,
+    "rootElement": true,
+    "health": {
+      "ok": true,
+      "mode": "mock",
+      "configured": false,
+      "contentApproval": "pending"
+    }
+  },
+  "scope": "Local mock foundation; no external model or deployment",
+  "development": {
+    "command": "npm.cmd run dev",
+    "url": "http://127.0.0.1:5173/",
+    "pageStatus": 200,
+    "viteClient": true,
+    "proxyHealth": {
+      "ok": true,
+      "mode": "mock",
+      "configured": false,
+      "contentApproval": "pending"
+    }
+  }
+}

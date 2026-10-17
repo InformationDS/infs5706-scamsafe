@@ -1,5 +1,5 @@
-# 合成机构、岗位与权限
+# 岗位与接收方
 
-岗位内容与正式配置的交付位置。记录合成名称、岗位、权限、职责和版本；权限来源于配置，不由模型生成。
+当前有效的有限合成岗位、权限及两个接收方职责位于[business/role.json](../business/role.json)，批准范围见[批准基准](../../docs/product/examples/APPROVED_BASELINE.md)。example-role.pending.json是负向样例，不参与正常加载。
 
-[岗位起始稿](EXAMPLE_ROLE_DRAFT.md)供 TASK-006-01 核对，不可直接作为有效配置。后续按 PRD 六类机构范围，由 A 确定各阶段实际开放的角色及对应验收；不要求成员自行补齐未分配的岗位。接入与审核情况见[当前状态](../../docs/project/STATUS.md)。
+A确定实际开放岗位与验收，不要求成员补齐六类机构。D只按已指派卡中的核对表检查，差异交A处理。结构及哈希用npm run check:business校验，实际流程范围见[STATUS](../../docs/project/STATUS.md)。

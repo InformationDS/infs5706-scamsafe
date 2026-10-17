@@ -1,0 +1,37 @@
+{
+  "id": "EX-ROLE-01",
+  "version": 1,
+  "organisation": "SYN Bank A",
+  "title": "Intake Officer",
+  "permissions": [
+    "Record synthetic case",
+    "Check facts",
+    "Prepare local drafts",
+    "Prepare human assessment requests as local drafts"
+  ],
+  "recipients": [
+    {
+      "id": "HANDOVER-BANK",
+      "title": "SYN Bank A / designated human review team"
+    },
+    {
+      "id": "HANDOVER-TELCO",
+      "title": "SYN Telco B / designated human intake team"
+    }
+  ],
+  "contentApproval": "approved",
+  "enabled": true,
+  "synthetic": true,
+  "approvalRef": "BUSINESS-BASELINE-01",
+  "excludedActions": [
+    "Account or transaction operations",
+    "Freezing funds",
+    "Promising refunds or recovery",
+    "Telecom account or number changes",
+    "Sending handovers or assessment requests"
+  ],
+  "recipientResponsibilities": {
+    "HANDOVER-BANK": "Human verification and assessment of reported unfamiliar debits, credential exposure and transaction information; the prototype only prepares a local draft.",
+    "HANDOVER-TELCO": "Human assessment of whether the reported SMS concern falls within the mobile provider remit; do not assume the provider sent the SMS or that SIM swapping occurred. Local draft only; sharing permission unverified."
+  }
+}

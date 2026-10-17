@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "scope": "Windows mock PDF rendering; no business approval",
+  "renderer": "Poppler pdftoppm, scale-to 1000, all pages",
+  "visualResult": "All five rendered pages inspected: no missing Chinese glyphs, clipping or overlap observed",
+  "files": [
+    {
+      "path": "EXAMPLE-01_SUMMARY_v1.pdf",
+      "sha256": "d18e670d270039ff439610fd740525d0eedd37d07385048ccdfcb75b5221d442",
+      "pages": 1,
+      "visuallyInspectedPages": [
+        1
+      ]
+    },
+    {
+      "path": "rendering-probe.pdf",
+      "sha256": "53a2fcbacd609cdf8ca11f6621ec7446d359f4d4e2ca911e8193150db16601e8",
+      "pages": 4,
+      "visuallyInspectedPages": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  ],
+  "chineseTextExtracted": true,
+  "lastParagraphExtracted": true,
+  "limitations": [
+    "Plain text table only; complex Markdown table layout not implemented",
+    "macOS font and layout not verified"
+  ]
+}

@@ -1,0 +1,424 @@
+{
+  "scope": "Current module-based task definitions; no implementation or acceptance claimed",
+  "tasks": [
+    {
+      "id": "A01",
+      "title": "准备可并行开发的公共起点",
+      "role": "A",
+      "phase": "prepare",
+      "dependencies": [],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-09",
+        "FR-11",
+        "FR-12"
+      ],
+      "reads": [
+        "docs/product/PRD.md",
+        "docs/architecture/RUNBOOK.md",
+        "data/business/T09.json",
+        "shared/schema.ts",
+        "shared/core.ts",
+        "shared/business.ts",
+        "app/src/Workbench.tsx",
+        "server/src/app.ts",
+        "docs/architecture/CONTRACTS.md"
+      ],
+      "writes": [
+        "shared/schema.ts",
+        "shared/core.ts",
+        "shared/index.ts",
+        "shared/business.ts",
+        "shared/export-schemas.ts",
+        "shared/write-schemas.ts",
+        "app/src/main.tsx",
+        "app/src/Workbench.tsx",
+        "app/src/style.css",
+        "server/src/app.ts",
+        "package.json",
+        "docs/architecture/CONTRACTS.md",
+        "docs/architecture/RUNBOOK.md",
+        "docs/project/STATUS.md",
+        "docs/project/FOUNDATION_READINESS.md",
+        "data/schemas/AnalysisEnvelope.schema.json",
+        "data/schemas/AnalysisResult.schema.json",
+        "data/schemas/CaseRecord.schema.json",
+        "data/schemas/ExportSnapshot.schema.json",
+        "data/schemas/Guideline.schema.json",
+        "data/schemas/HandoverDraft.schema.json",
+        "data/schemas/Recommendation.schema.json",
+        "data/schemas/RoleProfile.schema.json",
+        "data/schemas/Summary.schema.json",
+        "data/business/schemas/ApprovedGuideline.schema.json",
+        "data/business/schemas/ApprovedRole.schema.json",
+        "data/business/schemas/BusinessApproval.schema.json",
+        "data/business/schemas/BusinessBaseline.schema.json",
+        "data/business/schemas/BusinessCase.schema.json"
+      ],
+      "creates": [
+        "shared/runtime.ts",
+        "shared/module-ports.ts",
+        "shared/runtime-fixtures.ts",
+        "docs/architecture/MODULE_CONTRACTS.md",
+        "data/evaluation/prototype.json",
+        "app/src/module-preview.tsx",
+        "app/src/runtime-storage.ts",
+        "tests/runtime-foundation.test.ts",
+        "tests/module-browser.ts",
+        "data/schemas/RuntimeCaseRecord.schema.json",
+        "data/schemas/RuntimeExportSnapshot.schema.json"
+      ],
+      "gate": ""
+    },
+    {
+      "id": "B01",
+      "title": "完成案件录入、事实核对与补问模块",
+      "role": "B",
+      "phase": "module",
+      "dependencies": [
+        "A01"
+      ],
+      "requirements": [
+        "FR-02",
+        "FR-03",
+        "FR-04",
+        "FR-05"
+      ],
+      "reads": [
+        "docs/product/PRD.md",
+        "docs/architecture/RUNBOOK.md",
+        "data/business/T09.json",
+        "shared/runtime.ts",
+        "shared/module-ports.ts",
+        "shared/runtime-fixtures.ts",
+        "docs/architecture/MODULE_CONTRACTS.md",
+        "data/evaluation/prototype.json",
+        "app/src/components/CasePanel.tsx",
+        "app/src/components/AnalysisPanel.tsx"
+      ],
+      "writes": [
+        "app/src/components/CasePanel.tsx",
+        "app/src/components/AnalysisPanel.tsx"
+      ],
+      "creates": [
+        "shared/intake.ts",
+        "app/src/modules/intake/index.tsx",
+        "app/src/modules/intake/useIntake.ts",
+        "app/src/modules/intake/style.css",
+        "tests/intake.test.ts"
+      ],
+      "gate": "A01公共结构、固定输入、模拟分析端口、保存回调和intake独立页面已实际验收；不等待C01、D01或E01。"
+    },
+    {
+      "id": "C01",
+      "title": "完成模型接入、分析与API设置模块",
+      "role": "C",
+      "phase": "module",
+      "dependencies": [
+        "A01"
+      ],
+      "requirements": [
+        "FR-02",
+        "FR-03",
+        "FR-05",
+        "FR-12"
+      ],
+      "reads": [
+        "docs/product/PRD.md",
+        "docs/architecture/RUNBOOK.md",
+        "data/business/T09.json",
+        "shared/runtime.ts",
+        "shared/module-ports.ts",
+        "shared/runtime-fixtures.ts",
+        "docs/architecture/MODULE_CONTRACTS.md",
+        "data/evaluation/prototype.json",
+        "server/src/model.ts",
+        "server/src/model-settings.ts",
+        "server/src/config.ts",
+        "shared/model-settings.ts",
+        "app/src/components/ModelSettings.tsx",
+        "server/prompts/intake.txt"
+      ],
+      "writes": [
+        "server/src/model.ts",
+        "server/src/model-settings.ts",
+        "server/src/config.ts",
+        "shared/model-settings.ts",
+        "app/src/components/ModelSettings.tsx",
+        "server/prompts/intake.txt",
+        "tests/model-settings.test.ts"
+      ],
+      "creates": [
+        "app/src/modules/model/index.tsx",
+        "app/src/modules/model/style.css",
+        "tests/model.test.ts"
+      ],
+      "gate": "A01已冻结分析输入／响应及调用点，model独立页面和固定案件可运行；不等待B01。"
+    },
+    {
+      "id": "D01",
+      "title": "完成岗位、指引匹配与建议模块",
+      "role": "D",
+      "phase": "module",
+      "dependencies": [
+        "A01"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-06",
+        "FR-07",
+        "FR-09"
+      ],
+      "reads": [
+        "docs/product/PRD.md",
+        "docs/architecture/RUNBOOK.md",
+        "data/business/T09.json",
+        "shared/runtime.ts",
+        "shared/module-ports.ts",
+        "shared/runtime-fixtures.ts",
+        "docs/architecture/MODULE_CONTRACTS.md",
+        "data/evaluation/prototype.json",
+        "data/business/role.json",
+        "data/business/guidelines.json",
+        "data/business/approval.json",
+        "shared/business.ts",
+        "docs/product/examples/APPROVED_BASELINE.md"
+      ],
+      "writes": [],
+      "creates": [
+        "shared/guidance.ts",
+        "app/src/modules/guidance/index.tsx",
+        "app/src/modules/guidance/style.css",
+        "tests/guidance.test.ts"
+      ],
+      "gate": "A01提供运行事实、批准包读取端口及guidance独立页面，负向配置与有效配置分离；不等待B01或C01。"
+    },
+    {
+      "id": "E01",
+      "title": "完成摘要草稿、最终审核与输出模块",
+      "role": "E",
+      "phase": "module",
+      "dependencies": [
+        "A01"
+      ],
+      "requirements": [
+        "FR-08",
+        "FR-09",
+        "FR-10"
+      ],
+      "reads": [
+        "docs/product/PRD.md",
+        "docs/architecture/RUNBOOK.md",
+        "data/business/T09.json",
+        "shared/runtime.ts",
+        "shared/module-ports.ts",
+        "shared/runtime-fixtures.ts",
+        "docs/architecture/MODULE_CONTRACTS.md",
+        "data/evaluation/prototype.json",
+        "app/src/export/OutputPanel.tsx",
+        "shared/export.ts",
+        "docs/product/examples/APPROVED_BASELINE.md"
+      ],
+      "writes": [
+        "app/src/export/OutputPanel.tsx",
+        "shared/export.ts"
+      ],
+      "creates": [
+        "shared/outputs.ts",
+        "app/src/modules/outputs/index.tsx",
+        "app/src/modules/outputs/style.css",
+        "tests/outputs.test.ts",
+        "server/src/output-service.ts"
+      ],
+      "gate": "A01提供事实、模拟建议／决定、保存回调及outputs独立页面；不等待B01、C01或D01。"
+    },
+    {
+      "id": "A02",
+      "title": "集成四模块并跑通完整原型",
+      "role": "A",
+      "phase": "integrate",
+      "dependencies": [
+        "A01",
+        "B01",
+        "C01",
+        "D01",
+        "E01"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-03",
+        "FR-04",
+        "FR-05",
+        "FR-06",
+        "FR-07",
+        "FR-08",
+        "FR-09",
+        "FR-10",
+        "FR-11",
+        "FR-12"
+      ],
+      "reads": [
+        "docs/product/PRD.md",
+        "docs/architecture/RUNBOOK.md",
+        "data/business/T09.json",
+        "shared/runtime.ts",
+        "shared/module-ports.ts",
+        "shared/runtime-fixtures.ts",
+        "docs/architecture/MODULE_CONTRACTS.md",
+        "data/evaluation/prototype.json",
+        "shared/intake.ts",
+        "shared/guidance.ts",
+        "shared/outputs.ts",
+        "app/src/modules/intake/index.tsx",
+        "app/src/modules/model/index.tsx",
+        "app/src/modules/guidance/index.tsx",
+        "app/src/modules/outputs/index.tsx",
+        "app/src/runtime-storage.ts",
+        "server/src/model.ts",
+        "server/src/output-service.ts"
+      ],
+      "writes": [
+        "app/src/main.tsx",
+        "app/src/Workbench.tsx",
+        "app/src/style.css",
+        "server/src/app.ts",
+        "server/src/index.ts",
+        "package.json",
+        "docs/architecture/CONTRACTS.md",
+        "docs/architecture/RUNBOOK.md",
+        "docs/project/STATUS.md",
+        "docs/project/FOUNDATION_READINESS.md",
+        "data/schemas/AnalysisEnvelope.schema.json",
+        "data/schemas/AnalysisResult.schema.json",
+        "data/schemas/CaseRecord.schema.json",
+        "data/schemas/ExportSnapshot.schema.json",
+        "data/schemas/Guideline.schema.json",
+        "data/schemas/HandoverDraft.schema.json",
+        "data/schemas/Recommendation.schema.json",
+        "data/schemas/RoleProfile.schema.json",
+        "data/schemas/Summary.schema.json",
+        "data/business/schemas/ApprovedGuideline.schema.json",
+        "data/business/schemas/ApprovedRole.schema.json",
+        "data/business/schemas/BusinessApproval.schema.json",
+        "data/business/schemas/BusinessBaseline.schema.json",
+        "data/business/schemas/BusinessCase.schema.json",
+        "shared/runtime.ts",
+        "shared/module-ports.ts",
+        "shared/runtime-fixtures.ts",
+        "shared/schema.ts",
+        "shared/core.ts",
+        "shared/index.ts",
+        "shared/export-schemas.ts",
+        "shared/write-schemas.ts",
+        "app/src/runtime-storage.ts",
+        "data/schemas/RuntimeCaseRecord.schema.json",
+        "data/schemas/RuntimeExportSnapshot.schema.json",
+        "docs/architecture/MODULE_CONTRACTS.md"
+      ],
+      "creates": [
+        "app/src/PrototypeWorkbench.tsx",
+        "tests/prototype-browser.ts",
+        "docs/architecture/PROTOTYPE_RUNBOOK.md"
+      ],
+      "gate": "四模块实现及局部检查已由A接收，文件基于同一A01结构；有失败必须明确，未完成实现不能用报告接收代替。"
+    },
+    {
+      "id": "F01",
+      "title": "集中检查原型并提交缺陷",
+      "role": "F",
+      "phase": "verify",
+      "dependencies": [
+        "A02"
+      ],
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "FR-03",
+        "FR-04",
+        "FR-05",
+        "FR-06",
+        "FR-07",
+        "FR-08",
+        "FR-09",
+        "FR-10",
+        "FR-11",
+        "FR-12"
+      ],
+      "reads": [
+        "docs/product/PRD.md",
+        "docs/architecture/RUNBOOK.md",
+        "data/business/T09.json",
+        "docs/architecture/PROTOTYPE_RUNBOOK.md",
+        "data/evaluation/prototype.json"
+      ],
+      "writes": [],
+      "creates": [],
+      "gate": "A02已交完整副本和实际步骤；F从安装运行开始集中检查，不提前穿插模块开发。"
+    },
+    {
+      "id": "F02",
+      "title": "集中复测并给出原型结论",
+      "role": "F",
+      "phase": "retest",
+      "dependencies": [
+        "F01"
+      ],
+      "requirements": [
+        "FR-02",
+        "FR-05",
+        "FR-06",
+        "FR-09",
+        "FR-10",
+        "FR-11",
+        "FR-12"
+      ],
+      "reads": [
+        "docs/product/PRD.md",
+        "docs/architecture/RUNBOOK.md",
+        "data/business/T09.json",
+        "docs/architecture/PROTOTYPE_RUNBOOK.md",
+        "data/evaluation/prototype.json"
+      ],
+      "writes": [],
+      "creates": [],
+      "gate": "F01报告已接收；A汇总B/C/D/E及公共修复为一个副本，未修复项保留阻塞。无缺陷也可检查最终副本，不虚构修复。"
+    },
+    {
+      "id": "A03",
+      "title": "整理可运行原型与交付说明",
+      "role": "A",
+      "phase": "deliver",
+      "dependencies": [
+        "F02"
+      ],
+      "requirements": [
+        "FR-10",
+        "FR-11",
+        "FR-12"
+      ],
+      "reads": [
+        "docs/product/PRD.md",
+        "docs/architecture/RUNBOOK.md",
+        "data/business/T09.json",
+        "README.md",
+        "docs/project/STATUS.md",
+        "docs/architecture/PROTOTYPE_RUNBOOK.md",
+        "deliverables/README.md"
+      ],
+      "writes": [
+        "README.md",
+        "docs/architecture/RUNBOOK.md",
+        "docs/architecture/PROTOTYPE_RUNBOOK.md",
+        "docs/project/STATUS.md",
+        "docs/project/FOUNDATION_READINESS.md",
+        "deliverables/README.md"
+      ],
+      "creates": [
+        "deliverables/LOCAL_DELIVERY.md"
+      ],
+      "gate": "F02结论为可演示，启动与核心流程问题解决；限制及未执行项明确。只收到仍阻塞报告不满足交付门槛。"
+    }
+  ]
+}

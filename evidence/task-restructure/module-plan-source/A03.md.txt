@@ -1,0 +1,89 @@
+# A03：实现指引匹配、建议选择与岗位重算
+
+## 目标与责任
+
+目标：实现指引匹配、建议选择与岗位重算，只完成本卡范围。建议角色：A；实际成员由 A 人工指派。产品规则：FR-01, FR-06, FR-07, FR-09，以卡内指定PRD条款为准。
+
+## 开工条件
+
+依赖：[A01](A01.md)、[D01](D01.md)
+
+依赖卡须由 A 验收；核对实际产物和检查记录后开工。
+
+A 指派时在下方唯一执行记录确认工作副本实际绝对路径；Windows 可使用当前项目目录，macOS 使用成员自己的项目根目录。没有完整文件、存在未交接改动或检查失败时保留现场，交 A 判断。不得按远端文件存在推定本地新增文件已发布。
+
+## 必读与固定输入
+
+- [AGENTS.md](../../../AGENTS.md)
+- [docs/project/STATUS.md](../../../docs/project/STATUS.md)
+- [PRD](../../product/PRD.md)：只读FR-01/06/07/09、4.3、4.4和风险关注提示。
+- [data/business/role.json](../../../data/business/role.json)
+- [data/business/guidelines.json](../../../data/business/guidelines.json)
+- [data/business/T09.json](../../../data/business/T09.json)
+- [shared/business.ts](../../../shared/business.ts)
+- [shared/core.ts](../../../shared/core.ts)
+- [docs/product/examples/APPROVED_BASELINE.md](../../../docs/product/examples/APPROVED_BASELINE.md)
+
+字段只查字典对应项。前置卡新建文件在验收后读取，缺失时停止相关步骤，不按计划路径推定已存在。
+
+## 允许修改与交付
+
+现有文件：`shared/workflow.ts`、`shared/schema.ts`、`shared/core.ts`、`shared/index.ts`、`tests/workflow.test.ts`、`docs/architecture/CONTRACTS.md`、`shared/write-schemas.ts`、`shared/export-schemas.ts`、`data/schemas/RuntimeCaseRecord.schema.json`、`data/schemas/RuntimeExportSnapshot.schema.json`、`data/schemas/AnalysisEnvelope.schema.json`、`data/schemas/AnalysisResult.schema.json`、`data/schemas/CaseRecord.schema.json`、`data/schemas/ExportSnapshot.schema.json`、`data/schemas/Guideline.schema.json`、`data/schemas/HandoverDraft.schema.json`、`data/schemas/Recommendation.schema.json`、`data/schemas/RoleProfile.schema.json`、`data/schemas/Summary.schema.json`、`data/business/schemas/ApprovedGuideline.schema.json`、`data/business/schemas/ApprovedRole.schema.json`、`data/business/schemas/BusinessApproval.schema.json`、`data/business/schemas/BusinessBaseline.schema.json`、`data/business/schemas/BusinessCase.schema.json`
+
+本卡新建产物（当前不要求存在）：`shared/guidance.ts`、`tests/guidance.test.ts`
+
+检查截图、日志和脱敏输出可新建于 `evidence/task-results/A03/`。只更新本卡“唯一执行记录”；不更新其他卡状态、TASKS或STATUS（仅本卡允许范围列出时可改STATUS）。禁止将密钥、.env、local/或实际个人信息交付。
+
+交付方式：文件交A，按[CONTRIBUTING](../../../CONTRIBUTING.md)收集允许差异、本卡和证据；不执行Git交付。
+
+## 顺序步骤
+
+1. 用批准包 EX-G01–03 及 T09 的事实条件实现确定性匹配；逐项检查已批准、有效、岗位权限、required、allowedUnknown、onMismatch 和来源，不按类型名称直接命中。
+2. 输出本岗位可做、相关接收方职责、优先级、理由、依赖与局限；部分不匹配只省略对应步骤并列原因；冲突指引保留引用，禁止模型任选一个。
+3. 实现接受、修改、拒绝及理由持久化；接受不表示执行，拒绝不删除事实，重新分析不撤销决定。通知依赖该建议的对象更新，不影响无依赖对象。
+4. 实现岗位／指引变更重算入口，保留事实、首次审核历史与补问计数；未提供的角色 ID 拒绝。用测试注入未批准、失效、冲突和低权限配置，不把它们注册为有效内容。
+5. 无任何有效适用指引时仅允许事实摘要路径，返回固定英文提示，不生成建议／机构路径／交接草稿；建立测试及公共消费者接口。
+
+共享结构变化后执行 `npm run schemas`，核对data/schemas生成差异与本卡契约同步；只交实际受影响文件。未改结构不为刷新时间戳重写生成物。
+
+人工修改采用PRD 4.4的轻量规则：保留原内容及Employee edited标记，修改后重新审核；不自行新增语义审查、自动风险评分或人工文字逐句指引拦截。系统生成建议仍遵守既有匹配规则。
+
+## 固定检查与预期
+
+| 输入／操作 | 应观察到的结果 |
+|---|---|
+| T09 当前获批条件 | 每条建议引用准确指引编号／版本和事实，不宣称动作已完成 |
+| 拒绝 T09 第三条建议并重算 | 理由保留；待执行摘要／草稿不得引用被拒绝动作 |
+| 指引失效／冲突／岗位无权限 | 不输出对应步骤；零匹配仅摘要并显示 Insufficient approved guidance; human review required |
+| 切换岗位 | 事实和题数不变；只更新受影响建议／输出依赖 |
+
+命令从本副本项目根目录执行；Windows使用npm.cmd，macOS使用npm。只执行本卡步骤要求的检查；需要浏览器时先构建并安装Chromium。前置新建命令由A实际验证后填工作包，成员不猜命令。
+
+## 停止、审核与完成条件
+
+缺输入、接口冲突或需要范围外修改时，保留现场并停止受影响步骤，按[AGENTS](../../../AGENTS.md)报告具体缺项；不自行补架构、改业务规则或标准答案。
+
+成员填写实际观察，A审核技术与集成。本卡要求的交付与检查有证据、相关问题解决且A确认后才标已验收；不继承基座通过结论。
+
+证据写evidence/task-results/A03/run-01/；复测使用run-02等新批次，保留首次失败。
+
+## 工作包与交付门槛
+
+由A按[发放清单](../WORK_PACKAGE.md)填入本卡真实值；未填完整不指派。实际状态仍只记下方唯一执行记录。
+
+- 工作包编号／基础副本编号：待A发放时填写。
+- 文件基线：待A逐个填写允许文件SHA256；新建文件记本卡创建。
+- 依赖验收位置与副本：待A填写；无依赖写不适用。
+- 本次固定输入／目标画面／A已执行入口及证据：见本卡检查表；实际副本验证待A填写。
+- 交付渠道：待A指定；本机收集到local/delivery/A03/。
+
+## 唯一执行记录
+
+- 实际成员：待 A 人工指派（A 角色卡由项目发起人负责，执行前确认）。
+- 状态：待指派；本卡尚未执行。
+- 工作副本：待指派时记录实际绝对路径；不允许 agent 猜测另一台电脑路径。
+- 本次系统／浏览器／Node版本：待实际操作者记录。
+- 对应 Issue：无；当前以本卡记录为准。
+- 实际修改与检查：未执行。
+- 模拟／真实模型／内容审核：未执行；不继承公共基座的通过结论。
+- 问题、证据和 A 验收：未执行。

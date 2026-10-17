@@ -1,0 +1,24 @@
+{
+  "id": "EX-ROLE-01",
+  "version": 1,
+  "organisation": "SYN Bank A",
+  "title": "Intake Officer",
+  "permissions": [
+    "Record synthetic case",
+    "Check facts",
+    "Prepare local drafts"
+  ],
+  "recipients": [
+    {
+      "id": "HANDOVER-BANK",
+      "title": "SYN Bank A / designated human review team"
+    },
+    {
+      "id": "HANDOVER-TELCO",
+      "title": "SYN Telco B / designated human intake team"
+    }
+  ],
+  "contentApproval": "pending",
+  "enabled": false,
+  "synthetic": true
+}

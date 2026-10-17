@@ -1,0 +1,33 @@
+{
+  "scope": "Controlled copies in ignored local/preparation/checks; no application or model",
+  "executionLimitation": "Initial OS temporary-directory attempt failed with WinError 5; rerun in workspace local directory succeeded.",
+  "checks": [
+    {
+      "variant": "source_changed",
+      "expected": "failed",
+      "actual": "failed",
+      "errors": [
+        "Source changed; A must compare and reconfirm: docs/product/examples/WORKED_CASE.md"
+      ],
+      "passed": true
+    },
+    {
+      "variant": "copied_segment_changed",
+      "expected": "failed",
+      "actual": "failed",
+      "errors": [
+        "Segment differs from source: narrative"
+      ],
+      "passed": true
+    },
+    {
+      "variant": "approval_falsified",
+      "expected": "failed",
+      "actual": "failed",
+      "errors": [
+        "Source package must retain pending content approvals; it is not an approval registry"
+      ],
+      "passed": true
+    }
+  ]
+}

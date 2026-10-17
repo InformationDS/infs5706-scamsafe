@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "const": "BUSINESS-BASELINE-01"
+    },
+    "contentVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "status": {
+      "type": "string",
+      "const": "approved"
+    },
+    "approvedBy": {
+      "type": "string",
+      "const": "A (user in this conversation)"
+    },
+    "approvedOn": {
+      "type": "string",
+      "const": "2026-10-17"
+    },
+    "authority": {
+      "type": "string",
+      "const": "Direct user instruction in this conversation"
+    },
+    "userInstruction": {
+      "type": "string",
+      "const": "你直接完成所有的业务内容，我都批准"
+    },
+    "hashNormalization": {
+      "type": "string",
+      "const": "utf8-lf"
+    },
+    "scope": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "limitations": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "contentVersion",
+    "status",
+    "approvedBy",
+    "approvedOn",
+    "authority",
+    "userInstruction",
+    "hashNormalization",
+    "scope",
+    "limitations",
+    "artifacts"
+  ],
+  "additionalProperties": false
+}

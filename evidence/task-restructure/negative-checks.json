@@ -1,0 +1,55 @@
+{
+  "status": "passed",
+  "scope": "Checker validation on isolated local copies and browser output-directory guard; no task execution",
+  "checks": [
+    {
+      "name": "control snapshot passes",
+      "result": "passed",
+      "observedErrors": []
+    },
+    {
+      "name": "dependency cycle rejected",
+      "result": "passed",
+      "observedErrors": [
+        "Dependency cycle: A01 -> A02 -> A01",
+        "A01: dependency not linked in card: A02"
+      ]
+    },
+    {
+      "name": "missing actual input rejected",
+      "result": "passed",
+      "observedErrors": [
+        "A01: missing input/write target without producer dependency: app/src/DOES_NOT_EXIST.ts"
+      ]
+    },
+    {
+      "name": "unknown dependency rejected",
+      "result": "passed",
+      "observedErrors": [
+        "Unknown dependency: F99",
+        "A01: dependency not linked in card: F99"
+      ]
+    },
+    {
+      "name": "missing PRD coverage rejected",
+      "result": "passed",
+      "observedErrors": [
+        "PRD coverage missing: ['FR-12']"
+      ]
+    },
+    {
+      "name": "obsolete task reference rejected",
+      "result": "passed",
+      "observedErrors": [
+        "Obsolete task reference: docs\\project\\obsolete-reference.md"
+      ]
+    },
+    {
+      "name": "browser output outside project evidence rejected",
+      "result": "passed",
+      "observedErrors": [
+        "Rejected before browser/server startup"
+      ]
+    }
+  ]
+}

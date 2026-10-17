@@ -1,0 +1,156 @@
+[
+  {
+    "id": "EX-G01",
+    "version": 1,
+    "contentApproval": "approved",
+    "enabled": true,
+    "synthetic": true,
+    "roleId": "EX-ROLE-01",
+    "required": [
+      {
+        "target": {
+          "fieldId": "F06"
+        },
+        "allowedValues": [
+          [
+            "Unfamiliar debit"
+          ]
+        ]
+      },
+      {
+        "target": {
+          "fieldId": "E07",
+          "recordId": "TX-01"
+        },
+        "allowedValues": [
+          "SYN Bank A"
+        ]
+      },
+      {
+        "target": {
+          "fieldId": "E09",
+          "recordId": "TX-01"
+        },
+        "allowedValues": [
+          null,
+          "reported pending"
+        ]
+      }
+    ],
+    "requiredContext": [
+      "F06 abnormal debit refers specifically to TX-01",
+      "No unresolved E09 conflict"
+    ],
+    "allowedUnknown": [
+      {
+        "fieldId": "E04",
+        "recordId": "TX-01"
+      },
+      {
+        "fieldId": "E05",
+        "recordId": "TX-01"
+      },
+      {
+        "fieldId": "E09",
+        "recordId": "TX-01"
+      }
+    ],
+    "step": "Prepare a local internal human assessment record.",
+    "limits": [
+      "Approved synthetic prototype guidance only; no authority for real-world action.",
+      "EXAMPLE-01 teaching target TX-01 only.",
+      "E09 conflicts, reported completed and payment requested are outside this teaching entry.",
+      "The human specialist decides further assessment; no freeze, refund or recovery promised."
+    ],
+    "onMismatch": "Omit this step and preserve missing or conflicting facts for human review.",
+    "humanEscalation": "A designated bank human specialist decides further assessment; the intake role performs no account or transaction action.",
+    "approvalRef": "BUSINESS-BASELINE-01",
+    "validity": "current"
+  },
+  {
+    "id": "EX-G02",
+    "version": 1,
+    "contentApproval": "approved",
+    "enabled": true,
+    "synthetic": true,
+    "roleId": "EX-ROLE-01",
+    "required": [
+      {
+        "target": {
+          "fieldId": "C03",
+          "recordId": "CONTACT-01"
+        },
+        "allowedValues": [
+          "SMS"
+        ]
+      }
+    ],
+    "requiredContext": [
+      "S4 explicitly identifies SYN Telco B as the person's mobile service provider",
+      "Configuration includes corresponding human intake responsibilities"
+    ],
+    "allowedUnknown": [
+      {
+        "fieldId": "C08",
+        "recordId": "CONTACT-01"
+      },
+      {
+        "fieldId": "J04",
+        "recordId": "EVID-01"
+      },
+      {
+        "fieldId": "O07"
+      }
+    ],
+    "step": "Prepare a local SYN Telco B human intake draft.",
+    "limits": [
+      "Approved synthetic prototype guidance only; no authority for real-world action.",
+      "Also requires S4 to explicitly identify SYN Telco B as the person's mobile provider and configured human intake responsibilities; this limited draft is not a runtime matcher.",
+      "Unknown sharing permission permits local drafting only; no sharing or verification asserted.",
+      "Do not infer SIM swapping or change a mobile service."
+    ],
+    "onMismatch": "Omit this step and preserve missing or conflicting facts for human review.",
+    "humanEscalation": "The receiving human intake team verifies whether the concern falls within its remit; sharing permission remains unverified.",
+    "approvalRef": "BUSINESS-BASELINE-01",
+    "validity": "current"
+  },
+  {
+    "id": "EX-G03",
+    "version": 1,
+    "contentApproval": "approved",
+    "enabled": true,
+    "synthetic": true,
+    "roleId": "EX-ROLE-01",
+    "required": [
+      {
+        "target": {
+          "fieldId": "C03",
+          "recordId": "CONTACT-01"
+        },
+        "allowedValues": [
+          "SMS"
+        ]
+      }
+    ],
+    "requiredContext": [
+      "Existing corresponding SMS clues have source references"
+    ],
+    "allowedUnknown": [
+      {
+        "fieldId": "J04",
+        "recordId": "EVID-01"
+      }
+    ],
+    "step": "Optionally prepare a separate summary of existing SMS clues for human assessment.",
+    "limits": [
+      "Approved synthetic prototype guidance only; no authority for real-world action.",
+      "Also requires existing SMS clues and source references; this limited draft is not a runtime matcher.",
+      "The employee may decline duplicate preparation; rejection retains facts and gaps.",
+      "Do not request new materials or claim the SMS is verified."
+    ],
+    "onMismatch": "Omit this step and preserve missing or conflicting facts for human review.",
+    "humanEscalation": "Human staff decide whether a separate existing-clue summary is useful; no new materials are required.",
+    "approvalRef": "BUSINESS-BASELINE-01",
+    "validity": "current"
+  }
+]

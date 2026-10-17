@@ -1,0 +1,95 @@
+Rendering probe — layout only
+SYNTHETIC / MOCK - Content not approved. Training review simulation only. Local draft; no delivery or
+external verification.
+Case: EXAMPLE-01 | Case version: 7
+Object: SUMMARY | Object version: 2
+RENDERING PROBE ONLY — NOT A BUSINESS EXPECTATION
+中文排版核对：未知金额不等于零；人工核对不等于外部事实已证实。
+A long source URL: https://rendering.example/long-path-segment/long-path-segment/long-
+path-segment/long-path-segment/long-path-segment/long-path-segment/long-path-
+segment/long-path-segment/long-path-segment/long-path-segment/long-path-segment/long-
+path-segment/long-path-segment/long-path-segment/long-path-segment/long-path-
+segment/long-path-segment/long-path-segment/
+Field | Value | Status
+Amount | 200 AUD | Reported
+Recipient | Unknown | Missing
+Paragraph 1. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 2. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 3. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 4. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 5. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 6. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 7. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 8. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 9. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 10. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 11. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 12. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 13. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 14. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 15. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 16. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 17. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 18. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 19. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 20. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 21. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 22. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 23. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 24. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 25. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 26. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 27. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 28. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 29. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 30. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 31. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 32. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 33. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 34. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 35. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 36. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 37. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 38. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 39. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。
+Paragraph 40. Synthetic rendering text for page breaks, line wrapping and readable output. 中
+文来源文字应完整显示，分页不得截断或缺字。

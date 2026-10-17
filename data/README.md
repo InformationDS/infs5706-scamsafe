@@ -1,7 +1,11 @@
-# 项目数据与配置
+# 数据与配置入口
 
-本目录存放岗位、指引、评估案例和共享结构。实现与内容审核情况统一见[当前状态](../docs/project/STATUS.md)；具体任务从[任务入口](../docs/project/TASKS.md)进入，按卡片读取相关材料。
+| 位置 | 当前用途 |
+|---|---|
+| [business/](business/README.md) | 当前已批准的有限合成岗位、指引和T09参考；唯一批准登记在此 |
+| [fixtures/](fixtures/README.md) | 固定模拟状态；不作为真实员工审核 |
+| [evaluation/](evaluation/README.md) | 固定验收输入与独立预期，执行证据不放这里 |
+| [schemas/](schemas/README.md) | 从共享定义生成的结构；程序仍检查跨字段规则 |
+| [roles/](roles/README.md)、[guidelines/](guidelines/README.md) | pending负向样例及当前业务包入口，不是有效配置加载位置 |
 
-[贯穿教学样例 EXAMPLE-01](../docs/product/examples/WORKED_CASE.md)说明事实、补问、审核与输出如何对应；它不属于运行配置或已审核评估集。内容起始稿用于任务核对，不能因文件已存在就视为有效配置。
-
-岗位、指引和案例的内容草稿可按任务卡并行准备。接入程序时，先确定共享结构，再转换并校验角色／权限、指引与评估数据。规则见 [CONTRACTS](../docs/architecture/CONTRACTS.md) 和 [字段字典](../docs/product/FIELD_DICTIONARY.md)。所有案例明确标为合成。
+实际实现见[STATUS](../docs/project/STATUS.md)，当前任务见[TASKS](../docs/project/TASKS.md)。A维护结构与批准登记；成员只读取卡中列出的数据，不自行扩权限、刷新批准哈希或复制模型输出作为预期。
