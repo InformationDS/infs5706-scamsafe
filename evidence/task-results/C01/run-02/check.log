@@ -1,0 +1,62 @@
+
+> scamsafe-foundation@0.1.0 check
+> tsc --noEmit && tsx --test tests/*.test.ts
+
+✔ approved baseline preserves fixed inputs, boundaries and conditional expected decisions (5.117375ms)
+✔ business schemas reject pending guidance and invalid approved references (1.776125ms)
+✔ modified content fails the approved artifact hash check (4.341541ms)
+✔ approved business API is distinct from legacy mock case approval (32.69475ms)
+✔ all fixed states validate without business approval or enabled roles (23.042125ms)
+✔ case entrypoints require complete handovers and a configured teaching recipient (5.817375ms)
+✔ single-case fact semantics reject wrong types and missing record targets while preserving false versus unknown (4.56725ms)
+✔ manual amount correction is preserved as model conflict and history survives (0.449291ms)
+✔ model cannot impersonate employee review or invent source references (0.549458ms)
+✔ equal analysis with changed request provenance does not change content or review (0.60775ms)
+✔ unknown amount is separate; independent transactions group by currency and state (0.754125ms)
+✔ partial answer retains round; stop and later answer update original without new count (0.583375ms)
+✔ rounds require display and save and enforce 3 per round, 3 rounds, 9 total (0.718417ms)
+✔ dependency invalidation is per object and old reviews remain as history (2.112417ms)
+✔ snapshot gate blocks unsaved, stale review, modified body and requires explicit simulated marker (6.4985ms)
+✔ old case and superseded same-version requests cannot overwrite facts or reviews (1.949167ms)
+✔ summary and handover contracts keep recipient and recommendation boundaries explicit (3.914208ms)
+✔ recommendation schema requires traceable simulated decisions without enabling business content (2.311625ms)
+✔ settings DTO never returns keys; blank preserves and explicit clear removes credentials (1.123458ms)
+✔ settings validation rejects incomplete live mode, unsafe URLs, unknown fields and invalid headers (0.925916ms)
+✔ local atomic persistence restores after restart and explicit cleared key overrides env fallback (1.52ms)
+✔ failed persistence returns safe 503 and retains last settings in memory (44.486166ms)
+✔ settings routes enforce host/origin, strict input and never echo secrets (16.920708ms)
+✔ saved settings immediately route real adapter to local fake provider without external calls (38.114209ms)
+✔ C01 Mock T09 returns sourced proposals without invoking provider or mutating case (6.32475ms)
+✔ C01 corrected, unknown, partial, stopped and limit cases retain employee state and counters (10.665792ms)
+✔ C01 Mock refuses unrelated narratives and supports explicit fault checks (2.542042ms)
+✔ C01 live request isolates instructions/configuration, preserves Chinese narrative and uses source schema (20.933375ms)
+✔ C01 accepts new repeated records and additional fields on existing records (3.377833ms)
+✔ C01 rejects forged facts, identifiers, source references, review claims and extra nested properties (20.483834ms)
+✔ C01 rejects question counter bypass, answered proposals, duplicate targets and pending/unknown repeats (11.58675ms)
+✔ C01 provider failures are safe, bounded and retryable where appropriate (207.966125ms)
+✔ C01 HTTP route rejects results when API settings change during a request (31.258792ms)
+✔ C01 rejects a stale input ticket without a provider call (0.496125ms)
+✔ C01 free narrative can start with no extracted facts and retain distinct currencies/unknown/false (3.329292ms)
+✔ C01 actual browser: analysis, corrected values, errors, settings, stale responses and backups (3044.844875ms)
+✔ all independent runtime inputs validate, future answers do not leak into initial sources (27.755292ms)
+✔ correction and delayed identity cannot overwrite 200 or current 250 (5.529791ms)
+✔ partial, unknown, stopped and 3/9 counters remain distinct independent inputs (6.273291ms)
+✔ single edit, rejected recommendation and shared context invalidate only dependencies (6.422333ms)
+✔ mock review never becomes actual employee review; unsaved output is blocked (2.57325ms)
+✔ backup rejects version, missing references, duplicate targets; unsaved import guarded (5.0845ms)
+✔ runtime routes use injected registrations and validate identity; explicit mock never calls provider (45.063083ms)
+✔ health exposes configuration status, never credential values (25.786917ms)
+✔ mock analysis is deterministic and rejects arbitrary modified facts and client configuration (38.584042ms)
+✔ mock fault responses preserve supplied case and identify timeout/invalid separately (6.030875ms)
+✔ foreign origins and DNS rebinding hosts cannot call local API (10.227417ms)
+✔ Markdown export requires current saved simulated review (13.120958ms)
+✔ OpenAI-compatible adapter uses a local fake provider, validates output, and redacts external errors (319.371292ms)
+✔ missing live configuration makes no provider call (1.709583ms)
+ℹ tests 50
+ℹ suites 0
+ℹ pass 50
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3906.026875
