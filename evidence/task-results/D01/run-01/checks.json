@@ -1,0 +1,66 @@
+{
+  "task": "D01",
+  "batch": "run-01",
+  "dateSydney": "2026-10-25",
+  "baselineCommit": "435962f51daae5ae22065fdd8c3c3feb75099314",
+  "node": "v24.22.1",
+  "applicationAcceptance": "not verified",
+  "commands": [
+    {
+      "command": "npm run check:business",
+      "chunk_id": "55c765",
+      "wall_time_seconds": 0.227303541,
+      "exit_code": 127,
+      "original_token_count": 29,
+      "output": "\n> scamsafe-foundation@0.1.0 check:business\n> tsx scripts/maintenance/check-business.ts\n\nsh: tsx: command not found\n"
+    },
+    {
+      "command": "npm run check",
+      "chunk_id": "6e55c9",
+      "wall_time_seconds": 0.227255042,
+      "exit_code": 127,
+      "original_token_count": 27,
+      "output": "\n> scamsafe-foundation@0.1.0 check\n> tsc --noEmit && tsx --test tests/*.test.ts\n\nsh: tsc: command not found\n"
+    },
+    {
+      "command": "npm run build",
+      "chunk_id": "3f47bd",
+      "wall_time_seconds": 0.229619125,
+      "exit_code": 127,
+      "original_token_count": 23,
+      "output": "\n> scamsafe-foundation@0.1.0 build\n> tsc --noEmit && vite build\n\nsh: tsc: command not found\n"
+    },
+    {
+      "command": "npm run check:module -- guidance evidence/task-results/D01/run-01/guidance",
+      "chunk_id": "ed88c2",
+      "wall_time_seconds": 0.227172792,
+      "exit_code": 127,
+      "original_token_count": 38,
+      "output": "\n> scamsafe-foundation@0.1.0 check:module\n> tsx tests/module-browser.ts guidance evidence/task-results/D01/run-01/guidance\n\nsh: tsx: command not found\n"
+    }
+  ],
+  "otherChecks": [
+    {
+      "command": "node --check shared/guidance.ts",
+      "exit_code": 0,
+      "scope": "syntax only; no imports resolved or code executed"
+    },
+    {
+      "command": "node --check tests/guidance.test.ts",
+      "exit_code": 0,
+      "scope": "syntax only; 15 tests authored but not executed"
+    },
+    {
+      "command": "python scripts/maintenance/check_repository.py",
+      "exit_code": 0,
+      "scope": "repository documentation and preservation only; no application tests"
+    }
+  ],
+  "blockedBy": "Project dependencies unavailable. Network installation request rejected by user; no further install attempted.",
+  "browserChecks": "not started",
+  "providerRequests": "No application or provider calls made.",
+  "notes": [
+    "No build, TypeScript typecheck or business tests passed; required commands failed to start because tsx/tsc are missing.",
+    "No simulated fixture review was promoted to actual staff review."
+  ]
+}
