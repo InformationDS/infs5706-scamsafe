@@ -1,0 +1,14 @@
+.module-model { background: #fff; border: 1px solid #d2dce5; border-radius: 12px; padding: 24px; margin: 16px 0; color: #183044; }
+.module-model header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.module-model h2, .module-model h3, .module-model h4 { margin: 12px 0 8px; }
+.module-model p, .module-model li { line-height: 1.6; overflow-wrap: anywhere; }
+.module-model button { background: #17625c; color: white; border: 0; padding: 12px 18px; border-radius: 6px; cursor: pointer; }
+.module-model button:disabled { opacity: .6; cursor: wait; }
+.module-model [role=status] { padding: 12px; background: #eff6fa; border-left: 4px solid #327a9f; }
+.module-model .model-warning { padding: 12px; background: #fff2cf; color: #6b4400; }
+.module-model .model-table { overflow-x: auto; }
+.module-model table { width: 100%; border-collapse: collapse; text-align: left; }
+.module-model th, .module-model td { padding: 10px; border-bottom: 1px solid #d2dce5; vertical-align: top; overflow-wrap: anywhere; }
+.module-model details { margin: 8px 0; }
+.module-model summary { cursor: pointer; }
+.module-model .model-result { border-top: 1px solid #d2dce5; margin-top: 16px; }
