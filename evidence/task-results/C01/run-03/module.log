@@ -1,0 +1,5 @@
+
+> scamsafe-foundation@0.1.0 check:module
+> tsx tests/module-browser.ts model evidence/task-results/C01/run-03/foundation
+
+model: 11 browser checks passed; providerRequests=0. Evidence: <workspace>/evidence/task-results/C01/run-03/foundation

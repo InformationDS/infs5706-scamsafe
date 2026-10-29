@@ -31,7 +31,7 @@ export function ModelSettings({ onSaved }: { onSaved: (summary: ModelSettingsSum
       const response = await fetch('/api/settings/model', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error?.message ?? 'Settings were not saved. Your previous configuration is retained.');
-      setForm(data); setSavedSummary(data); setApiKey(''); setClearApiKey(false); setMessage('Model settings saved. The next analysis will use this configuration. No model request was sent.'); onSaved(data);
+      setForm(data); setSavedSummary(data); setApiKey(''); setClearApiKey(false); setMessage('Model settings saved. The next analysis will use this configuration. No model request was sent.'); window.dispatchEvent(new Event('scamsafe:model-settings-saved')); onSaved(data);
     } catch (error) { setMessage((error as Error).message); }
     finally { setSaving(false); }
   }
