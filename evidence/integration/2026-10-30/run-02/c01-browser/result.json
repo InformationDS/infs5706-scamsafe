@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "Actual C01 module loads; mock proposals do not mutate case or call provider",
+    "Employee 200 and sourced 2000 proposal shown separately, with case unchanged",
+    "Failed save retains old config; successful retry clears password and invalidates old proposal without a provider call",
+    "Real transport via local fake provider; invalid output retains case and prior proposal, retry succeeds",
+    "Late response rejected after employee changes amount to 250",
+    "Saving new configuration during analysis prevents old response rendering",
+    "Case backup excludes configuration/credentials; explicit key removal works"
+  ],
+  "errors": [],
+  "providerCalls": 5,
+  "realExternalProviderCalls": 0,
+  "browser": "156.0.8078.4"
+}

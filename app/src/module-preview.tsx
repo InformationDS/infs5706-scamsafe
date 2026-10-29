@@ -4,6 +4,7 @@ import { makeRuntimeFixture, runtimeVariants } from '../../shared/runtime-fixtur
 import { RuntimeCaseRecordSchema, runtimeDependencies, runtimeReviewValid, ticketCurrent, type RuntimeCaseRecord } from '../../shared/runtime';
 import { saveRuntimeCase, loadRuntimeCase, listRuntimeCases, backupRuntimeCase, parseRuntimeBackup, assertImportAllowed } from './runtime-storage';
 import { ModelSettings } from './components/ModelSettings';
+import { evaluateGuidance } from '../../shared/guidance';
 
 const entries = import.meta.glob<ModuleEntry>('./modules/*/index.tsx');
 const components = Object.fromEntries(moduleNames.map(name => [name, entries[`./modules/${name}/index.tsx`] ? lazy(entries[`./modules/${name}/index.tsx`]) : null]));
@@ -16,7 +17,8 @@ function download(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = filename; a.click(); setTimeout(() => URL.revokeObjectURL(url), 30000);
 }
 
-export function ModulePreview({ name }: { name: ModuleName }) {
+export function ModulePreview({ name, integrated = false }: { name: ModuleName; integrated?: boolean }) {
+  const session = integrated ? 'integration' : name;
   const [record, setRecord] = useState(() => makeRuntimeFixture('T09', crypto.randomUUID()));
   const current = useRef(record); current.current = record;
   const [ready, setReady] = useState(false), [busy, setBusy] = useState(false);
@@ -30,15 +32,15 @@ export function ModulePreview({ name }: { name: ModuleName }) {
   const refresh = async () => setHistory(await listRuntimeCases());
   useEffect(() => {
     let active = true;
-    Promise.all([loadRuntimeCase(undefined, name), listRuntimeCases()]).then(([saved, all]) => {
+    Promise.all([loadRuntimeCase(undefined, session), listRuntimeCases()]).then(([saved, all]) => {
       if (!active) return;
       if (saved) { const restored = { ...saved, instanceId: crypto.randomUUID() }; current.current = restored; setRecord(restored); }
       setHistory(all); setMessage(saved ? 'Saved runtime case restored from this browser.' : 'No runtime history; unsaved MOCK input loaded.');
     }).catch(error => { if (active) setMessage(error.message); }).finally(() => { if (active) setReady(true); });
     return () => { active = false; };
-  }, [name]);
+  }, [session]);
   async function save(input = current.current) {
-    const saved = await saveRuntimeCase(input, name, failSave);
+    const saved = await saveRuntimeCase(input, session, failSave);
     if (JSON.stringify(current.current) === JSON.stringify(input)) apply(saved);
     await refresh(); return saved;
   }
@@ -60,7 +62,7 @@ export function ModulePreview({ name }: { name: ModuleName }) {
       return (await (await post('/api/runtime/analyze', { ...input, previewMock: input.previewMock ?? !context.modelRegistered })).json()) as AnalysisResponse;
     },
     save,
-    guidance: async input => ({ recommendations: structuredClone(input.recommendations), guidanceStatus: input.guidanceStatus, simulated: true }),
+    guidance: async input => { const result = evaluateGuidance(input); return { recommendations: result.recommendations, guidanceStatus: result.guidanceStatus, simulated: false }; },
     export: async (input, objectId, format) => {
       const context = await (await fetch('/api/runtime/context')).json();
       return (await post('/api/runtime/export', { case: input, objectId, format, previewMock: !context.outputRegistered, ...(failOutput ? { fault: 'failure' } : {}) })).blob();
@@ -81,6 +83,7 @@ export function ModulePreview({ name }: { name: ModuleName }) {
   const props: ModuleProps = { record, ports, onChange: next => apply({ ...next, saved: false }), onError: error => setMessage(`${error.code}: ${error.message}`), reset };
   // The public fixture harness stays explicitly simulated even after a real module is installed.
   const mockPorts: ModulePorts = { ...ports,
+    guidance: async input => ({ recommendations: structuredClone(input.recommendations), guidanceStatus: input.guidanceStatus, simulated: true }),
     export: async (input, objectId, format) => (await post('/api/runtime/export', { case: input, objectId, format, previewMock: true, ...(failOutput ? { fault: 'failure' } : {}) })).blob(),
   };
   async function importBackup(file: File) {
@@ -91,12 +94,12 @@ export function ModulePreview({ name }: { name: ModuleName }) {
     const existing = await loadRuntimeCase(next.caseId);
     assertImportAllowed(current.current);
     if (existing && !window.confirm(`Replace saved case ${next.caseId}? Cancel keeps both cases unchanged.`)) { setMessage('Import cancelled; cases retained.'); return; }
-    const saved = await saveRuntimeCase(next, name, failSave); requestId.current = ''; apply(saved); await refresh(); setMessage('Backup validated, saved and opened.');
+    const saved = await saveRuntimeCase(next, session, failSave); requestId.current = ''; apply(saved); await refresh(); setMessage('Backup validated, saved and opened.');
   }
   return <main className="module-preview">
-    <h1>{name} independent preview</h1>
-    <p>A01-20261017-01 · SYNTHETIC · MOCK ports · No actual employee review or external delivery</p>
-    <nav>{moduleNames.map(n => <a key={n} href={`/?module=${n}`}>{n}</a>)}</nav>
+    <h1>{integrated ? 'ScamSafe integration test workspace' : `${name} independent preview`}</h1>
+    <p>{integrated ? 'SYNTHETIC · C model proposals and D guidance share one runtime case. B intake and E review/output are not implemented. Fixed inputs are test fixtures; their reviews are simulations.' : 'A01-20261017-01 · SYNTHETIC · MOCK test controls · No actual employee review or external delivery'}</p>
+    <nav><a href="/">Integration workspace</a>{moduleNames.map(n => <a key={n} href={`/?module=${n}`}>{n}</a>)}<a href="/?view=foundation">Legacy foundation</a></nav>
     <p>Runtime schema v2 · {record.caseId} · case version {record.version} · {record.saved ? 'Saved' : 'Unsaved'} · {record.followUp.rounds} rounds / {record.followUp.totalQuestions} questions</p>
     <p role="status">{message}</p>
     <fieldset disabled={!ready || busy}>
@@ -113,7 +116,7 @@ export function ModulePreview({ name }: { name: ModuleName }) {
       <label>Saved case <select aria-label="Saved case" value={selectedCase} onChange={e => setSelectedCase(e.target.value)}><option value="">Select a case</option>{history.map(r => <option key={r.caseId}>{r.caseId}</option>)}</select></label>
       <button disabled={!selectedCase} onClick={() => guard(async () => {
         const next = await loadRuntimeCase(selectedCase); if (!next) throw new Error('Saved case not found.');
-        const opened = { ...next, instanceId: crypto.randomUUID() }; await saveRuntimeCase(opened, name, failSave); requestId.current = ''; apply(opened); setMessage('Saved case opened.');
+        const opened = { ...next, instanceId: crypto.randomUUID() }; await saveRuntimeCase(opened, session, failSave); requestId.current = ''; apply(opened); setMessage('Saved case opened.');
       })}>Open saved case</button>
       <button onClick={() => download(new Blob([backupRuntimeCase(record)], { type: 'application/json' }), `${record.caseId}_runtime.json`)}>Download runtime backup</button>
       <label>Import runtime backup <input type="file" accept=".json" onChange={e => { const file = e.target.files?.[0]; if (file) void run(() => importBackup(file)); e.target.value = ''; }} /></label>
@@ -123,13 +126,18 @@ export function ModulePreview({ name }: { name: ModuleName }) {
       <button disabled={busy} onClick={() => { const action = pending; setPending(null); void run(action); }}>Discard changes and continue</button>
       <button disabled={busy} onClick={() => { setPending(null); setMessage('Cancelled; current input retained.'); }}>Cancel</button>
     </section>}
-    <section className={`module-${name}`}>
+    {integrated ? <>
+      <section><h2>B · Intake unavailable</h2><p>Use the fixed synthetic inputs for testing. Free intake, conflict-aware proposal merging, first checking and follow-up counting await B01 implementation. C proposals do not update facts.</p></section>
+      {(['model', 'guidance'] as const).map(n => { const Installed = components[n]; return <section key={n} className={`module-${n}`}><Suspense fallback={<p>Loading {n}…</p>}>{Installed ? <Installed {...props} /> : <p>{n} module unavailable.</p>}</Suspense></section>; })}
+      <section><h2>E · Review and output unavailable</h2><p>Summary/draft generation, employee final review, preview, copy and production Markdown/PDF output await E01. Historical fixture bodies are not current reviewed deliverables.</p></section>
+      <details><summary>Diagnostic MOCK controls — foundation fixtures only</summary><MockModule {...props} ports={mockPorts} installed={false} name={name} analyze={analyze} message={setMessage} run={run} ready={ready} /></details>
+    </> : <section className={`module-${name}`}>
       {Component && <Suspense fallback={<p>Loading module…</p>}><Component {...props} /></Suspense>}
       <MockModule {...props} ports={mockPorts} installed={!!Component} name={name} analyze={analyze} message={setMessage} run={run} ready={ready} />
-    </section>
+    </section>}
     <details><summary>Fixed actions and expectations</summary><pre>{JSON.stringify(runtimeVariants.find(v => v.id === variant), null, 2)}</pre></details>
     <details><summary>Shared runtime record</summary><pre data-testid="runtime-record">{JSON.stringify(record, null, 2)}</pre></details>
-    {name === 'model' && <ModelSettings onSaved={() => { requestId.current = ''; revision.current++; setMessage('Settings saved; old analysis invalidated. No provider called.'); }} />}
+    {(integrated || name === 'model') && <ModelSettings onSaved={() => { requestId.current = ''; revision.current++; setMessage('Settings saved; old analysis invalidated. No provider called.'); }} />}
   </main>;
 }
 function MockModule({ record, ports, onChange, name, analyze, message, run, ready, installed }: ModuleProps & { name: ModuleName; analyze: (fault?: AnalysisRequest['fault']) => Promise<void>; message: (s: string) => void; run: (action: () => Promise<void>) => Promise<void>; ready: boolean; installed: boolean }) {

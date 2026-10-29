@@ -6,4 +6,5 @@ import { ModulePreview } from './module-preview';
 import { moduleNames, type ModuleName } from '../../shared/module-ports';
 
 const moduleName = new URLSearchParams(location.search).get('module');
-createRoot(document.getElementById('root')!).render(<React.StrictMode>{moduleNames.includes(moduleName as ModuleName) ? <ModulePreview name={moduleName as ModuleName} /> : <Workbench />}</React.StrictMode>);
+const legacy = new URLSearchParams(location.search).get('view') === 'foundation';
+createRoot(document.getElementById('root')!).render(<React.StrictMode>{moduleNames.includes(moduleName as ModuleName) ? <ModulePreview name={moduleName as ModuleName} /> : legacy ? <Workbench /> : <ModulePreview name="model" integrated />}</React.StrictMode>);
