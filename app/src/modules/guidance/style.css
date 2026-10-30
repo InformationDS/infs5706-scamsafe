@@ -1,0 +1,25 @@
+.module-guidance .guidance-workspace { background: #f5f8fb; border: 1px solid #d6e1e9; border-radius: 18px; padding: 26px; color: #203846; margin: 24px 0; }
+.module-guidance .guidance-workspace h2 { font-size: 28px; margin: 6px 0 12px; }
+.module-guidance .guidance-kicker { color: #326a75; font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+.module-guidance .guidance-context, .module-guidance .guidance-matches { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 20px 0; }
+.module-guidance .guidance-context label, .module-guidance .guidance-card label { display: grid; gap: 8px; margin: 10px 0; font-weight: 600; }
+.module-guidance .guidance-context input, .module-guidance .guidance-context select, .module-guidance .guidance-card textarea { box-sizing: border-box; width: 100%; background: white; color: #203846; padding: 10px; border: 1px solid #a8bdcc; border-radius: 8px; font: inherit; }
+.module-guidance .guidance-card textarea { min-height: 70px; resize: vertical; }
+.module-guidance .guidance-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+.module-guidance .guidance-actions button { background: white; color: #214d5b; border: 1px solid #a3bac4; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.module-guidance .guidance-actions .guidance-primary { background: #176571; color: white; border-color: #176571; }
+.module-guidance .guidance-actions button:focus-visible { outline: 3px solid #2788b3; outline-offset: 3px; }
+.module-guidance .guidance-actions button:disabled { opacity: .5; cursor: default; }
+.module-guidance .guidance-card, .module-guidance .guidance-matches article { border: 1px solid #cfdae2; background: white; border-radius: 12px; padding: 18px; margin: 14px 0; }
+.module-guidance .guidance-card-top { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 12px; }
+.module-guidance .guidance-card-top h3 { margin: 0; }
+.module-guidance .guidance-badge { color: #24596a; background: #e5f0f2; border-radius: 20px; padding: 5px 12px; font-size: 13px; }
+.module-guidance .guidance-step { font-weight: 650; font-size: 18px; }
+.module-guidance .guidance-warning { background: #fff4db; border-left: 4px solid #bc8a26; padding: 12px 16px; color: #624813; border-radius: 4px; }
+.module-guidance .guidance-inactive { border-style: dashed; background: #f4f5f6; }
+.module-guidance .guidance-feedback { min-height: 24px; color: #225c58; }
+.module-guidance .guidance-workspace details { margin: 14px 0; }
+.module-guidance .guidance-workspace summary { cursor: pointer; font-weight: 600; }
+.module-guidance .guidance-workspace li { margin: 8px 0; overflow-wrap: anywhere; }
+.module-guidance .guidance-workspace pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 320px; overflow: auto; font-size: 12px; }
+.module-guidance .guidance-footnote { color: #586b76; font-size: 13px; }

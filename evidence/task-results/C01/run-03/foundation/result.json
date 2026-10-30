@@ -1,0 +1,21 @@
+{
+  "module": "model",
+  "browser": "156.0.8078.4",
+  "checks": [
+    "independent URL starts with explicit MOCK substitute",
+    "save commits, refresh restores facts/history",
+    "delayed old 2000 proposal cannot overwrite current 250",
+    "new/list/open isolates cases; Cancel and failed Save and continue retain original; retry switches",
+    "timeout/invalid errors preserve input",
+    "injected guidance decisions port is callable without D",
+    "JSON backup, invalid rejection, unsaved guard, same-ID cancel/confirm restore",
+    "all partial/unknown/limits/stopped/rejection/context/edit/save-failure variants reset independently",
+    "no-guidance saved summary generates Markdown and PDF; PDF popup created (native renderer not observable headlessly; render files separately)",
+    "output failure retains body/reviews; same snapshot PDF retry succeeds",
+    "stale guidance blocks reviewed handover output"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": null,
+  "scope": "A01 MOCK foundation only"
+}

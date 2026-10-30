@@ -1,0 +1,74 @@
+{
+  "status": "passed",
+  "mode": "mock",
+  "platform": "win32",
+  "origin": "http://127.0.0.1:10841",
+  "contentApproval": "pending",
+  "checks": [
+    {
+      "name": "approved business reference loads independently of legacy mock review",
+      "result": "passed"
+    },
+    {
+      "name": "product API settings save and reload without key echo, blank preserves, no automatic provider calls",
+      "result": "passed"
+    },
+    {
+      "name": "closing settings discards unsaved edits and typed key",
+      "result": "passed"
+    },
+    {
+      "name": "saving settings invalidates an in-flight analysis response",
+      "result": "passed"
+    },
+    {
+      "name": "partial answer and count restore after browser refresh",
+      "result": "passed"
+    },
+    {
+      "name": "JSON backup, replace state and restore original partial case",
+      "result": "passed"
+    },
+    {
+      "name": "controlled model timeout and invalid output preserve page case",
+      "result": "passed"
+    },
+    {
+      "name": "delayed response ignored after correction",
+      "result": "passed"
+    },
+    {
+      "name": "save failure retains input, blocks output and permits retry",
+      "result": "passed"
+    },
+    {
+      "name": "stale review blocked; current summary can receive labelled training review",
+      "result": "passed"
+    },
+    {
+      "name": "copy, Markdown and PDF failure retain review and permit retry",
+      "result": "passed"
+    },
+    {
+      "name": "copy and Markdown equal exact selected snapshot; PDF generated",
+      "result": "passed"
+    },
+    {
+      "name": "separate Chinese, long URL, table-text and pagination PDF probe generated",
+      "result": "passed"
+    },
+    {
+      "name": "separate recipient teaching snapshots and rejected step retained as declined",
+      "result": "passed"
+    },
+    {
+      "name": "browser console has no uncaught page errors",
+      "result": "passed"
+    },
+    {
+      "name": "explicit API key removal works; settings remain separate from case backup",
+      "result": "passed"
+    }
+  ],
+  "pdfVisualInspection": "separate render required"
+}

@@ -1,0 +1,7 @@
+# Generated synthetic downloads stay local; selected results/logs are committed.
+*.pdf
+*.md
+*backup.json
+*.png
+!run-05/workspace/*.png
+pdf-open.json

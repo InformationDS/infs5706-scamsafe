@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "Root mounts actual C/D with explicit B/E gaps; C service registered, E absent",
+    "C corrected 200 vs proposal 2000 remains separate; no fake B merge or question counting",
+    "D matches all three guidelines; rejection survives recomputation without changing facts/counts or creating reviews; C sees shared change",
+    "Failed save retains unsaved decision; successful retry and refresh restore rejection/history in integration session"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": "TimeoutError: locator.selectOption: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Organisation / role', { exact: true })\u001b[22m\n",
+  "scope": "Actual C/D integration and A storage; B/E absent; no full workflow acceptance",
+  "browser": "156.0.8078.4"
+}
