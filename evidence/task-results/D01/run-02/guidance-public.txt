@@ -1,0 +1,23 @@
+
+> scamsafe-foundation@0.1.0 check:module
+> tsx tests/module-browser.ts guidance evidence/task-results/D01/run-02/guidance-public
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+browserType.launch: Executable doesn't exist at /Users/wenlinsheng/Library/Caches/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-mac-arm64/chrome-headless-shell
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+    at <anonymous> (/Users/wenlinsheng/Documents/ChatGPT/INFS5706 Team Work/tests/module-browser.ts:21:32) {
+  log: [],
+  name: 'Error'
+}
+
+Node.js v24.22.1

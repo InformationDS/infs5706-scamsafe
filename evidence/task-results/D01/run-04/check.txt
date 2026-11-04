@@ -1,0 +1,95 @@
+
+> scamsafe-foundation@0.1.0 check
+> tsc --noEmit && tsx --test tests/*.test.ts
+
+✔ approved baseline preserves fixed inputs, boundaries and conditional expected decisions (4.233333ms)
+✔ business schemas reject pending guidance and invalid approved references (1.816167ms)
+✔ modified content fails the approved artifact hash check (2.554584ms)
+✔ approved business API is distinct from legacy mock case approval (77.203042ms)
+✔ all fixed states validate without business approval or enabled roles (31.809333ms)
+✔ case entrypoints require complete handovers and a configured teaching recipient (27.204458ms)
+✔ single-case fact semantics reject wrong types and missing record targets while preserving false versus unknown (5.206459ms)
+✔ manual amount correction is preserved as model conflict and history survives (3.430125ms)
+✔ model cannot impersonate employee review or invent source references (2.04025ms)
+✔ equal analysis with changed request provenance does not change content or review (3.55075ms)
+✔ unknown amount is separate; independent transactions group by currency and state (0.989083ms)
+✔ partial answer retains round; stop and later answer update original without new count (0.687208ms)
+✔ rounds require display and save and enforce 3 per round, 3 rounds, 9 total (4.36125ms)
+✔ dependency invalidation is per object and old reviews remain as history (5.616917ms)
+✔ snapshot gate blocks unsaved, stale review, modified body and requires explicit simulated marker (18.40725ms)
+✔ old case and superseded same-version requests cannot overwrite facts or reviews (3.132833ms)
+✔ summary and handover contracts keep recipient and recommendation boundaries explicit (16.905042ms)
+✔ recommendation schema requires traceable simulated decisions without enabling business content (13.06725ms)
+✔ T09 matches approved facts and source context; generated decisions start pending (32.356333ms)
+✔ repeated matching and unchanged package reload do not create new versions or review requirements (11.26225ms)
+✔ reject REC-03, recalculate and reload preserve its ID, reason, history and all facts (24.428666ms)
+✔ rejection invalidates only outputs depending on the changed recommendation (37.4835ms)
+✔ employee editing retains original content and survives acceptance and recomputation (9.265208ms)
+✔ decision validation requires actor, reasons and current basis (3.126125ms)
+✔ conflict E09 omits only EX-G01 (0.582709ms)
+✔ not-applicable E09 omits only EX-G01 (0.440291ms)
+✔ completed debit, unapproved bank and missing required SMS are not filled from type labels (7.571334ms)
+✔ provider context and SMS clue sources are individually necessary (1.102625ms)
+✔ altered, unapproved, expired and duplicate definitions never authorise steps (2.445166ms)
+✔ restricted permissions and guidance changes retain facts, first-review history and question counts (15.519041ms)
+✔ a fact version update invalidates only recommendations depending on it (9.440667ms)
+✔ no-guidance has fixed message and summary-only eligibility without recipients or fabricated actions (1.38925ms)
+✔ rejected records remain historical during loss and restoration of guidance (17.903958ms)
+✔ newly supplied allowed-unknown fact requires recalculation before a stored action is current (2.621ms)
+✔ fixture decisions with a different stored basis must be recalculated before employee action (5.050041ms)
+✔ rejection and employee wording survive JSON restoration, both context cycles and recalculation (15.739834ms)
+✔ missing required fact, unknown permitted condition and one unavailable guideline remain local (9.419375ms)
+✖ D01 actual UI: decisions, edited wording, context cycles, restore and no-guidance (11333.219042ms)
+✔ settings DTO never returns keys; blank preserves and explicit clear removes credentials (3.657667ms)
+✔ settings validation rejects incomplete live mode, unsafe URLs, unknown fields and invalid headers (1.514ms)
+✔ local atomic persistence restores after restart and explicit cleared key overrides env fallback (4.675791ms)
+✔ failed persistence returns safe 503 and retains last settings in memory (73.381125ms)
+✔ settings routes enforce host/origin, strict input and never echo secrets (24.177583ms)
+✔ saved settings immediately route real adapter to local fake provider without external calls (62.195708ms)
+✔ C01 Mock T09 returns sourced proposals without invoking provider or mutating case (25.856917ms)
+✔ C01 corrected, unknown, partial, stopped and limit cases retain employee state and counters (11.006958ms)
+✔ C01 Mock refuses unrelated narratives and supports explicit fault checks (2.383125ms)
+✔ C01 live request isolates instructions/configuration, preserves Chinese narrative and uses source schema (50.554333ms)
+✔ C01 accepts new repeated records and additional fields on existing records (13.223167ms)
+✔ C01 rejects forged facts, identifiers, source references, review claims and extra nested properties (71.350083ms)
+✔ C01 rejects question counter bypass, answered proposals, duplicate targets and pending/unknown repeats (24.573042ms)
+✔ C01 provider failures are safe, bounded and retryable where appropriate (212.664084ms)
+✔ C01 HTTP route rejects results when API settings change during a request (32.178958ms)
+✔ C01 rejects a stale input ticket without a provider call (0.699458ms)
+✔ C01 free narrative can start with no extracted facts and retain distinct currencies/unknown/false (4.191667ms)
+✔ C01 actual browser: analysis, corrected values, errors, settings, stale responses and backups (3160.30525ms)
+✔ all independent runtime inputs validate, future answers do not leak into initial sources (58.535833ms)
+✔ correction and delayed identity cannot overwrite 200 or current 250 (8.925583ms)
+✔ partial, unknown, stopped and 3/9 counters remain distinct independent inputs (16.992458ms)
+✔ single edit, rejected recommendation and shared context invalidate only dependencies (20.35525ms)
+✔ mock review never becomes actual employee review; unsaved output is blocked (2.113042ms)
+✔ backup rejects version, missing references, duplicate targets; unsaved import guarded (5.812792ms)
+✔ runtime routes use injected registrations and validate identity; explicit mock never calls provider (77.534959ms)
+✔ health exposes configuration status, never credential values (43.664083ms)
+✔ mock analysis is deterministic and rejects arbitrary modified facts and client configuration (122.078084ms)
+✔ mock fault responses preserve supplied case and identify timeout/invalid separately (10.700708ms)
+✔ foreign origins and DNS rebinding hosts cannot call local API (13.042167ms)
+✔ Markdown export requires current saved simulated review (35.104167ms)
+✔ OpenAI-compatible adapter uses a local fake provider, validates output, and redacts external errors (356.943875ms)
+✔ missing live configuration makes no provider call (3.3895ms)
+ℹ tests 70
+ℹ suites 0
+ℹ pass 69
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12058.820417
+
+✖ failing tests:
+
+test at tests/guidance.test.ts:217:38
+✖ D01 actual UI: decisions, edited wording, context cycles, restore and no-guidance (11333.219042ms)
+  locator.fill: Timeout 10000ms exceeded.
+  Call log:
+  [2m  - waiting for getByRole('region', { name: 'Guidance and employee decisions' }).getByLabel('Edited step for REC-01', { exact: true })[22m
+
+      at TestContext.<anonymous> (/Users/wenlinsheng/Documents/ChatGPT/INFS5706 Team Work/tests/guidance.test.ts:265:76) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for getByRole('region', { name: 'Guidance and employee decisions' }).getByLabel('Edited step for REC-01', { exact: true })" ]
+  }

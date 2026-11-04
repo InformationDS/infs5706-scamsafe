@@ -1,0 +1,51 @@
+{
+  "base": "58038ac",
+  "original_branch": "main",
+  "review_branch": "codex/d01-integration-review",
+  "backup": "/Users/wenlinsheng/Documents/ChatGPT/INFS5706 Team Work/local/d01-pre-review-20261031",
+  "stash": "d01-preserved-before-integration-review-20261031",
+  "files": [
+    {
+      "file": "app/src/modules/guidance/index.tsx",
+      "preserved_sha256": "cd580eed9836e35478f786764aea1d2abb5088891694e38d06e6c3847479ebe3",
+      "integration_sha256": "cd580eed9836e35478f786764aea1d2abb5088891694e38d06e6c3847479ebe3",
+      "identical_to_integration": true
+    },
+    {
+      "file": "app/src/modules/guidance/style.css",
+      "preserved_sha256": "06ad9c1d95f0a2fb50c003dcc3e57d0bbbb60c176f6bc06859b52b231b86c72f",
+      "integration_sha256": "06ad9c1d95f0a2fb50c003dcc3e57d0bbbb60c176f6bc06859b52b231b86c72f",
+      "identical_to_integration": true
+    },
+    {
+      "file": "docs/project/tasks/D01.md",
+      "preserved_sha256": "4c6dfd7b78a4ec5e924a57808721bd7ceda257eaa006f5cc296f5b1275c59be6",
+      "integration_sha256": "48b929c973bf4946f5648576610d294ace23832559e8929afd673faa88c6ad19",
+      "identical_to_integration": false
+    },
+    {
+      "file": "evidence/task-results/D01/run-01/checks.json",
+      "preserved_sha256": "29ea4ebc4d481a28f80e1cac4f9c6b6657eb50f7fb325b991260bdeb372b2edf",
+      "integration_sha256": "29ea4ebc4d481a28f80e1cac4f9c6b6657eb50f7fb325b991260bdeb372b2edf",
+      "identical_to_integration": true
+    },
+    {
+      "file": "evidence/task-results/D01/run-01/manual-checks.md",
+      "preserved_sha256": "f119cba56a578080ee36389dda33f4a7eff9561d2e04593bc48edd14632f319b",
+      "integration_sha256": "f119cba56a578080ee36389dda33f4a7eff9561d2e04593bc48edd14632f319b",
+      "identical_to_integration": true
+    },
+    {
+      "file": "shared/guidance.ts",
+      "preserved_sha256": "d7fb27495ee7166a60cc4bbb97329b463b2dca4b605db97b2f1795694b9f6cce",
+      "integration_sha256": "d7fb27495ee7166a60cc4bbb97329b463b2dca4b605db97b2f1795694b9f6cce",
+      "identical_to_integration": true
+    },
+    {
+      "file": "tests/guidance.test.ts",
+      "preserved_sha256": "b8811a0c5395b5830a3842ee85d6c0088eb8ef484652a5d66d5f5c9403418b47",
+      "integration_sha256": "b8811a0c5395b5830a3842ee85d6c0088eb8ef484652a5d66d5f5c9403418b47",
+      "identical_to_integration": true
+    }
+  ]
+}

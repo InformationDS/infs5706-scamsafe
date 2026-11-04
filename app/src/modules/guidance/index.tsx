@@ -19,8 +19,8 @@ function DecisionCard({ rec, active, actor, commit }: { rec: Rec; active: boolea
     <details><summary>Sources, uncertainty and boundaries</summary><ul>{rec.limits.map((limit, i) => <li key={i}>{limit}</li>)}</ul></details>
     <fieldset disabled={!active}>
       <legend>Employee decision for {rec.id}</legend>
-      <label>Reason for {rec.id}<textarea value={reason} onChange={e => setReason(e.target.value)} placeholder="Required for modification or rejection" /></label>
-      <label>Edited step for {rec.id}<textarea value={step} onChange={e => setStep(e.target.value)} /></label>
+      <label>Reason for {rec.id}<textarea aria-label={`Reason for ${rec.id}`} value={reason} onChange={e => setReason(e.target.value)} placeholder="Required for modification or rejection" /></label>
+      <label>Edited step for {rec.id}<textarea aria-label={`Edited step for ${rec.id}`} value={step} onChange={e => setStep(e.target.value)} /></label>
       <div className="guidance-actions">
         <button onClick={() => commit(rec.id, 'accepted', actor, reason, step)}>Accept {rec.id}</button>
         <button onClick={() => commit(rec.id, 'modified', actor, reason, step)}>Modify {rec.id}</button>

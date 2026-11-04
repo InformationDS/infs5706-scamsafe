@@ -1,0 +1,8 @@
+{
+  "checks": [],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('region', { name: 'Guidance and employee decisions' }).getByLabel('Edited step for REC-01', { exact: true })\u001b[22m\n",
+  "browser": "156.0.8078.4",
+  "scope": "Actual D module and A storage; no E body generation or human/F acceptance"
+}

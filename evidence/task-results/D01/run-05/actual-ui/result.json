@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "integration: actual accept/modify/reject, original text and Employee edited, both context cycles, stable rejection/history, facts/reviews/counts, IndexedDB save/refresh",
+    "integration: fixed no-guidance message, no actionable recommendations or related recipient path; E summary remains unimplemented",
+    "independent: actual accept/modify/reject, original text and Employee edited, both context cycles, stable rejection/history, facts/reviews/counts, IndexedDB save/refresh",
+    "independent: fixed no-guidance message, no actionable recommendations or related recipient path; E summary remains unimplemented"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": null,
+  "browser": "156.0.8078.4",
+  "scope": "Actual D module and A storage; no E body generation or human/F acceptance"
+}
