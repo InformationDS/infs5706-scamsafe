@@ -1,0 +1,18 @@
+{
+  "module": "B01",
+  "baseline": "origin/integration/test-fixes@58038acc6176f4252c0e392732b3d7e6c7c56d27",
+  "entry": "http://127.0.0.1:5173/?module=intake",
+  "mode": "A01 runtime MOCK; providerCalls=0",
+  "checks": [
+    "T09 narrative retained as source and submitted through ports.analyze",
+    "E04/TX-01 corrected from 2000 to 200; reanalysis retained 200 and displayed 2000 as a sourced conflict candidate",
+    "old in-flight analysis response was rejected after E04/TX-01 changed to 250; 200 remains in history",
+    "employee suspected-type correction survived reanalysis and retained the conflicting type proposal",
+    "first fact check saved through A01 save port",
+    "simulated question-save failure left the case at 0 rounds / 0 questions",
+    "retry committed and displayed round 1 with 3 questions",
+    "answering Q1 only kept the case in round 1 with the counter at 3",
+    "marking Q2 unknown retained the explicit unknown state"
+  ],
+  "screenshot": "manual-flow.png"
+}
