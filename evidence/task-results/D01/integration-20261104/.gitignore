@@ -1,0 +1,6 @@
+# Generated synthetic downloads and images remain local.
+*.png
+*.pdf
+*.md
+*backup.json
+pdf-open.json

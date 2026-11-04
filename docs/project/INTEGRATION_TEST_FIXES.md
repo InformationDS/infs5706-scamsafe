@@ -75,3 +75,19 @@ C原交付的dependency-note记录body-parser告警，本次未更新依赖，�
 - npm.cmd run check:business通过。仓库／任务维护及diff检查结果见本批最终记录。
 
 run-01记录核对保存失败后重试按钮被禁用的回归失败，修复后run-02通过。B双入口实际验证保存成功状态、失败重试、问题计数、回答与结束保存、刷新恢复以及保存进行中更正250；页面异常0、外部提供商调用0。首次核对沿用原B实现的simulated=true训练事件。E最终审核输出、真实模型效果、F独立验收及跨系统验证待完成。
+
+## D更新整合与推送 · 2026-11-04
+
+按用户本次授权，先将B修复fcf547c及日志格式提交faff4e1推送至origin/integration/test-fixes，再以merge c228b70接入origin/codex/d01-integration-review@957831c。其中d5b21a3加强当前建议的事实／来源／指引依据比较，交接增加decisionReason及employeeEdited，957831c为成员交付记录；完整保留来源和原检查证据，合并无冲突。
+
+重新fetch及检索仓库PR后，C分支继续指向已有成果，E仍缺可发现交付。B五个模块文件已通过选择性接入及修复纳入，NewB01分支中的根目录文件、旧测试换行和重复内容继续留在来源分支，避免重复带入。当前复核范围为B/C/D及公共存储。
+
+本批实际命令与结果保存在evidence/integration/2026-11-04/run-01/。
+
+- npm.cmd run build通过，日志为build.txt。
+- B01_BROWSER=1、C01_BROWSER=1、D01_BROWSER=1的npm.cmd run check为77/77，0失败、0跳过，日志为check.txt。各模块B01_EVIDENCE_DIR／C01_EVIDENCE_DIR／D01_EVIDENCE_DIR分别使用evidence/task-results/对应任务/integration-20261104/run-01/browser，含B保存回归、C本地假提供商回归和D双入口实际页面。
+- node_modules/.bin/tsx.cmd tests/integration-browser.ts evidence/integration/2026-11-04/run-01/workspace通过7组，providerRequests=0。
+- npm.cmd run check:module -- guidance evidence/integration/2026-11-04/run-01/guidance-public通过11组公共Mock检查，providerRequests=0。
+- npm.cmd run check:business通过；仓库、任务定义及差异检查通过。
+
+E仍需根据当前D记录与guidanceHandoff消费员工决定和依赖，并实现正文更新及最终审核。公共ports.guidance目前返回evaluateGuidance匹配提议，E接线时须按D卡消费当前决定，避免将提议覆盖已拒绝或人工修改的记录。跨指引版本迁移、真实模型效果、人类／F验收及跨系统检查待完成。
