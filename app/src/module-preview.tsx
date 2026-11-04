@@ -40,8 +40,11 @@ export function ModulePreview({ name, integrated = false }: { name: ModuleName; 
     return () => { active = false; };
   }, [session]);
   async function save(input = current.current) {
+    const contentBeforeSave = JSON.stringify(current.current);
+    const submittedContent = JSON.stringify(input);
     const saved = await saveRuntimeCase(input, session, failSave);
-    if (JSON.stringify(current.current) === JSON.stringify(input)) apply(saved);
+    const currentContent = JSON.stringify(current.current);
+    if (currentContent === contentBeforeSave || currentContent === submittedContent) apply(saved);
     await refresh(); return saved;
   }
   async function run(action: () => Promise<void>) {
@@ -98,7 +101,7 @@ export function ModulePreview({ name, integrated = false }: { name: ModuleName; 
   }
   return <main className="module-preview">
     <h1>{integrated ? 'ScamSafe integration test workspace' : `${name} independent preview`}</h1>
-    <p>{integrated ? 'SYNTHETIC · C model proposals and D guidance share one runtime case. B intake and E review/output are not implemented. Fixed inputs are test fixtures; their reviews are simulations.' : 'A01-20261017-01 · SYNTHETIC · MOCK test controls · No actual employee review or external delivery'}</p>
+    <p>{integrated ? 'SYNTHETIC · B intake, C model proposals and D guidance share one runtime case. E review/output is awaiting implementation. Fixed inputs and first reviews use training simulations.' : 'A01-20261017-01 · SYNTHETIC · MOCK test controls · No actual employee review or external delivery'}</p>
     <nav><a href="/">Integration workspace</a>{moduleNames.map(n => <a key={n} href={`/?module=${n}`}>{n}</a>)}<a href="/?view=foundation">Legacy foundation</a></nav>
     <p>Runtime schema v2 · {record.caseId} · case version {record.version} · {record.saved ? 'Saved' : 'Unsaved'} · {record.followUp.rounds} rounds / {record.followUp.totalQuestions} questions</p>
     <p role="status">{message}</p>
@@ -127,8 +130,7 @@ export function ModulePreview({ name, integrated = false }: { name: ModuleName; 
       <button disabled={busy} onClick={() => { setPending(null); setMessage('Cancelled; current input retained.'); }}>Cancel</button>
     </section>}
     {integrated ? <>
-      <section><h2>B · Intake unavailable</h2><p>Use the fixed synthetic inputs for testing. Free intake, conflict-aware proposal merging, first checking and follow-up counting await B01 implementation. C proposals do not update facts.</p></section>
-      {(['model', 'guidance'] as const).map(n => { const Installed = components[n]; return <section key={n} className={`module-${n}`}><Suspense fallback={<p>Loading {n}…</p>}>{Installed ? <Installed {...props} /> : <p>{n} module unavailable.</p>}</Suspense></section>; })}
+      {(['intake', 'model', 'guidance'] as const).map(n => { const Installed = components[n]; return <section key={n} className={`module-${n}`}><Suspense fallback={<p>Loading {n}…</p>}>{ready && Installed ? <Installed {...props} /> : <p>Loading {n} runtime…</p>}</Suspense></section>; })}
       <section><h2>E · Review and output unavailable</h2><p>Summary/draft generation, employee final review, preview, copy and production Markdown/PDF output await E01. Historical fixture bodies are not current reviewed deliverables.</p></section>
       <details><summary>Diagnostic MOCK controls — foundation fixtures only</summary><MockModule {...props} ports={mockPorts} installed={false} name={name} analyze={analyze} message={setMessage} run={run} ready={ready} /></details>
     </> : <section className={`module-${name}`}>

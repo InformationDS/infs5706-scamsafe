@@ -1,0 +1,7 @@
+# Keep generated synthetic downloads local; retain selected regression evidence.
+*.pdf
+*.md
+*backup.json
+*.png
+!run-02/browser/*.png
+pdf-open.json

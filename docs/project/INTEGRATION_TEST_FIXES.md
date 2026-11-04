@@ -1,5 +1,7 @@
 # 测试集成记录 · 2026-10-30（Sydney）
 
+后续B接入及修复结果见文末2026-11-04批次；以下2026-10-30记录保留原检查范围。
+
 本地分支 `integration/test-fixes`；工作目录 `D:\BaiduSyncdisk\UNSW\INFS5706\GroupAssignment-integration`。本次是可用部分集成，不是A02完整验收、F独立验收或发布。
 
 ## 来源与接收结论
@@ -57,3 +59,19 @@ C原交付的dependency-note记录body-parser告警，本次未更新依赖，�
 在上述worktree目录执行 `npm.cmd run dev`，打开 http://127.0.0.1:5173/；或 `npm.cmd run build` 后 `npm.cmd start`，打开 http://127.0.0.1:4310/。本机依赖已就绪；新电脑按RUNBOOK执行npm ci及npm run browser:install。默认Mock，不需密钥。真实模型仅由人类在产品内保存设置后主动点击分析。
 
 选corrected并Reset fixed input，按未保存提示确认后，在C点Analyze current case；D点Recalculate guidance，填写合成员工标识并接受／修改／拒绝。Save runtime case后刷新验证恢复。选no-guidance并重置可检查无指引边界；诊断MOCK输出只用于底座检查。重跑浏览器命令时使用新的证据目录，保留原失败批次。
+
+## B接入与保存修复 · 2026-11-04
+
+来源为origin/NewB01@83fc6a234b2579ee15efc35602ebe7f5c282db54。将根目录intake.ts放到shared/intake.ts，将index.tsx、useIntake.ts、style.css放到app/src/modules/intake/，提取tests/intake.test.ts。保留成员实际实现；选择性接入5个文件，来源分支的重复测试、根目录证据及旧公共代码继续留在原分支。
+
+修复中，B保存成功后由宿主应用已提交状态，去除再次onChange(saved)带来的未保存标记。宿主对未提前展示的待保存状态（如新问题轮次）支持事务提交后应用，并比较保存前／提交内容以保护较新编辑。保存失败保留输入并显示失败，首次核对允许重试；回答、结束及来源保存的成功提示仅在当前案件确已保存时显示。问题保存失败计数保持0，重试成功后计3，迟到保存保留当前250及未保存状态。根页面与/?module=intake均挂载成员模块。
+
+实际验证使用Windows Node v24.15.0与Chromium 156.0.8078.4，证据位于evidence/task-results/B01/fix-20261104/。
+
+- npm.cmd run build通过。
+- B01_BROWSER=1、C01_BROWSER=1及各自新证据目录环境下的npm.cmd run check通过72/72，0失败、0跳过；含6项B原单测及1项B双入口浏览器回归。
+- npm.cmd run check:module -- intake evidence/task-results/B01/fix-20261104/run-02/public-intake通过11组公共Mock检查。
+- node_modules/.bin/tsx.cmd tests/integration-browser.ts evidence/task-results/B01/fix-20261104/run-02/integration通过7组。
+- npm.cmd run check:business通过。仓库／任务维护及diff检查结果见本批最终记录。
+
+run-01记录核对保存失败后重试按钮被禁用的回归失败，修复后run-02通过。B双入口实际验证保存成功状态、失败重试、问题计数、回答与结束保存、刷新恢复以及保存进行中更正250；页面异常0、外部提供商调用0。首次核对沿用原B实现的simulated=true训练事件。E最终审核输出、真实模型效果、F独立验收及跨系统验证待完成。

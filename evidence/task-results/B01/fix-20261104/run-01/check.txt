@@ -1,0 +1,111 @@
+
+> scamsafe-foundation@0.1.0 check
+> tsc --noEmit && tsx --test tests/*.test.ts
+
+✔ approved baseline preserves fixed inputs, boundaries and conditional expected decisions (11.2224ms)
+✔ business schemas reject pending guidance and invalid approved references (5.2773ms)
+✔ modified content fails the approved artifact hash check (25.6094ms)
+✔ approved business API is distinct from legacy mock case approval (52.7684ms)
+✔ all fixed states validate without business approval or enabled roles (52.7649ms)
+✔ case entrypoints require complete handovers and a configured teaching recipient (8.9595ms)
+✔ single-case fact semantics reject wrong types and missing record targets while preserving false versus unknown (6.5245ms)
+✔ manual amount correction is preserved as model conflict and history survives (1.8591ms)
+✔ model cannot impersonate employee review or invent source references (2.3568ms)
+✔ equal analysis with changed request provenance does not change content or review (3.2578ms)
+✔ unknown amount is separate; independent transactions group by currency and state (2.5557ms)
+✔ partial answer retains round; stop and later answer update original without new count (3.9888ms)
+✔ rounds require display and save and enforce 3 per round, 3 rounds, 9 total (8.8187ms)
+✔ dependency invalidation is per object and old reviews remain as history (5.7764ms)
+✔ snapshot gate blocks unsaved, stale review, modified body and requires explicit simulated marker (10.8549ms)
+✔ old case and superseded same-version requests cannot overwrite facts or reviews (3.184ms)
+✔ summary and handover contracts keep recipient and recommendation boundaries explicit (6.1562ms)
+✔ recommendation schema requires traceable simulated decisions without enabling business content (9.3079ms)
+✔ T09 matches approved facts and source context; generated decisions start pending (33.1592ms)
+✔ repeated matching and unchanged package reload do not create new versions or review requirements (13.1174ms)
+✔ reject REC-03, recalculate and reload preserve its ID, reason, history and all facts (26.4046ms)
+✔ rejection invalidates only outputs depending on the changed recommendation (20.1106ms)
+✔ employee editing retains original content and survives acceptance and recomputation (11.0009ms)
+✔ decision validation requires actor, reasons and current basis (6.0388ms)
+✔ conflict E09 omits only EX-G01 (1.5137ms)
+✔ not-applicable E09 omits only EX-G01 (1.363ms)
+✔ completed debit, unapproved bank and missing required SMS are not filled from type labels (4.2592ms)
+✔ provider context and SMS clue sources are individually necessary (2.8428ms)
+✔ altered, unapproved, expired and duplicate definitions never authorise steps (5.1563ms)
+✔ restricted permissions and guidance changes retain facts, first-review history and question counts (20.9917ms)
+✔ a fact version update invalidates only recommendations depending on it (7.65ms)
+✔ no-guidance has fixed message and summary-only eligibility without recipients or fabricated actions (2.6387ms)
+✔ rejected records remain historical during loss and restoration of guidance (9.2006ms)
+✔ re-reading the source retains an employee correction and records a conflicting candidate (16.4931ms)
+✔ transaction targets remain keyed by field and record; unknown stays null (0.3069ms)
+✔ a proposal started before a 250 correction is stale when its delayed response returns (1.9683ms)
+✔ employee type correction survives later analysis and preserves the conflicting type proposal (11.0549ms)
+✔ follow-up questions require first check, remain target-specific, and obey the 3/9 cap (8.4075ms)
+✔ ending follow-up skips pending questions and accepts a later answer without reopening or recounting (4.9687ms)
+✖ B01 saved state, failed saves, question counts and newer edits survive the actual host (13743.3431ms)
+✔ settings DTO never returns keys; blank preserves and explicit clear removes credentials (3.859ms)
+✔ settings validation rejects incomplete live mode, unsafe URLs, unknown fields and invalid headers (1.8955ms)
+✔ local atomic persistence restores after restart and explicit cleared key overrides env fallback (25.5322ms)
+✔ failed persistence returns safe 503 and retains last settings in memory (88.6082ms)
+✔ settings routes enforce host/origin, strict input and never echo secrets (44.2919ms)
+✔ saved settings immediately route real adapter to local fake provider without external calls (106.3985ms)
+✔ C01 Mock T09 returns sourced proposals without invoking provider or mutating case (22.6101ms)
+✔ C01 corrected, unknown, partial, stopped and limit cases retain employee state and counters (30.2283ms)
+✔ C01 Mock refuses unrelated narratives and supports explicit fault checks (5.4108ms)
+✔ C01 live request isolates instructions/configuration, preserves Chinese narrative and uses source schema (30.1721ms)
+✔ C01 accepts new repeated records and additional fields on existing records (9.3776ms)
+✔ C01 rejects forged facts, identifiers, source references, review claims and extra nested properties (108.7763ms)
+✔ C01 rejects question counter bypass, answered proposals, duplicate targets and pending/unknown repeats (68.951ms)
+✔ C01 provider failures are safe, bounded and retryable where appropriate (242.0226ms)
+✔ C01 HTTP route rejects results when API settings change during a request (76.0527ms)
+✔ C01 rejects a stale input ticket without a provider call (1.564ms)
+✔ C01 free narrative can start with no extracted facts and retain distinct currencies/unknown/false (8.7048ms)
+✔ C01 actual browser: analysis, corrected values, errors, settings, stale responses and backups (5416.9331ms)
+✔ all independent runtime inputs validate, future answers do not leak into initial sources (104.3482ms)
+✔ correction and delayed identity cannot overwrite 200 or current 250 (6.2323ms)
+✔ partial, unknown, stopped and 3/9 counters remain distinct independent inputs (11.8353ms)
+✔ single edit, rejected recommendation and shared context invalidate only dependencies (19.5627ms)
+✔ mock review never becomes actual employee review; unsaved output is blocked (10.8314ms)
+✔ backup rejects version, missing references, duplicate targets; unsaved import guarded (17.243ms)
+✔ runtime routes use injected registrations and validate identity; explicit mock never calls provider (145.1137ms)
+✔ health exposes configuration status, never credential values (50.3861ms)
+✔ mock analysis is deterministic and rejects arbitrary modified facts and client configuration (157.7903ms)
+✔ mock fault responses preserve supplied case and identify timeout/invalid separately (15.6251ms)
+✔ foreign origins and DNS rebinding hosts cannot call local API (12.6421ms)
+✔ Markdown export requires current saved simulated review (48.6699ms)
+✔ OpenAI-compatible adapter uses a local fake provider, validates output, and redacts external errors (380.4324ms)
+✔ missing live configuration makes no provider call (11.7336ms)
+ℹ tests 72
+ℹ suites 0
+ℹ pass 71
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14971.7971
+
+✖ failing tests:
+
+test at tests\intake.test.ts:81:38
+✖ B01 saved state, failed saves, question counts and newer edits survive the actual host (13743.3431ms)
+  locator.click: Timeout 10000ms exceeded.
+  Call log:
+  [2m  - waiting for getByRole('button', { name: 'Confirm changes to checked facts', exact: true })[22m
+  [2m    - locator resolved to <button disabled type="button" class="primary">Confirm changes to checked facts</button>[22m
+  [2m  - attempting click action[22m
+  [2m    2 × waiting for element to be visible, enabled and stable[22m
+  [2m      - element is not enabled[22m
+  [2m    - retrying click action[22m
+  [2m    - waiting 20ms[22m
+  [2m    2 × waiting for element to be visible, enabled and stable[22m
+  [2m      - element is not enabled[22m
+  [2m    - retrying click action[22m
+  [2m      - waiting 100ms[22m
+  [2m    19 × waiting for element to be visible, enabled and stable[22m
+  [2m       - element is not enabled[22m
+  [2m     - retrying click action[22m
+  [2m       - waiting 500ms[22m
+  
+      at TestContext.<anonymous> (D:\BaiduSyncdisk\UNSW\INFS5706\GroupAssignment-integration\tests\intake.test.ts:133:56) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for getByRole('button', { name: 'Confirm changes to checked facts', exact: true })", '    - locator resolved to <button disabled type="button" class="primary">Confirm changes to checked facts</button>', '  - attempting click action', '    2 × waiting for element to be visible, enabled and stable', '      - element is not enabled', '    - retrying click action', '    - waiting 20ms', '    2 × waiting for element to be visible, enabled and stable', '      - element is not enabled', '    - retrying click action', '      - waiting 100ms', '    19 × waiting for element to be visible, enabled and stable', '       - element is not enabled', '     - retrying click action', '       - waiting 500ms' ]
+  }

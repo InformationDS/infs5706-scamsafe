@@ -39,12 +39,12 @@ let failure: string | null = null;
 try {
   await page.goto(`http://127.0.0.1:${address.port}/`);
   await status('No runtime history'); await model.waitFor(); await guidance.waitFor();
-  await page.getByRole('heading', { name: 'B · Intake unavailable' }).waitFor();
+  await page.getByRole('region', { name: 'B01 case intake and follow-up' }).waitFor();
   await page.getByRole('heading', { name: 'E · Review and output unavailable' }).waitFor();
   const context = await page.request.get(`http://127.0.0.1:${address.port}/api/runtime/context`);
   const registration = await context.json();
   assert.equal(registration.modelRegistered, true); assert.equal(registration.outputRegistered, false);
-  checks.push('Root mounts actual C/D with explicit B/E gaps; C service registered, E absent');
+  checks.push('Root mounts actual B/C/D with explicit E gap; C service registered, E absent');
   await reset('corrected'); const original = await state();
   await model.getByRole('button', { name: 'Analyze current case', exact: true }).click();
   await model.getByRole('status').filter({ hasText: 'Analysis ready' }).waitFor();
@@ -106,7 +106,7 @@ try {
 } catch (error) { failure = String(error); await page.screenshot({ path: resolve(directory, 'failure.png'), fullPage: true }); }
 finally {
   await writeFile(resolve(directory, 'result.json'), JSON.stringify({ checks, errors, providerRequests, failure,
-    scope: 'Actual C/D integration and A storage; B/E absent; no full workflow acceptance', browser: browser.version() }, null, 2));
+    scope: 'B mounted; C/D integration and A storage; E absent', browser: browser.version() }, null, 2));
   await browser.close(); server.closeAllConnections(); await new Promise<void>(resolve => server.close(() => resolve()));
 }
 if (failure) throw new Error(failure);
