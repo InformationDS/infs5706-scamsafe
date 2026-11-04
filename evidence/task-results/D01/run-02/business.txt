@@ -1,0 +1,24 @@
+
+> scamsafe-foundation@0.1.0 check:business
+> tsx scripts/maintenance/check-business.ts
+
+node:net:2368
+      const error = new UVExceptionWithHostPort(rval, 'listen', address, port);
+                    ^
+
+Error: listen EPERM: operation not permitted /var/folders/8x/sqfqx7yx1lqcsg15qvcg29sh0000gn/T/tsx-501/7999.pipe
+    at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+    at listenInCluster (node:net:2499:12)
+    at Server.listen (node:net:2641:5)
+    at file:///Users/wenlinsheng/Documents/ChatGPT/INFS5706%20Team%20Work/node_modules/tsx/dist/cli.mjs:53:32174
+    at new Promise (<anonymous>)
+    at createIpcServer (file:///Users/wenlinsheng/Documents/ChatGPT/INFS5706%20Team%20Work/node_modules/tsx/dist/cli.mjs:53:32152)
+    at async file:///Users/wenlinsheng/Documents/ChatGPT/INFS5706%20Team%20Work/node_modules/tsx/dist/cli.mjs:55:542 {
+  code: 'EPERM',
+  errno: -1,
+  syscall: 'listen',
+  address: '/var/folders/8x/sqfqx7yx1lqcsg15qvcg29sh0000gn/T/tsx-501/7999.pipe',
+  port: -1
+}
+
+Node.js v24.22.1

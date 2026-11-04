@@ -1,0 +1,7 @@
+{
+  "checks": [],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": "Error: browserType.launch: Executable doesn't exist at /Users/wenlinsheng/Library/Caches/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-mac-arm64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+  "scope": "Actual D module and A storage; no E body generation or human/F acceptance"
+}

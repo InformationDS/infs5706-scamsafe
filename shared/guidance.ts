@@ -145,8 +145,17 @@ export function recommendationEdited(rec: Rec): boolean {
 }
 
 export function activeRecommendations(record: RuntimeCaseRecord): Rec[] {
-  const matched = new Set(evaluateGuidance(record).recommendations.map(r => r.id));
-  return record.recommendations.filter(r => matched.has(r.id) && dependenciesValid(record, r.dependencies));
+  const proposals = new Map(evaluateGuidance(record).recommendations.map(r => [r.id, r]));
+  // Version keys alone cannot detect a previously absent optional fact or an
+  // injected fixture with an incomplete basis. Compare the actual generated
+  // basis too, while preserving employee wording and decision history.
+  const basis = (r: Rec) => ({ responsibleRole: r.responsibleRole, priority: r.priority,
+    dependencies: r.dependencies, factRefs: r.factRefs, guidelineRefs: r.guidelineRefs, limits: r.limits });
+  return record.recommendations.filter(r => {
+    const proposal = proposals.get(r.id);
+    return proposal && dependenciesValid(record, r.dependencies) && canonical(basis(r)) === canonical(basis(proposal)) &&
+      (recommendationEdited(r) || r.step === proposal.step);
+  });
 }
 export function actionableRecommendations(record: RuntimeCaseRecord): Rec[] {
   return activeRecommendations(record).filter(r => r.decision !== 'rejected');
@@ -174,7 +183,8 @@ export function guidanceHandoff(record: RuntimeCaseRecord) {
   const actionable = new Set(actionableRecommendations(record).map(r => r.id));
   return {
     summaryOnly: evaluateGuidance(record).summaryOnly,
-    recommendations: record.recommendations.map(r => ({ id: r.id, version: r.version, decision: r.decision, dependencies: r.dependencies, active: active.has(r.id), includeAction: actionable.has(r.id) })),
+    recommendations: record.recommendations.map(r => ({ id: r.id, version: r.version, decision: r.decision, decisionReason: r.decisionReason,
+      employeeEdited: recommendationEdited(r), dependencies: r.dependencies, active: active.has(r.id), includeAction: actionable.has(r.id) })),
     outputsToRefresh: record.outputs.filter(o => !dependenciesValid(record, o.dependencies) || (o.recommendationIds ?? []).some(id => !actionable.has(id)) || (evaluateGuidance(record).summaryOnly && o.kind === 'handover')).map(o => o.id),
   };
 }

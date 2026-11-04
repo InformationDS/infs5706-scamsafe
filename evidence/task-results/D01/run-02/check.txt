@@ -1,0 +1,127 @@
+
+> scamsafe-foundation@0.1.0 check
+> tsc --noEmit && tsx --test tests/*.test.ts
+
+✔ approved baseline preserves fixed inputs, boundaries and conditional expected decisions (5.0585ms)
+✔ business schemas reject pending guidance and invalid approved references (1.662792ms)
+✔ modified content fails the approved artifact hash check (2.762625ms)
+✔ approved business API is distinct from legacy mock case approval (72.338333ms)
+✔ all fixed states validate without business approval or enabled roles (33.776292ms)
+✔ case entrypoints require complete handovers and a configured teaching recipient (5.468833ms)
+✔ single-case fact semantics reject wrong types and missing record targets while preserving false versus unknown (2.401417ms)
+✔ manual amount correction is preserved as model conflict and history survives (0.811625ms)
+✔ model cannot impersonate employee review or invent source references (11.240792ms)
+✔ equal analysis with changed request provenance does not change content or review (1.062083ms)
+✔ unknown amount is separate; independent transactions group by currency and state (0.677375ms)
+✔ partial answer retains round; stop and later answer update original without new count (0.637417ms)
+✔ rounds require display and save and enforce 3 per round, 3 rounds, 9 total (13.373334ms)
+✔ dependency invalidation is per object and old reviews remain as history (5.956709ms)
+✔ snapshot gate blocks unsaved, stale review, modified body and requires explicit simulated marker (4.19625ms)
+✔ old case and superseded same-version requests cannot overwrite facts or reviews (1.008208ms)
+✔ summary and handover contracts keep recipient and recommendation boundaries explicit (8.484375ms)
+✔ recommendation schema requires traceable simulated decisions without enabling business content (22.962542ms)
+✔ T09 matches approved facts and source context; generated decisions start pending (88.387917ms)
+✔ repeated matching and unchanged package reload do not create new versions or review requirements (6.681375ms)
+✔ reject REC-03, recalculate and reload preserve its ID, reason, history and all facts (10.75675ms)
+✔ rejection invalidates only outputs depending on the changed recommendation (42.38525ms)
+✔ employee editing retains original content and survives acceptance and recomputation (3.420625ms)
+✔ decision validation requires actor, reasons and current basis (1.693042ms)
+✔ conflict E09 omits only EX-G01 (0.546959ms)
+✔ not-applicable E09 omits only EX-G01 (0.4795ms)
+✔ completed debit, unapproved bank and missing required SMS are not filled from type labels (1.536917ms)
+✔ provider context and SMS clue sources are individually necessary (3.448ms)
+✔ altered, unapproved, expired and duplicate definitions never authorise steps (19.876125ms)
+✔ restricted permissions and guidance changes retain facts, first-review history and question counts (22.72075ms)
+✔ a fact version update invalidates only recommendations depending on it (2.345667ms)
+✔ no-guidance has fixed message and summary-only eligibility without recipients or fabricated actions (11.926417ms)
+✔ rejected records remain historical during loss and restoration of guidance (26.583667ms)
+✔ newly supplied allowed-unknown fact requires recalculation before a stored action is current (35.899875ms)
+✔ fixture decisions with a different stored basis must be recalculated before employee action (13.974583ms)
+✔ rejection and employee wording survive JSON restoration, both context cycles and recalculation (8.013666ms)
+✔ missing required fact, unknown permitted condition and one unavailable guideline remain local (9.204583ms)
+✖ D01 actual UI: decisions, edited wording, context cycles, restore and no-guidance (595.678708ms)
+✔ settings DTO never returns keys; blank preserves and explicit clear removes credentials (2.072209ms)
+✔ settings validation rejects incomplete live mode, unsafe URLs, unknown fields and invalid headers (0.669375ms)
+✔ local atomic persistence restores after restart and explicit cleared key overrides env fallback (1.692958ms)
+✔ failed persistence returns safe 503 and retains last settings in memory (62.625958ms)
+✔ settings routes enforce host/origin, strict input and never echo secrets (32.3295ms)
+✔ saved settings immediately route real adapter to local fake provider without external calls (98.610959ms)
+✔ C01 Mock T09 returns sourced proposals without invoking provider or mutating case (16.304125ms)
+✔ C01 corrected, unknown, partial, stopped and limit cases retain employee state and counters (20.120041ms)
+✔ C01 Mock refuses unrelated narratives and supports explicit fault checks (2.41875ms)
+✔ C01 live request isolates instructions/configuration, preserves Chinese narrative and uses source schema (42.75325ms)
+✔ C01 accepts new repeated records and additional fields on existing records (4.622ms)
+✔ C01 rejects forged facts, identifiers, source references, review claims and extra nested properties (73.229417ms)
+✔ C01 rejects question counter bypass, answered proposals, duplicate targets and pending/unknown repeats (28.566125ms)
+✔ C01 provider failures are safe, bounded and retryable where appropriate (213.244708ms)
+✔ C01 HTTP route rejects results when API settings change during a request (47.086292ms)
+✔ C01 rejects a stale input ticket without a provider call (0.800917ms)
+✔ C01 free narrative can start with no extracted facts and retain distinct currencies/unknown/false (4.835084ms)
+✖ C01 actual browser: analysis, corrected values, errors, settings, stale responses and backups (11.690458ms)
+
+Interrupted while running:
+
+⚠ tests/model.test.ts (tests/model.test.ts:1:1)
+⚠ tests/runtime-foundation.test.ts (tests/runtime-foundation.test.ts:1:1)
+⚠ tests/server.test.ts (tests/server.test.ts:1:1)
+✖ tests/model.test.ts (90707.478458ms)
+✔ all independent runtime inputs validate, future answers do not leak into initial sources (107.42575ms)
+✔ correction and delayed identity cannot overwrite 200 or current 250 (11.512375ms)
+✔ partial, unknown, stopped and 3/9 counters remain distinct independent inputs (10.221208ms)
+✔ single edit, rejected recommendation and shared context invalidate only dependencies (19.245958ms)
+✔ mock review never becomes actual employee review; unsaved output is blocked (2.85525ms)
+✔ backup rejects version, missing references, duplicate targets; unsaved import guarded (16.576584ms)
+✔ runtime routes use injected registrations and validate identity; explicit mock never calls provider (88.604583ms)
+✔ health exposes configuration status, never credential values (87.2815ms)
+✔ mock analysis is deterministic and rejects arbitrary modified facts and client configuration (90.919ms)
+✔ mock fault responses preserve supplied case and identify timeout/invalid separately (5.879458ms)
+✔ foreign origins and DNS rebinding hosts cannot call local API (9.808875ms)
+✔ Markdown export requires current saved simulated review (23.986917ms)
+✔ OpenAI-compatible adapter uses a local fake provider, validates output, and redacts external errors (347.528667ms)
+✔ missing live configuration makes no provider call (3.353834ms)
+ℹ tests 71
+ℹ suites 0
+ℹ pass 68
+ℹ fail 2
+ℹ cancelled 1
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 90716.3935
+
+✖ failing tests:
+
+test at tests/guidance.test.ts:217:38
+✖ D01 actual UI: decisions, edited wording, context cycles, restore and no-guidance (595.678708ms)
+  browserType.launch: Executable doesn't exist at /Users/wenlinsheng/Library/Caches/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-mac-arm64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/Users/wenlinsheng/Documents/ChatGPT/INFS5706 Team Work/tests/guidance.test.ts:240:30) {
+    name: 'Error',
+    log: []
+  }
+
+test at tests/model.test.ts:187:1
+✖ C01 actual browser: analysis, corrected values, errors, settings, stale responses and backups (11.690458ms)
+  browserType.launch: Executable doesn't exist at /Users/wenlinsheng/Library/Caches/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-mac-arm64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/Users/wenlinsheng/Documents/ChatGPT/INFS5706 Team Work/tests/model.test.ts:208:34) {
+    name: 'Error',
+    log: []
+  }
+
+test at tests/model.test.ts:1:1
+✖ tests/model.test.ts (90707.478458ms)
+  'Promise resolution is still pending but the event loop has already resolved'

@@ -1,0 +1,27 @@
+✔ T09 matches approved facts and source context; generated decisions start pending (15.149791ms)
+✔ repeated matching and unchanged package reload do not create new versions or review requirements (4.241583ms)
+✔ reject REC-03, recalculate and reload preserve its ID, reason, history and all facts (7.748167ms)
+✔ rejection invalidates only outputs depending on the changed recommendation (9.801958ms)
+✔ employee editing retains original content and survives acceptance and recomputation (3.597542ms)
+✔ decision validation requires actor, reasons and current basis (1.759125ms)
+✔ conflict E09 omits only EX-G01 (0.456834ms)
+✔ not-applicable E09 omits only EX-G01 (0.761667ms)
+✔ completed debit, unapproved bank and missing required SMS are not filled from type labels (1.337958ms)
+✔ provider context and SMS clue sources are individually necessary (0.804666ms)
+✔ altered, unapproved, expired and duplicate definitions never authorise steps (2.175ms)
+✔ restricted permissions and guidance changes retain facts, first-review history and question counts (6.890083ms)
+✔ a fact version update invalidates only recommendations depending on it (2.478459ms)
+✔ no-guidance has fixed message and summary-only eligibility without recipients or fabricated actions (1.184167ms)
+✔ rejected records remain historical during loss and restoration of guidance (3.641416ms)
+✔ newly supplied allowed-unknown fact requires recalculation before a stored action is current (2.496541ms)
+✔ fixture decisions with a different stored basis must be recalculated before employee action (3.938833ms)
+✔ rejection and employee wording survive JSON restoration, both context cycles and recalculation (6.252042ms)
+✔ missing required fact, unknown permitted condition and one unavailable guideline remain local (2.570208ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 252.829167

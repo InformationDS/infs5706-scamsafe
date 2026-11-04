@@ -1,0 +1,17 @@
+271 http fetch GET https://registry.npmjs.org/yargs/-/yargs-18.0.0.tgz attempt 1 failed with ENOTFOUND
+272 http fetch GET https://registry.npmjs.org/zod/-/zod-4.6.7.tgz attempt 1 failed with ENOTFOUND
+273 http fetch GET https://registry.npmjs.org/yargs-parser/-/yargs-parser-22.0.0.tgz attempt 1 failed with ENOTFOUND
+274 http fetch GET https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz attempt 1 failed with ENOTFOUND
+275 http fetch GET https://registry.npmjs.org/vite/-/vite-8.3.4.tgz attempt 1 failed with ENOTFOUND
+276 http fetch GET https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-9.0.2.tgz attempt 1 failed with ENOTFOUND
+277 http fetch GET https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz attempt 1 failed with ENOTFOUND
+278 http fetch GET https://registry.npmjs.org/vary/-/vary-1.1.2.tgz attempt 1 failed with ENOTFOUND
+279 http fetch GET https://registry.npmjs.org/undici-types/-/undici-types-8.9.0.tgz attempt 1 failed with ENOTFOUND
+280 http fetch GET https://registry.npmjs.org/tsx/-/tsx-4.23.15.tgz attempt 1 failed with ENOTFOUND
+281 http fetch GET https://registry.npmjs.org/type-is/-/type-is-2.1.0.tgz attempt 1 failed with ENOTFOUND
+282 http fetch GET https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz attempt 1 failed with ENOTFOUND
+283 http fetch GET https://registry.npmjs.org/tree-kill/-/tree-kill-1.2.2.tgz attempt 1 failed with ENOTFOUND
+284 http fetch GET https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.1.tgz attempt 1 failed with ENOTFOUND
+285 http fetch GET https://registry.npmjs.org/tinyglobby/-/tinyglobby-0.2.17.tgz attempt 1 failed with ENOTFOUND
+286 http fetch GET https://registry.npmjs.org/@types/http-errors/-/http-errors-2.0.5.tgz attempt 1 failed with ENOTFOUND
+287 http fetch GET https://registry.npmjs.org/@types/node/-/node-26.6.5.tgz attempt 1 failed with ENOTFOUND
