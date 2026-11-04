@@ -104,7 +104,7 @@ test at tests\intake.test.ts:81:38
   [2m       - element is not enabled[22m
   [2m     - retrying click action[22m
   [2m       - waiting 500ms[22m
-  
+
       at TestContext.<anonymous> (D:\BaiduSyncdisk\UNSW\INFS5706\GroupAssignment-integration\tests\intake.test.ts:133:56) {
     name: 'TimeoutError',
     log: [ "  - waiting for getByRole('button', { name: 'Confirm changes to checked facts', exact: true })", '    - locator resolved to <button disabled type="button" class="primary">Confirm changes to checked facts</button>', '  - attempting click action', '    2 × waiting for element to be visible, enabled and stable', '      - element is not enabled', '    - retrying click action', '    - waiting 20ms', '    2 × waiting for element to be visible, enabled and stable', '      - element is not enabled', '    - retrying click action', '      - waiting 100ms', '    19 × waiting for element to be visible, enabled and stable', '       - element is not enabled', '     - retrying click action', '       - waiting 500ms' ]
