@@ -35,7 +35,7 @@ async function saveModelSettings() {
   await page.getByRole('status').filter({ hasText: 'Model settings saved.' }).waitFor();
 }
 try {
-  await page.goto(origin);
+  await page.goto(`${origin}/?view=foundation`);
   await page.getByRole('status').filter({ hasText: 'No saved history' }).waitFor();
   await page.getByText('BUSINESS-BASELINE-01 · content v1', { exact: true }).waitFor();
   checks.push({ name: 'approved business reference loads independently of legacy mock review', result: 'passed' });
