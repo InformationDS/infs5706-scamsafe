@@ -26,10 +26,19 @@ export function ModulePreview({ name, integrated = false }: { name: ModuleName; 
   const [history, setHistory] = useState<RuntimeCaseRecord[]>([]), [selectedCase, setSelectedCase] = useState('');
   const [failSave, setFailSave] = useState(false), [failOutput, setFailOutput] = useState(false);
   const [pending, setPending] = useState<(() => Promise<void>) | null>(null);
+  const [workingEditDirty, setWorkingEditDirty] = useState(false);
+  const workingEdit = useRef(workingEditDirty); workingEdit.current = workingEditDirty;
   const requestId = useRef(''), revision = useRef(1);
   const Component = components[name];
   const apply = (next: RuntimeCaseRecord) => { const valid = RuntimeCaseRecordSchema.parse(next); current.current = valid; setRecord(valid); };
   const refresh = async () => setHistory(await listRuntimeCases());
+  const workingEditMessage = 'Record or discard the working output edit before saving or changing cases.';
+  useEffect(() => {
+    if (!workingEditDirty) return;
+    const protect = (event: BeforeUnloadEvent) => { event.preventDefault(); event.returnValue = ''; };
+    window.addEventListener('beforeunload', protect);
+    return () => window.removeEventListener('beforeunload', protect);
+  }, [workingEditDirty]);
   useEffect(() => {
     let active = true;
     Promise.all([loadRuntimeCase(undefined, session), listRuntimeCases()]).then(([saved, all]) => {
@@ -40,6 +49,7 @@ export function ModulePreview({ name, integrated = false }: { name: ModuleName; 
     return () => { active = false; };
   }, [session]);
   async function save(input = current.current) {
+    if (workingEdit.current) throw new Error(workingEditMessage);
     const contentBeforeSave = JSON.stringify(current.current);
     const submittedContent = JSON.stringify(input);
     const saved = await saveRuntimeCase(input, session, failSave);
@@ -51,6 +61,7 @@ export function ModulePreview({ name, integrated = false }: { name: ModuleName; 
     setBusy(true); try { await action(); } catch (error) { setMessage((error as Error).message); } finally { setBusy(false); }
   }
   function guard(action: () => Promise<void>) {
+    if (workingEdit.current) { setMessage(workingEditMessage); return; }
     if (!current.current.saved) setPending(() => action);
     else void run(action);
   }
@@ -83,27 +94,31 @@ export function ModulePreview({ name, integrated = false }: { name: ModuleName; 
       setMessage(`MOCK response ready: ${result.proposal.facts.length} fact proposals; providerCalled=false. No automatic merge (B/C responsibility).`);
     } catch (error) { if (requestId.current === id) setMessage((error as Error).message); }
   }
-  const props: ModuleProps = { record, ports, onChange: next => apply({ ...next, saved: false }), onError: error => setMessage(`${error.code}: ${error.message}`), reset };
+  const props: ModuleProps = { record, ports, onChange: next => apply({ ...next, saved: false }), onError: error => setMessage(`${error.code}: ${error.message}`), reset, integrated, onWorkingEditChange: setWorkingEditDirty };
   // The public fixture harness stays explicitly simulated even after a real module is installed.
   const mockPorts: ModulePorts = { ...ports,
     guidance: async input => ({ recommendations: structuredClone(input.recommendations), guidanceStatus: input.guidanceStatus, simulated: true }),
     export: async (input, objectId, format) => (await post('/api/runtime/export', { case: input, objectId, format, previewMock: true, ...(failOutput ? { fault: 'failure' } : {}) })).blob(),
   };
   async function importBackup(file: File) {
-    assertImportAllowed(current.current);
+    const checkImport = () => {
+      if (workingEdit.current) throw new Error(workingEditMessage);
+      assertImportAllowed(current.current);
+    };
+    checkImport();
     const next = parseRuntimeBackup(await file.text());
     // File reads are asynchronous; recheck before any replacement.
-    assertImportAllowed(current.current);
+    checkImport();
     const existing = await loadRuntimeCase(next.caseId);
-    assertImportAllowed(current.current);
+    checkImport();
     if (existing && !window.confirm(`Replace saved case ${next.caseId}? Cancel keeps both cases unchanged.`)) { setMessage('Import cancelled; cases retained.'); return; }
     const saved = await saveRuntimeCase(next, session, failSave); requestId.current = ''; apply(saved); await refresh(); setMessage('Backup validated, saved and opened.');
   }
   return <main className="module-preview">
     <h1>{integrated ? 'ScamSafe integration test workspace' : `${name} independent preview`}</h1>
-    <p>{integrated ? 'SYNTHETIC · B intake, C model proposals and D guidance share one runtime case. E review/output is awaiting implementation. Fixed inputs and first reviews use training simulations.' : 'A01-20261017-01 · SYNTHETIC · MOCK test controls · No actual employee review or external delivery'}</p>
-    <nav><a href="/">Integration workspace</a>{moduleNames.map(n => <a key={n} href={`/?module=${n}`}>{n}</a>)}<a href="/?view=foundation">Legacy foundation</a></nav>
-    <p>Runtime schema v2 · {record.caseId} · case version {record.version} · {record.saved ? 'Saved' : 'Unsaved'} · {record.followUp.rounds} rounds / {record.followUp.totalQuestions} questions</p>
+    <p>{integrated ? 'SYNTHETIC · Intake, analysis, guidance and reviewed local outputs share one case. Fixed inputs and first checks retain training simulation labels.' : 'A01-20261017-01 · SYNTHETIC · MOCK test controls · No actual employee review or external delivery'}</p>
+    <nav onClick={event => { if (workingEdit.current) { event.preventDefault(); setMessage(workingEditMessage); } }}><a href="/">Integration workspace</a>{moduleNames.map(n => <a key={n} href={`/?module=${n}`}>{n}</a>)}<a href="/?view=foundation">Legacy foundation</a></nav>
+    <p>Runtime schema v2 · {record.caseId} · case version {record.version} · {workingEditDirty ? 'Working output edit pending' : record.saved ? 'Saved' : 'Unsaved'} · {record.followUp.rounds} rounds / {record.followUp.totalQuestions} questions</p>
     <p role="status">{message}</p>
     <fieldset disabled={!ready || busy}>
       <legend>Common preview controls</legend>
@@ -121,19 +136,18 @@ export function ModulePreview({ name, integrated = false }: { name: ModuleName; 
         const next = await loadRuntimeCase(selectedCase); if (!next) throw new Error('Saved case not found.');
         const opened = { ...next, instanceId: crypto.randomUUID() }; await saveRuntimeCase(opened, session, failSave); requestId.current = ''; apply(opened); setMessage('Saved case opened.');
       })}>Open saved case</button>
-      <button onClick={() => download(new Blob([backupRuntimeCase(record)], { type: 'application/json' }), `${record.caseId}_runtime.json`)}>Download runtime backup</button>
+      <button onClick={() => { if (workingEdit.current) { setMessage(workingEditMessage); return; } download(new Blob([backupRuntimeCase(record)], { type: 'application/json' }), `${record.caseId}_runtime.json`); }}>Download runtime backup</button>
       <label>Import runtime backup <input type="file" accept=".json" onChange={e => { const file = e.target.files?.[0]; if (file) void run(() => importBackup(file)); e.target.value = ''; }} /></label>
     </fieldset>
     {pending && <section role="dialog" aria-label="Unsaved runtime changes"><p>Current changes are unsaved.</p>
       <button disabled={busy} onClick={() => void run(async () => { await save(); const action = pending; setPending(null); await action(); })}>Save and continue</button>
-      <button disabled={busy} onClick={() => { const action = pending; setPending(null); void run(action); }}>Discard changes and continue</button>
+      <button disabled={busy} onClick={() => { if (workingEdit.current) { setMessage(workingEditMessage); return; } const action = pending; setPending(null); void run(action); }}>Discard changes and continue</button>
       <button disabled={busy} onClick={() => { setPending(null); setMessage('Cancelled; current input retained.'); }}>Cancel</button>
     </section>}
     {integrated ? <>
-      {(['intake', 'model', 'guidance'] as const).map(n => { const Installed = components[n]; return <section key={n} className={`module-${n}`}><Suspense fallback={<p>Loading {n}…</p>}>{ready && Installed ? <Installed {...props} /> : <p>Loading {n} runtime…</p>}</Suspense></section>; })}
-      <section><h2>E · Review and output unavailable</h2><p>Summary/draft generation, employee final review, preview, copy and production Markdown/PDF output await E01. Historical fixture bodies are not current reviewed deliverables.</p></section>
+      {moduleNames.map(n => { const Installed = components[n]; return <section key={n} className={`module-${n}`} inert={busy || !ready}><Suspense fallback={<p>Loading {n}…</p>}>{ready && Installed ? <Installed {...props} /> : <p>Loading {n} runtime…</p>}</Suspense></section>; })}
       <details><summary>Diagnostic MOCK controls — foundation fixtures only</summary><MockModule {...props} ports={mockPorts} installed={false} name={name} analyze={analyze} message={setMessage} run={run} ready={ready} /></details>
-    </> : <section className={`module-${name}`}>
+    </> : <section className={`module-${name}`} inert={busy || !ready}>
       {Component && <Suspense fallback={<p>Loading module…</p>}><Component {...props} /></Suspense>}
       <MockModule {...props} ports={mockPorts} installed={!!Component} name={name} analyze={analyze} message={setMessage} run={run} ready={ready} />
     </section>}

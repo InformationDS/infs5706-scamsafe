@@ -40,11 +40,11 @@ try {
   await page.goto(`http://127.0.0.1:${address.port}/`);
   await status('No runtime history'); await model.waitFor(); await guidance.waitFor();
   await page.getByRole('region', { name: 'B01 case intake and follow-up' }).waitFor();
-  await page.getByRole('heading', { name: 'E · Review and output unavailable' }).waitFor();
+  await page.getByRole('region', { name: 'E01 final review and outputs' }).waitFor();
   const context = await page.request.get(`http://127.0.0.1:${address.port}/api/runtime/context`);
   const registration = await context.json();
-  assert.equal(registration.modelRegistered, true); assert.equal(registration.outputRegistered, false);
-  checks.push('Root mounts actual B/C/D with explicit E gap; C service registered, E absent');
+  assert.equal(registration.modelRegistered, true); assert.equal(registration.outputRegistered, true);
+  checks.push('Root mounts B/C/D/E on one case; C and E services are registered');
   await reset('corrected'); const original = await state();
   await model.getByRole('button', { name: 'Analyze current case', exact: true }).click();
   await model.getByRole('status').filter({ hasText: 'Analysis ready' }).waitFor();
@@ -87,7 +87,7 @@ try {
   await reset('no-guidance'); await button('Recalculate guidance').click();
   record = await state(); assert.equal(record.recommendations.length, 0); assert.equal(record.outputs.length, 1);
   await guidance.getByText('Insufficient approved guidance; human review required', { exact: true }).waitFor();
-  checks.push('No-guidance matching produces no recipient actions; existing summary is a MOCK fixture, E workflow remains missing');
+  checks.push('No-guidance matching produces no recipient actions; fixture summary awaits explicit E generation and review');
   await page.screenshot({ path: resolve(directory, 'no-guidance.png'), fullPage: true });
   await reset('output-error'); await button('Recalculate guidance').click();
   assert.ok((await guidance.innerText()).includes('Dependent output update required'));
@@ -106,7 +106,7 @@ try {
 } catch (error) { failure = String(error); await page.screenshot({ path: resolve(directory, 'failure.png'), fullPage: true }); }
 finally {
   await writeFile(resolve(directory, 'result.json'), JSON.stringify({ checks, errors, providerRequests, failure,
-    scope: 'B mounted; C/D integration and A storage; E absent', browser: browser.version() }, null, 2));
+    scope: 'B/C/D/E mounted, C/D and storage regression; complete output flow checked separately', browser: browser.version() }, null, 2));
   await browser.close(); server.closeAllConnections(); await new Promise<void>(resolve => server.close(() => resolve()));
 }
 if (failure) throw new Error(failure);

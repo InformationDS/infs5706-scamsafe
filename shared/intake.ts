@@ -149,10 +149,12 @@ export function answerRuntimeQuestion(record: RuntimeCaseRecord, questionId: str
   if (status === 'answered' && !answer?.trim()) throw new Error('Enter an answer or choose an unknown state.');
   question.history.push({ answer: question.answer, status: question.status }); question.answer = answer; question.status = status;
   if (status === 'answered') {
-    const sourceId = question.id;
-    let source = next.sources.find(item => item.id === sourceId);
-    if (!source) { source = { id: sourceId, kind: 'answer', text: answer!.trim(), target: question.target }; next.sources.push(source); }
-    else source.text = answer!.trim();
+    const text = answer!.trim();
+    const original = next.sources.find(item => item.id === question.id);
+    const sourceId = original && original.text !== text ? `SRC-${crypto.randomUUID()}` : question.id;
+    if (!next.sources.some(item => item.id === sourceId)) {
+      next.sources.push({ id: sourceId, kind: 'answer', text, target: question.target });
+    }
     if (updateFact) {
       const fact = next.facts.find(item => intakeTargetKey(item) === intakeTargetKey(question.target));
       if (!fact) throw new Error('The question target is not present in the fact record; answer saved as source only.');

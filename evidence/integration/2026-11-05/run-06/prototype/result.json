@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "T09 starts at B analysis, corrects 2000 to 200, first-checks, saves 3 questions, answers/unknown/stops without fixture shortcuts",
+    "Actual D decisions and explicit E reviews gate same-snapshot preview, clipboard, Markdown and PDF with current 200",
+    "Unrecorded E text blocks host save/new/reset/open/import/navigation; single-draft edit preserves TELCO review; same-version failure retry succeeds",
+    "D rejection updates dependent TELCO; B shared correction requires confirmation; regenerating current 250 protects employee text until explicit comparison/replacement",
+    "No-guidance summary alone is reviewed/exported, historical handover is blocked by server; refresh retains counters, decisions, review and valid summary"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": null,
+  "browser": "156.0.8078.4",
+  "scope": "Integrated synthetic T09 and no-guidance paths, explicit automated review actions; human/F acceptance remains separate"
+}

@@ -131,9 +131,10 @@ test('E01 output failure preserves saved body and review; same version retry suc
 test('E01 actual UI review, editing, storage, copy, HTTP export and PDF stress exercise', { skip: process.env.E01_BROWSER !== '1', timeout: 180000 }, async () => {
   const { chromium } = await import('playwright');
   const { mkdir, writeFile } = await import('node:fs/promises');
-  const { resolve } = await import('node:path');
+  const { resolve, relative, isAbsolute, sep } = await import('node:path');
   const dir = resolve(process.env.E01_EVIDENCE_DIR ?? 'evidence/task-results/E01/run-01/business');
-  assert.ok(dir.includes('/evidence/task-results/E01/'));
+  const within = relative(resolve('evidence/task-results/E01'), dir);
+  assert.ok(within && !isAbsolute(within) && !within.split(sep).includes('..'));
   await mkdir(dir, { recursive: true });
   const server = createApp({ staticDir: resolve('dist') }).listen(0, '127.0.0.1');
   await new Promise<void>(done => server.once('listening', done));
@@ -172,7 +173,7 @@ test('E01 actual UI review, editing, storage, copy, HTTP export and PDF stress e
     await button('Copy E Markdown').click();
     await e.getByText(/copy completed from SUMMARY/).waitFor();
     const clipboard = await page.evaluate(() => navigator.clipboard.readText());
-    assert.equal(clipboard, outputSnapshotToMarkdown(outputSnapshot(await record(), 'SUMMARY')));
+    assert.equal(clipboard.replaceAll('\r\n', '\n'), outputSnapshotToMarkdown(outputSnapshot(await record(), 'SUMMARY')));
     let downloadPromise = page.waitForEvent('download'); await button('Download E markdown').click();
     let download = await downloadPromise; await download.saveAs(resolve(dir, 'summary.md'));
     downloadPromise = page.waitForEvent('download'); await button('Download E pdf').click();

@@ -82,3 +82,13 @@ previewMock:true强制使用A01模拟服务，即使已有真实注册；false�
 选择Fixed runtime variant后点Reset fixed input；必要时选择放弃或保存／取消。保存后刷新观察Saved runtime case restored。Delayed MOCK analysis后立即MOCK change amount to 250应出现Stale response ignored且金额250。输出选择no-guidance或output-error，重置后Save runtime case；在Output object中选摘要或草稿，Download MOCK markdown/pdf或Open MOCK PDF。output-error默认故障，取消Simulate output failure后同版本重试。无指引只有摘要，过期角色／指引草稿不得输出。
 
 A01实际命令、失败、复测证据及发放结论只记[A01唯一执行记录](../project/tasks/A01.md#唯一执行记录)。完整十五例、实际员工业务审核、真实模型、macOS／第二电脑与A02全流程均不由本次mock通过推定。
+
+## 2026-11-05整合补充
+
+ModuleProps新增两个可选属性，现有模块调用保持兼容。integrated为true时使用同案主页面，E复用页面上已有D面板；独立outputs入口仍保留D决定控件。onWorkingEditChange(dirty)由E报告尚未Record edit的工作文本，宿主阻止保存、新建／重置／打开／导入及导航，待Record edit或Discard working edit后继续；刷新／关闭通过beforeunload提示保护。回调只报告工作状态，案件数据仍由onChange和ports.save管理，JSON schema无变化。
+
+B后补同一问题时保留旧Q来源原文，新答案使用SRC-UUID新来源和同一字段／记录目标，问题ID及计数保持。普通后补更新通过事实版本使E引用依赖失效，旧来源不会被新答案原地改写。E消费当前D记录及guidanceHandoff，不以ports.guidance返回的新匹配提议覆盖员工决定。服务端exportRuntime按E的outputSnapshot重新验证当前保存、审核与依赖资格。
+
+实际操作与首次核对训练标记见[原型操作说明](PROTOTYPE_RUNBOOK.md)。
+
+共享保存／导入／切案正在执行时，宿主暂时锁定模块交互，事务结束后恢复，避免异步替换期间新增工作文本。

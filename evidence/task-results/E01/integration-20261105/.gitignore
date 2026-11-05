@@ -1,0 +1,13 @@
+# Synthetic generated artifacts stay local except selected final evidence.
+*.png
+*.pdf
+*.md
+*.html
+*backup.json
+pdf-open.json
+rendered/
+!run-05/browser/*.pdf
+!run-05/browser/*.md
+!run-05/browser/*.html
+!run-05/browser/reviewed-output.png
+run-05/browser/summary.md

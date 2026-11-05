@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "T09 starts at B analysis, corrects 2000 to 200, first-checks, saves 3 questions, answers/unknown/stops without fixture shortcuts"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('region', { name: 'E01 final review and outputs' }).getByRole('button', { name: 'Final review HANDOVER-BANK', exact: true })\u001b[22m\n",
+  "browser": "156.0.8078.4",
+  "scope": "Integrated synthetic T09 and no-guidance paths, explicit automated review actions; human/F acceptance remains separate"
+}

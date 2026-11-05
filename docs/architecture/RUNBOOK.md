@@ -1,5 +1,7 @@
 # 本地运行与检查
 
+2026-11-05四模块整合后的主页面、T09及无指引操作见[测试原型操作说明](PROTOTYPE_RUNBOOK.md)。下文保留基础服务与旧基座说明。
+
 从仓库根目录执行下列命令。目标为 Windows 和 macOS 本地项目；当前实际平台验证及失败／未执行项见[就绪情况](../project/FOUNDATION_READINESS.md)和[验证证据](../../evidence/preparation/README.md)。任务范围与开工条件见[任务入口](../project/TASKS.md)。
 
 ## 环境与安装

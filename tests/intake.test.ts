@@ -78,6 +78,23 @@ test('ending follow-up skips pending questions and accepts a later answer withou
   assert.equal(later.sources.find(source => source.id === 'Q3')?.kind, 'answer');
 });
 
+test('later answers preserve original source text used by existing output and history references', () => {
+  const checked = confirmRuntimeFacts(makeRuntimeFixture('T09'));
+  const started = appendSavedQuestionRound(checked, fixedQuestions);
+  const first = answerRuntimeQuestion(started, 'Q1', 'reported pending', 'answered', true);
+  const originalSource = structuredClone(first.sources.find(source => source.id === 'Q1'));
+  const later = answerRuntimeQuestion(first, 'Q1', 'reported completed', 'answered', true);
+  assert.deepEqual(later.sources.find(source => source.id === 'Q1'), originalSource);
+  const addedSource = later.sources.find(source => source.kind === 'answer' && source.text === 'reported completed')!;
+  assert.ok(addedSource.id.startsWith('SRC-'));
+  assert.ok(later.facts.find(fact => fact.fieldId === 'E09' && fact.recordId === 'TX-01')!.sourceIds.includes(addedSource.id));
+  assert.deepEqual(later.followUp.questions[0].history.at(-1), { answer: 'reported pending', status: 'answered' });
+  assert.equal(later.followUp.totalQuestions, 3);
+  const sourceOnly = answerRuntimeQuestion(first, 'Q1', 'New detail awaiting fact checking', 'answered', false);
+  assert.deepEqual(sourceOnly.sources.find(source => source.id === 'Q1'), originalSource);
+  assert.deepEqual(sourceOnly.facts, first.facts);
+});
+
 if (process.env.B01_BROWSER === '1') test('B01 saved state, failed saves, question counts and newer edits survive the actual host', async () => {
   const { chromium } = await import('playwright');
   const { once } = await import('node:events');

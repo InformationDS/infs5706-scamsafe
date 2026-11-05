@@ -1,0 +1,8 @@
+# Synthetic generated artifacts stay local except selected final evidence.
+*.png
+*.pdf
+*.md
+*.html
+*backup.json
+pdf-open.json
+rendered/

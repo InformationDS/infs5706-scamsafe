@@ -1,0 +1,52 @@
+{
+  "pdfs": [
+    {
+      "file": "chinese-long-table.pdf",
+      "pages": 5,
+      "renderedPages": 5,
+      "pixelHashes": [
+        "984a912e8c02a1163a20e4fad2e1b16edb906d645f00650b391ca12d2bd6ba6f",
+        "189a3184884c80da0c8905cbba33f8d0983959aef30a553817d2b499eca5544b",
+        "bc6d6b14afd2bef62d109bad2bea1a7880b1ad009bbe584b132d07f7fdb02042",
+        "cffb4a460a742bb1a4cad1e3e40fd11717e50643bd72cbeeead974b1a30e0d91",
+        "a7a208a624d5678461dc95257cc16979a63569bc259e2b8d8ad37c4bac023876"
+      ]
+    },
+    {
+      "file": "no-guidance.pdf",
+      "pages": 3,
+      "renderedPages": 3,
+      "pixelHashes": [
+        "ff3e5f855c08584b93232dffdd8e4fa0148f9e00a9c7243fd3065783c405e4df",
+        "36654cf69faf73259cac6fd3a1a969fb404686467d9f89444c5f8e56ed9eb0f1",
+        "397717454ab281e0b2f49de2dfa59d44f232594ae6c72839c49b1a3889b82ffd"
+      ]
+    },
+    {
+      "file": "same-version-retry.pdf",
+      "pages": 5,
+      "renderedPages": 5,
+      "pixelHashes": [
+        "984a912e8c02a1163a20e4fad2e1b16edb906d645f00650b391ca12d2bd6ba6f",
+        "189a3184884c80da0c8905cbba33f8d0983959aef30a553817d2b499eca5544b",
+        "bc6d6b14afd2bef62d109bad2bea1a7880b1ad009bbe584b132d07f7fdb02042",
+        "cffb4a460a742bb1a4cad1e3e40fd11717e50643bd72cbeeead974b1a30e0d91",
+        "a7a208a624d5678461dc95257cc16979a63569bc259e2b8d8ad37c4bac023876"
+      ]
+    },
+    {
+      "file": "summary.pdf",
+      "pages": 4,
+      "renderedPages": 4,
+      "pixelHashes": [
+        "46029720c50de95dba2f0fa5b3217b8be8fe8bf8461f8646b2c72428a4ac6b43",
+        "7161c803bd99d1118319606653ae9cf2a88bb67827373c7feae7ce9947896069",
+        "4ca282660964f142704fe1afc98057c4ed13fce7856aabb25cc5324c1361f2e2",
+        "773907abe727c76df86457ac88f1e0f391fd1965fcc8b8369b88d718ee73f3d7"
+      ]
+    }
+  ],
+  "expectedTextBlocks": 168,
+  "missingTextBlocks": [],
+  "sameVersionRetryPixelsIdentical": true
+}

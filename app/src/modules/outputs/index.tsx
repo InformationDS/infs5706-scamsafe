@@ -18,9 +18,14 @@ function OutputEditor({ record, output, actor, onChange, report, onDirty }: { re
     {body !== output.body && <><p className="e-warning">Unrecorded edit. Record or discard it before review / output.</p><button onClick={() => setBody(output.body)}>Discard working edit</button></>}
   </div>;
 }
-export default function OutputsModule({ record, onChange, ports, onError, reset }: ModuleProps) {
+export default function OutputsModule({ record, onChange, ports, onError, reset, integrated, onWorkingEditChange }: ModuleProps) {
   const [actor, setActor] = useState(''), [message, setMessage] = useState(''), [selected, setSelected] = useState('SUMMARY');
   const [dirty, setDirty] = useState(false);
+  const workingEdit = useRef(dirty); workingEdit.current = dirty;
+  useEffect(() => {
+    onWorkingEditChange?.(dirty);
+    return () => onWorkingEditChange?.(false);
+  }, [dirty, onWorkingEditChange]);
   const [ack, setAck] = useState(false), [busy, setBusy] = useState(false), [replacement, setReplacement] = useState('');
   const [pending, setPending] = useState<{ caseId: string; instanceId: string; version: number; proposals: Out[] } | null>(null);
   const current = useRef(record); current.current = record;
@@ -39,7 +44,7 @@ export default function OutputsModule({ record, onChange, ports, onError, reset 
     try {
       const snapshot = outputSnapshot(before, id);
       const blob = format === 'copy' ? null : await ports.export(before, id, format);
-      if (current.current.caseId !== before.caseId || current.current.instanceId !== before.instanceId || current.current.version !== before.version || !current.current.saved || selection.current !== chosen) throw new Error('Output response is stale; current case retained. Retry current content.');
+      if (workingEdit.current || current.current.caseId !== before.caseId || current.current.instanceId !== before.instanceId || current.current.version !== before.version || !current.current.saved || selection.current !== chosen) throw new Error('Output response is stale; current case retained. Retry current content.');
       if (format === 'copy') await navigator.clipboard.writeText(outputSnapshotToMarkdown(snapshot));
       else downloadBlob(blob!, outputSnapshotFilename(snapshot, format === 'pdf' ? 'pdf' : 'md'));
       report(`${format} completed from ${id} v${snapshot.objectVersion}. No sending performed.`);
@@ -48,9 +53,9 @@ export default function OutputsModule({ record, onChange, ports, onError, reset 
   }
   return <section className="module-outputs e-workspace" aria-label="E01 final review and outputs">
     <header><p>SYNTHETIC CASE · E01 RUNTIME</p><h2>Summary, final review & local output</h2><p>Generate from current facts and D guidance. Employee review records an explicit local event; it does not approve business content or execute actions.</p></header>
-    <p>First-check input: {record.reviews.some(r => r.stage === 'first' && !r.simulated) ? 'Employee event present' : 'Fixed input / simulated history; B runtime not implemented'}. {record.needsFactConfirmation ? 'B must confirm changes before final review.' : 'Current recorded fact-check flags are consumed as supplied.'}</p>
+    <p>First-check input: {record.reviews.some(r => r.stage === 'first' && !r.simulated) ? 'Employee event present' : 'Training first-check history'}. {record.needsFactConfirmation ? 'B must confirm changes before final review.' : 'Current recorded fact-check flags are consumed as supplied.'}</p>
     <label>E employee identifier<input value={actor} onChange={e => { setActor(e.target.value); setAck(false); }} placeholder="Enter your own identifier" /></label>
-    <details><summary>D guidance and decisions for this same case</summary><GuidanceModule record={record} onChange={onChange} ports={ports} onError={onError} reset={reset} /></details>
+    {!integrated && <details><summary>D guidance and decisions for this same case</summary><GuidanceModule record={record} onChange={onChange} ports={ports} onError={onError} reset={reset} /></details>}
     <div className="e-actions"><button disabled={dirty} onClick={() => {
       try {
         const result = regenerateOutputs(record);

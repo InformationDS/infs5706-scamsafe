@@ -91,3 +91,35 @@ run-01记录核对保存失败后重试按钮被禁用的回归失败，修复�
 - npm.cmd run check:business通过；仓库、任务定义及差异检查通过。
 
 E仍需根据当前D记录与guidanceHandoff消费员工决定和依赖，并实现正文更新及最终审核。公共ports.guidance目前返回evaluateGuidance匹配提议，E接线时须按D卡消费当前决定，避免将提议覆盖已拒绝或人工修改的记录。跨指引版本迁移、真实模型效果、人类／F验收及跨系统检查待完成。
+
+## E四模块接入 · 2026-11-05
+
+来源为origin/feat/e01-outputs-jingran@13ed32d1ea549657a55293a150d857b294c0d93b，公共起点58038ac。本地以2c14f21为基线，merge ef79301保留E实现、tests/outputs.test.ts及原失败／成功证据，无合并冲突。
+
+主页面同案装配B/C/D/E，E独立预览继续保留嵌入D的便利控件，整合页复用已有D区域。E服务自动注册并沿用outputSnapshot服务端复验，摘要／接收方草稿、决定过滤、重生成保护、编辑历史和显式最终审核均使用成员原实现。
+
+必要适配如下。
+
+- ModuleProps增加可选integrated及onWorkingEditChange属性，保持旧模块调用兼容。E未Record edit的正文阻止公共保存、新建／重置／打开／导入／导航，刷新／关闭时提示；Record edit或Discard working edit后恢复。PDF请求期间开始编辑时，迟到文件会被丢弃，当前工作文本保留。
+- B后补同一问题的答案时，保留原Q来源文字，新答案生成SRC-UUID且沿用字段／记录目标，问题ID和计数保持。事实版本继续使E依赖失效，避免源文原地改写影响历史正文。
+- E浏览器证据目录检查改用跨平台relative/isAbsolute，保持任务目录边界；Windows剪贴板CRLF只在比较时归一为LF，正文内容比较仍严格。
+- 既有tests/integration-browser.ts更新为检查E服务已注册；新增A02允许的tests/prototype-browser.ts，通过实际主页面操作检查T09和无指引流程。
+
+最终结果来自evidence/integration/2026-11-05/及evidence/task-results/各模块/integration-e-20261105或integration-20261105。
+
+| 实际命令／动作 | 结果及证据 |
+| --- | --- |
+| npm.cmd run build | run-05/build.txt，TypeScript及Vite通过 |
+| B01_BROWSER=1、C01_BROWSER=1、D01_BROWSER=1、E01_BROWSER=1的npm.cmd run check | run-05/check.txt，89/89、0失败、0跳过；每个任务的证据目录为对应任务下integration-e-20261105/run-05/browser，E为integration-20261105/run-05/browser |
+| node_modules/.bin/tsx.cmd tests/prototype-browser.ts evidence/integration/2026-11-05/run-06/prototype | 5组完整流程通过，页面异常0、providerRequests=0；从初始T09执行B分析／200更正／首次核对／1轮3问部分回答未知结束，经D决定到E审核、复制及双格式输出；后续拒绝REC-03、金额250、员工稿保护／明确替换、无指引摘要、503重试及刷新恢复通过；含导出进行中开始工作编辑的迟到下载阻断 |
+| node_modules/.bin/tsx.cmd tests/integration-browser.ts evidence/integration/2026-11-05/run-05/host-regression | 原宿主7组通过，providerRequests=0 |
+| npm.cmd run check:module -- outputs evidence/integration/2026-11-05/run-05/public-outputs | 公共Mock 11组通过，providerRequests=0 |
+| npm.cmd run check:business | 批准包、哈希及引用通过，日志为run-05/business.txt |
+| PDF结构、文本及渲染检查 | E最终压力目录4份PDF共17页（摘要4、中文长表5、同版本重试5、无指引3）；中文与表格换页正常，168个HTML文本块在按阅读顺序提取的PDF文本中全部找到，缺失0。长表5页逐页观察，摘要4页及无指引3页用逐页拼图观察，重试5页像素与长表完全一致。结果为E对应run-05/browser/pdf-check.json，PDF和渲染保留于同目录 |
+| npm.cmd run dev及GET 5173/、/api/runtime/context | UI与4310服务实际启动，页面200，modelRegistered=true、outputRegistered=true、previewMode=mock |
+
+run-01保留E Windows路径校验失败；run-02保留剪贴板换行差异；run-03全套88项通过，但新增整合脚本未先切换所选草稿导致定位审核按钮失败；修正脚本操作后run-04完整流程通过。新增B旧来源保护后run-05最终89项及完整流程通过，run-06在相同产品代码上额外验证PDF迟到响应与工作编辑并发。旧批次均保留。PDF表格逐块完整性使用raw阅读顺序提取，layout方式列文本交错的误报已在本地QA核对。
+
+当前可开展合成T09及无指引两条完整流程人工测试，操作见[原型说明](../architecture/PROTOTYPE_RUNBOOK.md)。首次核对保留B的训练模拟标记，自动最终审核以测试标识记录；人类／F独立验收、真实模型效果、完整15例、跨系统和跨指引版本迁移待完成。原批准包、依赖和JSON schema无差异。
+
+本轮跨日于2026-11-06收尾。最终共享存储操作期间将模块设为inert，避免导入／切案正在进行时再开始工作编辑；run-07/build.txt、run-07/check.txt为最终构建及89/89结果，run-07/prototype/result.json为含迟到PDF保护的完整5组流程，run-07/public-outputs/result.json为最终11组公共检查，额外tsc --noEmit通过。原宿主7组及17页PDF版式／文本结果保留在run-05，导出实现与最终版本一致。失败文本日志的提交归档仅清理行末空白，原始副本留在忽略的local/e-integration-20261105/original-logs/。

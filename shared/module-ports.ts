@@ -18,7 +18,15 @@ export type ModulePorts = {
   guidance: (record: RuntimeCaseRecord) => Promise<{ recommendations: RuntimeCaseRecord['recommendations']; guidanceStatus: RuntimeCaseRecord['guidanceStatus']; simulated: boolean }>;
   export: (record: RuntimeCaseRecord, objectId: string, format: 'markdown' | 'pdf') => Promise<Blob>;
 };
-export type ModuleProps = { record: RuntimeCaseRecord; ports: ModulePorts; onChange: (next: RuntimeCaseRecord) => void; onError: (error: PortError) => void; reset: () => void };
+export type ModuleProps = {
+  record: RuntimeCaseRecord;
+  ports: ModulePorts;
+  onChange: (next: RuntimeCaseRecord) => void;
+  onError: (error: PortError) => void;
+  reset: () => void;
+  integrated?: boolean;
+  onWorkingEditChange?: (dirty: boolean) => void;
+};
 export type ModuleEntry = { default: ComponentType<ModuleProps> };
 export type ModelRegistration = { analyzeRuntime: AnalyzeRuntime };
 export type OutputRegistration = { exportRuntime: ExportRuntime };
