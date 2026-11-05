@@ -1,0 +1,30 @@
+[
+  {
+    "file": "chinese-long-table.pdf",
+    "pages": 5,
+    "characters": 10861,
+    "hasChineseEnd": true,
+    "hasNoGuidance": false
+  },
+  {
+    "file": "summary.pdf",
+    "pages": 4,
+    "characters": 9189,
+    "hasChineseEnd": false,
+    "hasNoGuidance": false
+  },
+  {
+    "file": "no-guidance.pdf",
+    "pages": 3,
+    "characters": 5553,
+    "hasChineseEnd": false,
+    "hasNoGuidance": true
+  },
+  {
+    "file": "same-version-retry.pdf",
+    "pages": 5,
+    "characters": 10861,
+    "hasChineseEnd": true,
+    "hasNoGuidance": false
+  }
+]

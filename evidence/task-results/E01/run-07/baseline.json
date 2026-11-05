@@ -1,0 +1,11 @@
+{
+  "branch": "feat/e01-outputs-jingran",
+  "origin": "https://github.com/InformationDS/infs5706-scamsafe.git",
+  "base": "58038acc6176f4252c0e392732b3d7e6c7c56d27",
+  "initialWorktree": "clean fresh clone; no existing project modifications",
+  "sha256": {
+    "shared/export.ts": "0e3d7cd08842884ebda2cc0e0f03c98ff1428b15c7ceb63c4f42041f0a594284",
+    "app/src/export/OutputPanel.tsx": "b78b500de4aafa78172c799e646e3cd66141f910dbbe0c267106fb80c70c1772",
+    "docs/project/tasks/E01.md": "239908fe5e45c1f0845931d0fb19f4c308ed081621d7114c20e916a85f773bbb"
+  }
+}

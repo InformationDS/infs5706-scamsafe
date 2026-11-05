@@ -1,0 +1,35 @@
+{
+  "files": [
+    {
+      "file": "chinese-long-table.pdf",
+      "pages": 5,
+      "characters": 8082,
+      "hasChineseEnd": true,
+      "hasNoGuidance": false
+    },
+    {
+      "file": "no-guidance.pdf",
+      "pages": 3,
+      "characters": 3661,
+      "hasChineseEnd": false,
+      "hasNoGuidance": true
+    },
+    {
+      "file": "same-version-retry.pdf",
+      "pages": 5,
+      "characters": 8082,
+      "hasChineseEnd": true,
+      "hasNoGuidance": false
+    },
+    {
+      "file": "summary.pdf",
+      "pages": 4,
+      "characters": 6727,
+      "hasChineseEnd": false,
+      "hasNoGuidance": false
+    }
+  ],
+  "htmlTextBlocksChecked": 167,
+  "missingBlocks": [],
+  "sameVersionRetryTextAndRenderedPagesIdentical": true
+}

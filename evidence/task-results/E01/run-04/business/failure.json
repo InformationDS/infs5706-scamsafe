@@ -1,0 +1,8 @@
+{
+  "steps": [
+    "Generated three current unreviewed E objects, no borrowed reference approval.",
+    "Actual E review clicks, IndexedDB save, same-snapshot preview, clipboard, Markdown and PDF downloads."
+  ],
+  "errors": [],
+  "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('region', { name: 'E01 final review and outputs' }).getByLabel('Working body for HANDOVER-BANK', { exact: true })\u001b[22m\n"
+}

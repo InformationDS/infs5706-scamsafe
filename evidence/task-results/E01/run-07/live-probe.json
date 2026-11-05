@@ -1,0 +1,10 @@
+{
+  "context": {
+    "settingsRevision": 1,
+    "previewMode": "mock",
+    "modelRegistered": true,
+    "outputRegistered": true
+  },
+  "pageStatus": 200,
+  "scope": "Same-process loopback probe; not deployed; cross-tool network namespaces cannot access one another."
+}
