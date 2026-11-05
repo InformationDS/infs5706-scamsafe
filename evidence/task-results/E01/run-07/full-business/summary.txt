@@ -1,0 +1,136 @@
+Unifiedfactualsummary
+SYNTHETIC·Contentapprovalpending·Localdraftonly.Reportedinformationisnotindependently
+verified.Noaction,deliveryorreferralhasbeenperformed.
+Case:EXAMPLE-01|caseversion:11
+Object:SUMMARY|objectversion:1
+Employeereviewedsyntheticrecord·E01-AUTOMATED-TEST·2026-11-01T23:42:46.457Z
+Employeereviewisnotcontentapproval,externalverificationordelivery.
+SYNTHETIC·Contentapprovalpending·Localdraftonly.Reportedinformationisnotindependently
+verified.Noaction,deliveryorreferralhasbeenperformed.
+Currentreportedfacts
+Field/record Currentreportedvalue Status/check Sources
+B01: Personconcerned extracted/checked S1,S2,S3,S4,S5
+C02:CONTACT-01 16October202609:00
+Australia/Sydney
+extracted/checked S1
+C03:CONTACT-01 SMS extracted/checked S1
+C04:CONTACT-01 ClaimstobeSYNBankA extracted/checked S1
+C06:CONTACT-01 verify-bank.example extracted/checked S2
+C08:CONTACT-01 Unknown/notsupplied missing/checked None
+D04:EVENT-01 Openedthelinkand
+enteredbankingpassword
+andone-timecode
+categories;nosecretvalues
+recorded.
+extracted/checked S2
+E01: Reporteddebit extracted/checked S3
+E02:TX-01 TX-01 extracted/checked S3
+E03:TX-01 Unknown/notsupplied missing/checked None
+E04:TX-01 200 extracted/corrected S3
+E05:TX-01 AUD extracted/checked S3
+E06:TX-01 Unknown/notsupplied missing/checked None
+E07:TX-01 SYNBankA extracted/checked S3
+E08:TX-01 Unknown/notsupplied missing/checked None
+SYNTHETIC local draft · 1 / 4
+Field/record Currentreportedvalue Status/check Sources
+E09:TX-01 Unknown/notsupplied missing/checked None
+F01: true extracted/checked S2
+F02: Bankingpassword;One-
+timecode
+extracted/checked S2
+F03: Linkedpage extracted/checked S2
+F05: SYNBankAonlinebanking extracted/checked S2,S3
+F06: Unfamiliardebit extracted/checked S3
+F07: 16October202609:30
+Australia/Sydney
+extracted/checked S3
+J02:EVID-01 Textmessage extracted/checked S5
+J04:EVID-01 Reportedavailableon
+phone;notprovidedor
+verified
+extracted/checked S5
+Amountsarereportedvalues,notverifiedlosses.Transactionsremainseparatebyrecord,currencyand
+status;unknownvaluesarenotzero.
+Candidateanalysis(notaconfirmedscamfinding)
+-Suspectedphishing
+-Basis:CONTACT-01:reportedbankimpersonationSMS;EVENT-01:reportedcredentialentry.
+-Uncertainty:Senderidentityandthedebit'sconnectiontotheSMSareunverified.
+-Gap:Transactiontime
+-Gap:Paymentmethod
+-Gap:Recipient
+-Gap:Continuingcontact
+Unresolvedinformation
+-C08:CONTACT-01:missing;currentUnknown/notsupplied;candidates[]
+-E03:TX-01:missing;currentUnknown/notsupplied;candidates[]
+-E06:TX-01:missing;currentUnknown/notsupplied;candidates[]
+-E08:TX-01:missing;currentUnknown/notsupplied;candidates[]
+-E09:TX-01:missing;currentUnknown/notsupplied;candidates[]
+Reportedsourcesandcorrectionhistory(historicalwordingmaydifferfromcurrent
+values)
+-S1(narrative):Ireceivedatextmessageat09:00on16October2026claimingtobeSYNBankAandsaying
+thatmyaccountneededverification.
+-S2(narrative):Iopenedthelinkatverify-bank.exampleandenteredmyonlinebankingpasswordanda
+one-timecode.
+SYNTHETIC local draft · 2 / 4
+-S3(narrative):At09:30InoticedanunfamiliarAUD2,000debitinmySYNBankAapp;Idonotknow
+whetheritispendingorcompleted.
+-S4(narrative):IuseSYNTelcoBformymobileservice,andIhavenotcontactedeitherorganisationabout
+thisyet.
+-S5(narrative):Ihavethetextmessageonmyphone,butIhavenotprovidedanymaterialtotheemployee.
+-E04:TX-01previous2000:Theamountwasenteredincorrectly.ThereporteddebitisAUD200,notAUD
+2,000.[S3]
+Recordedresponseboundaries
+Reportedresponsesarelistedinthecurrentfactswhensupplied.Unknownresponsedetailsremain
+unknown.Noexternalexecutionorreceiptisestablishedbythislocalrecord.
+Proposedlocalpreparation(acceptanceisnotexecution)
+-REC-01v2[accepted]:Preparealocalinternalhumanassessmentrecord.
+Basis:EX-G01v1;SYNBankA/IntakeOfficer;priority1:Prioritisehumanassessmentofthereported
+pendingunfamiliardebit.
+Limit/uncertainty:Approvedsyntheticprototypeguidanceonly;noauthorityforreal-worldaction.
+Limit/uncertainty:EXAMPLE-01teachingtargetTX-01only.
+Limit/uncertainty:E09conflicts,reportedcompletedandpaymentrequestedareoutsidethisteaching
+entry.
+Limit/uncertainty:Thehumanspecialistdecidesfurtherassessment;nofreeze,refundorrecovery
+promised.
+Limit/uncertainty:MaybepreparedinparallelwithREC-02;transactionfactsremainreportedand
+unverified.
+Limit/uncertainty:Adesignatedbankhumanspecialistdecidesfurtherassessment;theintakerole
+performsnoaccountortransactionaction.
+Limit/uncertainty:E09:TX-01:unknown;localpreparationonly.
+Limit/uncertainty:ReportedsourceS3:At09:30InoticedanunfamiliarAUD2,000debitinmySYNBankA
+app;Idonotknowwhetheritispendingorcompleted.
+-REC-02v2[accepted]:PreparealocalSYNTelcoBhumanintakedraft.
+Basis:EX-G02v1;SYNBankA/IntakeOfficer;priority2:PrepareinparallelwithREC-01.
+Limit/uncertainty:Approvedsyntheticprototypeguidanceonly;noauthorityforreal-worldaction.
+Limit/uncertainty:AlsorequiresS4toexplicitlyidentifySYNTelcoBastheperson'smobileproviderand
+configuredhumanintakeresponsibilities;thislimiteddraftisnotaruntimematcher.
+Limit/uncertainty:Unknownsharingpermissionpermitslocaldraftingonly;nosharingorverification
+asserted.
+Limit/uncertainty:DonotinferSIMswappingorchangeamobileservice.
+Limit/uncertainty:Externalsharingwouldrequirehumanverificationofpermissionandreceiverremit;no
+sendingoccurs.
+Limit/uncertainty:Thereceivinghumanintaketeamverifieswhethertheconcernfallswithinitsremit;
+sharingpermissionremainsunverified.
+Limit/uncertainty:C08:CONTACT-01:unknown;preservethisgap.
+Limit/uncertainty:O07::unknown;preservethisgap.
+Limit/uncertainty:ReportedsourceS1:Ireceivedatextmessageat09:00on16October2026claimingtobe
+SYNBankAandsayingthatmyaccountneededverification.
+Limit/uncertainty:ReportedsourceS4:IuseSYNTelcoBformymobileservice,andIhavenotcontacted
+eitherorganisationaboutthisyet.
+SYNTHETIC local draft · 3 / 4
+-REC-03v2[accepted]:OptionallyprepareaseparatesummaryofexistingSMScluesforhumanassessment.
+Basis:EX-G03v1;SYNBankA/IntakeOfficer;priority3:Optional,lowerpriority.
+Limit/uncertainty:Approvedsyntheticprototypeguidanceonly;noauthorityforreal-worldaction.
+Limit/uncertainty:AlsorequiresexistingSMScluesandsourcereferences;thislimiteddraftisnotaruntime
+matcher.
+Limit/uncertainty:Theemployeemaydeclineduplicatepreparation;rejectionretainsfactsandgaps.
+Limit/uncertainty:DonotrequestnewmaterialsorclaimtheSMSisverified.
+Limit/uncertainty:ExistingSMScluesandsourcesonly;maybedeclinedasduplicate.
+Limit/uncertainty:Humanstaffdecidewhetheraseparateexisting-cluesummaryisuseful;nonew
+materialsarerequired.
+Limit/uncertainty:ReportedsourceS1:Ireceivedatextmessageat09:00on16October2026claimingtobe
+SYNBankAandsayingthatmyaccountneededverification.
+Limit/uncertainty:ReportedsourceS5:Ihavethetextmessageonmyphone,butIhavenotprovidedany
+materialtotheemployee.
+SYNTHETIC local draft · 4 / 4
+

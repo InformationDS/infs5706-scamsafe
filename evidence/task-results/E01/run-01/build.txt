@@ -1,0 +1,21 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> scamsafe-foundation@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 141 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                      0.41 kB │ gzip:   0.29 kB
+dist/assets/model-CpaafGWh.css       1.07 kB │ gzip:   0.46 kB
+dist/assets/outputs-kFVO9QfO.css     1.68 kB │ gzip:   0.61 kB
+dist/assets/guidance-DudkHbyd.css    2.66 kB │ gzip:   0.83 kB
+dist/assets/index-BA4m7Ifz.css       5.54 kB │ gzip:   1.73 kB
+dist/assets/model-Ec4hTq9G.js        6.73 kB │ gzip:   2.65 kB
+dist/assets/guidance-D9CYcKTj.js     7.78 kB │ gzip:   2.67 kB
+dist/assets/outputs-FQmIUC2X.js      8.92 kB │ gzip:   3.28 kB
+dist/assets/index-DzKiVpge.js      418.99 kB │ gzip: 124.85 kB
+
+✓ built in 176ms

@@ -1,0 +1,32 @@
+✔ E01 generates current values with uncertainty, sources, version and no borrowed approval (36.617887ms)
+✔ E01 same gate requires current unsimulated review and saved, checked facts (46.279845ms)
+✔ E01 single edit invalidates bank alone; exact dependency change invalidates shared outputs (38.671145ms)
+✔ E01 protects employee text and keeps previous bodies after explicit replacement (29.329697ms)
+✔ E01 D rejection never becomes a pending action; unrelated bank review survives (22.994976ms)
+✔ E01 no effective guidance gives factual summary only, never recipient paths (49.474808ms)
+✔ E01 pending / mocked decisions cannot be reviewed or exported; available means actual D matching (16.090964ms)
+✔ E01 precision includes added facts and missing dependency references; stale basis cannot be rebased by edit (17.374526ms)
+✔ E01 unified HTML / Markdown render text safely and use same snapshot (26.409407ms)
+✔ E01 output failure preserves saved body and review; same version retry succeeds (27.951838ms)
+✖ E01 actual UI review, editing, storage, copy, HTTP export and PDF stress exercise (32242.468431ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 10
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 33518.79428
+
+✖ failing tests:
+
+test at tests/outputs.test.ts:1:8563
+✖ E01 actual UI review, editing, storage, copy, HTTP export and PDF stress exercise (32242.468431ms)
+  locator.selectOption: Timeout 30000ms exceeded.
+  Call log:
+  [2m  - waiting for getByRole('region', { name: 'E01 final review and outputs' }).getByLabel('E draft selection', { exact: true })[22m
+  
+      at TestContext.<anonymous> (/workspace/scratch/65e879aae433/infs5706-scamsafe/tests/outputs.test.ts:183:62) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for getByRole('region', { name: 'E01 final review and outputs' }).getByLabel('E draft selection', { exact: true })" ]
+  }

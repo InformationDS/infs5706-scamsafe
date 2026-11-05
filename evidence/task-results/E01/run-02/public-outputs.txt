@@ -1,0 +1,15 @@
+/workspace/scratch/65e879aae433/infs5706-scamsafe/tests/module-browser.ts:102
+if (failure) throw new Error(failure);
+                   ^
+
+Error: Error: locator.selectOption: Error: strict mode violation: getByLabel('Output object') resolved to 2 elements:
+    1) <select>…</select> aka getByLabel('E output objectSUMMARY')
+    2) <select>…</select> aka getByLabel('Output object SUMMARYHANDOVER')
+
+Call log:
+[2m  - waiting for getByLabel('Output object')[22m
+
+    at <anonymous> (/workspace/scratch/65e879aae433/infs5706-scamsafe/tests/module-browser.ts:102:20)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v24.22.1

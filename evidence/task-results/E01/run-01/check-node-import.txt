@@ -1,0 +1,953 @@
+✔ approved baseline preserves fixed inputs, boundaries and conditional expected decisions (5.617265ms)
+✔ business schemas reject pending guidance and invalid approved references (11.676782ms)
+✔ modified content fails the approved artifact hash check (3.653728ms)
+✔ approved business API is distinct from legacy mock case approval (60.998917ms)
+✔ all fixed states validate without business approval or enabled roles (52.872154ms)
+✔ case entrypoints require complete handovers and a configured teaching recipient (11.115802ms)
+✔ single-case fact semantics reject wrong types and missing record targets while preserving false versus unknown (20.380023ms)
+✔ manual amount correction is preserved as model conflict and history survives (1.543996ms)
+✔ model cannot impersonate employee review or invent source references (1.921975ms)
+✔ equal analysis with changed request provenance does not change content or review (1.755769ms)
+✔ unknown amount is separate; independent transactions group by currency and state (1.394584ms)
+✔ partial answer retains round; stop and later answer update original without new count (1.894824ms)
+✔ rounds require display and save and enforce 3 per round, 3 rounds, 9 total (3.348016ms)
+✔ dependency invalidation is per object and old reviews remain as history (7.106809ms)
+✔ snapshot gate blocks unsaved, stale review, modified body and requires explicit simulated marker (10.732274ms)
+✔ old case and superseded same-version requests cannot overwrite facts or reviews (3.963436ms)
+✔ summary and handover contracts keep recipient and recommendation boundaries explicit (3.661199ms)
+✔ recommendation schema requires traceable simulated decisions without enabling business content (9.981403ms)
+✔ T09 matches approved facts and source context; generated decisions start pending (28.775129ms)
+✔ repeated matching and unchanged package reload do not create new versions or review requirements (17.569413ms)
+✔ reject REC-03, recalculate and reload preserve its ID, reason, history and all facts (29.348302ms)
+✔ rejection invalidates only outputs depending on the changed recommendation (28.618897ms)
+✔ employee editing retains original content and survives acceptance and recomputation (7.163202ms)
+✔ decision validation requires actor, reasons and current basis (3.886427ms)
+✔ conflict E09 omits only EX-G01 (1.641629ms)
+✔ not-applicable E09 omits only EX-G01 (1.588161ms)
+✔ completed debit, unapproved bank and missing required SMS are not filled from type labels (3.561622ms)
+✔ provider context and SMS clue sources are individually necessary (8.360083ms)
+✔ altered, unapproved, expired and duplicate definitions never authorise steps (10.102673ms)
+✔ restricted permissions and guidance changes retain facts, first-review history and question counts (21.259235ms)
+✔ a fact version update invalidates only recommendations depending on it (5.182771ms)
+✔ no-guidance has fixed message and summary-only eligibility without recipients or fabricated actions (2.06076ms)
+✔ rejected records remain historical during loss and restoration of guidance (9.464609ms)
+✔ settings DTO never returns keys; blank preserves and explicit clear removes credentials (3.20962ms)
+✔ settings validation rejects incomplete live mode, unsafe URLs, unknown fields and invalid headers (1.35832ms)
+✔ local atomic persistence restores after restart and explicit cleared key overrides env fallback (2.403957ms)
+✔ failed persistence returns safe 503 and retains last settings in memory (83.451162ms)
+✔ settings routes enforce host/origin, strict input and never echo secrets (45.860686ms)
+✔ saved settings immediately route real adapter to local fake provider without external calls (118.826886ms)
+✔ C01 Mock T09 returns sourced proposals without invoking provider or mutating case (24.185897ms)
+✔ C01 corrected, unknown, partial, stopped and limit cases retain employee state and counters (46.120701ms)
+✔ C01 Mock refuses unrelated narratives and supports explicit fault checks (7.091496ms)
+✔ C01 live request isolates instructions/configuration, preserves Chinese narrative and uses source schema (100.065502ms)
+✔ C01 accepts new repeated records and additional fields on existing records (16.116764ms)
+✔ C01 rejects forged facts, identifiers, source references, review claims and extra nested properties (80.906858ms)
+✔ C01 rejects question counter bypass, answered proposals, duplicate targets and pending/unknown repeats (56.556987ms)
+✔ C01 provider failures are safe, bounded and retryable where appropriate (231.158412ms)
+✔ C01 HTTP route rejects results when API settings change during a request (52.384142ms)
+✔ C01 rejects a stale input ticket without a provider call (5.516675ms)
+✔ C01 free narrative can start with no extracted facts and retain distinct currencies/unknown/false (6.646808ms)
+﹣ C01 actual browser: analysis, corrected values, errors, settings, stale responses and backups (0.185024ms) # SKIP
+✖ E01 generates current values with uncertainty, sources, version and no borrowed approval (93.924954ms)
+✔ E01 same gate requires current unsimulated review and saved, checked facts (82.167172ms)
+✖ E01 single edit invalidates bank alone; exact dependency change invalidates shared outputs (51.825063ms)
+✖ E01 protects employee text and keeps previous bodies after explicit replacement (30.065879ms)
+✔ E01 D rejection never becomes a pending action; unrelated bank review survives (38.438881ms)
+✔ E01 no effective guidance gives factual summary only, never recipient paths (57.489438ms)
+✔ E01 pending / mocked decisions cannot be reviewed or exported; available means actual D matching (16.636302ms)
+✔ E01 precision includes added facts and missing dependency references; stale basis cannot be rebased by edit (36.894676ms)
+✔ E01 unified HTML / Markdown render text safely and use same snapshot (31.921125ms)
+✔ E01 output failure preserves saved body and review; same version retry succeeds (22.112017ms)
+﹣ E01 actual UI review, editing, storage, copy, HTTP export and PDF stress exercise (0.18915ms) # SKIP
+✔ all independent runtime inputs validate, future answers do not leak into initial sources (80.836422ms)
+✔ correction and delayed identity cannot overwrite 200 or current 250 (3.941564ms)
+✔ partial, unknown, stopped and 3/9 counters remain distinct independent inputs (29.606284ms)
+✔ single edit, rejected recommendation and shared context invalidate only dependencies (17.639508ms)
+✔ mock review never becomes actual employee review; unsaved output is blocked (5.140729ms)
+✔ backup rejects version, missing references, duplicate targets; unsaved import guarded (17.775789ms)
+✔ runtime routes use injected registrations and validate identity; explicit mock never calls provider (166.859472ms)
+✔ health exposes configuration status, never credential values (51.071069ms)
+✔ mock analysis is deterministic and rejects arbitrary modified facts and client configuration (76.386276ms)
+✔ mock fault responses preserve supplied case and identify timeout/invalid separately (9.416446ms)
+✔ foreign origins and DNS rebinding hosts cannot call local API (10.5608ms)
+✔ Markdown export requires current saved simulated review (29.388096ms)
+✔ OpenAI-compatible adapter uses a local fake provider, validates output, and redacts external errors (344.853469ms)
+✔ missing live configuration makes no provider call (4.792694ms)
+ℹ tests 76
+ℹ suites 0
+ℹ pass 71
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 2756.404327
+
+✖ failing tests:
+
+test at tests/outputs.test.ts:1:1284
+✖ E01 generates current values with uncertainty, sources, version and no borrowed approval (93.924954ms)
+  AssertionError [ERR_ASSERTION]: identical regeneration is a no-op
+  + actual - expected
+  ... Skipped lines
+  
+    {
+      analysis: {
+        alternatives: [
+          "Sender identity and the debit's connection to the SMS are unverified."
+        ],
+  ...
+          employeeEdited: false,
+  +       history: [
+  +         {
+  +           actor: 'SYSTEM',
+  +           previous: 'SYNTHETIC · Content approval pending · Local draft only. Reported information is not independently verified. No action, delivery or referral has been performed.\n' +
+  +             '\n' +
+  +             '## Current reported facts\n' +
+  +             '| Field / record | Current reported value | Status / check | Sources |\n' +
+  +             '| --- | --- | --- | --- |\n' +
+  +             '| B01: | Person concerned | extracted / checked | S1, S2, S3, S4, S5 |\n' +
+  +             '| C02:CONTACT-01 | 16 October 2026 09:00 Australia/Sydney | extracted / checked | S1 |\n' +
+  +             '| C03:CONTACT-01 | SMS | extracted / checked | S1 |\n' +
+  +             '| C04:CONTACT-01 | Claims to be SYN Bank A | extracted / checked | S1 |\n' +
+  +             '| C06:CONTACT-01 | verify-bank.example | extracted / checked | S2 |\n' +
+  +             '| C08:CONTACT-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| D04:EVENT-01 | Opened the link and entered banking password and one-time code categories; no secret values recorded. | extracted / checked | S2 |\n' +
+  +             '| E01: | Reported debit | extracted / checked | S3 |\n' +
+  +             '| E02:TX-01 | TX-01 | extracted / checked | S3 |\n' +
+  +             '| E03:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E04:TX-01 | 200 | extracted / corrected | S3 |\n' +
+  +             '| E05:TX-01 | AUD | extracted / checked | S3 |\n' +
+  +             '| E06:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E07:TX-01 | SYN Bank A | extracted / checked | S3 |\n' +
+  +             '| E08:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E09:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| F01: | true | extracted / checked | S2 |\n' +
+  +             '| F02: | Banking password; One-time code | extracted / checked | S2 |\n' +
+  +             '| F03: | Linked page | extracted / checked | S2 |\n' +
+  +             '| F05: | SYN Bank A online banking | extracted / checked | S2, S3 |\n' +
+  +             '| F06: | Unfamiliar debit | extracted / checked | S3 |\n' +
+  +             '| F07: | 16 October 2026 09:30 Australia/Sydney | extracted / checked | S3 |\n' +
+  +             '| J02:EVID-01 | Text message | extracted / checked | S5 |\n' +
+  +             '| J04:EVID-01 | Reported available on phone; not provided or verified | extracted / checked | S5 |\n' +
+  +             '\n' +
+  +             'Amounts are reported values, not verified losses. Transactions remain separate by record, currency and status; unknown values are not zero.\n' +
+  +             '\n' +
+  +             '## Candidate analysis (not a confirmed scam finding)\n' +
+  +             '- Suspected phishing\n' +
+  +             '- Basis: CONTACT-01: reported bank impersonation SMS; EVENT-01: reported credential entry.\n' +
+  +             "- Uncertainty: Sender identity and the debit's connection to the SMS are unverified.\n" +
+  +             '- Gap: Transaction time\n' +
+  +             '- Gap: Payment method\n' +
+  +             '- Gap: Recipient\n' +
+  +             '- Gap: Continuing contact\n' +
+  +             '\n' +
+  +             '## Unresolved information\n' +
+  +             '- C08:CONTACT-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E03:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E06:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E08:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E09:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '\n' +
+  +             '## Reported sources and correction history (historical wording may differ from current values)\n' +
+  +             '- S1 (narrative): I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '- S2 (narrative): I opened the link at verify-bank.example and entered my online banking password and a one-time code.\n' +
+  +             '- S3 (narrative): At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n' +
+  +             '- S4 (narrative): I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n' +
+  +             '- S5 (narrative): I have the text message on my phone, but I have not provided any material to the employee.\n' +
+  +             '- CORRECTION-01 (correction): The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000.\n' +
+  +             '- E04:TX-01 previous 2000: The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000. [S3]\n' +
+  +             '\n' +
+  +             '## Recorded responses and follow-up\n' +
+  +             'Rounds: 0; questions: 0; stopped: false.\n' +
+  +             'No external execution or receipt is established by this local record.\n' +
+  +             '\n' +
+  +             '## Proposed local preparation (acceptance is not execution)\n' +
+  +             '- REC-01 v2 [accepted]: Prepare a local internal human assessment record.\n' +
+  +             '  Basis: EX-G01 v1; SYN Bank A / Intake Officer; priority 1: Prioritise human assessment of the reported pending unfamiliar debit.\n' +
+  +             '  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n' +
+  +             '  Limit / uncertainty: EXAMPLE-01 teaching target TX-01 only.\n' +
+  +             '  Limit / uncertainty: E09 conflicts, reported completed and payment requested are outside this teaching entry.\n' +
+  +             '  Limit / uncertainty: The human specialist decides further assessment; no freeze, refund or recovery promised.\n' +
+  +             '  Limit / uncertainty: May be prepared in parallel with REC-02; transaction facts remain reported and unverified.\n' +
+  +             '  Limit / uncertainty: A designated bank human specialist decides further assessment; the intake role performs no account or transaction action.\n' +
+  +             '  Limit / uncertainty: E09:TX-01: unknown; local preparation only.\n' +
+  +             '  Limit / uncertainty: Reported source S3: At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n' +
+  +             '- REC-02 v2 [accepted]: Prepare a local SYN Telco B human intake draft.\n' +
+  +             '  Basis: EX-G02 v1; SYN Bank A / Intake Officer; priority 2: Prepare in parallel with REC-01.\n' +
+  +             '  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n' +
+  +             "  Limit / uncertainty: Also requires S4 to explicitly identify SYN Telco B as the person's mobile provider and configured human intake responsibilities; this limited draft is not a runtime matcher.\n" +
+  +             '  Limit / uncertainty: Unknown sharing permission permits local drafting only; no sharing or verification asserted.\n' +
+  +             '  Limit / uncertainty: Do not infer SIM swapping or change a mobile service.\n' +
+  +             '  Limit / uncertainty: External sharing would require human verification of permission and receiver remit; no sending occurs.\n' +
+  +             '  Limit / uncertainty: The receiving human intake team verifies whether the concern falls within its remit; sharing permission remains unverified.\n' +
+  +             '  Limit / uncertainty: C08:CONTACT-01: unknown; preserve this gap.\n' +
+  +             '  Limit / uncertainty: O07:: unknown; preserve this gap.\n' +
+  +             '  Limit / uncertainty: Reported source S1: I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '  Limit / uncertainty: Reported source S4: I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n' +
+  +             '- REC-03 v2 [accepted]: Optionally prepare a separate summary of existing SMS clues for human assessment.\n' +
+  +             '  Basis: EX-G03 v1; SYN Bank A / Intake Officer; priority 3: Optional, lower priority.\n' +
+  +             '  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n' +
+  +             '  Limit / uncertainty: Also requires existing SMS clues and source references; this limited draft is not a runtime matcher.\n' +
+  +             '  Limit / uncertainty: The employee may decline duplicate preparation; rejection retains facts and gaps.\n' +
+  +             '  Limit / uncertainty: Do not request new materials or claim the SMS is verified.\n' +
+  +             '  Limit / uncertainty: Existing SMS clues and sources only; may be declined as duplicate.\n' +
+  +             '  Limit / uncertainty: Human staff decide whether a separate existing-clue summary is useful; no new materials are required.\n' +
+  +             '  Limit / uncertainty: Reported source S1: I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '  Limit / uncertainty: Reported source S5: I have the text message on my phone, but I have not provided any material to the employee.\n',
+  +           reason: 'Regenerated on current structured facts and guidance; prior body retained.'
+  +         }
+  +       ],
+  -       history: [],
+          id: 'SUMMARY',
+          kind: 'summary',
+          recommendationIds: [
+            'REC-01',
+            'REC-02',
+  ...
+          title: 'Unified factual summary',
+  +       version: 2
+  -       version: 1
+        },
+        {
+          body: 'SYNTHETIC · Content approval pending · Local draft only. Reported information is not independently verified. No action, delivery or referral has been performed.\n' +
+            '\n' +
+            '## Current reported facts\n' +
+  ...
+          employeeEdited: false,
+  +       history: [
+  +         {
+  +           actor: 'SYSTEM',
+  +           previous: 'SYNTHETIC · Content approval pending · Local draft only. Reported information is not independently verified. No action, delivery or referral has been performed.\n' +
+  +             '\n' +
+  +             '## Current reported facts\n' +
+  +             '| Field / record | Current reported value | Status / check | Sources |\n' +
+  +             '| --- | --- | --- | --- |\n' +
+  +             '| B01: | Person concerned | extracted / checked | S1, S2, S3, S4, S5 |\n' +
+  +             '| C02:CONTACT-01 | 16 October 2026 09:00 Australia/Sydney | extracted / checked | S1 |\n' +
+  +             '| C03:CONTACT-01 | SMS | extracted / checked | S1 |\n' +
+  +             '| C04:CONTACT-01 | Claims to be SYN Bank A | extracted / checked | S1 |\n' +
+  +             '| C06:CONTACT-01 | verify-bank.example | extracted / checked | S2 |\n' +
+  +             '| C08:CONTACT-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| D04:EVENT-01 | Opened the link and entered banking password and one-time code categories; no secret values recorded. | extracted / checked | S2 |\n' +
+  +             '| E01: | Reported debit | extracted / checked | S3 |\n' +
+  +             '| E02:TX-01 | TX-01 | extracted / checked | S3 |\n' +
+  +             '| E03:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E04:TX-01 | 200 | extracted / corrected | S3 |\n' +
+  +             '| E05:TX-01 | AUD | extracted / checked | S3 |\n' +
+  +             '| E06:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E07:TX-01 | SYN Bank A | extracted / checked | S3 |\n' +
+  +             '| E08:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E09:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| F01: | true | extracted / checked | S2 |\n' +
+  +             '| F02: | Banking password; One-time code | extracted / checked | S2 |\n' +
+  +             '| F03: | Linked page | extracted / checked | S2 |\n' +
+  +             '| F05: | SYN Bank A online banking | extracted / checked | S2, S3 |\n' +
+  +             '| F06: | Unfamiliar debit | extracted / checked | S3 |\n' +
+  +             '| F07: | 16 October 2026 09:30 Australia/Sydney | extracted / checked | S3 |\n' +
+  +             '| J02:EVID-01 | Text message | extracted / checked | S5 |\n' +
+  +             '| J04:EVID-01 | Reported available on phone; not provided or verified | extracted / checked | S5 |\n' +
+  +             '\n' +
+  +             'Amounts are reported values, not verified losses. Transactions remain separate by record, currency and status; unknown values are not zero.\n' +
+  +             '\n' +
+  +             '## Candidate analysis (not a confirmed scam finding)\n' +
+  +             '- Suspected phishing\n' +
+  +             '- Basis: CONTACT-01: reported bank impersonation SMS; EVENT-01: reported credential entry.\n' +
+  +             "- Uncertainty: Sender identity and the debit's connection to the SMS are unverified.\n" +
+  +             '- Gap: Transaction time\n' +
+  +             '- Gap: Payment method\n' +
+  +             '- Gap: Recipient\n' +
+  +             '- Gap: Continuing contact\n' +
+  +             '\n' +
+  +             '## Unresolved information\n' +
+  +             '- C08:CONTACT-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E03:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E06:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E08:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E09:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '\n' +
+  +             '## Reported sources and correction history (historical wording may differ from current values)\n' +
+  +             '- S1 (narrative): I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '- S2 (narrative): I opened the link at verify-bank.example and entered my online banking password and a one-time code.\n' +
+  +             '- S3 (narrative): At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n' +
+  +             '- S4 (narrative): I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n' +
+  +             '- S5 (narrative): I have the text message on my phone, but I have not provided any material to the employee.\n' +
+  +             '- CORRECTION-01 (correction): The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000.\n' +
+  +             '- E04:TX-01 previous 2000: The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000. [S3]\n' +
+  +             '\n' +
+  +             '## Recorded responses and follow-up\n' +
+  +             'Rounds: 0; questions: 0; stopped: false.\n' +
+  +             'No external execution or receipt is established by this local record.\n' +
+  +             '\n' +
+  +             '\n' +
+  +             '## Intended recipient\n' +
+  +             'SYN Bank A / designated human review team\n' +
+  +             'Human verification and assessment of reported unfamiliar debits, credential exposure and transaction information; the prototype only prepares a local draft.\n' +
+  +             'Sharing permission remains unverified unless explicitly recorded. No sending performed.\n' +
+  +             '\n' +
+  +             '## Proposed local preparation (acceptance is not execution)\n' +
+  +             '- REC-01 v2 [accepted]: Prepare a local internal human assessment record.\n' +
+  +             '  Basis: EX-G01 v1; SYN Bank A / Intake Officer; priority 1: Prioritise human assessment of the reported pending unfamiliar debit.\n' +
+  +             '  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n' +
+  +             '  Limit / uncertainty: EXAMPLE-01 teaching target TX-01 only.\n' +
+  +             '  Limit / uncertainty: E09 conflicts, reported completed and payment requested are outside this teaching entry.\n' +
+  +             '  Limit / uncertainty: The human specialist decides further assessment; no freeze, refund or recovery promised.\n' +
+  +             '  Limit / uncertainty: May be prepared in parallel with REC-02; transaction facts remain reported and unverified.\n' +
+  +             '  Limit / uncertainty: A designated bank human specialist decides further assessment; the intake role performs no account or transaction action.\n' +
+  +             '  Limit / uncertainty: E09:TX-01: unknown; local preparation only.\n' +
+  +             '  Limit / uncertainty: Reported source S3: At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n',
+  +           reason: 'Regenerated on current structured facts and guidance; prior body retained.'
+  +         }
+  +       ],
+  -       history: [],
+          id: 'HANDOVER-BANK',
+          kind: 'handover',
+          recipient: {
+            id: 'HANDOVER-BANK',
+            title: 'SYN Bank A / designated human review team'
+  ...
+          title: 'Local draft for SYN Bank A / designated human review team',
+  +       version: 2
+  -       version: 1
+        },
+        {
+          body: 'SYNTHETIC · Content approval pending · Local draft only. Reported information is not independently verified. No action, delivery or referral has been performed.\n' +
+            '\n' +
+            '## Current reported facts\n' +
+  ...
+          employeeEdited: false,
+  +       history: [
+  +         {
+  +           actor: 'SYSTEM',
+  +           previous: 'SYNTHETIC · Content approval pending · Local draft only. Reported information is not independently verified. No action, delivery or referral has been performed.\n' +
+  +             '\n' +
+  +             '## Current reported facts\n' +
+  +             '| Field / record | Current reported value | Status / check | Sources |\n' +
+  +             '| --- | --- | --- | --- |\n' +
+  +             '| B01: | Person concerned | extracted / checked | S1, S2, S3, S4, S5 |\n' +
+  +             '| C02:CONTACT-01 | 16 October 2026 09:00 Australia/Sydney | extracted / checked | S1 |\n' +
+  +             '| C03:CONTACT-01 | SMS | extracted / checked | S1 |\n' +
+  +             '| C04:CONTACT-01 | Claims to be SYN Bank A | extracted / checked | S1 |\n' +
+  +             '| C06:CONTACT-01 | verify-bank.example | extracted / checked | S2 |\n' +
+  +             '| C08:CONTACT-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| D04:EVENT-01 | Opened the link and entered banking password and one-time code categories; no secret values recorded. | extracted / checked | S2 |\n' +
+  +             '| E01: | Reported debit | extracted / checked | S3 |\n' +
+  +             '| E02:TX-01 | TX-01 | extracted / checked | S3 |\n' +
+  +             '| E03:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E04:TX-01 | 200 | extracted / corrected | S3 |\n' +
+  +             '| E05:TX-01 | AUD | extracted / checked | S3 |\n' +
+  +             '| E06:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E07:TX-01 | SYN Bank A | extracted / checked | S3 |\n' +
+  +             '| E08:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E09:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| F01: | true | extracted / checked | S2 |\n' +
+  +             '| F02: | Banking password; One-time code | extracted / checked | S2 |\n' +
+  +             '| F03: | Linked page | extracted / checked | S2 |\n' +
+  +             '| F05: | SYN Bank A online banking | extracted / checked | S2, S3 |\n' +
+  +             '| F06: | Unfamiliar debit | extracted / checked | S3 |\n' +
+  +             '| F07: | 16 October 2026 09:30 Australia/Sydney | extracted / checked | S3 |\n' +
+  +             '| J02:EVID-01 | Text message | extracted / checked | S5 |\n' +
+  +             '| J04:EVID-01 | Reported available on phone; not provided or verified | extracted / checked | S5 |\n' +
+  +             '\n' +
+  +             'Amounts are reported values, not verified losses. Transactions remain separate by record, currency and status; unknown values are not zero.\n' +
+  +             '\n' +
+  +             '## Candidate analysis (not a confirmed scam finding)\n' +
+  +             '- Suspected phishing\n' +
+  +             '- Basis: CONTACT-01: reported bank impersonation SMS; EVENT-01: reported credential entry.\n' +
+  +             "- Uncertainty: Sender identity and the debit's connection to the SMS are unverified.\n" +
+  +             '- Gap: Transaction time\n' +
+  +             '- Gap: Payment method\n' +
+  +             '- Gap: Recipient\n' +
+  +             '- Gap: Continuing contact\n' +
+  +             '\n' +
+  +             '## Unresolved information\n' +
+  +             '- C08:CONTACT-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E03:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E06:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E08:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E09:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '\n' +
+  +             '## Reported sources and correction history (historical wording may differ from current values)\n' +
+  +             '- S1 (narrative): I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '- S2 (narrative): I opened the link at verify-bank.example and entered my online banking password and a one-time code.\n' +
+  +             '- S3 (narrative): At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n' +
+  +             '- S4 (narrative): I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n' +
+  +             '- S5 (narrative): I have the text message on my phone, but I have not provided any material to the employee.\n' +
+  +             '- CORRECTION-01 (correction): The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000.\n' +
+  +             '- E04:TX-01 previous 2000: The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000. [S3]\n' +
+  +             '\n' +
+  +             '## Recorded responses and follow-up\n' +
+  +             'Rounds: 0; questions: 0; stopped: false.\n' +
+  +             'No external execution or receipt is established by this local record.\n' +
+  +             '\n' +
+  +             '\n' +
+  +             '## Intended recipient\n' +
+  +             'SYN Telco B / designated human intake team\n' +
+  +             'Human assessment of whether the reported SMS concern falls within the mobile provider remit; do not assume the provider sent the SMS or that SIM swapping occurred. Local draft only; sharing permission unverified.\n' +
+  +             'Sharing permission remains unverified unless explicitly recorded. No sending performed.\n' +
+  +             '\n' +
+  +             '## Proposed local preparation (acceptance is not execution)\n' +
+  +             '- REC-02 v2 [accepted]: Prepare a local SYN Telco B human intake draft.\n' +
+  +             '  Basis: EX-G02 v1; SYN Bank A / Intake Officer; priority 2: Prepare in parallel with REC-01.\n' +
+  +             '  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n' +
+  +             "  Limit / uncertainty: Also requires S4 to explicitly identify SYN Telco B as the person's mobile provider and configured human intake responsibilities; this limited draft is not a runtime matcher.\n" +
+  +             '  Limit / uncertainty: Unknown sharing permission permits local drafting only; no sharing or verification asserted.\n' +
+  +             '  Limit / uncertainty: Do not infer SIM swapping or change a mobile service.\n' +
+  +             '  Limit / uncertainty: External sharing would require human verification of permission and receiver remit; no sending occurs.\n' +
+  +             '  Limit / uncertainty: The receiving human intake team verifies whether the concern falls within its remit; sharing permission remains unverified.\n' +
+  +             '  Limit / uncertainty: C08:CONTACT-01: unknown; preserve this gap.\n' +
+  +             '  Limit / uncertainty: O07:: unknown; preserve this gap.\n' +
+  +             '  Limit / uncertainty: Reported source S1: I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '  Limit / uncertainty: Reported source S4: I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n' +
+  +             '- REC-03 v2 [accepted]: Optionally prepare a separate summary of existing SMS clues for human assessment.\n' +
+  +             '  Basis: EX-G03 v1; SYN Bank A / Intake Officer; priority 3: Optional, lower priority.\n' +
+  +             '  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n' +
+  +             '  Limit / uncertainty: Also requires existing SMS clues and source references; this limited draft is not a runtime matcher.\n' +
+  +             '  Limit / uncertainty: The employee may decline duplicate preparation; rejection retains facts and gaps.\n' +
+  +             '  Limit / uncertainty: Do not request new materials or claim the SMS is verified.\n' +
+  +             '  Limit / uncertainty: Existing SMS clues and sources only; may be declined as duplicate.\n' +
+  +             '  Limit / uncertainty: Human staff decide whether a separate existing-clue summary is useful; no new materials are required.\n' +
+  +             '  Limit / uncertainty: Reported source S1: I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '  Limit / uncertainty: Reported source S5: I have the text message on my phone, but I have not provided any material to the employee.\n',
+  +           reason: 'Regenerated on current structured facts and guidance; prior body retained.'
+  +         }
+  +       ],
+  -       history: [],
+          id: 'HANDOVER-TELCO',
+          kind: 'handover',
+          recipient: {
+            id: 'HANDOVER-TELCO',
+            title: 'SYN Telco B / designated human intake team'
+  ...
+          title: 'Local draft for SYN Telco B / designated human intake team',
+  +       version: 2
+  -       version: 1
+        }
+      ],
+      recommendations: [
+        {
+          contentApproval: 'pending',
+  ...
+      synthetic: true,
+  +   version: 8
+  -   version: 7
+    }
+  
+      at TestContext.<anonymous> (/workspace/scratch/65e879aae433/infs5706-scamsafe/tests/outputs.test.ts:32:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: {
+      schemaVersion: 2,
+      synthetic: true,
+      mode: 'mock',
+      contentApproval: 'pending',
+      caseId: 'EXAMPLE-01',
+      evaluationId: 'T09',
+      version: 8,
+      stage: 'corrected',
+      role: { id: 'EX-ROLE-01', version: 1, organisation: 'SYN Bank A', title: 'Intake Officer', permissions: [Array], recipients: [Array], contentApproval: 'approved', enabled: true, synthetic: true, approvalRef: 'BUSINESS-BASELINE-01', excludedActions: [Array], recipientResponsibilities: [Object] },
+      facts: [
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object]
+      ],
+      analysis: { version: 1, basedOnCaseVersion: 1, source: 'mock', types: [Array], reasons: [Array], alternatives: [Array], gaps: [Array], facts: [], guidanceStatus: 'unapproved', recommendations: [] },
+      followUp: { rounds: 0, totalQuestions: 0, stopped: false, questions: [] },
+      outputs: [ [Object], [Object], [Object] ],
+      reviews: [ [Object] ],
+      saved: false,
+      needsFactConfirmation: false,
+      recommendations: [ [Object], [Object], [Object] ],
+      roleRevision: 1,
+      guidanceRevision: 1,
+      guidelines: [ [Object], [Object], [Object] ],
+      guidanceStatus: 'available',
+      sources: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+      instanceId: 'fixture-instance'
+    },
+    expected: {
+      schemaVersion: 2,
+      synthetic: true,
+      mode: 'mock',
+      contentApproval: 'pending',
+      caseId: 'EXAMPLE-01',
+      evaluationId: 'T09',
+      version: 7,
+      stage: 'corrected',
+      role: { id: 'EX-ROLE-01', version: 1, organisation: 'SYN Bank A', title: 'Intake Officer', permissions: [Array], recipients: [Array], contentApproval: 'approved', enabled: true, synthetic: true, approvalRef: 'BUSINESS-BASELINE-01', excludedActions: [Array], recipientResponsibilities: [Object] },
+      facts: [
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object]
+      ],
+      analysis: { version: 1, basedOnCaseVersion: 1, source: 'mock', types: [Array], reasons: [Array], alternatives: [Array], gaps: [Array], facts: [], guidanceStatus: 'unapproved', recommendations: [] },
+      followUp: { rounds: 0, totalQuestions: 0, stopped: false, questions: [] },
+      outputs: [ [Object], [Object], [Object] ],
+      reviews: [ [Object] ],
+      saved: false,
+      needsFactConfirmation: false,
+      recommendations: [ [Object], [Object], [Object] ],
+      roleRevision: 1,
+      guidanceRevision: 1,
+      guidelines: [ [Object], [Object], [Object] ],
+      guidanceStatus: 'available',
+      sources: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+      instanceId: 'fixture-instance'
+    },
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/outputs.test.ts:1:2679
+✖ E01 single edit invalidates bank alone; exact dependency change invalidates shared outputs (51.825063ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /E04:TX-01 \| 250/. Input:
+  
+  'SYNTHETIC · Content approval pending · Local draft only. Reported information is not independently verified. No action, delivery or referral has been performed.\n' +
+    '\n' +
+    '## Current reported facts\n' +
+    '| Field / record | Current reported value | Status / check | Sources |\n' +
+    '| --- | --- | --- | --- |\n' +
+    '| B01: | Person concerned | extracted / checked | S1, S2, S3, S4, S5 |\n' +
+    '| C02:CONTACT-01 | 16 October 2026 09:00 Australia/Sydney | extracted / checked | S1 |\n' +
+    '| C03:CONTACT-01 | SMS | extracted / checked | S1 |\n' +
+    '| C04:CONTACT-01 | Claims to be SYN Bank A | extracted / checked | S1 |\n' +
+    '| C06:CONTACT-01 | verify-bank.example | extracted / checked | S2 |\n' +
+    '| C08:CONTACT-01 | Unknown / not supplied | missing / checked | None |\n' +
+    '| D04:EVENT-01 | Opened the link and entered banking password and one-time code categories; no secret values recorded. | extracted / checked | S2 |\n' +
+    '| E01: | Reported debit | extracted / checked | S3 |\n' +
+    '| E02:TX-01 | TX-01 | extracted / checked | S3 |\n' +
+    '| E03:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+    '| E04:TX-01 | 200 | extracted / corrected | S3 |\n' +
+    '| E05:TX-01 | AUD | extracted / checked | S3 |\n' +
+    '| E06:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+    '| E07:TX-01 | SYN Bank A | extracted / checked | S3 |\n' +
+    '| E08:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+    '| E09:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+    '| F01: | true | extracted / checked | S2 |\n' +
+    '| F02: | Banking password; One-time code | extracted / checked | S2 |\n' +
+    '| F03: | Linked page | extracted / checked | S2 |\n' +
+    '| F05: | SYN Bank A online banking | extracted / checked | S2, S3 |\n' +
+    '| F06: | Unfamiliar debit | extracted / checked | S3 |\n' +
+    '| F07: | 16 October 2026 09:30 Australia/Sydney | extracted / checked | S3 |\n' +
+    '| J02:EVID-01 | Text message | extracted / checked | S5 |\n' +
+    '| J04:EVID-01 | Reported available on phone; not provided or verified | extracted / checked | S5 |\n' +
+    '\n' +
+    'Amounts are reported values, not verified losses. Transactions remain separate by record, currency and status; unknown values are not zero.\n' +
+    '\n' +
+    '## Candidate analysis (not a confirmed scam finding)\n' +
+    '- Suspected phishing\n' +
+    '- Basis: CONTACT-01: reported bank impersonation SMS; EVENT-01: reported credential entry.\n' +
+    "- Uncertainty: Sender identity and the debit's connection to the SMS are unverified.\n" +
+    '- Gap: Transaction time\n' +
+    '- Gap: Payment method\n' +
+    '- Gap: Recipient\n' +
+    '- Gap: Continuing contact\n' +
+    '\n' +
+    '## Unresolved information\n' +
+    '- C08:CONTACT-01: missing; current Unknown / not supplied; candidates []\n' +
+    '- E03:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+    '- E06:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+    '- E08:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+    '- E09:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+    '\n' +
+    '## Reported sources and correction history (historical wording may differ from current values)\n' +
+    '- S1 (narrative): I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+    '- S2 (narrative): I opened the link at verify-bank.example and entered my online banking password and a one-time code.\n' +
+    '- S3 (narrative): At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n' +
+    '- S4 (narrative): I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n' +
+    '- S5 (narrative): I have the text message on my phone, but I have not provided any material to the employee.\n' +
+    '- CORRECTION-01 (correction): The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000.\n' +
+    '- E04:TX-01 previous 2000: The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000. [S3]\n' +
+    '\n' +
+    '## Recorded responses and follow-up\n' +
+    'Rounds: 0; questions: 0; stopped: false.\n' +
+    'No external execution or receipt is established by this local record.\n' +
+    '\n' +
+    '\n' +
+    '## Intended recipient\n' +
+    'SYN Bank A / designated human review team\n' +
+    'Human verification and assessment of reported unfamiliar debits, credential exposure and transaction information; the prototype only prepares a local draft.\n' +
+    'Sharing permission remains unverified unless explicitly recorded. No sending performed.\n' +
+    '\n' +
+    '## Proposed local preparation (acceptance is not execution)\n' +
+    '- REC-01 v2 [accepted]: Prepare a local internal human assessment record.\n' +
+    '  Basis: EX-G01 v1; SYN Bank A / Intake Officer; priority 1: Prioritise human assessment of the reported pending unfamiliar debit.\n' +
+    '  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n' +
+    '  Limit / uncertainty: EXAMPLE-01 teaching target TX-01 only.\n' +
+    '  Limit / uncertainty: E09 conflicts, reported completed and payment requested are outside this teaching entry.\n' +
+    '  Limit / uncertainty: The human specialist decides further assessment; no freeze, refund or recovery promised.\n' +
+    '  Limit / uncertainty: May be prepared in parallel with REC-02; transaction facts remain reported and unverified.\n' +
+    '  Limit / uncertainty: A designated bank human specialist decides further assessment; the intake role performs no account or transaction action.\n' +
+    '  Limit / uncertainty: E09:TX-01: unknown; local preparation only.\n' +
+    '  Limit / uncertainty: Reported source S3: At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n'
+  
+      at TestContext.<anonymous> (/workspace/scratch/65e879aae433/infs5706-scamsafe/tests/outputs.test.ts:55:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: "SYNTHETIC · Content approval pending · Local draft only. Reported information is not independently verified. No action, delivery or referral has been performed.\n\n## Current reported facts\n| Field / record | Current reported value | Status / check | Sources |\n| --- | --- | --- | --- |\n| B01: | Person concerned | extracted / checked | S1, S2, S3, S4, S5 |\n| C02:CONTACT-01 | 16 October 2026 09:00 Australia/Sydney | extracted / checked | S1 |\n| C03:CONTACT-01 | SMS | extracted / checked | S1 |\n| C04:CONTACT-01 | Claims to be SYN Bank A | extracted / checked | S1 |\n| C06:CONTACT-01 | verify-bank.example | extracted / checked | S2 |\n| C08:CONTACT-01 | Unknown / not supplied | missing / checked | None |\n| D04:EVENT-01 | Opened the link and entered banking password and one-time code categories; no secret values recorded. | extracted / checked | S2 |\n| E01: | Reported debit | extracted / checked | S3 |\n| E02:TX-01 | TX-01 | extracted / checked | S3 |\n| E03:TX-01 | Unknown / not supplied | missing / checked | None |\n| E04:TX-01 | 200 | extracted / corrected | S3 |\n| E05:TX-01 | AUD | extracted / checked | S3 |\n| E06:TX-01 | Unknown / not supplied | missing / checked | None |\n| E07:TX-01 | SYN Bank A | extracted / checked | S3 |\n| E08:TX-01 | Unknown / not supplied | missing / checked | None |\n| E09:TX-01 | Unknown / not supplied | missing / checked | None |\n| F01: | true | extracted / checked | S2 |\n| F02: | Banking password; One-time code | extracted / checked | S2 |\n| F03: | Linked page | extracted / checked | S2 |\n| F05: | SYN Bank A online banking | extracted / checked | S2, S3 |\n| F06: | Unfamiliar debit | extracted / checked | S3 |\n| F07: | 16 October 2026 09:30 Australia/Sydney | extracted / checked | S3 |\n| J02:EVID-01 | Text message | extracted / checked | S5 |\n| J04:EVID-01 | Reported available on phone; not provided or verified | extracted / checked | S5 |\n\nAmounts are reported values, not verified losses. Transactions remain separate by record, currency and status; unknown values are not zero.\n\n## Candidate analysis (not a confirmed scam finding)\n- Suspected phishing\n- Basis: CONTACT-01: reported bank impersonation SMS; EVENT-01: reported credential entry.\n- Uncertainty: Sender identity and the debit's connection to the SMS are unverified.\n- Gap: Transaction time\n- Gap: Payment method\n- Gap: Recipient\n- Gap: Continuing contact\n\n## Unresolved information\n- C08:CONTACT-01: missing; current Unknown / not supplied; candidates []\n- E03:TX-01: missing; current Unknown / not supplied; candidates []\n- E06:TX-01: missing; current Unknown / not supplied; candidates []\n- E08:TX-01: missing; current Unknown / not supplied; candidates []\n- E09:TX-01: missing; current Unknown / not supplied; candidates []\n\n## Reported sources and correction history (historical wording may differ from current values)\n- S1 (narrative): I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n- S2 (narrative): I opened the link at verify-bank.example and entered my online banking password and a one-time code.\n- S3 (narrative): At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n- S4 (narrative): I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n- S5 (narrative): I have the text message on my phone, but I have not provided any material to the employee.\n- CORRECTION-01 (correction): The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000.\n- E04:TX-01 previous 2000: The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000. [S3]\n\n## Recorded responses and follow-up\nRounds: 0; questions: 0; stopped: false.\nNo external execution or receipt is established by this local record.\n\n\n## Intended recipient\nSYN Bank A / designated human review team\nHuman verification and assessment of reported unfamiliar debits, credential exposure and transaction information; the prototype only prepares a local draft.\nSharing permission remains unverified unless explicitly recorded. No sending performed.\n\n## Proposed local preparation (acceptance is not execution)\n- REC-01 v2 [accepted]: Prepare a local internal human assessment record.\n  Basis: EX-G01 v1; SYN Bank A / Intake Officer; priority 1: Prioritise human assessment of the reported pending unfamiliar debit.\n  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n  Limit / uncertainty: EXAMPLE-01 teaching target TX-01 only.\n  Limit / uncertainty: E09 conflicts, reported completed and payment requested are outside this teaching entry.\n  Limit / uncertainty: The human specialist decides further assessment; no freeze, refund or recovery promised.\n  Limit / uncertainty: May be prepared in parallel with REC-02; transaction facts remain reported and unverified.\n  Limit / uncertainty: A designated bank human specialist decides further assessment; the intake role performs no account or transaction action.\n  Limit / uncertainty: E09:TX-01: unknown; local preparation only.\n  Limit / uncertainty: Reported source S3: At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n",
+    expected: /E04:TX-01 \| 250/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/outputs.test.ts:1:3531
+✖ E01 protects employee text and keeps previous bodies after explicit replacement (30.065879ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be reference-equal to "expected":
+  + actual - expected
+  ... Skipped lines
+  
+    {
+      analysis: {
+        alternatives: [
+          "Sender identity and the debit's connection to the SMS are unverified."
+        ],
+  ...
+          employeeEdited: false,
+  +       history: [
+  +         {
+  +           actor: 'SYSTEM',
+  +           previous: 'SYNTHETIC · Content approval pending · Local draft only. Reported information is not independently verified. No action, delivery or referral has been performed.\n' +
+  +             '\n' +
+  +             '## Current reported facts\n' +
+  +             '| Field / record | Current reported value | Status / check | Sources |\n' +
+  +             '| --- | --- | --- | --- |\n' +
+  +             '| B01: | Person concerned | extracted / checked | S1, S2, S3, S4, S5 |\n' +
+  +             '| C02:CONTACT-01 | 16 October 2026 09:00 Australia/Sydney | extracted / checked | S1 |\n' +
+  +             '| C03:CONTACT-01 | SMS | extracted / checked | S1 |\n' +
+  +             '| C04:CONTACT-01 | Claims to be SYN Bank A | extracted / checked | S1 |\n' +
+  +             '| C06:CONTACT-01 | verify-bank.example | extracted / checked | S2 |\n' +
+  +             '| C08:CONTACT-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| D04:EVENT-01 | Opened the link and entered banking password and one-time code categories; no secret values recorded. | extracted / checked | S2 |\n' +
+  +             '| E01: | Reported debit | extracted / checked | S3 |\n' +
+  +             '| E02:TX-01 | TX-01 | extracted / checked | S3 |\n' +
+  +             '| E03:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E04:TX-01 | 200 | extracted / corrected | S3 |\n' +
+  +             '| E05:TX-01 | AUD | extracted / checked | S3 |\n' +
+  +             '| E06:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E07:TX-01 | SYN Bank A | extracted / checked | S3 |\n' +
+  +             '| E08:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E09:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| F01: | true | extracted / checked | S2 |\n' +
+  +             '| F02: | Banking password; One-time code | extracted / checked | S2 |\n' +
+  +             '| F03: | Linked page | extracted / checked | S2 |\n' +
+  +             '| F05: | SYN Bank A online banking | extracted / checked | S2, S3 |\n' +
+  +             '| F06: | Unfamiliar debit | extracted / checked | S3 |\n' +
+  +             '| F07: | 16 October 2026 09:30 Australia/Sydney | extracted / checked | S3 |\n' +
+  +             '| J02:EVID-01 | Text message | extracted / checked | S5 |\n' +
+  +             '| J04:EVID-01 | Reported available on phone; not provided or verified | extracted / checked | S5 |\n' +
+  +             '\n' +
+  +             'Amounts are reported values, not verified losses. Transactions remain separate by record, currency and status; unknown values are not zero.\n' +
+  +             '\n' +
+  +             '## Candidate analysis (not a confirmed scam finding)\n' +
+  +             '- Suspected phishing\n' +
+  +             '- Basis: CONTACT-01: reported bank impersonation SMS; EVENT-01: reported credential entry.\n' +
+  +             "- Uncertainty: Sender identity and the debit's connection to the SMS are unverified.\n" +
+  +             '- Gap: Transaction time\n' +
+  +             '- Gap: Payment method\n' +
+  +             '- Gap: Recipient\n' +
+  +             '- Gap: Continuing contact\n' +
+  +             '\n' +
+  +             '## Unresolved information\n' +
+  +             '- C08:CONTACT-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E03:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E06:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E08:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E09:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '\n' +
+  +             '## Reported sources and correction history (historical wording may differ from current values)\n' +
+  +             '- S1 (narrative): I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '- S2 (narrative): I opened the link at verify-bank.example and entered my online banking password and a one-time code.\n' +
+  +             '- S3 (narrative): At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n' +
+  +             '- S4 (narrative): I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n' +
+  +             '- S5 (narrative): I have the text message on my phone, but I have not provided any material to the employee.\n' +
+  +             '- CORRECTION-01 (correction): The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000.\n' +
+  +             '- E04:TX-01 previous 2000: The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000. [S3]\n' +
+  +             '\n' +
+  +             '## Recorded responses and follow-up\n' +
+  +             'Rounds: 0; questions: 0; stopped: false.\n' +
+  +             'No external execution or receipt is established by this local record.\n' +
+  +             '\n' +
+  +             '## Proposed local preparation (acceptance is not execution)\n' +
+  +             '- REC-01 v2 [accepted]: Prepare a local internal human assessment record.\n' +
+  +             '  Basis: EX-G01 v1; SYN Bank A / Intake Officer; priority 1: Prioritise human assessment of the reported pending unfamiliar debit.\n' +
+  +             '  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n' +
+  +             '  Limit / uncertainty: EXAMPLE-01 teaching target TX-01 only.\n' +
+  +             '  Limit / uncertainty: E09 conflicts, reported completed and payment requested are outside this teaching entry.\n' +
+  +             '  Limit / uncertainty: The human specialist decides further assessment; no freeze, refund or recovery promised.\n' +
+  +             '  Limit / uncertainty: May be prepared in parallel with REC-02; transaction facts remain reported and unverified.\n' +
+  +             '  Limit / uncertainty: A designated bank human specialist decides further assessment; the intake role performs no account or transaction action.\n' +
+  +             '  Limit / uncertainty: E09:TX-01: unknown; local preparation only.\n' +
+  +             '  Limit / uncertainty: Reported source S3: At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n' +
+  +             '- REC-02 v2 [accepted]: Prepare a local SYN Telco B human intake draft.\n' +
+  +             '  Basis: EX-G02 v1; SYN Bank A / Intake Officer; priority 2: Prepare in parallel with REC-01.\n' +
+  +             '  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n' +
+  +             "  Limit / uncertainty: Also requires S4 to explicitly identify SYN Telco B as the person's mobile provider and configured human intake responsibilities; this limited draft is not a runtime matcher.\n" +
+  +             '  Limit / uncertainty: Unknown sharing permission permits local drafting only; no sharing or verification asserted.\n' +
+  +             '  Limit / uncertainty: Do not infer SIM swapping or change a mobile service.\n' +
+  +             '  Limit / uncertainty: External sharing would require human verification of permission and receiver remit; no sending occurs.\n' +
+  +             '  Limit / uncertainty: The receiving human intake team verifies whether the concern falls within its remit; sharing permission remains unverified.\n' +
+  +             '  Limit / uncertainty: C08:CONTACT-01: unknown; preserve this gap.\n' +
+  +             '  Limit / uncertainty: O07:: unknown; preserve this gap.\n' +
+  +             '  Limit / uncertainty: Reported source S1: I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '  Limit / uncertainty: Reported source S4: I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n' +
+  +             '- REC-03 v2 [accepted]: Optionally prepare a separate summary of existing SMS clues for human assessment.\n' +
+  +             '  Basis: EX-G03 v1; SYN Bank A / Intake Officer; priority 3: Optional, lower priority.\n' +
+  +             '  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n' +
+  +             '  Limit / uncertainty: Also requires existing SMS clues and source references; this limited draft is not a runtime matcher.\n' +
+  +             '  Limit / uncertainty: The employee may decline duplicate preparation; rejection retains facts and gaps.\n' +
+  +             '  Limit / uncertainty: Do not request new materials or claim the SMS is verified.\n' +
+  +             '  Limit / uncertainty: Existing SMS clues and sources only; may be declined as duplicate.\n' +
+  +             '  Limit / uncertainty: Human staff decide whether a separate existing-clue summary is useful; no new materials are required.\n' +
+  +             '  Limit / uncertainty: Reported source S1: I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '  Limit / uncertainty: Reported source S5: I have the text message on my phone, but I have not provided any material to the employee.\n',
+  +           reason: 'Regenerated on current structured facts and guidance; prior body retained.'
+  +         }
+  +       ],
+  -       history: [],
+          id: 'SUMMARY',
+          kind: 'summary',
+          recommendationIds: [
+            'REC-01',
+            'REC-02',
+  ...
+          title: 'Unified factual summary',
+  +       version: 2
+  -       version: 1
+        },
+        {
+          body: '员工补充：保留不确定性。',
+          contentApproval: 'pending',
+          dependencies: {
+  ...
+          employeeEdited: false,
+  +       history: [
+  +         {
+  +           actor: 'SYSTEM',
+  +           previous: 'SYNTHETIC · Content approval pending · Local draft only. Reported information is not independently verified. No action, delivery or referral has been performed.\n' +
+  +             '\n' +
+  +             '## Current reported facts\n' +
+  +             '| Field / record | Current reported value | Status / check | Sources |\n' +
+  +             '| --- | --- | --- | --- |\n' +
+  +             '| B01: | Person concerned | extracted / checked | S1, S2, S3, S4, S5 |\n' +
+  +             '| C02:CONTACT-01 | 16 October 2026 09:00 Australia/Sydney | extracted / checked | S1 |\n' +
+  +             '| C03:CONTACT-01 | SMS | extracted / checked | S1 |\n' +
+  +             '| C04:CONTACT-01 | Claims to be SYN Bank A | extracted / checked | S1 |\n' +
+  +             '| C06:CONTACT-01 | verify-bank.example | extracted / checked | S2 |\n' +
+  +             '| C08:CONTACT-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| D04:EVENT-01 | Opened the link and entered banking password and one-time code categories; no secret values recorded. | extracted / checked | S2 |\n' +
+  +             '| E01: | Reported debit | extracted / checked | S3 |\n' +
+  +             '| E02:TX-01 | TX-01 | extracted / checked | S3 |\n' +
+  +             '| E03:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E04:TX-01 | 200 | extracted / corrected | S3 |\n' +
+  +             '| E05:TX-01 | AUD | extracted / checked | S3 |\n' +
+  +             '| E06:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E07:TX-01 | SYN Bank A | extracted / checked | S3 |\n' +
+  +             '| E08:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| E09:TX-01 | Unknown / not supplied | missing / checked | None |\n' +
+  +             '| F01: | true | extracted / checked | S2 |\n' +
+  +             '| F02: | Banking password; One-time code | extracted / checked | S2 |\n' +
+  +             '| F03: | Linked page | extracted / checked | S2 |\n' +
+  +             '| F05: | SYN Bank A online banking | extracted / checked | S2, S3 |\n' +
+  +             '| F06: | Unfamiliar debit | extracted / checked | S3 |\n' +
+  +             '| F07: | 16 October 2026 09:30 Australia/Sydney | extracted / checked | S3 |\n' +
+  +             '| J02:EVID-01 | Text message | extracted / checked | S5 |\n' +
+  +             '| J04:EVID-01 | Reported available on phone; not provided or verified | extracted / checked | S5 |\n' +
+  +             '\n' +
+  +             'Amounts are reported values, not verified losses. Transactions remain separate by record, currency and status; unknown values are not zero.\n' +
+  +             '\n' +
+  +             '## Candidate analysis (not a confirmed scam finding)\n' +
+  +             '- Suspected phishing\n' +
+  +             '- Basis: CONTACT-01: reported bank impersonation SMS; EVENT-01: reported credential entry.\n' +
+  +             "- Uncertainty: Sender identity and the debit's connection to the SMS are unverified.\n" +
+  +             '- Gap: Transaction time\n' +
+  +             '- Gap: Payment method\n' +
+  +             '- Gap: Recipient\n' +
+  +             '- Gap: Continuing contact\n' +
+  +             '\n' +
+  +             '## Unresolved information\n' +
+  +             '- C08:CONTACT-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E03:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E06:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E08:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '- E09:TX-01: missing; current Unknown / not supplied; candidates []\n' +
+  +             '\n' +
+  +             '## Reported sources and correction history (historical wording may differ from current values)\n' +
+  +             '- S1 (narrative): I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '- S2 (narrative): I opened the link at verify-bank.example and entered my online banking password and a one-time code.\n' +
+  +             '- S3 (narrative): At 09:30 I noticed an unfamiliar AUD 2,000 debit in my SYN Bank A app; I do not know whether it is pending or completed.\n' +
+  +             '- S4 (narrative): I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n' +
+  +             '- S5 (narrative): I have the text message on my phone, but I have not provided any material to the employee.\n' +
+  +             '- CORRECTION-01 (correction): The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000.\n' +
+  +             '- E04:TX-01 previous 2000: The amount was entered incorrectly. The reported debit is AUD 200, not AUD 2,000. [S3]\n' +
+  +             '\n' +
+  +             '## Recorded responses and follow-up\n' +
+  +             'Rounds: 0; questions: 0; stopped: false.\n' +
+  +             'No external execution or receipt is established by this local record.\n' +
+  +             '\n' +
+  +             '\n' +
+  +             '## Intended recipient\n' +
+  +             'SYN Telco B / designated human intake team\n' +
+  +             'Human assessment of whether the reported SMS concern falls within the mobile provider remit; do not assume the provider sent the SMS or that SIM swapping occurred. Local draft only; sharing permission unverified.\n' +
+  +             'Sharing permission remains unverified unless explicitly recorded. No sending performed.\n' +
+  +             '\n' +
+  +             '## Proposed local preparation (acceptance is not execution)\n' +
+  +             '- REC-02 v2 [accepted]: Prepare a local SYN Telco B human intake draft.\n' +
+  +             '  Basis: EX-G02 v1; SYN Bank A / Intake Officer; priority 2: Prepare in parallel with REC-01.\n' +
+  +             '  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n' +
+  +             "  Limit / uncertainty: Also requires S4 to explicitly identify SYN Telco B as the person's mobile provider and configured human intake responsibilities; this limited draft is not a runtime matcher.\n" +
+  +             '  Limit / uncertainty: Unknown sharing permission permits local drafting only; no sharing or verification asserted.\n' +
+  +             '  Limit / uncertainty: Do not infer SIM swapping or change a mobile service.\n' +
+  +             '  Limit / uncertainty: External sharing would require human verification of permission and receiver remit; no sending occurs.\n' +
+  +             '  Limit / uncertainty: The receiving human intake team verifies whether the concern falls within its remit; sharing permission remains unverified.\n' +
+  +             '  Limit / uncertainty: C08:CONTACT-01: unknown; preserve this gap.\n' +
+  +             '  Limit / uncertainty: O07:: unknown; preserve this gap.\n' +
+  +             '  Limit / uncertainty: Reported source S1: I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '  Limit / uncertainty: Reported source S4: I use SYN Telco B for my mobile service, and I have not contacted either organisation about this yet.\n' +
+  +             '- REC-03 v2 [accepted]: Optionally prepare a separate summary of existing SMS clues for human assessment.\n' +
+  +             '  Basis: EX-G03 v1; SYN Bank A / Intake Officer; priority 3: Optional, lower priority.\n' +
+  +             '  Limit / uncertainty: Approved synthetic prototype guidance only; no authority for real-world action.\n' +
+  +             '  Limit / uncertainty: Also requires existing SMS clues and source references; this limited draft is not a runtime matcher.\n' +
+  +             '  Limit / uncertainty: The employee may decline duplicate preparation; rejection retains facts and gaps.\n' +
+  +             '  Limit / uncertainty: Do not request new materials or claim the SMS is verified.\n' +
+  +             '  Limit / uncertainty: Existing SMS clues and sources only; may be declined as duplicate.\n' +
+  +             '  Limit / uncertainty: Human staff decide whether a separate existing-clue summary is useful; no new materials are required.\n' +
+  +             '  Limit / uncertainty: Reported source S1: I received a text message at 09:00 on 16 October 2026 claiming to be SYN Bank A and saying that my account needed verification.\n' +
+  +             '  Limit / uncertainty: Reported source S5: I have the text message on my phone, but I have not provided any material to the employee.\n',
+  +           reason: 'Regenerated on current structured facts and guidance; prior body retained.'
+  +         }
+  +       ],
+  -       history: [],
+          id: 'HANDOVER-TELCO',
+          kind: 'handover',
+          recipient: {
+            id: 'HANDOVER-TELCO',
+            title: 'SYN Telco B / designated human intake team'
+  ...
+          title: 'Local draft for SYN Telco B / designated human intake team',
+  +       version: 2
+  -       version: 1
+        }
+      ],
+      recommendations: [
+        {
+          contentApproval: 'pending',
+  ...
+      synthetic: true,
+  +   version: 15
+  -   version: 14
+    }
+  
+      at TestContext.<anonymous> (/workspace/scratch/65e879aae433/infs5706-scamsafe/tests/outputs.test.ts:61:77)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: {
+      schemaVersion: 2,
+      synthetic: true,
+      mode: 'mock',
+      contentApproval: 'pending',
+      caseId: 'EXAMPLE-01',
+      evaluationId: 'T09',
+      version: 15,
+      stage: 'corrected',
+      role: { id: 'EX-ROLE-01', version: 1, organisation: 'SYN Bank A', title: 'Intake Officer', permissions: [Array], recipients: [Array], contentApproval: 'approved', enabled: true, synthetic: true, approvalRef: 'BUSINESS-BASELINE-01', excludedActions: [Array], recipientResponsibilities: [Object] },
+      facts: [
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object]
+      ],
+      analysis: { version: 1, basedOnCaseVersion: 1, source: 'mock', types: [Array], reasons: [Array], alternatives: [Array], gaps: [Array], facts: [], guidanceStatus: 'unapproved', recommendations: [] },
+      followUp: { rounds: 0, totalQuestions: 0, stopped: false, questions: [] },
+      outputs: [ [Object], [Object], [Object] ],
+      reviews: [
+        [Object], [Object],
+        [Object], [Object],
+        [Object], [Object],
+        [Object]
+      ],
+      saved: false,
+      needsFactConfirmation: false,
+      recommendations: [ [Object], [Object], [Object] ],
+      roleRevision: 1,
+      guidanceRevision: 1,
+      guidelines: [ [Object], [Object], [Object] ],
+      guidanceStatus: 'available',
+      sources: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+      instanceId: 'fixture-instance'
+    },
+    expected: {
+      schemaVersion: 2,
+      synthetic: true,
+      mode: 'mock',
+      contentApproval: 'pending',
+      caseId: 'EXAMPLE-01',
+      evaluationId: 'T09',
+      version: 14,
+      stage: 'corrected',
+      role: { id: 'EX-ROLE-01', version: 1, organisation: 'SYN Bank A', title: 'Intake Officer', permissions: [Array], recipients: [Array], contentApproval: 'approved', enabled: true, synthetic: true, approvalRef: 'BUSINESS-BASELINE-01', excludedActions: [Array], recipientResponsibilities: [Object] },
+      facts: [
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object], [Object], [Object],
+        [Object]
+      ],
+      analysis: { version: 1, basedOnCaseVersion: 1, source: 'mock', types: [Array], reasons: [Array], alternatives: [Array], gaps: [Array], facts: [], guidanceStatus: 'unapproved', recommendations: [] },
+      followUp: { rounds: 0, totalQuestions: 0, stopped: false, questions: [] },
+      outputs: [ [Object], [Object], [Object] ],
+      reviews: [
+        [Object], [Object],
+        [Object], [Object],
+        [Object], [Object],
+        [Object]
+      ],
+      saved: false,
+      needsFactConfirmation: false,
+      recommendations: [ [Object], [Object], [Object] ],
+      roleRevision: 1,
+      guidanceRevision: 1,
+      guidelines: [ [Object], [Object], [Object] ],
+      guidanceStatus: 'available',
+      sources: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+      instanceId: 'fixture-instance'
+    },
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
