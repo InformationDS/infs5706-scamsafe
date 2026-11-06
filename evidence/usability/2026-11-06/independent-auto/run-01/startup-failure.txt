@@ -1,0 +1,1 @@
+Startup failed before product navigation. Playwright default sandbox browser cache did not contain chromium_headless_shell-1248. The installed user cache exists at C:\Users\InformationDS\AppData\Local\ms-playwright. Retest uses PLAYWRIGHT_BROWSERS_PATH pointing there. No product assertion was executed in this attempt.

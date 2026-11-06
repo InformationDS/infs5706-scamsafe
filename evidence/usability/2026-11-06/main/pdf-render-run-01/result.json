@@ -1,0 +1,30 @@
+[
+  {
+    "file": "summary.pdf",
+    "pages": 4,
+    "replacementGlyphs": 0,
+    "hasChinese": false,
+    "hasEndMarker": false
+  },
+  {
+    "file": "chinese-long-table.pdf",
+    "pages": 5,
+    "replacementGlyphs": 0,
+    "hasChinese": true,
+    "hasEndMarker": true
+  },
+  {
+    "file": "same-version-retry.pdf",
+    "pages": 5,
+    "replacementGlyphs": 0,
+    "hasChinese": true,
+    "hasEndMarker": true
+  },
+  {
+    "file": "no-guidance.pdf",
+    "pages": 3,
+    "replacementGlyphs": 0,
+    "hasChinese": false,
+    "hasEndMarker": false
+  }
+]

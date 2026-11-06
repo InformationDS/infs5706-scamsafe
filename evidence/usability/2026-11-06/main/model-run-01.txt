@@ -1,0 +1,20 @@
+✔ C01 Mock T09 returns sourced proposals without invoking provider or mutating case (15.9609ms)
+✔ C01 corrected, unknown, partial, stopped and limit cases retain employee state and counters (22.4434ms)
+✔ C01 Mock refuses unrelated narratives and supports explicit fault checks (5.3417ms)
+✔ C01 live request isolates instructions/configuration, preserves Chinese narrative and uses source schema (24.5109ms)
+✔ C01 accepts new repeated records and additional fields on existing records (7.1336ms)
+✔ C01 rejects forged facts, identifiers, source references, review claims and extra nested properties (69.329ms)
+✔ C01 rejects question counter bypass, answered proposals, duplicate targets and pending/unknown repeats (57.9625ms)
+✔ C01 provider failures are safe, bounded and retryable where appropriate (231.7549ms)
+✔ C01 HTTP route rejects results when API settings change during a request (92.5422ms)
+✔ C01 rejects a stale input ticket without a provider call (1.9893ms)
+✔ C01 free narrative can start with no extracted facts and retain distinct currencies/unknown/false (32.5848ms)
+✔ C01 actual browser: analysis, corrected values, errors, settings, stale responses and backups (6103.3393ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8619.4052

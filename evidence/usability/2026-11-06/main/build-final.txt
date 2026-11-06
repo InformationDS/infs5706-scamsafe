@@ -1,0 +1,22 @@
+
+> scamsafe-foundation@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 146 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                      0.41 kB │ gzip:   0.29 kB
+dist/assets/model-CpaafGWh.css       1.07 kB │ gzip:   0.46 kB
+dist/assets/outputs-qEEowO_w.css     2.21 kB │ gzip:   0.73 kB
+dist/assets/guidance-BrBiosjw.css    2.63 kB │ gzip:   0.82 kB
+dist/assets/intake-B0jyu_D5.css      4.36 kB │ gzip:   1.23 kB
+dist/assets/index-B1b8bvAT.css       6.78 kB │ gzip:   2.01 kB
+dist/assets/model-BDBmbu3f.js        6.73 kB │ gzip:   2.65 kB
+dist/assets/guidance-BF0dLoId.js     9.21 kB │ gzip:   3.02 kB
+dist/assets/outputs-BjRDadpj.js     13.32 kB │ gzip:   4.29 kB
+dist/assets/intake-DJ_T8Fdy.js      17.01 kB │ gzip:   5.27 kB
+dist/assets/index-BOKma7pM.js      436.72 kB │ gzip: 130.12 kB
+
+✓ built in 269ms

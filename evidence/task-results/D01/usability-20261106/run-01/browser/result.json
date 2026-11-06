@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "independent: actual accept/modify/reject, original text and Employee edited, both context cycles, stable rejection/history, facts/reviews/counts, IndexedDB save/refresh"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": "TimeoutError: locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('status').filter({ hasText: 'Reset no-guidance' }) to be visible\u001b[22m\n",
+  "browser": "156.0.8078.4",
+  "scope": "Actual D module and A storage; no E body generation or human/F acceptance"
+}

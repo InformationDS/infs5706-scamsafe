@@ -1,0 +1,38 @@
+[
+  {
+    "file": "summary.pdf",
+    "pages": 4,
+    "replacementGlyphs": 0,
+    "hasChinese": false,
+    "hasEndMarker": false,
+    "badGuidelineLabels": false,
+    "sha256": "c32bbd6458f4468ebb84c2953e5eafe03c966f6225ec0d7250dfe8e310d0f9b6"
+  },
+  {
+    "file": "chinese-long-table.pdf",
+    "pages": 5,
+    "replacementGlyphs": 0,
+    "hasChinese": true,
+    "hasEndMarker": true,
+    "badGuidelineLabels": false,
+    "sha256": "064b703952f7420f83bbcd38d3afb6f23797e178847f4adec69f85a850e76825"
+  },
+  {
+    "file": "same-version-retry.pdf",
+    "pages": 5,
+    "replacementGlyphs": 0,
+    "hasChinese": true,
+    "hasEndMarker": true,
+    "badGuidelineLabels": false,
+    "sha256": "c4b6126ec0c94e4611bfc61fbba4abe8edf0f943098bb9eee8920a1bd200464a"
+  },
+  {
+    "file": "no-guidance.pdf",
+    "pages": 3,
+    "replacementGlyphs": 0,
+    "hasChinese": false,
+    "hasEndMarker": false,
+    "badGuidelineLabels": false,
+    "sha256": "862cac861c36bf5de6397bfd256e9aa77e2768e7bccd4cf9e8b26fd478cde731"
+  }
+]

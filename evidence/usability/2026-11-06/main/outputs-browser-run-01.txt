@@ -1,0 +1,40 @@
+✔ E01 generates current values with uncertainty, sources, version and no borrowed approval (51.0154ms)
+✔ E01 same gate requires current unsimulated review and saved, checked facts (65.2984ms)
+✔ E01 single edit invalidates bank alone; exact dependency change invalidates shared outputs (56.3631ms)
+✔ E01 protects employee text and keeps previous bodies after explicit replacement (43.1067ms)
+✔ E01 D rejection never becomes a pending action; unrelated bank review survives (40.376ms)
+✔ E01 no effective guidance gives factual summary only, never recipient paths (69.0217ms)
+✔ E01 pending / mocked decisions cannot be reviewed or exported; available means actual D matching (21.3374ms)
+✔ E01 precision includes added facts and missing dependency references; stale basis cannot be rebased by edit (33.0471ms)
+✔ E01 unified HTML / Markdown render text safely and use same snapshot (50.0536ms)
+✔ E01 output failure preserves saved body and review; same version retry succeeds (41.8379ms)
+✔ selected document review records unique referenced recommendations and document reviews atomically (39.804ms)
+✔ generated documents and serialized document metadata use business names (27.5381ms)
+✖ E01 actual UI review, editing, storage, copy, HTTP export and PDF stress exercise (5598.0656ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 12
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7979.8271
+
+✖ failing tests:
+
+test at tests\outputs.test.ts:161:1
+✖ E01 actual UI review, editing, storage, copy, HTTP export and PDF stress exercise (5598.0656ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(runtimeReviewValid(await record(), 'SUMMARY'))
+  
+      at TestContext.<anonymous> (D:\BaiduSyncdisk\UNSW\INFS5706\GroupAssignment-integration\tests\outputs.test.ts:213:12)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

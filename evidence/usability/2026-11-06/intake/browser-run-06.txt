@@ -1,0 +1,45 @@
+✔ re-reading the source retains an employee correction and records a conflicting candidate (13.4325ms)
+✔ transaction targets remain keyed by field and record; unknown stays null (0.2917ms)
+✔ a proposal started before a 250 correction is stale when its delayed response returns (1.7384ms)
+✔ employee type correction survives later analysis and preserves the conflicting type proposal (8.6457ms)
+✔ follow-up questions require first check, remain target-specific, and obey the 3/9 cap (11.8572ms)
+✔ ending follow-up skips pending questions and accepts a later answer without reopening or recounting (3.7321ms)
+✔ later answers preserve original source text used by existing output and history references (2.7911ms)
+✔ F01-001 follow-up updates current analysis gaps and preserves the original narrative and answer history (2.5281ms)
+✔ older saved gaps reconcile against current facts without erasing other uncertainty or review history (1.9806ms)
+✖ B01 saved state, failed saves, question counts and newer edits survive the actual host (13132.2649ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 9
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13930.1285
+
+✖ failing tests:
+
+test at tests\intake.test.ts:140:38
+✖ B01 saved state, failed saves, question counts and newer edits survive the actual host (13132.2649ms)
+  locator.check: Timeout 10000ms exceeded.
+  Call log:
+  [2m  - waiting for getByLabel('Simulate save failure', { exact: true })[22m
+  [2m    - locator resolved to <input type="checkbox"/>[22m
+  [2m  - attempting click action[22m
+  [2m    2 × waiting for element to be visible, enabled and stable[22m
+  [2m      - element is not visible[22m
+  [2m    - retrying click action[22m
+  [2m    - waiting 20ms[22m
+  [2m    2 × waiting for element to be visible, enabled and stable[22m
+  [2m      - element is not visible[22m
+  [2m    - retrying click action[22m
+  [2m      - waiting 100ms[22m
+  [2m    19 × waiting for element to be visible, enabled and stable[22m
+  [2m       - element is not visible[22m
+  [2m     - retrying click action[22m
+  [2m       - waiting 500ms[22m
+  
+      at TestContext.<anonymous> (D:\BaiduSyncdisk\UNSW\INFS5706\GroupAssignment-integration\tests\intake.test.ts:198:71) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for getByLabel('Simulate save failure', { exact: true })", '    - locator resolved to <input type="checkbox"/>', '  - attempting click action', '    2 × waiting for element to be visible, enabled and stable', '      - element is not visible', '    - retrying click action', '    - waiting 20ms', '    2 × waiting for element to be visible, enabled and stable', '      - element is not visible', '    - retrying click action', '      - waiting 100ms', '    19 × waiting for element to be visible, enabled and stable', '       - element is not visible', '     - retrying click action', '       - waiting 500ms' ]
+  }

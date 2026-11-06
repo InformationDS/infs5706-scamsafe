@@ -1,0 +1,21 @@
+✔ E01 generates current values with uncertainty, sources, version and no borrowed approval (49.9528ms)
+✔ E01 same gate requires current unsimulated review and saved, checked facts (55.81ms)
+✔ E01 single edit invalidates bank alone; exact dependency change invalidates shared outputs (50.1294ms)
+✔ E01 protects employee text and keeps previous bodies after explicit replacement (31.8047ms)
+✔ E01 D rejection never becomes a pending action; unrelated bank review survives (37.3642ms)
+✔ E01 no effective guidance gives factual summary only, never recipient paths (57.8782ms)
+✔ E01 pending / mocked decisions cannot be reviewed or exported; available means actual D matching (15.8337ms)
+✔ E01 precision includes added facts and missing dependency references; stale basis cannot be rebased by edit (27.5157ms)
+✔ E01 unified HTML / Markdown render text safely and use same snapshot (28.387ms)
+✔ E01 output failure preserves saved body and review; same version retry succeeds (31.4403ms)
+✔ selected document review records unique referenced recommendations and document reviews atomically (26.6967ms)
+✔ generated documents and serialized document metadata use business names (21.597ms)
+﹣ E01 actual UI review, editing, storage, copy, HTTP export and PDF stress exercise (0.2477ms) # SKIP
+ℹ tests 13
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 2218.6826

@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "T09 starts at B analysis, corrects 2000 to 200, first-checks, saves 3 questions, answers/unknown/stops without fixture shortcuts",
+    "Actual D decisions and explicit E reviews gate same-snapshot preview, clipboard, Markdown and PDF with current 200"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": "TimeoutError: locator.isDisabled: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Download PDF', exact: true })\u001b[22m\n",
+  "browser": "156.0.8078.4",
+  "scope": "Integrated synthetic T09 and no-guidance paths, explicit automated review actions; human/F acceptance remains separate"
+}

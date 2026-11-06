@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "Normal five-stage intake, identity gating, 200 correction, first check, partial answer, unknown and stop; F01-001 current analysis reconciled.",
+    "Shared actor, coordinated decisions/materials, six per-object review records from one acknowledgement; clipboard and Markdown exact snapshot, PDF downloaded.",
+    "Unrecorded body blocks save and stage navigation; recorded Chinese bank edit keeps other review current and exports PDF.",
+    "Rejection propagated to telecom actions; fact change invalidated dependent reviews; employee body survived refresh until explicit comparison/replacement.",
+    "Save and refresh retains actor, questions, decisions, bodies and effective reviews.",
+    "Diagnostic isolated saved fixture with cleared final reviews; bank-only UI scope records only bank and its referenced recommendation.",
+    "Diagnostic isolated legacy stale-gap and suspended-guidance fixture; restore reconciles gaps as unsaved, preserves sources/questions, and summary-only UI review/export needs no recommendation."
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'New case', exact: true })\u001b[22m\n",
+  "browser": "156.0.8078.4",
+  "scope": "Independent headless automated regression through normal five-stage UI; not computer-use or human acceptance."
+}

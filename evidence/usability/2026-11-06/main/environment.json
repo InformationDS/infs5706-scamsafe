@@ -1,0 +1,13 @@
+{
+  "branch": "integration/test-fixes",
+  "sha": "5393f7b6d61779bae3d58daa2d2b5b172c3eaf6d",
+  "node": "v24.15.0",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "defaultHttpProgId": "DoubaoHTM.TPEX5PJEUUYNGJZLOKF3HHU5AU",
+  "defaultBrowserVerification": "Read-only HKCU UserChoice query through exec_command, 2026-11-06",
+  "initialWorkingChanges": [
+    " M docs/project/tasks/F01.md",
+    "?? evidence/task-results/F01/"
+  ],
+  "modelScope": "Mock and local fake-provider automated checks; no real key accessed or changed; computer-use results logged separately"
+}

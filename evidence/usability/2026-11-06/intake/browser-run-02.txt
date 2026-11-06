@@ -1,0 +1,36 @@
+✔ re-reading the source retains an employee correction and records a conflicting candidate (13.1875ms)
+✔ transaction targets remain keyed by field and record; unknown stays null (0.3033ms)
+✔ a proposal started before a 250 correction is stale when its delayed response returns (2.8808ms)
+✔ employee type correction survives later analysis and preserves the conflicting type proposal (7.6937ms)
+✔ follow-up questions require first check, remain target-specific, and obey the 3/9 cap (10.4127ms)
+✔ ending follow-up skips pending questions and accepts a later answer without reopening or recounting (3.3544ms)
+✔ later answers preserve original source text used by existing output and history references (2.7818ms)
+✔ F01-001 follow-up updates current analysis gaps and preserves the original narrative and answer history (3.1868ms)
+✔ older saved gaps reconcile against current facts without erasing other uncertainty or review history (1.9366ms)
+✖ B01 saved state, failed saves, question counts and newer edits survive the actual host (1130.3484ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 9
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1960.0857
+
+✖ failing tests:
+
+test at tests\intake.test.ts:140:38
+✖ B01 saved state, failed saves, question counts and newer edits survive the actual host (1130.3484ms)
+  browserType.launch: Executable doesn't exist at C:\Users\InformationDS\AppData\Local\Packages\sandbox.{dc035754-0391-4ad8-907e-4e2fd3601a11}\AC\ms-playwright\chromium_headless_shell-1248\chrome-headless-shell-win64\chrome-headless-shell.exe
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (D:\BaiduSyncdisk\UNSW\INFS5706\GroupAssignment-integration\tests\intake.test.ts:158:34) {
+    name: 'Error',
+    log: []
+  }

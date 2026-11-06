@@ -1,0 +1,37 @@
+✔ re-reading the source retains an employee correction and records a conflicting candidate (13.2518ms)
+✔ transaction targets remain keyed by field and record; unknown stays null (0.2929ms)
+✔ a proposal started before a 250 correction is stale when its delayed response returns (1.7171ms)
+✔ employee type correction survives later analysis and preserves the conflicting type proposal (7.5173ms)
+✔ follow-up questions require first check, remain target-specific, and obey the 3/9 cap (8.3072ms)
+✔ ending follow-up skips pending questions and accepts a later answer without reopening or recounting (6.1709ms)
+✔ later answers preserve original source text used by existing output and history references (3.393ms)
+✔ F01-001 follow-up updates current analysis gaps and preserves the original narrative and answer history (2.4583ms)
+✔ older saved gaps reconcile against current facts without erasing other uncertainty or review history (1.9406ms)
+✖ B01 saved state, failed saves, question counts and newer edits survive the actual host (9158.9335ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 9
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9957.6175
+
+✖ failing tests:
+
+test at tests\intake.test.ts:140:38
+✖ B01 saved state, failed saves, question counts and newer edits survive the actual host (9158.9335ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (D:\BaiduSyncdisk\UNSW\INFS5706\GroupAssignment-integration\tests\intake.test.ts:248:14)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

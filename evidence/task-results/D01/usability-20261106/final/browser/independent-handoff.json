@@ -1,0 +1,57 @@
+{
+  "summaryOnly": false,
+  "recommendations": [
+    {
+      "id": "REC-01",
+      "version": 7,
+      "decision": "accepted",
+      "decisionReason": "Clarify local wording.",
+      "employeeEdited": true,
+      "dependencies": {
+        "role": 3,
+        "guideline:EX-G01": 1,
+        "fact:F06:": 1,
+        "fact:E07:TX-01": 1,
+        "fact:E09:TX-01": 2,
+        "fact:E04:TX-01": 2,
+        "fact:E05:TX-01": 1,
+        "fact:E02:TX-01": 1
+      },
+      "active": true,
+      "includeAction": true
+    },
+    {
+      "id": "REC-02",
+      "version": 5,
+      "decision": "pending",
+      "decisionReason": null,
+      "employeeEdited": false,
+      "dependencies": {
+        "role": 3,
+        "guideline:EX-G02": 1,
+        "fact:C03:CONTACT-01": 1,
+        "fact:C08:CONTACT-01": 1,
+        "fact:J04:EVID-01": 1
+      },
+      "active": true,
+      "includeAction": true
+    },
+    {
+      "id": "REC-03",
+      "version": 6,
+      "decision": "rejected",
+      "decisionReason": "Duplicate local preparation.",
+      "employeeEdited": false,
+      "dependencies": {
+        "role": 3,
+        "guideline:EX-G03": 1,
+        "fact:C03:CONTACT-01": 1,
+        "fact:J04:EVID-01": 1,
+        "fact:J02:EVID-01": 1
+      },
+      "active": true,
+      "includeAction": false
+    }
+  ],
+  "outputsToRefresh": []
+}

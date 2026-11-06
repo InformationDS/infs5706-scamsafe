@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "Normal five-stage intake, identity gating, 200 correction, first check, partial answer, unknown and stop; F01-001 current analysis reconciled.",
+    "Shared actor, coordinated decisions/materials, six per-object review records from one acknowledgement; clipboard and Markdown exact snapshot, PDF downloaded."
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(await button('Save case').isDisabled())\n",
+  "browser": "156.0.8078.4",
+  "scope": "Independent headless automated regression through normal five-stage UI; not computer-use or human acceptance."
+}

@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "actor": "E01-AUTOMATED-TEST",
+  "scope": "Automated synthetic UI events, not human approval or F acceptance",
+  "steps": [
+    "Generated three current unreviewed E objects, no borrowed reference approval.",
+    "Actual E review clicks, IndexedDB save, same-snapshot preview, clipboard, Markdown and PDF downloads.",
+    "Recorded employee edit with history, blocked unrecorded edit, protected regeneration, re-reviewed and generated Chinese / long text / table PDF.",
+    "Actual HTTP and UI export failure retain body and valid review; same-version Markdown and PDF retry succeed.",
+    "Actual D REC-03 rejection invalidates TELCO while bank review remains current.",
+    "Actual guidance suspension: factual summary review and PDF available; historical recipient drafts blocked."
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "context": {
+    "settingsRevision": 1,
+    "previewMode": "mock",
+    "modelRegistered": true,
+    "outputRegistered": true
+  }
+}

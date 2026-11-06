@@ -1,0 +1,18 @@
+✔ re-reading the source retains an employee correction and records a conflicting candidate (12.4761ms)
+✔ transaction targets remain keyed by field and record; unknown stays null (0.3031ms)
+✔ a proposal started before a 250 correction is stale when its delayed response returns (1.6801ms)
+✔ employee type correction survives later analysis and preserves the conflicting type proposal (7.6717ms)
+✔ follow-up questions require first check, remain target-specific, and obey the 3/9 cap (11.1185ms)
+✔ ending follow-up skips pending questions and accepts a later answer without reopening or recounting (3.264ms)
+✔ later answers preserve original source text used by existing output and history references (2.961ms)
+✔ F01-001 follow-up updates current analysis gaps and preserves the original narrative and answer history (2.3874ms)
+✔ older saved gaps reconcile against current facts without erasing other uncertainty or review history (2.1166ms)
+✔ B01 saved state, failed saves, question counts and newer edits survive the actual host (10340.9868ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11106.1565
