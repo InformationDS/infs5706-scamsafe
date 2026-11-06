@@ -70,3 +70,8 @@
 .module-intake .intake-proposals { background: #f4f8fa; border: 1px dashed #9cb3c0; border-radius: .45rem; margin-top: 1rem; padding: .75rem; }
 .module-intake .intake-proposals h4 { margin-top: 0; }
 .module-intake .intake-footer { color: var(--intake-muted); font-size: .8rem; }
+
+.module-intake [hidden] { display: none !important; }
+
+.module-intake .intake-edit button { min-width: 64px; white-space: nowrap; }
+.module-intake .intake-edit input, .module-intake .intake-edit select { min-width: 0; }

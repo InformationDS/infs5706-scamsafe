@@ -10,3 +10,20 @@
 .module-preview article { border: 1px solid #bac8d4; padding: 16px; margin: 12px 0; }
 .module-preview [role="status"] { background: #fff3cf; padding: 12px; }
 .module-preview [role="dialog"] { border: 2px solid #805818; padding: 16px; }
+
+[hidden] { display: none !important; }
+.workflow { max-width: 1320px; }
+.workflow .workflow-save { position: sticky; top: 0; z-index: 20; background: #fff; border: 1px solid #cbdadc; border-radius: 10px; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.workflow .workflow-steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 18px 0; }
+.workflow-steps button { text-align: left; padding: 12px; }
+.workflow-steps button span { display: block; font-weight: 400; margin-top: 6px; }
+.workflow-steps [aria-current=step] { background: #17675d; color: #fff; border-color: #17675d; }
+.workflow .workflow-task { padding: 12px 16px; border-left: 3px solid #17675d; background: #e6f1ee; }
+.workflow .workflow-next { display: flex; justify-content: space-between; gap: 12px; margin: 24px 0; }
+.workflow label { display: block; margin: 10px 0; }
+.workflow input:not([type=checkbox]), .workflow select { padding: 10px; border: 1px solid #cbdadc; border-radius: 6px; font: inherit; }
+.workflow .card label { display: inline-block; margin-right: 18px; }
+.workflow .intake-table-wrap { max-height: none; overflow-y: visible; }
+.workflow .e-body { max-height: none; overflow-y: visible; }
+.workflow .test-tools { padding: 14px; border: 1px dashed #8b9ca5; margin-bottom: 16px; }
+@media(max-width:800px) { .workflow .workflow-steps { grid-template-columns: 1fr 1fr; } }

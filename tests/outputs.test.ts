@@ -1,9 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readableText } from '../shared/presentation';
+import { reconcileAnalysisGaps } from '../shared/intake';
 import { makeRuntimeFixture } from '../shared/runtime-fixtures';
 import { RuntimeCaseRecordSchema, runtimeReviewValid, type RuntimeCaseRecord } from '../shared/runtime';
 import { recalculateGuidance, activeRecommendations, decideRecommendation, changeGuidanceContext, NO_GUIDANCE } from '../shared/guidance';
-import { editOutput, finalReview, outputCurrent, outputProposals, outputSnapshot, regenerateOutputs } from '../shared/outputs';
+import { editOutput, finalReview, finalReviewSelection, outputCurrent, outputProposals, outputSnapshot, regenerateOutputs } from '../shared/outputs';
 import { outputSnapshotToHtml, outputSnapshotToMarkdown, outputSnapshotFilename } from '../shared/export';
 import { exportRuntime } from '../server/src/output-service';
 import { createApp } from '../server/src/app';
@@ -24,7 +26,7 @@ test('E01 generates current values with uncertainty, sources, version and no bor
   const r = prepared();
   assert.deepEqual(r.outputs.map(o => o.id), ['SUMMARY', 'HANDOVER-BANK', 'HANDOVER-TELCO']);
   const body = r.outputs[0].body;
-  assert.match(body, /E04:TX-01 \| 200/); assert.match(body, /Unknown \/ not supplied/);
+  assert.match(body, /Transaction 1 · Amount \| 200/); assert.match(body, /Unknown \/ not supplied/);
   assert.match(body, /S3 \(narrative\)/); assert.match(body, /previous 2000/);
   assert.doesNotMatch(body, /Reviewed for record accuracy by STAFF/);
   assert.equal(r.reviews.filter(v => v.stage === 'final' && !v.simulated).length, 0);
@@ -52,7 +54,7 @@ test('E01 single edit invalidates bank alone; exact dependency change invalidate
   const next = structuredClone(r), amount = next.facts.find(f => f.fieldId === 'E04')!;
   amount.value = 250; amount.version++; next.version++; next.saved = false;
   for (const o of next.outputs) { assert.equal(outputCurrent(next, o.id), false); assert.throws(() => outputSnapshot(next, o.id)); }
-  assert.match(regenerateOutputs(recalculateGuidance(next)).record.outputs[1].body, /E04:TX-01 \| 250/);
+  assert.match(regenerateOutputs(recalculateGuidance(next)).record.outputs[1].body, /Transaction 1 · Amount \| 250/);
 });
 test('E01 protects employee text and keeps previous bodies after explicit replacement', () => {
   const initial = reviewed(prepared());
@@ -73,8 +75,8 @@ test('E01 D rejection never becomes a pending action; unrelated bank review surv
   assert.equal(outputCurrent(rejected, 'HANDOVER-TELCO'), false);
   assert.equal(runtimeReviewValid(rejected, 'HANDOVER-BANK'), true);
   const generated = regenerateOutputs(rejected).record;
-  assert.doesNotMatch(generated.outputs.find(o => o.id === 'HANDOVER-TELCO')!.body, /REC-03 v/);
-  assert.doesNotMatch(generated.outputs[0].body, /REC-03 v/);
+  assert.doesNotMatch(generated.outputs.find(o => o.id === 'HANDOVER-TELCO')!.body, /Message evidence note \[accepted\]/);
+  assert.doesNotMatch(generated.outputs[0].body, /Message evidence note \[accepted\]/);
   assert.equal(recalculateGuidance(generated).recommendations.find(r => r.id === 'REC-03')!.decision, 'rejected');
   assert.equal(runtimeReviewValid(generated, 'HANDOVER-TELCO'), false);
 });
@@ -82,7 +84,7 @@ test('E01 no effective guidance gives factual summary only, never recipient path
   for (const change of ['suspend-role','suspend-guidance'] as const) {
     const r = changeGuidanceContext(reviewed(prepared()), change), p = outputProposals(r);
     assert.deepEqual(p.map(o => o.id), ['SUMMARY']); assert.match(p[0].body, new RegExp(NO_GUIDANCE));
-    assert.doesNotMatch(p[0].body, /Intended recipient|REC-0[123] v|designated human review team/);
+    assert.doesNotMatch(p[0].body, /Intended recipient|Bank assessment request|Telecommunications assessment request|Message evidence note|designated human review team/);
     assert.deepEqual(p[0].recommendationIds, []);
     assert.equal(outputCurrent(r, 'HANDOVER-BANK'), false);
     let refreshed = regenerateOutputs(r).record;
@@ -125,6 +127,36 @@ test('E01 output failure preserves saved body and review; same version retry suc
   assert.equal(JSON.stringify(r), previous);
   const retry = await exportRuntime({ case: r, objectId: 'SUMMARY', format: 'markdown' });
   assert.deepEqual(retry.snapshot, s);
+});
+
+
+test('selected document review records unique referenced recommendations and document reviews atomically', () => {
+  const record = prepared();
+  const reviewed = finalReviewSelection(record, ['HANDOVER-BANK', 'HANDOVER-TELCO', 'HANDOVER-BANK'], actor, true);
+  assert.equal(reviewed.reviews.filter(r => r.stage === 'final' && !r.simulated).length, 5);
+  assert.equal(runtimeReviewValid(reviewed, 'SUMMARY'), false);
+  assert.equal(runtimeReviewValid(reviewed, 'HANDOVER-BANK'), true);
+  assert.equal(runtimeReviewValid(reviewed, 'HANDOVER-TELCO'), true);
+  assert.equal(finalReviewSelection(reviewed, ['HANDOVER-BANK'], actor, true), reviewed);
+  const before = JSON.stringify(record);
+  assert.throws(() => finalReviewSelection(record, ['HANDOVER-BANK', 'missing'], actor, true));
+  assert.throws(() => finalReviewSelection(record, [], actor, true));
+  assert.throws(() => finalReviewSelection(record, ['SUMMARY'], actor, false));
+  let pending = recalculateGuidance(makeRuntimeFixture('corrected'));
+  pending = regenerateOutputs(pending).record;
+  assert.throws(() => finalReviewSelection(pending, ['SUMMARY'], actor, true));
+  assert.equal(JSON.stringify(record), before);
+});
+
+test('generated documents and serialized document metadata use business names', () => {
+  const record = reviewed(prepared());
+  const snapshot = outputSnapshot(record, 'HANDOVER-BANK');
+  const md = outputSnapshotToMarkdown(snapshot), html = outputSnapshotToHtml(snapshot);
+  for (const text of [md, html]) {
+    assert.match(text, /Transaction 1 · Amount/);
+    assert.match(text, /Bank handover/);
+    assert.doesNotMatch(text, /Object: HANDOVER-BANK|Content approval pending|E04:TX-01/);
+  }
 });
 
 // Opt-in actual UI/PDF exercise. Kept in this task's allowed test file, not a public MOCK assertion.
@@ -236,7 +268,7 @@ test('E01 actual UI review, editing, storage, copy, HTTP export and PDF stress e
     await button('Generate / refresh E outputs').click();
     // Preserve the independent employee bank draft while applying other refreshes.
     if (await e.getByRole('dialog', { name: 'Protect employee edits' }).count()) await button('Keep employee content / refresh other drafts').click();
-    assert.doesNotMatch((await record()).outputs.find(o => o.id === 'HANDOVER-TELCO')!.body, /REC-03 v/);
+    assert.doesNotMatch((await record()).outputs.find(o => o.id === 'HANDOVER-TELCO')!.body, /Message evidence note \[accepted\]/);
     await button('Suspend guidance').click(); await button('Generate / refresh E outputs').click();
     // The edited bank is now history-only; proposals contain summary alone.
     let noGuide = await record(); assert.deepEqual(outputProposals(noGuide).map(o => o.id), ['SUMMARY']);
@@ -253,4 +285,15 @@ test('E01 actual UI review, editing, storage, copy, HTTP export and PDF stress e
     await writeFile(resolve(dir, 'failure.json'), JSON.stringify({ steps, errors, message: String(error) }, null, 2));
     throw error;
   } finally { await browser.close(); server.closeAllConnections(); await new Promise<void>((done, reject) => server.close(e => e ? reject(e) : done())); }
+});
+
+
+test('business labels preserve guideline tokens until their own mapping and generated reviews survive gap reconciliation', () => {
+  assert.equal(readableText('O07:: unknown; preserve this gap.'), 'Data sharing permission: unknown; preserve this gap.');
+  assert.equal(readableText('EX-G01 and G01'), 'Bank assessment guidance and Software or access requested');
+  assert.equal(readableText('EX-G02 / E09:TX-01'), 'Telecommunications intake guidance / Transaction 1 · Transaction status');
+  const r = reviewed(prepared());
+  assert.equal(reconcileAnalysisGaps(r), r);
+  assert.equal(runtimeReviewValid(reconcileAnalysisGaps(r), 'SUMMARY'), true);
+  assert.doesNotMatch(r.outputs[0].body, /EX-Software|EX-Devices/);
 });

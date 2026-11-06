@@ -8,30 +8,28 @@ Windows在项目根目录执行npm.cmd run dev，打开http://127.0.0.1:5173/。
 
 默认使用Mock，输入保持固定T09合成叙述。其他自由叙述的模型效果由人类在API设置中配置并主动调用后另行验证。设置保存本身不会发出模型请求。四个独立入口仍为/?module=intake、model、guidance、outputs，旧基座在/?view=foundation。
 
-## T09主线
+## 五阶段 T09 主线
 
-1. 新浏览器会话自动显示T09种子。已有历史时，选择Fixed runtime variant中的T09并Reset fixed input，按未保存提示保存或放弃后继续。使用B的Analyze current description，等待Analysis proposal received。
-2. 在Facts表找到E04 / TX-01，将金额更正为200并Apply，再点Complete first fact check。该训练首次核对保留simulated=true标记。重新分析原叙述可展示2000冲突候选，当前人工200继续保留。
-3. 点Save and display proposed questions。Q1输入reported pending并Save answer and update target，Q2选Unknown / unable to answer，剩余Q3可用End follow-up标为跳过。观察仍为1轮3问，保存失败不计数，已显示问题的重试不重复计数。
-4. 在D填写合成测试标识SYN-DEMO，Recalculate guidance，核对EX-G01–03、事实与来源。逐条Accept或填写理由后Modify／Reject。接受仅记录选择，外部动作仍由人处理。
-5. 在E填写同一合成测试标识，Generate / refresh E outputs。生成SUMMARY、HANDOVER-BANK及HANDOVER-TELCO，初始均待最终审核。
-6. 每次点击Final review之前，勾选I checked the current facts复选框。先审核实际引用且接受／修改的建议，再用E draft selection分别选择摘要、银行稿、电信稿审核。拒绝的建议不作为待执行动作进入正文。
-7. Save E case成功后，选定对象的有效预览、Copy E Markdown、Download E markdown与Download E pdf可用。复制及双格式使用同一对象快照。刷新应恢复保存的事实、补问计数、建议、正文和审核。
+1. 根页面打开Local cases and backup，新建合成案件或打开历史案件。确认机构、岗位，统一填写合成标识SYN-DEMO并Confirm working context。旧案件保留，不通过重置覆盖历史测试案。输入支持中英文，Mock仍使用T09固定叙述，点击Analyze current description。
+2. Continue to Check information，在Transaction 1 · Amount更正200并Apply，点击Complete first fact check。首次核对仍保留训练simulated标记。来源、内部引用和更正历史可展开。
+3. Continue to Add information，Save and display proposed questions，Q1填reported pending并更新目标，Q2选择Unknown / unable to answer，End follow-up结束。当前交易状态及分析缺口应一致，保持1轮3问及跳过记录。
+4. Continue to Prepare materials集中更新建议及文稿。核对建议，Accept/Modify/Reject suggestion逐条记录决定。继续到下一阶段时会协调刷新当前材料。接受仅记录本地准备选择。Employee-edited稿不会静默覆盖，需要时点击Update documents / compare employee edits，比较并保留或填写理由明确替换。
+5. Continue to Review and export，核对可读事实、类型、缺口、所选文稿全文及引用建议。勾选本次文件与一次明确确认，Review selected documents and recommendations会按对象记录审核。顶部Save case成功后，选择Document to inspect or export，复制及下载Markdown/PDF。保存状态与审核状态分别展示。
 
-## 无有效指引
+## 无有效指引及诊断入口
 
-在D点击Suspend guidance，再在E生成／更新输出并选择SUMMARY。摘要应保留Insufficient approved guidance; human review required，且无具体机构路径和待执行建议。核对当前事实后，只审核当前摘要并Save E case即可预览、复制及下载。历史接收方稿保留供核对，其导出资格失效。
+独立Test workspace入口为/?test=1。测试控件位于Test controls and local case management，保留固定变体、保存／输出失败、备份和独立模块入口。阶段4可Suspend guidance，进入阶段5只审核事实摘要，保留Insufficient approved guidance; human review required。历史接收方稿仍可查看，失去导出资格。故障和固定变体结果必须单独标注，不能当作正常输入分析结果。
 
-## 修改、保护及故障
+## 修改、保护与恢复
 
-- 编辑正文时先填写Edit reason并Record edit，或Discard working edit。未记录的工作文本会阻止公共保存、新建、重置、打开、导入及页面导航；刷新／关闭页面触发浏览器离开确认。
-- 仅改银行稿时，银行稿需重审，其他无依赖变化的稿件保留审核。重新生成遇到员工稿会展示比较，明确选择保留或填写理由后替换，历史保留旧正文。
-- B在首次核对后更正共用金额250，需要Confirm changes to checked facts，再D重算、E更新及相关对象重审。旧稿不能凭旧审核导出。
-- D拒绝REC-03后重算继续保留拒绝，E更新电信稿时移除该待执行动作。银行稿的无关审核保持。
-- Simulate save failure用于检查保存失败后仍保留输入与重试。Simulate output failure用于检查503后正文及有效审核保持，取消故障后可重试同一版本。
-- 主页面折叠的Diagnostic MOCK controls只用于公共底座故障与固定变体检查。业务验证使用上方B/C/D/E控件。
+- 统一员工标识随案件保存，刷新恢复后在阶段1确认工作上下文，再返回相应阶段。刷新只恢复已保存状态。
+- 阶段2更正250后Confirm changes to checked facts，再进入材料阶段协调更新，相关文稿需重新审核。旧审核历史保留。
+- 拒绝建议必须填写理由，重算继续保留拒绝，更新正文后该项不作为待执行内容。无关稿件的审核按既有依赖保留。
+- 阶段4Edit body输入后先填理由并Record edit或Discard working edit。未记录正文阻止保存、切案及导航，刷新关闭提示继续保留。
+- 旧案件恢复时若存在已解决却残留的结构化缺口，协调当前分析并标未保存，受影响输出更新后重审。原叙述与历史不改写。
+- 模拟输出失败保留正文、审核及有效预览，取消故障后可重试同版本。真实模型仍须员工主动操作，本轮验证默认Mock。
 
-## 本次实际验证
+## 历史验证（本轮结果另记）
 
 Windows、Node v24.15.0、Chromium 156.0.8078.4。89项自动检查全部通过，包含B/C/D/E实际浏览器；完整主页面5组流程、原宿主7组及outputs公共11组通过。命令、失败批次和PDF检查见[集成记录](../project/INTEGRATION_TEST_FIXES.md)的2026-11-05批次。
 

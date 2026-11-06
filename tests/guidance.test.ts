@@ -239,7 +239,9 @@ if (process.env.D01_BROWSER === '1') test('D01 actual UI: decisions, edited word
   let failure: string | null = null;
   try {
     browser = await chromium.launch({ headless: true });
-    for (const route of ['/', '/?module=guidance']) {
+    // The normal five-stage route is covered by tests/usability-browser.ts.
+    // Keep this module-focused regression on its independent entry point.
+    for (const route of ['/?module=guidance']) {
       const context = await browser.newContext({ viewport: { width: 1440, height: 1100 } });
       const page = await context.newPage();
       currentPage = page;
@@ -306,7 +308,9 @@ if (process.env.D01_BROWSER === '1') test('D01 actual UI: decisions, edited word
       await writeFile(resolve(directory, `${prefix}-handoff.json`), JSON.stringify(guidanceHandoff(restored), null, 2));
       checks.push(`${prefix}: actual accept/modify/reject, original text and Employee edited, both context cycles, stable rejection/history, facts/reviews/counts, IndexedDB save/refresh`);
       await page.getByLabel('Fixed runtime variant').selectOption('no-guidance');
-      await button('Reset fixed input').click(); await status('Reset no-guidance');
+      await button('Reset fixed input').click();
+      if (await page.getByRole('dialog').count()) await button('Discard changes and continue').click();
+      await status('Reset no-guidance');
       await button('Recalculate guidance').click();
       await guidance.getByText(NO_GUIDANCE, { exact: true }).waitFor();
       assert.equal(actionableRecommendations(await state()).length, 0);

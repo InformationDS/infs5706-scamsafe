@@ -14,3 +14,9 @@
 .module-outputs.e-workspace iframe {width:100%;min-height:640px;border:1px solid #abc3cc;background:white;}
 .module-outputs.e-workspace .e-check {padding:12px;border:1px solid #9db9c2;}
 @media (max-width:700px) { .module-outputs.e-workspace .e-comparison {grid-template-columns:1fr;} }
+.module-outputs.e-workspace .e-body {max-height:none;overflow:visible;}
+.module-outputs.e-workspace .e-review-scope {border:1px solid #9db9c2;padding:16px;border-radius:8px;margin:16px 0;}
+.module-outputs.e-workspace .e-scope-option {font-weight:500;}
+.module-outputs.e-workspace table {width:100%;border-collapse:collapse;margin:12px 0;}
+.module-outputs.e-workspace th,.module-outputs.e-workspace td {text-align:left;border-bottom:1px solid #c8d9df;padding:9px;vertical-align:top;}
+.module-outputs.e-workspace [hidden] {display:none;}

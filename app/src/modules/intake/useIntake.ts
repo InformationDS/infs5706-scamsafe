@@ -40,7 +40,7 @@ export function useIntake({ record, ports, onChange, onError }: ModuleProps) {
       const saved = await ports.save(next);
       if (sameCaseContent(current.current, before) || sameCaseContent(current.current, next)) {
         current.current = saved;
-        setNotice('Saved after the A01 storage transaction committed.');
+        setNotice('Changes saved locally.');
         return saved;
       }
       setNotice('An earlier version was saved; newer edits remain current and unsaved. Save again before continuing.');
@@ -73,7 +73,7 @@ export function useIntake({ record, ports, onChange, onError }: ModuleProps) {
       const merged = mergeRuntimeProposal(current.current, result.proposal);
       update(merged);
       setQuestionProposals(eligibleQuestionProposals(merged, result.proposal.questions));
-      setNotice(`Analysis proposal received (${result.meta.implementation}; provider called: ${result.meta.providerCalled}). Proposed facts were merged with manual-change protection. Proposed questions are not counted until saved.`);
+      setNotice('Analysis proposal received. Check the facts and suspected types next. Your corrections are retained.');
     } catch (error) {
       onError({ code: 'ANALYSIS_FAILED', message: (error as Error).message, retryable: true });
       setNotice(`Analysis failed; narrative and current case remain available. ${(error as Error).message}`);

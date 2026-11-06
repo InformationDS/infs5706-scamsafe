@@ -25,6 +25,9 @@ export type ModuleProps = {
   onError: (error: PortError) => void;
   reset: () => void;
   integrated?: boolean;
+  workflowStage?: 1 | 2 | 3 | 4 | 5;
+  employeeIdentifier?: string;
+  testMode?: boolean;
   onWorkingEditChange?: (dirty: boolean) => void;
 };
 export type ModuleEntry = { default: ComponentType<ModuleProps> };

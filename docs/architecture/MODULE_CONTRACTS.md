@@ -92,3 +92,12 @@ B后补同一问题时保留旧Q来源原文，新答案使用SRC-UUID新来源�
 实际操作与首次核对训练标记见[原型操作说明](PROTOTYPE_RUNBOOK.md)。
 
 共享保存／导入／切案正在执行时，宿主暂时锁定模块交互，事务结束后恢复，避免异步替换期间新增工作文本。
+
+
+## 2026-11-06 易用性整合约定
+
+ModuleProps新增可选workflowStage（1至5）、employeeIdentifier和testMode，旧独立模块调用保持兼容。主入口按五阶段展示，组件持续挂载并使用hidden保留当前输入。机构、岗位和员工标识在阶段1确认，员工标识作为RuntimeCaseRecord的可选属性随案件保存，旧schemaVersion 2案件缺省为空，重新打开案件需确认工作上下文。
+
+宿主进入阶段4、5或点击集中更新时复用recalculateGuidance和regenerateOutputs，不调用模型。员工稿继续由regenerateOutputs保护，阶段4提供比较、保留或显式替换。单一Save case入口复用既有IndexedDB事务。/?test=1提供固定变体、故障、模块入口及JSON，普通入口只显示业务流程和本地案件管理。
+
+shared/presentation.ts提供factLabel、recordLabel、outputLabel及readableText，内部存储ID保持稳定。shared/intake.ts的reconcileAnalysisGaps在事实更新及旧案load/open/import时协调结构化缺口，实质变更递增analysis/case版本并标未保存，既有审核历史保留，过期输出须更新重审。shared/outputs.ts的finalReviewSelection在临时返回副本上逐建议再逐文件审核，全部成功后才发布整批结果，原finalReview API继续可用。

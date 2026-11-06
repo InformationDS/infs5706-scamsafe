@@ -6,6 +6,28 @@ export const intakeTargetKey = (target: Target) => `${target.fieldId}:${target.r
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const requiresRecord = (fieldId: string) => /^[CDIJ]/.test(fieldId) || /^E0[2-9]$/.test(fieldId);
 
+const unresolvedFact = (fact: FactRecord) => fact.value === null || ['missing', 'unclear', 'conflict'].includes(fact.status);
+function currentAnalysisGaps(record: RuntimeCaseRecord): string[] {
+  const legacyFields: Record<string, string> = { 'Transaction time': 'E03', 'Payment method': 'E06', Recipient: 'E08', 'Continuing contact': 'C08' };
+  const retained = record.analysis.gaps.filter(gap => {
+    const target = /^Unresolved ([A-J]\d{2}):([^\s]*)$/.exec(gap);
+    if (target) return !record.facts.some(f => f.fieldId === target[1] && (f.recordId ?? '') === target[2]);
+    const field = legacyFields[gap];
+    if (!field) return true;
+    return !record.facts.some(f => f.fieldId === field);
+  });
+  return [...new Set([...retained, ...record.facts.filter(unresolvedFact).map(fact => `Unresolved ${intakeTargetKey(fact)}`)])];
+}
+/** Reconcile fact-derived gaps on updates and when opening older saved cases. */
+export function reconcileAnalysisGaps(record: RuntimeCaseRecord): RuntimeCaseRecord {
+  const gaps = currentAnalysisGaps(record);
+  if (same(gaps, record.analysis.gaps)) return record;
+  const next = clone(record);
+  next.analysis.gaps = gaps; next.analysis.version++; next.version++; next.saved = false;
+  return RuntimeCaseRecordSchema.parse(next);
+}
+
+
 export function addNarrativeSource(record: RuntimeCaseRecord, text: string): { record: RuntimeCaseRecord; sourceId: string } {
   const trimmed = text.trim();
   if (!trimmed) throw new Error('Enter the caller’s description before analysis.');
@@ -64,6 +86,7 @@ export function mergeRuntimeProposal(record: RuntimeCaseRecord, proposalInput: u
       if (!incomingAnalysis.alternatives.includes(alternative)) incomingAnalysis.alternatives.push(alternative);
     }
   }
+  incomingAnalysis.gaps = currentAnalysisGaps({ ...next, analysis: incomingAnalysis });
   const semantics = (a: RuntimeCaseRecord['analysis']) => ({ types: a.types, reasons: a.reasons, alternatives: a.alternatives, gaps: a.gaps, guidanceStatus: a.guidanceStatus, recommendations: a.recommendations });
   const changed = !same(semantics(next.analysis), semantics(incomingAnalysis)) || !same(next.facts, record.facts);
   if (!changed) return record;
@@ -96,6 +119,8 @@ export function correctRuntimeFact(record: RuntimeCaseRecord, target: Target, va
   if (!fact) throw new Error('Fact target not found.');
   fact.history.push({ value: clone(fact.value), reason: reason.trim(), sourceIds: [...fact.sourceIds] });
   fact.value = value; fact.reviewStatus = 'corrected'; fact.status = value === null ? 'missing' : 'extracted'; fact.version++;
+  const gaps = currentAnalysisGaps(next);
+  if (!same(gaps, next.analysis.gaps)) { next.analysis.gaps = gaps; next.analysis.version++; }
   next.version++; next.saved = false;
   next.needsFactConfirmation ||= next.reviews.some(review => review.stage === 'first');
   return RuntimeCaseRecordSchema.parse(next);
@@ -169,6 +194,8 @@ export function answerRuntimeQuestion(record: RuntimeCaseRecord, questionId: str
       fact.version++;
     }
   }
+  const gaps = currentAnalysisGaps(next);
+  if (!same(gaps, next.analysis.gaps)) { next.analysis.gaps = gaps; next.analysis.version++; }
   if (record.followUp.stopped && status === 'answered' && updateFact) next.needsFactConfirmation = true;
   next.version++; next.saved = false;
   return RuntimeCaseRecordSchema.parse(next);

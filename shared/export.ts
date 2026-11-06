@@ -35,12 +35,13 @@ export function snapshotFilename(snapshot: ExportSnapshot, ext: 'md' | 'pdf'): s
 // E01 serializers are separate so A01 legacy API and MOCK snapshots stay compatible.
 import { RuntimeExportSnapshotSchema, type RuntimeExportSnapshot } from './runtime';
 import { outputNotice } from './outputs';
+import { outputLabel } from './presentation';
 export function outputSnapshotFilename(s: RuntimeExportSnapshot, ext: 'md' | 'pdf'): string {
   const safe = (v: string) => v.replace(/[^A-Za-z0-9_-]/g, '_');
   return `${safe(s.caseId)}_${s.objectId === 'SUMMARY' ? 'summary' : safe(s.objectId)}_v${s.objectVersion}.${ext}`;
 }
 function outputMeta(s: RuntimeExportSnapshot) {
-  return `Case: ${s.caseId} | case version: ${s.caseVersion}\nObject: ${s.objectId} | object version: ${s.objectVersion}\n${s.review.label} · ${s.review.actor} · ${s.review.reviewedAt}\nEmployee review is not content approval, external verification or delivery.`;
+  return `Case: ${s.caseId} | case version: ${s.caseVersion}\nDocument: ${outputLabel(s.objectId)} | document version: ${s.objectVersion}\n${s.review.label} · ${s.review.actor} · ${s.review.reviewedAt}\nEmployee review covers this recorded document and its referenced recommendations. External verification and delivery remain unconfirmed.`;
 }
 export function outputSnapshotToMarkdown(input: RuntimeExportSnapshot): string {
   const s = RuntimeExportSnapshotSchema.parse(input);

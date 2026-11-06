@@ -30,44 +30,50 @@ const errors: string[] = [], checks: string[] = [];
 page.on('pageerror', error => errors.push(error.message));
 const intake = page.getByRole('region', { name: 'B01 case intake and follow-up' });
 const guidance = page.getByRole('region', { name: 'Guidance and employee decisions' });
-const outputs = page.getByRole('region', { name: 'E01 final review and outputs' });
+const outputs = page.getByRole('region', { name: 'Materials and final review' });
 const button = (name: string) => page.getByRole('button', { name, exact: true });
+const stage = (number: number) => page.getByRole('navigation', { name: 'Case stages' }).getByRole('button').nth(number - 1).click();
 const state = async () => RuntimeCaseRecordSchema.parse(JSON.parse(await page.getByTestId('runtime-record').textContent() ?? '{}'));
 const intakeStatus = (text: string) => intake.getByRole('status').filter({ hasText: text }).waitFor();
 const outputStatus = (text: string) => outputs.getByRole('status').filter({ hasText: text }).waitFor();
 const hostStatus = (text: string) => page.getByRole('status').filter({ hasText: text }).waitFor();
 async function review(id: string) {
-  if (id === 'SUMMARY' || id.startsWith('HANDOVER-')) {
-    await outputs.getByLabel('E draft selection', { exact: true }).selectOption(id);
-  }
+  await stage(5);
+  if (id.startsWith('REC-')) return; // Referenced recommendations are reviewed atomically with the selected documents.
+  await outputs.getByLabel('Document to inspect or export', { exact: true }).selectOption(id);
   await outputs.getByRole('checkbox', { name: /^I checked the current facts/ }).check();
-  await outputs.getByRole('button', { name: `Final review ${id}`, exact: true }).click();
-  await outputStatus(`Final review recorded for ${id}`);
+  await button('Review selected documents and recommendations').click();
+  await outputStatus('Selected documents and referenced recommendations reviewed');
 }
 async function save() {
-  await outputs.getByRole('button', { name: 'Save E case', exact: true }).click();
-  await outputStatus('Saved through A01 storage');
+  await button('Save case').click();
+  await hostStatus('Case saved locally');
   assert.equal((await state()).saved, true);
 }
 async function download(format: 'markdown' | 'pdf', filename: string) {
   const pending = page.waitForEvent('download');
-  await outputs.getByRole('button', { name: `Download E ${format}`, exact: true }).click();
+  await button(format === 'pdf' ? 'Download PDF' : 'Download Markdown').click();
   await (await pending).saveAs(resolve(directory, filename));
 }
 let failure: string | null = null;
 try {
-  await page.goto(origin);
-  await hostStatus('No runtime history'); await intake.waitFor(); await outputs.waitFor();
-  assert.equal(await guidance.count(), 1, 'one D workspace on the integrated page');
+  await page.goto(`${origin}/?test=1`);
+  await hostStatus('No runtime history');
+  await page.getByText('Test controls and local case management', { exact: true }).click();
+  await page.getByLabel('Case employee identifier', { exact: true }).fill('SYNTHETIC-PROTOTYPE-TEST');
+  await button('Confirm working context').click(); await intake.waitFor();
+  assert.equal(await page.locator('section[aria-label="Guidance and employee decisions"]').count(), 1, 'one D workspace mounted across stages');
   const registration = await (await page.request.get(`${origin}/api/runtime/context`)).json();
   assert.equal(registration.modelRegistered, true); assert.equal(registration.outputRegistered, true);
   await intake.getByRole('button', { name: 'Analyze current description', exact: true }).click();
   await intakeStatus('Analysis proposal received');
-  const amountRow = intake.getByRole('row').filter({ hasText: 'E04 / TX-01' });
+  await stage(2);
+  const amountRow = intake.getByRole('row').filter({ has: page.getByText('Transaction 1 · Amount', { exact: true }) });
   await amountRow.getByRole('textbox').fill('200');
   await amountRow.getByRole('button', { name: 'Apply', exact: true }).click();
   await button('Complete first fact check').click(); await intakeStatus('First fact check recorded and saved');
   assert.equal((await state()).saved, true);
+  await stage(3);
   await button('Save and display proposed questions').click(); await intakeStatus('Round 1 saved and displayed');
   const q1 = intake.locator('.intake-question').filter({ hasText: 'Q1 ·' });
   await q1.getByRole('textbox').fill('reported pending');
@@ -81,27 +87,27 @@ try {
   assert.ok(checked.reviews.filter(r => r.stage === 'first').every(r => r.simulated));
   checks.push('T09 starts at B analysis, corrects 2000 to 200, first-checks, saves 3 questions, answers/unknown/stops without fixture shortcuts');
 
-  await guidance.getByLabel('Employee identifier', { exact: true }).fill('SYNTHETIC-PROTOTYPE-TEST');
-  await button('Recalculate guidance').click();
-  for (const id of ['REC-01', 'REC-02', 'REC-03']) await button(`Accept ${id}`).click();
-  await outputs.getByLabel('E employee identifier', { exact: true }).fill('SYNTHETIC-PROTOTYPE-TEST');
-  await button('Generate / refresh E outputs').click();
+  await stage(4);
+  for (const id of ['REC-01', 'REC-02', 'REC-03']) await page.getByTestId(`guidance-${id}`).getByRole('button', { name: 'Accept suggestion', exact: true }).click();
+  await button('Update recommendations and materials').click();
   assert.deepEqual((await state()).outputs.map(o => o.id), ['SUMMARY', 'HANDOVER-BANK', 'HANDOVER-TELCO']);
   assert.equal((await state()).reviews.filter(r => r.stage === 'final').length, 0);
   for (const id of ['REC-01', 'REC-02', 'REC-03', 'SUMMARY', 'HANDOVER-BANK', 'HANDOVER-TELCO']) await review(id);
   await save();
-  await outputs.getByLabel('E draft selection', { exact: true }).selectOption('SUMMARY');
-  await outputs.getByTitle('E reviewed output preview').waitFor();
+  assert.equal((await state()).reviews.filter(r => r.stage === 'final').length, 6);
+  await outputs.getByLabel('Document to inspect or export', { exact: true }).selectOption('SUMMARY');
+  await outputs.getByTitle('Reviewed document preview').waitFor();
   const summary = outputSnapshot(await state(), 'SUMMARY');
-  await button('Copy E Markdown').click(); await outputStatus('copy completed from SUMMARY');
+  await button('Copy Markdown').click(); await outputStatus('copy completed from Case summary');
   assert.equal((await page.evaluate(() => navigator.clipboard.readText())).replaceAll('\r\n', '\n'), outputSnapshotToMarkdown(summary));
   await download('markdown', 'summary.md');
   assert.equal(await readFile(resolve(directory, 'summary.md'), 'utf8'), outputSnapshotToMarkdown(summary));
-  assert.match(summary.body, /\| E04:TX-01 \| 200 \|/);
+  assert.match(summary.body, /\| Transaction 1 · Amount \| 200 \|/);
   await download('pdf', 'summary.pdf');
   checks.push('Actual D decisions and explicit E reviews gate same-snapshot preview, clipboard, Markdown and PDF with current 200');
 
-  await outputs.getByLabel('E draft selection', { exact: true }).selectOption('HANDOVER-BANK');
+  await outputs.getByLabel('Document to inspect or export', { exact: true }).selectOption('HANDOVER-BANK');
+  await stage(4);
   await outputs.getByText('Edit body (record edits before closing)', { exact: true }).click();
   const bank = (await state()).outputs.find(o => o.id === 'HANDOVER-BANK')!;
   const editedBody = bank.body + '\n\n员工补充：保留不确定性。\n\n| 项目 | 合成说明 |\n| --- | --- |\n| 中文 | 尚未独立核实 |\n';
@@ -116,16 +122,19 @@ try {
     await route.fulfill({ response });
   });
   const exporting = page.waitForRequest(request => request.url().endsWith('/api/runtime/export'));
-  await button('Download E pdf').click(); await exporting;
-  await outputs.getByLabel('Working body for HANDOVER-BANK', { exact: true }).fill(editedBody);
+  await stage(5);
+  await button('Download PDF').click(); await exporting;
+  await stage(4);
+  await outputs.getByLabel('Working body for Bank handover', { exact: true }).fill(editedBody);
   releaseExport();
   await outputStatus('Output response is stale');
   assert.equal(downloadsDuringEdit, 0);
   page.off('download', countDownload);
   await page.unroute('**/api/runtime/export');
   const beforeWorkingEdit = await state();
-  assert.ok(await button('Download E pdf').isDisabled());
-  for (const name of ['Save runtime case', 'New synthetic case', 'Reset fixed input']) {
+  assert.ok(await button('Download PDF').isDisabled());
+  assert.ok(await button('Save case').isDisabled());
+  for (const name of ['New synthetic case', 'Reset fixed input']) {
     await button(name).click(); await hostStatus('Record or discard the working output edit');
     assert.deepEqual(await state(), beforeWorkingEdit);
   }
@@ -134,56 +143,59 @@ try {
   await page.getByLabel('Import runtime backup').setInputFiles({ name: 'invalid.json', mimeType: 'application/json', buffer: Buffer.from('{}') });
   await hostStatus('Record or discard the working output edit');
   await page.getByRole('link', { name: 'model', exact: true }).click();
-  assert.equal(page.url(), `${origin}/`);
+  assert.equal(page.url(), `${origin}/?test=1`);
   assert.deepEqual(await state(), beforeWorkingEdit);
-  assert.equal(await outputs.getByLabel('Working body for HANDOVER-BANK', { exact: true }).inputValue(), editedBody);
-  await outputs.getByLabel('Edit reason for HANDOVER-BANK', { exact: true }).fill('Synthetic integration edit and shared guard exercise');
-  await button('Record edit HANDOVER-BANK').click();
+  assert.equal(await outputs.getByLabel('Working body for Bank handover', { exact: true }).inputValue(), editedBody);
+  await outputs.getByLabel('Edit reason for Bank handover', { exact: true }).fill('Synthetic integration edit and shared guard exercise');
+  await button('Record edit Bank handover').click();
   assert.equal(runtimeReviewValid(await state(), 'HANDOVER-BANK'), false);
   assert.equal(runtimeReviewValid(await state(), 'HANDOVER-TELCO'), true);
   await review('HANDOVER-BANK'); await save();
   const bankSnapshot = outputSnapshot(await state(), 'HANDOVER-BANK');
   await page.getByLabel('Simulate output failure', { exact: true }).check();
-  await button('Download E pdf').click(); await outputStatus('Output failed');
+  await button('Download PDF').click(); await outputStatus('Output failed');
   assert.deepEqual(outputSnapshot(await state(), 'HANDOVER-BANK'), bankSnapshot);
   await page.getByLabel('Simulate output failure', { exact: true }).uncheck();
   await download('pdf', 'bank-retry.pdf');
   checks.push('Unrecorded E text blocks host save/new/reset/open/import/navigation; single-draft edit preserves TELCO review; same-version failure retry succeeds');
 
-  await guidance.getByLabel('Reason for REC-03', { exact: true }).fill('Existing clues already covered');
-  await button('Reject REC-03').click();
+  await stage(4);
+  await guidance.getByLabel('Decision reason for Message evidence note', { exact: true }).fill('Existing clues already covered');
+  await page.getByTestId('guidance-REC-03').getByRole('button', { name: 'Reject suggestion', exact: true }).click();
   assert.equal(runtimeReviewValid(await state(), 'HANDOVER-BANK'), true);
   assert.equal(runtimeReviewValid(await state(), 'HANDOVER-TELCO'), false);
-  await button('Generate / refresh E outputs').click();
+  await button('Update documents / compare employee edits').click();
   await outputs.getByRole('dialog', { name: 'Protect employee edits' }).waitFor();
   await button('Keep employee content / refresh other drafts').click();
-  assert.doesNotMatch((await state()).outputs.find(o => o.id === 'HANDOVER-TELCO')!.body, /REC-03 v/);
+  assert.doesNotMatch((await state()).outputs.find(o => o.id === 'HANDOVER-TELCO')!.body, /Message evidence note v/);
+  await stage(2);
   await amountRow.getByRole('textbox').fill('250'); await amountRow.getByRole('button', { name: 'Apply', exact: true }).click();
   assert.equal((await state()).needsFactConfirmation, true);
-  assert.ok(await button('Download E pdf').isDisabled());
+  assert.ok(await button('Download PDF').isDisabled());
   await button('Confirm changes to checked facts').click(); await intakeStatus('First fact check recorded and saved');
-  await button('Recalculate guidance').click(); await button('Generate / refresh E outputs').click();
+  await stage(4); await button('Update documents / compare employee edits').click();
   await outputs.getByRole('dialog', { name: 'Protect employee edits' }).waitFor();
   assert.equal((await state()).outputs.find(o => o.id === 'HANDOVER-BANK')!.body, editedBody);
   await outputs.getByLabel('Replacement reason', { exact: true }).fill('Compared updated 250 facts with the previous employee draft');
   await button('Confirm replacement of compared drafts').click();
   const replacement = (await state()).outputs.find(o => o.id === 'HANDOVER-BANK')!;
-  assert.match(replacement.body, /\| E04:TX-01 \| 250 \|/);
+  assert.match(replacement.body, /\| Transaction 1 · Amount \| 250 \|/);
   assert.equal(replacement.history.at(-1)?.previous, editedBody);
   assert.equal((await state()).recommendations.find(r => r.id === 'REC-03')!.decision, 'rejected');
   checks.push('D rejection updates dependent TELCO; B shared correction requires confirmation; regenerating current 250 protects employee text until explicit comparison/replacement');
 
-  await button('Suspend guidance').click(); await button('Generate / refresh E outputs').click();
-  await outputs.getByLabel('E draft selection', { exact: true }).selectOption('SUMMARY');
+  await button('Suspend guidance').click(); await button('Update documents / compare employee edits').click();
+  await outputs.getByLabel('Document to inspect or export', { exact: true }).selectOption('SUMMARY');
   await review('SUMMARY'); await save();
   const factualSummary = outputSnapshot(await state(), 'SUMMARY');
   assert.match(factualSummary.body, /Insufficient approved guidance; human review required/);
-  assert.doesNotMatch(factualSummary.body, /Intended recipient|REC-0[123] v/);
+  assert.doesNotMatch(factualSummary.body, /Intended recipient|Message evidence note v|Bank assessment request v/);
   await download('markdown', 'no-guidance.md'); await download('pdf', 'no-guidance.pdf');
   const blocked = await page.request.post(`${origin}/api/runtime/export`, { data: { case: await state(), objectId: 'HANDOVER-BANK', format: 'markdown' } });
   assert.equal(blocked.status(), 409);
   const beforeRefresh = await state();
-  await page.reload(); await hostStatus('Saved runtime case restored'); await outputs.waitFor();
+  await page.reload(); await hostStatus('Saved runtime case restored');
+  await button('Confirm working context').click(); await stage(5); await outputs.waitFor();
   assert.deepEqual((await state()).followUp, beforeRefresh.followUp);
   assert.equal(outputSnapshot(await state(), 'SUMMARY').body, factualSummary.body);
   checks.push('No-guidance summary alone is reviewed/exported, historical handover is blocked by server; refresh retains counters, decisions, review and valid summary');

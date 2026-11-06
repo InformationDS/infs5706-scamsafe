@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { makeRuntimeFixture } from '../shared/runtime-fixtures.js';
 import { fixedQuestions } from '../shared/fixtures.js';
-import { correctRuntimeFact, correctRuntimeTypes, eligibleQuestionProposals, intakeTargetKey, mergeRuntimeProposal, parseAnswerValue, confirmRuntimeFacts, appendSavedQuestionRound, answerRuntimeQuestion, endRuntimeFollowUp } from '../shared/intake.js';
+import { correctRuntimeFact, correctRuntimeTypes, eligibleQuestionProposals, intakeTargetKey, mergeRuntimeProposal, parseAnswerValue, confirmRuntimeFacts, appendSavedQuestionRound, answerRuntimeQuestion, endRuntimeFollowUp, reconcileAnalysisGaps } from '../shared/intake.js';
 import { AnalysisEnvelopeSchema } from '../shared/schema.js';
 import { runtimeDependencies, ticketCurrent } from '../shared/runtime.js';
 
@@ -95,6 +95,48 @@ test('later answers preserve original source text used by existing output and hi
   assert.deepEqual(sourceOnly.facts, first.facts);
 });
 
+
+test('F01-001 follow-up updates current analysis gaps and preserves the original narrative and answer history', () => {
+  const checked = confirmRuntimeFacts(makeRuntimeFixture('T09'));
+  const started = appendSavedQuestionRound(checked, fixedQuestions);
+  started.analysis.gaps = ['Unresolved E09:TX-01', 'Unresolved E08:TX-01', 'Sender identity remains unverified'];
+  const originalSources = structuredClone(started.sources);
+  const first = answerRuntimeQuestion(started, 'Q1', 'reported pending', 'answered', true);
+  assert.equal(first.facts.find(f => f.fieldId === 'E09' && f.recordId === 'TX-01')?.value, 'reported pending');
+  assert.equal(first.analysis.gaps.includes('Unresolved E09:TX-01'), false);
+  assert.ok(first.analysis.gaps.includes('Unresolved E08:TX-01'));
+  assert.ok(first.analysis.gaps.includes('Sender identity remains unverified'));
+  assert.ok(first.analysis.version > started.analysis.version);
+  assert.deepEqual(first.sources.filter(source => source.kind === 'narrative'), originalSources.filter(source => source.kind === 'narrative'));
+  const restored = reconcileAnalysisGaps(JSON.parse(JSON.stringify(first)));
+  assert.deepEqual(restored.analysis.gaps, first.analysis.gaps);
+  assert.deepEqual(restored.facts, first.facts);
+  const later = answerRuntimeQuestion(first, 'Q1', 'reported completed', 'answered', true);
+  assert.equal(later.sources.find(source => source.id === 'Q1')?.text, 'reported pending');
+  assert.ok(later.followUp.questions[0].history.some(item => item.answer === 'reported pending'));
+  assert.equal(later.analysis.gaps.includes('Unresolved E09:TX-01'), false);
+});
+
+test('older saved gaps reconcile against current facts without erasing other uncertainty or review history', () => {
+  const record = makeRuntimeFixture('corrected');
+  const status = record.facts.find(f => f.fieldId === 'E09' && f.recordId === 'TX-01')!;
+  status.value = 'reported pending'; status.status = 'extracted';
+  record.analysis.gaps = ['Unresolved E09:TX-01', 'Unresolved E09:TX-02', 'Independent verification pending'];
+  record.saved = true;
+  const old = structuredClone(record);
+  const repaired = reconcileAnalysisGaps(record);
+  assert.equal(repaired.analysis.gaps.includes('Unresolved E09:TX-01'), false);
+  assert.ok(repaired.analysis.gaps.includes('Unresolved E09:TX-02'));
+  assert.ok(repaired.analysis.gaps.includes('Independent verification pending'));
+  assert.equal(repaired.saved, false);
+  assert.deepEqual(repaired.reviews, old.reviews);
+  assert.deepEqual(repaired.sources, old.sources);
+  assert.deepEqual(repaired.facts, old.facts);
+  assert.deepEqual(record, old);
+  const conflict = correctRuntimeFact(repaired, { fieldId: 'E09', recordId: 'TX-01' }, null, 'Status unavailable');
+  assert.ok(conflict.analysis.gaps.includes('Unresolved E09:TX-01'));
+});
+
 if (process.env.B01_BROWSER === '1') test('B01 saved state, failed saves, question counts and newer edits survive the actual host', async () => {
   const { chromium } = await import('playwright');
   const { once } = await import('node:events');
@@ -116,7 +158,7 @@ if (process.env.B01_BROWSER === '1') test('B01 saved state, failed saves, questi
   const browser = await chromium.launch({ headless: true });
   const checks: string[] = [], errors: string[] = [];
   try {
-    for (const route of ['/', '/?module=intake']) {
+    for (const route of ['/?module=intake', '/?test=1']) {
       const context = await browser.newContext({ viewport: { width: 1440, height: 1100 } });
       const page = await context.newPage();
       page.setDefaultTimeout(10000);
@@ -140,9 +182,19 @@ if (process.env.B01_BROWSER === '1') test('B01 saved state, failed saves, questi
       await page.goto(`http://127.0.0.1:${address.port}${route}`);
       await page.getByRole('status').filter({ hasText: 'No runtime history' }).waitFor();
       await intake.waitFor();
-      await button('Save fact changes').click(); await notice('Saved after the A01 storage transaction');
+      const integrated = route === '/?test=1';
+      if (!await page.getByLabel('Simulate save failure', { exact: true }).isVisible()) await page.getByText('Test controls and local case management', { exact: true }).click();
+      if (integrated) {
+        await page.getByLabel('Case employee identifier', { exact: true }).fill('SYN-B01-USABILITY');
+        await button('Confirm working context').click();
+        await button('Save case').click();
+        await page.getByRole('status').filter({ hasText: 'Case saved locally' }).waitFor();
+      } else {
+        await button('Save fact changes').click(); await notice('Changes saved locally');
+      }
       assert.equal((await state()).saved, true);
       await button('Analyze current description').click(); await notice('Analysis proposal received');
+      if (integrated) await button('Continue to Check information').click();
       await page.getByLabel('Simulate save failure', { exact: true }).check();
       await button('Complete first fact check').click(); await notice('Save failed');
       assert.equal((await state()).saved, false);
@@ -150,6 +202,7 @@ if (process.env.B01_BROWSER === '1') test('B01 saved state, failed saves, questi
       await button('Confirm changes to checked facts').click(); await notice('First fact check recorded and saved');
       assert.equal((await state()).saved, true);
       checks.push(`${route}: fact save remains saved; failed first check reports failure; retry persists current review`);
+      if (integrated) await button('Continue to Add information').click();
       await page.getByLabel('Simulate save failure', { exact: true }).check();
       await button('Save and display proposed questions').click(); await notice('Question round was not counted');
       assert.equal((await state()).followUp.totalQuestions, 0);
@@ -161,6 +214,8 @@ if (process.env.B01_BROWSER === '1') test('B01 saved state, failed saves, questi
       await question.getByRole('textbox').fill('reported pending');
       await question.getByRole('button', { name: 'Save answer and update target', exact: true }).click();
       await notice('Answer for Q1 saved'); assert.equal((await state()).saved, true);
+      assert.equal((await state()).facts.find((f: { fieldId: string; recordId?: string }) => f.fieldId === 'E09' && f.recordId === 'TX-01').value, 'reported pending');
+      assert.equal((await state()).analysis.gaps.includes('Unresolved E09:TX-01'), false);
       await button('End follow-up').click(); await notice('Follow-up ended and saved');
       assert.equal((await state()).saved, true);
       const savedRecord = await state();
@@ -168,19 +223,43 @@ if (process.env.B01_BROWSER === '1') test('B01 saved state, failed saves, questi
       await page.getByRole('status').filter({ hasText: 'Saved runtime case restored' }).waitFor();
       assert.deepEqual((await state()).followUp, savedRecord.followUp);
       assert.equal((await state()).saved, true);
+      assert.equal((await state()).analysis.gaps.includes('Unresolved E09:TX-01'), false);
+      if (integrated) {
+        assert.equal((await state()).employeeIdentifier, 'SYN-B01-USABILITY');
+        await button('Confirm working context').click();
+        await button('Continue to Check information').click();
+      }
       checks.push(`${route}: failed question save counts zero; retry counts three once; answer/end save and refresh preserve saved state`);
       await page.evaluate(() => { (window as Window & { saveDelay?: number }).saveDelay = 800; });
-      await button('Save fact changes').click();
-      if (route === '/') await page.getByText('Diagnostic MOCK controls — foundation fixtures only', { exact: true }).click();
+      if (integrated) {
+        await page.getByText('Diagnostic MOCK controls — foundation fixtures only', { exact: true }).click();
+        await button('Save case').click();
+      } else await button('Save fact changes').click();
       await button('MOCK change amount to 250').click();
-      await notice('An earlier version was saved');
+      if (integrated) await page.getByRole('status').filter({ hasText: 'Case saved locally' }).waitFor();
+      else await notice('An earlier version was saved');
       assert.equal((await state()).facts.find((f: { fieldId: string }) => f.fieldId === 'E04').value, 250);
       assert.equal((await state()).saved, false);
       await page.evaluate(() => { (window as Window & { saveDelay?: number }).saveDelay = 0; });
-      await button('Save fact changes').click(); await notice('Saved after the A01 storage transaction');
+      if (integrated) {
+        await button('Save case').click();
+        await page.getByRole('status').filter({ hasText: 'Case saved locally' }).waitFor();
+      } else { await button('Save fact changes').click(); await notice('Changes saved locally'); }
+      await page.waitForFunction(() => JSON.parse(document.querySelector('[data-testid=runtime-record]')?.textContent ?? '{}').saved === true);
       assert.equal((await state()).saved, true);
       checks.push(`${route}: delayed save preserves newer 250 as unsaved; explicit retry saves latest version`);
-      await page.screenshot({ path: resolve(directory, route === '/' ? 'integrated.png' : 'independent.png'), fullPage: true });
+      if (integrated) {
+        await button('Confirm changes to checked facts').click(); await notice('First fact check recorded and saved');
+        await button('Continue to Add information').click();
+        await button('Continue to Prepare materials').click();
+        assert.ok((await state()).outputs.length > 0);
+        await button('Continue to Review and export').click();
+        assert.equal(await page.getByRole('navigation', { name: 'Case stages' }).getByRole('button').nth(4).getAttribute('aria-current'), 'step');
+        assert.equal((await state()).employeeIdentifier, 'SYN-B01-USABILITY');
+        checks.push(`${route}: the five-stage entry confirms updated facts, prepares current materials, and opens final review with the shared identifier`);
+      }
+
+      await page.screenshot({ path: resolve(directory, integrated ? 'integrated.png' : 'independent.png'), fullPage: true });
       await context.close();
     }
     assert.deepEqual(errors, []); assert.equal(providerRequests, 0);

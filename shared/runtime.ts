@@ -15,6 +15,7 @@ export const RuntimeRecommendationSchema = z.object({ ...RecommendationSchema.sh
 export const RuntimeCaseRecordSchema = z.object({
   ...CaseRecordSchema.shape,
   schemaVersion: z.literal(2), mode: z.enum(['mock', 'live']),
+  employeeIdentifier: z.string().optional(),
   // Content approval belongs to the business configuration, never to employee reviews.
   role: z.union([ApprovedRoleSchema, CaseRecordSchema.shape.role]),
   roleRevision: z.number().int().positive(), guidanceRevision: z.number().int().positive(),
