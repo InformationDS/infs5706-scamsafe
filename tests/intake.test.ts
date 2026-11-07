@@ -161,6 +161,18 @@ if (process.env.B01_BROWSER === '1') test('B01 saved state, failed saves, questi
       await question.getByRole('textbox').fill('reported pending');
       await question.getByRole('button', { name: 'Save answer and update target', exact: true }).click();
       await notice('Answer for Q1 saved'); assert.equal((await state()).saved, true);
+      const gapHeading = intake.getByRole('heading', { name: 'Information gaps' });
+      await gapHeading.waitFor();
+      assert.doesNotMatch(await gapHeading.locator('xpath=following-sibling::ul[1]').innerText(), /Unresolved E09:TX-01/);
+      if (route === '/') {
+        await button('Generate / refresh E outputs').click();
+        const summary = (await state()).outputs.find((o: { id: string }) => o.id === 'SUMMARY');
+        assert.ok(summary);
+        const unresolved = summary.body.split('## Unresolved information')[1].split('## Reported sources')[0];
+        assert.doesNotMatch(unresolved, /E09:TX-01/);
+        assert.doesNotMatch(summary.body, /Gap: Unresolved E09:TX-01/);
+        checks.push('F01-001: answered E09 is absent from intake gaps and generated summary unresolved section');
+      }
       await button('End follow-up').click(); await notice('Follow-up ended and saved');
       assert.equal((await state()).saved, true);
       const savedRecord = await state();
@@ -183,6 +195,36 @@ if (process.env.B01_BROWSER === '1') test('B01 saved state, failed saves, questi
       await page.screenshot({ path: resolve(directory, route === '/' ? 'integrated.png' : 'independent.png'), fullPage: true });
       await context.close();
     }
+    // Simulate a persisted v2 case from before the gap fix; the original must not be rewritten on open.
+    const context = await browser.newContext({ viewport: { width: 1440, height: 1100 } });
+    const page = await context.newPage();
+    page.on('pageerror', error => errors.push(error.message));
+    await page.goto(`http://127.0.0.1:${address.port}/?module=outputs`);
+    await page.getByRole('status').filter({ hasText: 'No runtime history' }).waitFor();
+    const stale = makeRuntimeFixture('no-guidance');
+    stale.caseId = 'SYN-STALE-GAP'; stale.saved = true;
+    const fact = stale.facts.find(f => f.fieldId === 'E09' && f.recordId === 'TX-01')!;
+    fact.value = 'reported pending'; fact.status = 'extracted';
+    stale.analysis.gaps = ['Unresolved E09:TX-01'];
+    const clean = makeRuntimeFixture('T09'); clean.caseId = 'SYN-UNCHANGED'; clean.saved = true;
+    await page.evaluate(async ({ stale, clean }) => {
+      const db = await new Promise<IDBDatabase>((resolve, reject) => { const req = indexedDB.open('scamsafe-runtime', 1); req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error); });
+      await new Promise<void>((resolve, reject) => { const tx = db.transaction(['cases','sessions'], 'readwrite'); tx.objectStore('cases').put(stale); tx.objectStore('cases').put(clean); tx.objectStore('sessions').put(clean.caseId, 'outputs'); tx.oncomplete = () => resolve(); tx.onerror = () => reject(tx.error); }); db.close();
+    }, { stale, clean });
+    await page.reload(); await page.getByRole('status').filter({ hasText: 'Saved runtime case restored' }).waitFor();
+    await page.getByLabel('Saved case', { exact: true }).selectOption(stale.caseId);
+    await page.getByRole('button', { name: 'Open saved case', exact: true }).click();
+    await page.getByRole('status').filter({ hasText: 'stale gaps repaired in memory' }).waitFor();
+    const loaded = JSON.parse(await page.getByTestId('runtime-record').textContent() ?? '{}');
+    assert.equal(loaded.saved, false); assert.equal(loaded.analysisUpdate.status, 'pending');
+    assert.ok(!loaded.analysis.gaps.includes('Unresolved E09:TX-01'));
+    const stored = await page.evaluate(async (id) => {
+      const db = await new Promise<IDBDatabase>((resolve, reject) => { const req = indexedDB.open('scamsafe-runtime', 1); req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error); });
+      const value = await new Promise<any>((resolve, reject) => { const tx = db.transaction('cases', 'readonly'); const req = tx.objectStore('cases').get(id); req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error); }); db.close(); return value;
+    }, stale.caseId);
+    assert.deepEqual(stored, stale);
+    checks.push('outputs: opening an old stale-gap case repairs in memory, marks unsaved and leaves IndexedDB original unchanged');
+    await page.screenshot({ path: resolve(directory, 'stale-gap-restore.png'), fullPage: true }); await context.close();
     assert.deepEqual(errors, []); assert.equal(providerRequests, 0);
   } finally {
     await writeFile(resolve(directory, 'result.json'), JSON.stringify({ checks, errors, providerRequests, scope: 'B01 save regression, Mock training reviews', browser: browser.version() }, null, 2));

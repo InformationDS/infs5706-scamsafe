@@ -1,3 +1,5 @@
+import { targetLabel, factValueLabel } from './field-labels';
+import { currentFactGaps, isFieldGap } from './case-gaps';
 import { RuntimeCaseRecordSchema, dependenciesValid, runtimeSnapshot, runtimeReviewValid, type RuntimeCaseRecord, type RuntimeExportSnapshot } from './runtime';
 import { actionableRecommendations, activeRecommendations, evaluateGuidance, NO_GUIDANCE } from './guidance';
 
@@ -8,8 +10,8 @@ function canonical(v: unknown): string {
   return JSON.stringify(v) ?? 'undefined';
 }
 const equal = (a: unknown, b: unknown): boolean => canonical(a) === canonical(b);
-const target = (f: RuntimeCaseRecord['facts'][number]) => `${f.fieldId}:${f.recordId ?? ''}`;
-const value = (v: unknown): string => v === null ? 'Unknown / not supplied' : Array.isArray(v) ? v.join('; ') : String(v);
+const target = (f: Pick<RuntimeCaseRecord['facts'][number], 'fieldId' | 'recordId'>) => `${f.fieldId}:${f.recordId ?? ''}`;
+const value = (v: unknown): string => v === null || typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean' || (Array.isArray(v) && v.every(x => typeof x === 'string')) ? factValueLabel(v) : String(v);
 const cell = (v: unknown) => value(v).replaceAll('|', '\\|').replaceAll('\n', '<br>');
 export const outputNotice = 'SYNTHETIC · Content approval pending · Local draft only. Reported information is not independently verified. No action, delivery or referral has been performed.';
 
@@ -24,15 +26,15 @@ export function outputProposals(r: RuntimeCaseRecord): Output[] {
     ...Object.fromEntries(r.facts.map(f => [`fact:${target(f)}`, f.version])) };
   const reported = [outputNotice, '', '## Current reported facts',
     '| Field / record | Current reported value | Status / check | Sources |', '| --- | --- | --- | --- |',
-    ...facts.map(f => `| ${cell(target(f))} | ${cell(f.value)} | ${cell(`${f.status} / ${f.reviewStatus}`)} | ${cell(f.sourceIds.join(', ') || 'None')} |`), '',
+    ...facts.map(f => `| ${cell(`${targetLabel(f)} (${target(f)})`)} | ${cell(f.value)} | ${cell(`${f.status} / ${f.reviewStatus}`)} | ${cell(f.sourceIds.join(', ') || 'None')} |`), '',
     'Amounts are reported values, not verified losses. Transactions remain separate by record, currency and status; unknown values are not zero.', '',
     '## Candidate analysis (not a confirmed scam finding)', ...r.analysis.types.map(t => `- ${t}`),
     ...r.analysis.reasons.map(t => `- Basis: ${t}`), ...r.analysis.alternatives.map(t => `- Uncertainty: ${t}`),
-    ...r.analysis.gaps.map(t => `- Gap: ${t}`), '', '## Unresolved information',
-    ...facts.filter(f => f.value === null || ['missing','unclear','conflict'].includes(f.status) || f.candidates.length).map(f => `- ${target(f)}: ${f.status}; current ${value(f.value)}; candidates ${JSON.stringify(f.candidates)}`),
+    ...r.analysis.gaps.filter(t => !isFieldGap(t)).map(t => `- Gap: ${t}`), '', '## Unresolved information',
+    ...currentFactGaps(r).filter(g => g.target.fieldId !== 'A07').map(g => { const f = facts.find(f => target(f) === target(g.target))!; return `- ${cell(`${targetLabel(f)} (${target(f)})`)}: ${f.status}; current ${cell(f.value)}; candidates ${cell(JSON.stringify(f.candidates))}`; }),
     '', '## Reported sources and correction history (historical wording may differ from current values)',
     ...r.sources.filter(s => usedSources.has(s.id)).map(s => `- ${s.id} (${s.kind}): ${s.text}`),
-    ...facts.flatMap(f => f.history.map(h => `- ${target(f)} previous ${value(h.value)}: ${h.reason} [${h.sourceIds.join(', ')}]`)),
+    ...facts.flatMap(f => f.history.map(h => `- ${cell(`${targetLabel(f)} (${target(f)})`)} previous ${cell(h.value)}: ${h.reason} [${h.sourceIds.join(', ')}]`)),
     '', '## Recorded response boundaries',
     'Reported responses are listed in the current facts when supplied. Unknown response details remain unknown. No external execution or receipt is established by this local record.'
   ].join('\n');

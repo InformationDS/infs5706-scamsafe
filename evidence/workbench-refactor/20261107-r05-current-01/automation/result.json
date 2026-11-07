@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "empty case, local save and integration session restore",
+    "draft protection, isolated cases, cancel and failed save retry"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "failure": null,
+  "scope": "R05 candidate shell only; message operations not yet implemented"
+}

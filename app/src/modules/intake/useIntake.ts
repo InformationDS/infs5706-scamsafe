@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { AnalysisRequest, ModuleProps } from '../../../../shared/module-ports';
 import { runtimeDependencies, ticketCurrent } from '../../../../shared/runtime';
 import type { Question } from '../../../../shared/schema';
+import { hasStaleFieldGaps, repairStaleRuntimeGaps } from '../../../../shared/case-gaps';
 import {
   addNarrativeSource, answerRuntimeQuestion, appendSavedQuestionRound, confirmRuntimeFacts,
   correctRuntimeFact, correctRuntimeTypes, eligibleQuestionProposals, endRuntimeFollowUp, intakeTargetKey,
@@ -34,6 +35,14 @@ export function useIntake({ record, ports, onChange, onError }: ModuleProps) {
   useEffect(() => { setTypeDraft(record.analysis.types.join(', ')); }, [record.caseId, record.instanceId, record.analysis.version]);
 
   const update = (next: typeof record) => { current.current = next; onChange(next); };
+  useEffect(() => {
+    const old = current.current;
+    if (hasStaleFieldGaps(old)) {
+      const repaired = repairStaleRuntimeGaps(old);
+      current.current = repaired; onChange(repaired);
+      setNotice('Outdated field gaps were updated in memory. Save and review affected materials.');
+    }
+  }, [record.caseId, record.instanceId]);
   async function save(next = current.current) {
     const before = structuredClone(current.current);
     try {
@@ -108,9 +117,13 @@ export function useIntake({ record, ports, onChange, onError }: ModuleProps) {
     } finally { setBusy(false); }
   }
   async function answerQuestion(question: Question, status: 'answered' | 'unknown' | 'not-applicable', updateFact: boolean) {
+    if (status === 'not-applicable' && !answerDrafts[question.id]?.trim()) {
+      setNotice('Enter a short reason before marking this question not applicable.');
+      return;
+    }
     setBusy(true);
     try {
-      const answer = status === 'answered' ? answerDrafts[question.id] ?? '' : status === 'unknown' ? 'Unknown / unable to answer' : answerDrafts[question.id]?.trim() || 'Not applicable';
+      const answer = status === 'answered' ? answerDrafts[question.id] ?? '' : status === 'unknown' ? 'Unknown / unable to answer' : answerDrafts[question.id]!.trim();
       const saved = await save(answerRuntimeQuestion(current.current, question.id, answer, status, updateFact));
       if (saved) {
         setAnswerDrafts(old => ({ ...old, [question.id]: '' }));

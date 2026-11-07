@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "/: fact save remains saved; failed first check reports failure; retry persists current review",
+    "/: failed question save counts zero; retry counts three once; answer/end save and refresh preserve saved state",
+    "/: delayed save preserves newer 250 as unsaved; explicit retry saves latest version",
+    "/?module=intake: fact save remains saved; failed first check reports failure; retry persists current review",
+    "/?module=intake: failed question save counts zero; retry counts three once; answer/end save and refresh preserve saved state",
+    "/?module=intake: delayed save preserves newer 250 as unsaved; explicit retry saves latest version"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "scope": "B01 save regression, Mock training reviews",
+  "browser": "156.0.8078.4"
+}

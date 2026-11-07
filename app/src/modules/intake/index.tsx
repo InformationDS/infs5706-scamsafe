@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import type { FactRecord, Target } from '../../../../shared/schema';
 import type { ModuleProps } from '../../../../shared/module-ports';
+import { currentFactGaps, isFieldGap } from '../../../../shared/case-gaps';
 import { useIntake } from './useIntake';
 import './style.css';
 
@@ -50,12 +51,14 @@ export default function IntakeModule(props: ModuleProps) {
 
     <section className="intake-card">
       <div className="intake-section-title"><h3>Suspected types and alternatives</h3><span className={`intake-status ${record.analysis.source}`}>{record.analysis.source} proposal</span></div>
+      {record.analysisUpdate && record.analysisUpdate.status !== 'current' && <p className="intake-notice">Previous analysis — {record.analysisUpdate.status}. Analyze the current description again before treating it as current.</p>}
       {record.analysis.types.length ? <ul className="intake-tags">{record.analysis.types.map((type, index) => <li key={`${type}-${index}`}>{type}</li>)}</ul> : <p className="intake-muted">No type proposal yet. Multiple types or insufficient information may be retained.</p>}
       <div className="intake-type-edit"><label>Suspected types (comma-separated; clear for insufficient information)<input aria-label="Correct suspected types" value={intake.typeDraft} onChange={event => intake.setTypeDraft(event.target.value)} placeholder="e.g. suspected phishing, payment redirection" /></label><button type="button" disabled={intake.busy && !intake.requestPending} onClick={intake.correctTypes}>Apply type correction</button></div>
       <p className="intake-muted">Type labels remain employee-reviewed candidates, not a determination that a scam occurred.</p>
       <h4>Reasons</h4>{record.analysis.reasons.length ? <ul>{record.analysis.reasons.map((reason, index) => <li key={index}>{reason}</li>)}</ul> : <p className="intake-muted">No reasons recorded.</p>}
       <h4>Alternative explanations</h4>{record.analysis.alternatives.length ? <ul>{record.analysis.alternatives.map((reason, index) => <li key={index}>{reason}</li>)}</ul> : <p className="intake-muted">No alternatives recorded.</p>}
-      {record.analysis.gaps.length > 0 && <><h4>Information gaps</h4><ul>{record.analysis.gaps.map((gap, index) => <li key={index}>{gap}</li>)}</ul></>}
+      {(currentFactGaps(record).length > 0 || record.analysis.gaps.some(gap => !isFieldGap(gap))) && <><h4>Information gaps</h4><ul>{currentFactGaps(record).map(gap => <li key={`${gap.target.fieldId}:${gap.target.recordId ?? ''}`}>Unresolved {gap.target.fieldId}:{gap.target.recordId ?? ''}</li>)}{record.analysis.gaps.filter(gap => !isFieldGap(gap)).map((gap, index) => <li key={`note-${index}`}>{gap}</li>)}</ul></>}
+      {!!record.analysisGapHistory?.length && <details><summary>Previous analysis notes</summary>{record.analysisGapHistory.map((entry, index) => <ul key={`${entry.analysisVersion}-${index}`}>{entry.gaps.map((gap, i) => <li key={i}>{gap}</li>)}</ul>)}</details>}
     </section>
 
     <section className="intake-card">
@@ -104,7 +107,7 @@ export default function IntakeModule(props: ModuleProps) {
       {intake.questionProposals.length > 0 && <div className="intake-proposals"><h4>New question proposals — not yet counted</h4>{intake.questionProposals.map(question => <p key={question.id}><strong>{targetLabel(question.target)}:</strong> {question.text} <small>{question.reason}</small></p>)}
         <button type="button" className="primary" disabled={intake.busy || record.needsFactConfirmation || !review} onClick={() => void intake.saveQuestionProposals()}>Save and display proposed questions</button>
       </div>}
-      <div className="intake-actions"><button type="button" disabled={intake.busy || record.followUp.stopped || !record.followUp.questions.some(q => q.status === 'pending')} onClick={() => void intake.endQuestions()}>End follow-up</button>
+      <div className="intake-actions"><button type="button" disabled={intake.busy || record.followUp.stopped || !review} onClick={() => void intake.endQuestions()}>End follow-up</button>
         <button type="button" disabled={intake.busy || !intake.questionProposals.length} onClick={() => intake.setQuestionProposals([])}>Discard question proposals</button></div>
       {record.followUp.stopped && <p className="intake-muted">Follow-up ended. New information can be recorded, but questioning will not restart.</p>}
     </section>

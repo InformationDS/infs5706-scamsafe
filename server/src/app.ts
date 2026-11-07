@@ -6,7 +6,7 @@ import { chromium } from 'playwright';
 import { CaseRecordSchema, AnalysisResultSchema, buildSnapshot, fixtureNames, makeFixture } from '../../shared/index.js';
 import { snapshotFilename, snapshotToHtml, snapshotToMarkdown } from '../../shared/export.js';
 import { readConfig, isConfigured, type ServerConfig } from './config.js';
-import { analyzeLive, ApiError } from './model.js';
+import { analyzeLive, ApiError, validateWorkbenchRequest, validateWorkbenchResponse } from './model.js';
 import { loadBusinessBaseline } from './business.js';
 import { ModelSettingsStore } from './model-settings.js';
 import { existsSync } from 'node:fs';
@@ -100,14 +100,19 @@ export function createApp(options: Options = {}) {
       if (!parsed.success) throw new ApiError(400, 'INVALID_INPUT', 'Supply the runtime case and request ticket.');
       const input = parsed.data;
       if (!ticketCurrent(input.case, input.ticket, input.ticket.requestId, runtimeSettingsRevision)) throw new ApiError(409, 'STALE_REQUEST', 'Request identity or settings changed; request current context again.', true);
-      const service = input.previewMock ? mockRuntimeAnalysis : options.analyzeRuntime ?? (await registered<ModelRegistration>('server/src/model.ts')).analyzeRuntime;
+      const workbench = !!(input.interaction || input.purpose);
+      if (workbench) validateWorkbenchRequest(input);
+      const service = input.previewMock && !workbench ? mockRuntimeAnalysis : options.analyzeRuntime ?? (await registered<ModelRegistration>('server/src/model.ts')).analyzeRuntime;
       if (!service) throw new ApiError(503, 'MODULE_NOT_READY', 'C analyzeRuntime service is not installed.', true);
       const revision = runtimeSettingsRevision;
       const response = await service(input, { config: settings.getConfig(), fetchImpl: options.fetchImpl });
       if (revision !== runtimeSettingsRevision) throw new ApiError(409, 'STALE_REQUEST', 'Model settings changed during analysis.', true);
-      AnalysisEnvelopeSchema.parse(response.proposal);
-      if (JSON.stringify(response.ticket) !== JSON.stringify(input.ticket)) throw new ApiError(502, 'INVALID_TICKET', 'Service returned a different request identity.');
-      res.json(response);
+      if (workbench) res.json(validateWorkbenchResponse(input, response));
+      else {
+        AnalysisEnvelopeSchema.parse(response.proposal);
+        if (JSON.stringify(response.ticket) !== JSON.stringify(input.ticket)) throw new ApiError(502, 'INVALID_TICKET', 'Service returned a different request identity.');
+        res.json(response);
+      }
     } catch (error) { next(error); }
   });
   app.post('/api/runtime/export', async (req, res, next) => {

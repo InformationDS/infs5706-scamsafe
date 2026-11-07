@@ -24,7 +24,7 @@ test('E01 generates current values with uncertainty, sources, version and no bor
   const r = prepared();
   assert.deepEqual(r.outputs.map(o => o.id), ['SUMMARY', 'HANDOVER-BANK', 'HANDOVER-TELCO']);
   const body = r.outputs[0].body;
-  assert.match(body, /E04:TX-01 \| 200/); assert.match(body, /Unknown \/ not supplied/);
+  assert.match(body, /Reported amount · TX-01 \(E04:TX-01\) \| 200/); assert.match(body, /Unknown \/ not supplied/);
   assert.match(body, /S3 \(narrative\)/); assert.match(body, /previous 2000/);
   assert.doesNotMatch(body, /Reviewed for record accuracy by STAFF/);
   assert.equal(r.reviews.filter(v => v.stage === 'final' && !v.simulated).length, 0);
@@ -52,7 +52,7 @@ test('E01 single edit invalidates bank alone; exact dependency change invalidate
   const next = structuredClone(r), amount = next.facts.find(f => f.fieldId === 'E04')!;
   amount.value = 250; amount.version++; next.version++; next.saved = false;
   for (const o of next.outputs) { assert.equal(outputCurrent(next, o.id), false); assert.throws(() => outputSnapshot(next, o.id)); }
-  assert.match(regenerateOutputs(recalculateGuidance(next)).record.outputs[1].body, /E04:TX-01 \| 250/);
+  assert.match(regenerateOutputs(recalculateGuidance(next)).record.outputs[1].body, /Reported amount · TX-01 \(E04:TX-01\) \| 250/);
 });
 test('E01 protects employee text and keeps previous bodies after explicit replacement', () => {
   const initial = reviewed(prepared());

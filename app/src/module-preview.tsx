@@ -44,7 +44,7 @@ export function ModulePreview({ name, integrated = false }: { name: ModuleName; 
     Promise.all([loadRuntimeCase(undefined, session), listRuntimeCases()]).then(([saved, all]) => {
       if (!active) return;
       if (saved) { const restored = { ...saved, instanceId: crypto.randomUUID() }; current.current = restored; setRecord(restored); }
-      setHistory(all); setMessage(saved ? 'Saved runtime case restored from this browser.' : 'No runtime history; unsaved MOCK input loaded.');
+      setHistory(all); setMessage(saved ? (saved.saved ? 'Saved runtime case restored from this browser.' : 'Stored case restored with stale gaps repaired in memory; changes are unsaved. Analyze and save before output.') : 'No runtime history; unsaved MOCK input loaded.');
     }).catch(error => { if (active) setMessage(error.message); }).finally(() => { if (active) setReady(true); });
     return () => { active = false; };
   }, [session]);
@@ -134,7 +134,10 @@ export function ModulePreview({ name, integrated = false }: { name: ModuleName; 
       <label>Saved case <select aria-label="Saved case" value={selectedCase} onChange={e => setSelectedCase(e.target.value)}><option value="">Select a case</option>{history.map(r => <option key={r.caseId}>{r.caseId}</option>)}</select></label>
       <button disabled={!selectedCase} onClick={() => guard(async () => {
         const next = await loadRuntimeCase(selectedCase); if (!next) throw new Error('Saved case not found.');
-        const opened = { ...next, instanceId: crypto.randomUUID() }; await saveRuntimeCase(opened, session, failSave); requestId.current = ''; apply(opened); setMessage('Saved case opened.');
+        const opened = { ...next, instanceId: crypto.randomUUID() };
+        if (opened.saved) await saveRuntimeCase(opened, session, failSave);
+        requestId.current = ''; apply(opened);
+        setMessage(opened.saved ? 'Saved case opened.' : 'Saved case opened with stale gaps repaired in memory; changes are unsaved. Analyze and save before output.');
       })}>Open saved case</button>
       <button onClick={() => { if (workingEdit.current) { setMessage(workingEditMessage); return; } download(new Blob([backupRuntimeCase(record)], { type: 'application/json' }), `${record.caseId}_runtime.json`); }}>Download runtime backup</button>
       <label>Import runtime backup <input type="file" accept=".json" onChange={e => { const file = e.target.files?.[0]; if (file) void run(() => importBackup(file)); e.target.value = ''; }} /></label>

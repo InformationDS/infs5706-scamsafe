@@ -86,6 +86,8 @@ test('runtime routes use injected registrations and validate identity; explicit 
     const r = makeRuntimeFixture('corrected');
     const ticket = { caseId: r.caseId, instanceId: r.instanceId, caseVersion: r.version, requestId: 'req', settingsRevision: 1, dependencies: runtimeDependencies(r) };
     assert.equal((await post('/api/runtime/analyze', { case: r, ticket })).status, 200); assert.equal(calls, 1);
+    assert.equal((await post('/api/runtime/analyze', { case: r, ticket, interaction: { messageId: 'MSG-1', sourceId: r.sources[0].id, kind: 'supplement', questionIds: [] } })).status, 400);
+    assert.equal(calls, 1); // Invalid message context is rejected before the service is called.
     const mock = await (await post('/api/runtime/analyze', { case: r, ticket, previewMock: true })).json(); assert.equal(mock.meta.providerCalled, false); assert.equal(calls, 1);
     assert.equal((await post('/api/runtime/analyze', { case: r, ticket: { ...ticket, caseId: 'wrong' } })).status, 409);
     const out = { ...makeRuntimeFixture('output-error'), saved: true };
@@ -95,4 +97,91 @@ test('runtime routes use injected registrations and validate identity; explicit 
     assert.equal((await post('/api/runtime/export', { case: out, objectId: 'SUMMARY', format: 'markdown', previewMock: true })).status, 200);
     assert.equal(outputs, 1);
   } finally { await new Promise<void>((resolve, reject) => server.close(error => error ? reject(error) : resolve())); }
+});
+import { MessageIntentSchema, MessageResolutionSchema } from '../shared/conversation';
+import { AnalysisRequestSchema, parseAnalysisResponseForRequest } from '../shared/module-ports';
+
+test('v2 conversation fields preserve old backups and reject invalid message references', () => {
+  const old = makeRuntimeFixture('partial');
+  assert.equal(RuntimeCaseRecordSchema.safeParse(old).success, true);
+  const r = structuredClone(old);
+  const source = r.sources[0];
+  const q = r.followUp.questions[0];
+  r.conversation = { messages: [{ id: 'MSG-1', kind: 'supplement', sourceId: source.id, questionIds: [q.id], status: 'needs-decision', recordedFactVersions: { [`${q.target.fieldId}:${q.target.recordId ?? ''}`]: 1 }, updates: [{ questionId: q.id, target: q.target, sourceId: source.id, outcome: 'conflict', disposition: 'awaiting-decision' }], unresolvedQuotes: [], createdAt: '2026-11-07T00:00:00Z' }] };
+  r.analysisUpdate = { status: 'pending', messageId: 'MSG-1', operation: 'message' };
+  assert.equal(RuntimeCaseRecordSchema.safeParse(r).success, true);
+  const restored = parseRuntimeBackup(backupRuntimeCase(r));
+  assert.deepEqual(restored.conversation, r.conversation);
+  for (const mutate of [
+    (x: typeof r) => { x.conversation!.messages[0].sourceId = 'missing'; },
+    (x: typeof r) => { x.conversation!.messages[0].questionIds = ['missing']; },
+    (x: typeof r) => { x.conversation!.messages.push(structuredClone(x.conversation!.messages[0])); },
+    (x: typeof r) => { x.conversation!.messages[0].updates[0].sourceId = 'missing'; },
+    (x: typeof r) => { x.conversation!.messages[0].updates[0].target = { fieldId: 'G05' }; },
+  ]) { const bad = structuredClone(r); mutate(bad); assert.equal(RuntimeCaseRecordSchema.safeParse(bad).success, false); }
+  assert.equal(RuntimeCaseRecordSchema.safeParse({ ...r, unexpected: true }).success, false);
+});
+
+test('message contract checks typed values, unknown observations, strict objects and mutually exclusive purposes', () => {
+  const r = makeRuntimeFixture('partial');
+  const ticket = { caseId: r.caseId, instanceId: r.instanceId, caseVersion: r.version, requestId: 'req', settingsRevision: 1, dependencies: runtimeDependencies(r) };
+  const intent = { messageId: 'MSG-1', sourceId: r.sources[0].id, kind: 'supplement' as const, questionIds: [] };
+  assert.equal(AnalysisRequestSchema.safeParse({ case: r, ticket }).success, true);
+  assert.equal(AnalysisRequestSchema.safeParse({ case: r, ticket, interaction: intent, purpose: 'follow-up' }).success, false);
+  assert.equal(MessageIntentSchema.safeParse({ ...intent, extra: true }).success, false);
+  const answer = { questionId: 'Q1', target: { fieldId: 'C08', recordId: 'CONTACT-01' }, quote: 'No', status: 'answered', value: false };
+  const result = { messageId: 'MSG-1', sourceId: 'SRC-1', answers: [answer], observations: [{ target: { fieldId: 'G05' }, quote: 'unknown', status: 'unknown' }], unresolvedQuotes: [], clarificationRevision: 1 };
+  assert.equal(MessageResolutionSchema.safeParse(result).success, true);
+  assert.equal(MessageResolutionSchema.safeParse({ ...result, answers: [{ ...answer, value: 'false' }] }).success, false);
+  assert.equal(MessageResolutionSchema.safeParse({ ...result, answers: [{ ...answer, status: 'unknown', value: false }] }).success, false);
+  assert.equal(MessageResolutionSchema.safeParse({ ...result, clarificationRevision: 0 }).success, false);
+  assert.equal(MessageResolutionSchema.safeParse({ ...result, answers: [{ ...answer, extra: 'x' }] }).success, false);
+});
+
+test('unfinished messages block snapshot even if saved analysis cache says current', () => {
+  const r = { ...makeRuntimeFixture('no-guidance'), saved: true };
+  r.conversation = { messages: [{ id: 'MSG-1', kind: 'supplement', sourceId: r.sources[0].id, questionIds: [], status: 'failed', updates: [], unresolvedQuotes: [], createdAt: '2026-11-07T00:00:00Z' }] };
+  r.analysisUpdate = { status: 'current' };
+  assert.throws(() => runtimeSnapshot(r, 'SUMMARY', true), /pending analysis/);
+  r.conversation.messages[0].status = 'applied';
+  r.conversation.messages[0].unresolvedQuotes = [r.sources[0].text];
+  assert.throws(() => runtimeSnapshot(r, 'SUMMARY', true), /pending analysis/);
+});
+
+test('clarification and earlier-message references survive backup and reject inconsistent records', () => {
+  const r = makeRuntimeFixture('partial');
+  const q = r.followUp.questions[0];
+  r.sources.push({ id: 'MSG-SOURCE', kind: 'answer', text: 'It has stopped.' });
+  r.sources.push({ id: 'DECISION-SOURCE', kind: 'correction', text: 'Employee clarified the target.' });
+  r.sources.push({ id: 'LATER-SOURCE', kind: 'answer', text: 'Later answer.' });
+  r.conversation = { messages: [
+    { id: 'MSG-1', kind: 'supplement', sourceId: 'MSG-SOURCE', questionIds: [q.id], status: 'needs-clarification', recordedFactVersions: { [`${q.target.fieldId}:${q.target.recordId ?? ''}`]: 1 }, updates: [], unresolvedQuotes: ['It has stopped.'], clarifications: [{ revision: 1, sourceId: 'DECISION-SOURCE', actor: 'STAFF', status: 'recorded', decisions: [{ questionId: q.id, target: q.target, quote: 'It has stopped.', status: 'answered', value: 'reported pending' }], retainedQuotes: [] }], createdAt: '2026-11-07T00:00:00Z' },
+    { id: 'MSG-2', kind: 'supplement', sourceId: 'LATER-SOURCE', questionIds: [], status: 'applied', updates: [], unresolvedQuotes: [], createdAt: '2026-11-07T00:01:00Z' },
+  ] };
+  assert.deepEqual(parseRuntimeBackup(backupRuntimeCase(r)).conversation, r.conversation);
+  const first = r.conversation.messages[0];
+  first.updates.push({ questionId: q.id, target: q.target, sourceId: 'MSG-SOURCE', outcome: 'conflict', disposition: 'awaiting-decision', supersededByMessageId: 'MSG-2' });
+  assert.equal(RuntimeCaseRecordSchema.safeParse(r).success, true);
+  for (const mutate of [
+    (x: typeof r) => { x.conversation!.messages[0].updates[0].supersededByMessageId = 'MSG-1'; },
+    (x: typeof r) => { x.conversation!.messages[0].updates[0].disposition = 'kept-current'; },
+    (x: typeof r) => { x.conversation!.messages[0].clarifications![0].sourceId = 'missing'; },
+    (x: typeof r) => { x.conversation!.messages[0].clarifications![0].decisions[0].quote = 'invented'; },
+    (x: typeof r) => { x.conversation!.messages[0].clarifications![0].retainedQuotes = ['It has stopped.']; },
+    (x: typeof r) => { x.conversation!.messages[0].clarifications!.push(structuredClone(x.conversation!.messages[0].clarifications![0])); },
+  ]) { const bad = structuredClone(r); mutate(bad); assert.equal(RuntimeCaseRecordSchema.safeParse(bad).success, false); }
+});
+
+test('response pairing keeps legacy responses and requires the matching message and revision', async () => {
+  const r = makeRuntimeFixture('partial');
+  const ticket = { caseId: r.caseId, instanceId: r.instanceId, caseVersion: r.version, requestId: 'req', settingsRevision: 1, dependencies: runtimeDependencies(r) };
+  const legacy = await mockRuntimeAnalysis({ case: r, ticket });
+  assert.doesNotThrow(() => parseAnalysisResponseForRequest({ case: r, ticket }, legacy));
+  const interaction = { messageId: 'MSG-1', sourceId: r.sources[0].id, kind: 'supplement' as const, questionIds: [], clarification: { revision: 2, sourceId: r.sources[0].id, decisions: [], retainedQuotes: [] } };
+  const resolution = { messageId: interaction.messageId, sourceId: interaction.sourceId, answers: [], unresolvedQuotes: [], clarificationRevision: 2 };
+  assert.doesNotThrow(() => parseAnalysisResponseForRequest({ case: r, ticket, interaction }, { ...legacy, resolution }));
+  assert.throws(() => parseAnalysisResponseForRequest({ case: r, ticket, interaction }, legacy));
+  assert.throws(() => parseAnalysisResponseForRequest({ case: r, ticket, interaction }, { ...legacy, resolution: { ...resolution, clarificationRevision: 1 } }));
+  assert.throws(() => parseAnalysisResponseForRequest({ case: r, ticket, purpose: 'case-reanalysis' }, { ...legacy, resolution }));
+  assert.throws(() => parseAnalysisResponseForRequest({ case: r, ticket }, { ...legacy, ticket: { ...ticket, requestId: 'other' } }));
 });

@@ -1,10 +1,22 @@
 import { AnalysisEnvelopeSchema, FactRecordSchema, QuestionSchema, type FactRecord, type Question, type Target } from './schema.js';
+import { refreshRuntimeGaps } from './case-gaps.js';
 import { RuntimeCaseRecordSchema, runtimeDependencies, type RuntimeCaseRecord } from './runtime.js';
 
 const clone = <T>(value: T): T => structuredClone(value);
 export const intakeTargetKey = (target: Target) => `${target.fieldId}:${target.recordId ?? ''}`;
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const requiresRecord = (fieldId: string) => /^[CDIJ]/.test(fieldId) || /^E0[2-9]$/.test(fieldId);
+// The legacy entry has no message controller; make its need for a fresh analysis explicit.
+const markLegacyAnalysisPending = (record: RuntimeCaseRecord): RuntimeCaseRecord => {
+  if (!record.conversation) record.analysisUpdate = { status: 'pending', operation: 'reanalysis' };
+  return record;
+};
+const markCorrectionAnalysisPending = (record: RuntimeCaseRecord): RuntimeCaseRecord => {
+  if (!record.analysisUpdate || record.analysisUpdate.status === 'current' || record.analysisUpdate.operation === 'message' || record.analysisUpdate.operation === 'clarification') {
+    record.analysisUpdate = { status: 'pending', operation: 'reanalysis' };
+  }
+  return record;
+};
 
 export function addNarrativeSource(record: RuntimeCaseRecord, text: string): { record: RuntimeCaseRecord; sourceId: string } {
   const trimmed = text.trim();
@@ -30,7 +42,7 @@ export function addNarrativeSource(record: RuntimeCaseRecord, text: string): { r
   return { record: RuntimeCaseRecordSchema.parse(next), sourceId };
 }
 
-export function mergeRuntimeProposal(record: RuntimeCaseRecord, proposalInput: unknown): RuntimeCaseRecord {
+export function mergeRuntimeProposal(record: RuntimeCaseRecord, proposalInput: unknown, options: { origin: 'initial' | 'follow-up' | 'direct' } = { origin: 'direct' }): RuntimeCaseRecord {
   const proposal = AnalysisEnvelopeSchema.parse(proposalInput);
   const next = clone(record);
   const sourceIds = new Set(next.sources.map(source => source.id));
@@ -66,12 +78,15 @@ export function mergeRuntimeProposal(record: RuntimeCaseRecord, proposalInput: u
   }
   const semantics = (a: RuntimeCaseRecord['analysis']) => ({ types: a.types, reasons: a.reasons, alternatives: a.alternatives, gaps: a.gaps, guidanceStatus: a.guidanceStatus, recommendations: a.recommendations });
   const changed = !same(semantics(next.analysis), semantics(incomingAnalysis)) || !same(next.facts, record.facts);
-  if (!changed) return record;
+  const completesLegacyAnalysis = !record.conversation && record.analysisUpdate?.operation === 'reanalysis' && record.analysisUpdate.status !== 'current';
+  if (!changed && !completesLegacyAnalysis) return record;
+  if (!changed) { next.analysisUpdate = { status: 'current' }; next.version++; next.saved = false; return RuntimeCaseRecordSchema.parse(next); }
   next.analysis = { ...incomingAnalysis, version: record.analysis.version + 1, facts: [] };
-  next.needsFactConfirmation ||= record.reviews.some(review => review.stage === 'first');
+  if (completesLegacyAnalysis) next.analysisUpdate = { status: 'current' };
+  next.needsFactConfirmation ||= options.origin !== 'follow-up' && record.reviews.some(review => review.stage === 'first');
   next.version++;
   next.saved = false;
-  return RuntimeCaseRecordSchema.parse(next);
+  return RuntimeCaseRecordSchema.parse(refreshRuntimeGaps(next, { origin: 'analysis' }));
 }
 
 export function correctRuntimeTypes(record: RuntimeCaseRecord, types: string[], reason: string): RuntimeCaseRecord {
@@ -87,10 +102,10 @@ export function correctRuntimeTypes(record: RuntimeCaseRecord, types: string[], 
   next.analysis.version++;
   next.version++; next.saved = false;
   next.needsFactConfirmation ||= next.reviews.some(review => review.stage === 'first');
-  return RuntimeCaseRecordSchema.parse(next);
+  return RuntimeCaseRecordSchema.parse(markCorrectionAnalysisPending(next));
 }
 
-export function correctRuntimeFact(record: RuntimeCaseRecord, target: Target, value: FactRecord['value'], reason: string): RuntimeCaseRecord {
+export function correctRuntimeFact(record: RuntimeCaseRecord, target: Target, value: FactRecord['value'], reason: string, options: { messageDecision?: boolean } = {}): RuntimeCaseRecord {
   if (!reason.trim()) throw new Error('Enter a reason for the correction.');
   const next = clone(record), fact = next.facts.find(item => intakeTargetKey(item) === intakeTargetKey(target));
   if (!fact) throw new Error('Fact target not found.');
@@ -98,22 +113,23 @@ export function correctRuntimeFact(record: RuntimeCaseRecord, target: Target, va
   fact.value = value; fact.reviewStatus = 'corrected'; fact.status = value === null ? 'missing' : 'extracted'; fact.version++;
   next.version++; next.saved = false;
   next.needsFactConfirmation ||= next.reviews.some(review => review.stage === 'first');
-  return RuntimeCaseRecordSchema.parse(next);
+  return RuntimeCaseRecordSchema.parse(options.messageDecision ? refreshRuntimeGaps(next) : markCorrectionAnalysisPending(refreshRuntimeGaps(next)));
 }
 
-export function confirmRuntimeFacts(record: RuntimeCaseRecord): RuntimeCaseRecord {
+export function confirmRuntimeFacts(record: RuntimeCaseRecord, reviewer: { actor: string; simulated: boolean } = { actor: 'MOCK-STAFF', simulated: true }): RuntimeCaseRecord {
+  if (!reviewer.actor.trim()) throw new Error('Employee identifier is required.');
   const next = clone(record);
   next.facts.forEach(fact => { if (fact.reviewStatus !== 'corrected') fact.reviewStatus = 'checked'; });
   next.needsFactConfirmation = false;
   next.version++;
-  next.reviews.push({ stage: 'first', objectId: 'facts', objectVersion: next.version, dependencies: { case: next.version, ...runtimeDependencies(next) }, simulated: true, actor: 'MOCK-STAFF', reviewedAt: new Date().toISOString() });
+  next.reviews.push({ stage: 'first', objectId: 'facts', objectVersion: next.version, dependencies: { case: next.version, ...runtimeDependencies(next) }, simulated: reviewer.simulated, actor: reviewer.actor.trim(), reviewedAt: new Date().toISOString() });
   next.saved = false;
   return RuntimeCaseRecordSchema.parse(next);
 }
 
 export function eligibleQuestionProposals(record: RuntimeCaseRecord, questions: Question[]): Question[] {
   if (record.followUp.stopped || record.followUp.rounds >= 3 || record.followUp.totalQuestions >= 9 || record.followUp.questions.some(q => q.status === 'pending')) return [];
-  const blocked = new Set(record.followUp.questions.filter(q => ['pending', 'unknown', 'not-applicable', 'skipped'].includes(q.status)).map(q => intakeTargetKey(q.target)));
+  const blocked = new Set(record.followUp.questions.map(q => intakeTargetKey(q.target)));
   const seen = new Set<string>();
   const existingIds = new Set(record.followUp.questions.map(q => q.id));
   const selected = questions.filter(question => {
@@ -142,7 +158,7 @@ export function appendSavedQuestionRound(record: RuntimeCaseRecord, questions: Q
   return RuntimeCaseRecordSchema.parse(next);
 }
 
-export function answerRuntimeQuestion(record: RuntimeCaseRecord, questionId: string, answer: string | null, status: 'answered' | 'unknown' | 'not-applicable', updateFact: boolean): RuntimeCaseRecord {
+export function answerRuntimeQuestion(record: RuntimeCaseRecord, questionId: string, answer: string | null, status: 'answered' | 'unknown' | 'not-applicable', updateFact: boolean, options?: { value: FactRecord['value']; sourceId: string }): RuntimeCaseRecord {
   const next = clone(record), question = next.followUp.questions.find(item => item.id === questionId);
   if (!question) throw new Error('Question not found.');
   if (question.status === 'skipped' && status !== 'answered') throw new Error('A skipped question can only be completed with a later answer.');
@@ -151,27 +167,30 @@ export function answerRuntimeQuestion(record: RuntimeCaseRecord, questionId: str
   if (status === 'answered') {
     const text = answer!.trim();
     const original = next.sources.find(item => item.id === question.id);
-    const sourceId = original && original.text !== text ? `SRC-${crypto.randomUUID()}` : question.id;
+    const sourceId = options?.sourceId ?? (original && original.text !== text ? `SRC-${crypto.randomUUID()}` : question.id);
+    if (options && !next.sources.some(item => item.id === sourceId && item.text === text && (!item.target || intakeTargetKey(item.target) === intakeTargetKey(question.target)))) throw new Error('Typed answer requires its matching recorded quote source.');
     if (!next.sources.some(item => item.id === sourceId)) {
       next.sources.push({ id: sourceId, kind: 'answer', text, target: question.target });
     }
     if (updateFact) {
       const fact = next.facts.find(item => intakeTargetKey(item) === intakeTargetKey(question.target));
       if (!fact) throw new Error('The question target is not present in the fact record; answer saved as source only.');
-      const value = parseAnswerValue(fact.fieldId, answer!.trim());
+      const value = options ? options.value : parseAnswerValue(fact.fieldId, answer!.trim());
+      if (options && value === null) throw new Error('An answered mapping requires a non-null typed value.');
+      FactRecordSchema.parse({ ...fact, value });
       if (fact.reviewStatus === 'corrected' && !same(fact.value, value)) {
         if (!fact.candidates.some(candidate => same(candidate.value, value) && candidate.sourceIds.includes(sourceId))) fact.candidates.push({ value, sourceIds: [sourceId] });
         fact.status = 'conflict';
       } else {
         fact.history.push({ value: clone(fact.value), reason: `Follow-up answer ${question.id}`, sourceIds: [...fact.sourceIds] });
-        fact.value = value; fact.status = value === null ? 'missing' : 'extracted'; fact.sourceIds = [...new Set([...fact.sourceIds, sourceId])];
+        fact.value = value; fact.status = value === null ? 'missing' : 'extracted'; fact.reviewStatus = 'unreviewed'; fact.sourceIds = [...new Set([...fact.sourceIds, sourceId])];
       }
       fact.version++;
     }
   }
   if (record.followUp.stopped && status === 'answered' && updateFact) next.needsFactConfirmation = true;
   next.version++; next.saved = false;
-  return RuntimeCaseRecordSchema.parse(next);
+  return RuntimeCaseRecordSchema.parse(updateFact && status === 'answered' ? markLegacyAnalysisPending(refreshRuntimeGaps(next)) : next);
 }
 
 export function endRuntimeFollowUp(record: RuntimeCaseRecord): RuntimeCaseRecord {

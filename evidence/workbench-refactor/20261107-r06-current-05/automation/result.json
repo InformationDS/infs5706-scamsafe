@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "empty case, local save and integration session restore",
+    "draft protection, isolated cases, cancel and failed save retry",
+    "bad JSON and same-ID import cancellation preserve saved case; discard branch opens empty state",
+    "old integration host remains available and its v2 case without conversation restores in candidate",
+    "message source-save failure retries once, then real Mock service applies one multi-answer message",
+    "old ambiguous message remains a blocker after a newer message and reload, then recorded clarification completes it"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "analysisRequests": 6,
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('status').filter({ hasText: 'Follow-up analysis and new questions saved' }) to be visible\u001b[22m\n\n    at status (D:\\BaiduSyncdisk\\UNSW\\INFS5706\\GroupAssignment-integration\\tests\\workbench-browser.ts:28:85)\n    at <anonymous> (D:\\BaiduSyncdisk\\UNSW\\INFS5706\\GroupAssignment-integration\\tests\\workbench-browser.ts:97:53)",
+  "scope": "R05 shell and partial R06 messaging; not full task acceptance"
+}

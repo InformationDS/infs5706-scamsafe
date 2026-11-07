@@ -1,5 +1,6 @@
 import { RuntimeCaseRecordSchema, type RuntimeCaseRecord } from '../../shared/runtime';
 import { z } from 'zod';
+import { repairStaleRuntimeGaps } from '../../shared/case-gaps';
 const BackupSchema = z.object({ kind: z.literal('ScamSafe runtime backup'), schemaVersion: z.literal(2), record: RuntimeCaseRecordSchema }).strict();
 function openDatabase(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
@@ -35,12 +36,12 @@ export async function loadRuntimeCase(caseId?: string, session = 'default'): Pro
     const read = (id: string) => { const req = tx.objectStore('cases').get(id); req.onsuccess = () => { record = req.result; }; };
     if (caseId) read(caseId);
     else { const request = tx.objectStore('sessions').get(session); request.onsuccess = () => { if (request.result) read(request.result); }; }
-    tx.oncomplete = () => { db.close(); try { resolve(record ? RuntimeCaseRecordSchema.parse(record) : undefined); } catch { reject(new Error('Stored runtime case invalid; current input retained.')); } };
+    tx.oncomplete = () => { db.close(); try { resolve(record ? repairStaleRuntimeGaps(RuntimeCaseRecordSchema.parse(record)) : undefined); } catch { reject(new Error('Stored runtime case invalid; current input retained.')); } };
     tx.onerror = tx.onabort = () => { db.close(); reject(new Error('Cannot restore runtime case.')); };
   });
 }
 export const backupRuntimeCase = (record: RuntimeCaseRecord) => JSON.stringify(BackupSchema.parse({ kind: 'ScamSafe runtime backup', schemaVersion: 2, record }), null, 2);
-export const parseRuntimeBackup = (text: string): RuntimeCaseRecord => ({ ...BackupSchema.parse(JSON.parse(text)).record, saved: false, instanceId: crypto.randomUUID() });
+export const parseRuntimeBackup = (text: string): RuntimeCaseRecord => ({ ...repairStaleRuntimeGaps(BackupSchema.parse(JSON.parse(text)).record), saved: false, instanceId: crypto.randomUUID() });
 export function assertImportAllowed(current: RuntimeCaseRecord): void {
   if (!current.saved) throw new Error('Import with unsaved changes is not supported pending the product rule. Save first; current case kept.');
 }

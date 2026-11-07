@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "empty case, local save and integration session restore",
+    "draft protection, isolated cases, cancel and failed save retry",
+    "bad JSON and same-ID import cancellation preserve saved case; discard branch opens empty state",
+    "old integration host remains available and its v2 case without conversation restores in candidate",
+    "message source-save failure retries once, then real Mock service applies one multi-answer message"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "analysisRequests": 2,
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'applied'\n- 'needs-clarification'\n\n    at <anonymous> (D:\\BaiduSyncdisk\\UNSW\\INFS5706\\GroupAssignment-integration\\tests\\workbench-browser.ts:87:106)",
+  "scope": "R05 shell and partial R06 messaging; not full task acceptance"
+}

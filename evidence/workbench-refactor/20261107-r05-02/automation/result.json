@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "candidate route starts a seed-free case and restores it with session actor",
+    "composer draft protects save and case transitions; cancel and discard are distinct",
+    "failed save retains case; retry saves before switch; saved cases reopen independently",
+    "backup download, invalid import and same-ID cancel preserve current case",
+    "root remains the original integration workspace; no provider called"
+  ],
+  "errors": [],
+  "providerCalls": 0,
+  "browser": "156.0.8078.4",
+  "scope": "R05 candidate shell and local persistence; message handling pending"
+}

@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "empty case, local save and integration session restore",
+    "draft protection, isolated cases, cancel and failed save retry",
+    "bad JSON and same-ID import cancellation preserve saved case; discard branch opens empty state",
+    "old integration host remains available and its v2 case without conversation restores in candidate"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "analysisRequests": 1,
+  "failure": "locator.check: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel(/^Q1 ·/)\u001b[22m\n\n    at <anonymous> (D:\\BaiduSyncdisk\\UNSW\\INFS5706\\GroupAssignment-integration\\tests\\workbench-browser.ts:80:86)",
+  "scope": "R05 shell and partial R06 messaging; not full task acceptance"
+}

@@ -1,0 +1,15 @@
+.case-workbench { max-width: 1500px; margin: auto; padding: 1rem; }
+.case-workbench header, .case-workbench fieldset, .workbench-columns > section { padding: 1rem; margin-bottom: 1rem; border: 1px solid #ccd4dd; border-radius: .5rem; background: white; }
+.case-workbench nav a { margin-right: 1rem; }
+.case-workbench header { gap: 1rem; flex-wrap: wrap; }
+.case-workbench header h1 { white-space: nowrap; }
+.case-workbench .case-controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: end; }
+.case-workbench .case-controls label { display: flex; flex-direction: column; gap: .2rem; }
+.case-workbench .case-controls label:has(input[type="checkbox"]) { flex-direction: row; align-items: center; }
+.case-workbench .case-controls select { margin-top: 0; }
+.workbench-progress { display: flex; flex-wrap: wrap; gap: .75rem 2rem; padding-left: 1.5rem; }
+.workbench-progress [aria-current="step"] { font-weight: 700; }
+.workbench-columns { display: grid; grid-template-columns: 3fr 2fr; gap: 1rem; align-items: start; }
+.workbench-columns textarea { display: block; width: 100%; min-height: 10rem; }
+.workbench-columns pre { max-height: 25rem; overflow: auto; white-space: pre-wrap; }
+@media (max-width: 800px) { .workbench-columns { grid-template-columns: 1fr; } }

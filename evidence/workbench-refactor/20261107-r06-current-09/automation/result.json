@@ -1,0 +1,18 @@
+{
+  "checks": [
+    "empty case, local save and integration session restore",
+    "draft protection, isolated cases, cancel and failed save retry",
+    "bad JSON and same-ID import cancellation preserve saved case; discard branch opens empty state",
+    "old integration host remains available and its v2 case without conversation restores in candidate",
+    "message source-save failure retries once, then real Mock service applies one multi-answer message",
+    "old ambiguous message remains a blocker after a newer message and reload, then recorded clarification completes it",
+    "purpose-based reanalysis and continue do not add messages or repeat questions; end persists",
+    "controlled old-message failure, newer answer, retry comparison and keep-current decision with fresh analysis",
+    "controlled response-save failure retains applied candidate and retry saves without another analysis request"
+  ],
+  "errors": [],
+  "providerRequests": 0,
+  "analysisRequests": 12,
+  "failure": null,
+  "scope": "R05 shell and partial R06 messaging; not full task acceptance"
+}

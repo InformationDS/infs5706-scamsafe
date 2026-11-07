@@ -1,7 +1,10 @@
 import { readFile } from 'node:fs/promises';
 import { z } from 'zod';
 import { AnalysisEnvelopeSchema, type FactRecord, type Target } from '../../shared/schema.js';
-import { AnalysisRequestSchema, type AnalyzeRuntime, type AnalysisRequest } from '../../shared/module-ports.js';
+import { AnalysisRequestSchema, parseAnalysisResponseForRequest, type AnalyzeRuntime, type AnalysisRequest, type AnalysisResponse } from '../../shared/module-ports.js';
+import { MessageResolutionSchema, hasPendingMessageQuotes } from '../../shared/conversation.js';
+import { applyResolvedMessage } from '../../shared/workbench-case.js';
+import { limitedWorkbenchMock, isExactT09Initial, UnsupportedWorkbenchMock } from './workbench-mock.js';
 import { ticketCurrent } from '../../shared/runtime.js';
 import { makeRuntimeFixture } from '../../shared/runtime-fixtures.js';
 import { fixedQuestions } from '../../shared/fixtures.js';
@@ -93,7 +96,7 @@ function noExtraKeys(raw: unknown, parsed: unknown): boolean {
   return Object.keys(raw).every(k => Object.hasOwn(parsed, k) && noExtraKeys((raw as Record<string, unknown>)[k], (parsed as Record<string, unknown>)[k]));
 }
 
-function validateProposal(raw: unknown, input: AnalysisRequest, source: 'mock' | 'model') {
+function validateProposal(raw: unknown, input: AnalysisRequest, source: 'mock' | 'model', allowFixedRecords = false) {
   const parsed = AnalysisEnvelopeSchema.safeParse(raw);
   if (!parsed.success || !noExtraKeys(raw, parsed.data)) throw invalidOutput();
   const proposal = parsed.data, record = input.case;
@@ -112,11 +115,14 @@ function validateProposal(raw: unknown, input: AnalysisRequest, source: 'mock' |
       const existing = record.facts.some(f => f.recordId === fact.recordId && group(f.fieldId) === family && repeated(f.fieldId));
       if (!existing) {
         if (allRecords.has(fact.recordId!)) throw invalidOutput();
-        const prefix = `MODEL-${input.ticket.requestId}-${family}-`;
-        if (!fact.recordId?.startsWith(prefix)) throw invalidOutput();
-        const suffix = fact.recordId.slice(prefix.length);
-        if (!/^(?:0[1-9]|[1-9]\d+)$/.test(suffix)) throw invalidOutput();
-        const numbers = newRecords.get(family) ?? new Set<number>(); numbers.add(Number(suffix)); newRecords.set(family, numbers);
+        const fixed = ({ CONTACT: 'CONTACT-01', EVENT: 'EVENT-01', TX: 'TX-01', EVID: 'EVID-01' } as Record<string, string>)[family];
+        if (!(allowFixedRecords && fact.recordId === fixed)) {
+          const prefix = `MODEL-${input.ticket.requestId}-${family}-`;
+          if (!fact.recordId?.startsWith(prefix)) throw invalidOutput();
+          const suffix = fact.recordId.slice(prefix.length);
+          if (!/^(?:0[1-9]|[1-9]\d+)$/.test(suffix)) throw invalidOutput();
+          const numbers = newRecords.get(family) ?? new Set<number>(); numbers.add(Number(suffix)); newRecords.set(family, numbers);
+        }
       }
     } else if (fact.recordId !== undefined) throw invalidOutput();
     const original = record.facts.find(f => key(f) === key(fact));
@@ -133,6 +139,7 @@ function validateProposal(raw: unknown, input: AnalysisRequest, source: 'mock' |
       (analysis.facts.length && JSON.stringify(analysis.facts) !== JSON.stringify(proposal.facts)) ||
       (analysis.types.length && (!analysis.reasons.length || !analysis.alternatives.length)) ||
       [...analysis.types, ...analysis.reasons, ...analysis.alternatives, ...analysis.gaps].some(s => !s.trim())) throw invalidOutput();
+  if ((input.interaction || input.purpose) && analysis.gaps.some(gap => /^Unresolved [A-J]\d{2}\b/.test(gap) && !/^Unresolved [A-J]\d{2}:[^\r\n]*$/.test(gap))) throw invalidOutput();
   const allowedTypes = new Set(['Suspected investment scam', 'Suspected payment redirection', 'Suspected romance scam', 'Suspected phishing', 'Suspected remote access scam', 'Other', 'Insufficient information']);
   if (analysis.types.some(t => !allowedTypes.has(t)) || new Set(analysis.types).size !== analysis.types.length) throw invalidOutput();
   const follow = record.followUp;
@@ -149,6 +156,45 @@ function validateProposal(raw: unknown, input: AnalysisRequest, source: 'mock' |
   return proposal;
 }
 
+export function validateWorkbenchRequest(input: AnalysisRequest): void {
+  const intent = input.interaction;
+  if (!intent) return;
+  const badRequest = () => new ApiError(400, 'INVALID_INPUT', 'The recorded message, target or clarification no longer matches the request.');
+  const message = input.case.conversation?.messages.find(m => m.id === intent.messageId);
+  if (!message || message.sourceId !== intent.sourceId || message.kind !== intent.kind || !input.case.sources.some(s => s.id === intent.sourceId) || new Set(intent.questionIds).size !== intent.questionIds.length || intent.questionIds.some(id => !message.questionIds.includes(id) || !input.case.followUp.questions.some(q => q.id === id))) throw badRequest();
+  if ((!intent.clarification && message.status === 'applied' && !hasPendingMessageQuotes(message)) || message.status === 'needs-decision' || message.updates.some(u => u.disposition === 'awaiting-decision')) throw badRequest();
+  if (intent.clarification) {
+    const saved = message.clarifications?.find(c => c.revision === intent.clarification!.revision);
+    if (!saved || saved.status === 'applied' || saved.sourceId !== intent.clarification.sourceId || JSON.stringify(saved.decisions) !== JSON.stringify(intent.clarification.decisions) || JSON.stringify(saved.retainedQuotes) !== JSON.stringify(intent.clarification.retainedQuotes)) throw badRequest();
+  }
+}
+
+/** Validate a service result again at the HTTP boundary, including its message pairing. */
+export function validateWorkbenchResponse(input: AnalysisRequest, raw: unknown): AnalysisResponse {
+  try {
+    const response = parseAnalysisResponseForRequest(input, raw);
+    if (!noExtraKeys(raw, response)) throw invalidOutput();
+    if (response.meta.providerCalled === response.meta.simulated || response.proposal.analysis.source !== (response.meta.providerCalled ? 'model' : 'mock')) throw invalidOutput();
+    const fixed = !!input.interaction && !response.meta.providerCalled && response.meta.simulated && response.proposal.analysis.source === 'mock' && isExactT09Initial(input);
+    response.proposal = validateProposal(response.proposal, input, response.proposal.analysis.source, fixed);
+    if (input.interaction?.kind === 'supplement' && response.proposal.facts.some(f => f.value === null && !(f.status === 'not-applicable' && input.interaction?.clarification?.decisions.some(d => d.status === 'not-applicable' && key(d.target) === key(f) && f.sourceIds.includes(input.interaction!.clarification!.sourceId))))) throw invalidOutput();
+    if (input.purpose === 'case-reanalysis' && response.proposal.questions.length) throw invalidOutput();
+    if (input.purpose && response.proposal.facts.some(f => f.value === null && input.case.facts.some(current => key(current) === key(f) && current.value !== null))) throw invalidOutput();
+    if (input.interaction) {
+      validateWorkbenchRequest(input);
+      // This transform operates only on a clone; it defends the client boundary as well.
+      applyResolvedMessage({ record: input.case, response, interaction: input.interaction });
+    }
+    if (input.purpose === 'case-reanalysis') for (const fact of response.proposal.facts) {
+      const current = input.case.facts.find(f => key(f) === key(fact));
+      if (!current || JSON.stringify(current.value) === JSON.stringify(fact.value)) continue;
+      const rejectedEarlier = input.case.conversation?.messages.some(m => m.updates.some(u => key(u.target) === key(fact) && (u.disposition === 'kept-current' || u.disposition === 'historical') && fact.sourceIds.some(id => id === u.sourceId || id === m.sourceId)));
+      if (rejectedEarlier) throw invalidOutput();
+    }
+    return response;
+  } catch { throw invalidOutput(); }
+}
+
 export const analyzeRuntime: AnalyzeRuntime = async (rawInput, context) => {
   const checked = AnalysisRequestSchema.safeParse(rawInput);
   if (!checked.success) throw new ApiError(400, 'INVALID_INPUT', 'Supply the runtime case and request ticket.');
@@ -157,6 +203,28 @@ export const analyzeRuntime: AnalyzeRuntime = async (rawInput, context) => {
   const config = { ...(context?.config ?? readConfig({})) };
   const mock = input.previewMock || config.mode === 'mock';
   if (!mock && input.fault) throw new ApiError(400, 'FAULT_NOT_ALLOWED', 'Fault injection is available only in mock mode.');
+  if (input.interaction || input.purpose) {
+    validateWorkbenchRequest(input);
+    let payload: unknown;
+    if (mock) {
+      if (input.fault === 'timeout') throw new ApiError(504, 'MODEL_TIMEOUT', 'Simulated timeout. Input retained.', true);
+      if (input.fault === 'invalid') throw invalidOutput();
+      if (input.fault === 'delayed') await new Promise(resolve => setTimeout(resolve, 1500));
+      try { payload = limitedWorkbenchMock(input); }
+      catch (error) { if (error instanceof UnsupportedWorkbenchMock) throw new ApiError(422, 'MOCK_INPUT_UNSUPPORTED', error.message); throw error; }
+    } else {
+      const record = input.case;
+      const chronologicalSources = (record.conversation?.messages ?? []).map((m, messageOrder) => ({ messageId: m.id, sourceId: m.sourceId, messageOrder, updates: m.updates.map(u => ({ target: u.target, sourceId: u.sourceId, disposition: u.disposition, decision: u.decision ? { choice: u.decision.choice, reason: u.decision.reason } : undefined })) }));
+      const outputSchema = input.interaction ? z.object({ proposal: AnalysisEnvelopeSchema, resolution: MessageResolutionSchema }).strict() : z.object({ proposal: AnalysisEnvelopeSchema }).strict();
+      payload = await requestAnalysis({ contract: 'runtime-workbench-v2', requestId: input.ticket.requestId,
+        caseData: { version: record.version, analysisVersion: record.analysis.version, sources: record.sources, facts: record.facts, followUp: record.followUp, chronologicalSources, ...(input.interaction ? { interaction: input.interaction } : { purpose: input.purpose }) },
+        outputSchema: z.toJSONSchema(outputSchema) }, config, context?.fetchImpl ?? fetch);
+    }
+    if (!payload || typeof payload !== 'object') throw invalidOutput();
+    const raw = payload as Record<string, unknown>;
+    if (Object.keys(raw).some(key => key !== 'proposal' && !(key === 'resolution' && input.interaction))) throw invalidOutput();
+    return validateWorkbenchResponse(input, { ...raw, ticket: structuredClone(input.ticket), meta: { implementation: mock ? 'Limited workbench Mock' : 'Workbench model analysis', providerCalled: !mock, simulated: Boolean(mock) } });
+  }
   let proposal;
   if (mock) {
     if (input.fault === 'timeout') throw new ApiError(504, 'MODEL_TIMEOUT', 'Simulated timeout. Input retained.', true);
