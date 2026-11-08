@@ -15,10 +15,12 @@ import { AnalysisRequestSchema, type AnalyzeRuntime, type ExportRuntime, type Mo
 import { RuntimeCaseRecordSchema, runtimeSnapshot, ticketCurrent } from '../../shared/runtime.js';
 import { makeRuntimeFixture } from '../../shared/runtime-fixtures.js';
 import { AnalysisEnvelopeSchema } from '../../shared/schema.js';
+import { CourseTurnRequestSchema } from '../../shared/course-case.js';
+import { runCourseTurn, type CourseTurnRunner } from './course-turn.js';
 
 const AnalyzeRequest = z.object({ case: CaseRecordSchema, fault: z.enum(['timeout', 'invalid', 'delayed']).optional() }).strict();
 const ExportRequest = z.object({ case: CaseRecordSchema, objectId: z.string().min(1), format: z.enum(['markdown', 'pdf']), fault: z.literal('failure').optional() }).strict();
-type Options = { config?: ServerConfig; settingsStore?: ModelSettingsStore; fetchImpl?: typeof fetch; staticDir?: string; analyzeRuntime?: AnalyzeRuntime; exportRuntime?: ExportRuntime };
+type Options = { config?: ServerConfig; settingsStore?: ModelSettingsStore; fetchImpl?: typeof fetch; staticDir?: string; analyzeRuntime?: AnalyzeRuntime; exportRuntime?: ExportRuntime; courseTurn?: CourseTurnRunner };
 
 async function registered<T>(path: string): Promise<Partial<T>> {
   const absolute = resolve(process.cwd(), path);
@@ -86,6 +88,15 @@ export function createApp(options: Options = {}) {
   });
   app.get('/api/business', (_req, res, next) => {
     try { res.json(loadBusinessBaseline()); } catch (error) { next(error); }
+  });
+  app.post('/api/course/turn', async (req, res, next) => {
+    try {
+      const parsed = CourseTurnRequestSchema.safeParse(req.body);
+      if (!parsed.success) throw new ApiError(400, 'INVALID_INPUT', 'Supply a valid course case, latest text, purpose and replacement choice.');
+      const runner = options.courseTurn ?? runCourseTurn;
+      const result = await runner(parsed.data, { config: settings.getConfig(), fetchImpl: options.fetchImpl ?? fetch });
+      res.json({ case: result.case, assistantText: result.assistantText, requestId: randomUUID() });
+    } catch (error) { next(error); }
   });
 
   app.get('/api/runtime/context', async (_req, res, next) => {

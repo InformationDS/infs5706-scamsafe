@@ -1,0 +1,17 @@
+[
+  {
+    "id": "sms-phishing",
+    "name": "SMS phishing · unfamiliar debit",
+    "text": "I received a text message claiming to be SYN Bank A. I opened the link and entered my banking password and a one-time code. Later I noticed an unfamiliar AUD 2,000 debit. I do not know whether it is pending or completed. I have the message on my phone and have not contacted the bank or mobile provider yet."
+  },
+  {
+    "id": "supplier-payment",
+    "name": "Missing information · payment request",
+    "text": "Someone claiming to be a supplier emailed new payment details. I may have sent a payment, but I need to check the amount and whether it went through. I still have the email."
+  },
+  {
+    "id": "support-needed",
+    "name": "Limited information · support needed",
+    "text": "I am worried about repeated calls from someone asking me to act quickly. I feel overwhelmed and do not know what to do. I have not shared details of the calls yet."
+  }
+]

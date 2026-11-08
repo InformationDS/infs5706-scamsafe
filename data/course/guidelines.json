@@ -1,0 +1,38 @@
+[
+  {
+    "id": "DEMO-G01",
+    "title": "Bank account and payment concern",
+    "appliesTo": ["bank"],
+    "when": "Applies when the report concerns an account, a payment, credentials, or an unfamiliar debit.",
+    "thisOrganisation": "Assess the reported concern with a human reviewer. Do not promise to freeze an account or refund money.",
+    "otherOrganisation": "A telecom handover is allowed only when the report also includes a suspicious SMS or phone call. Otherwise no telecom handover.",
+    "humanJudgement": "A person must review the account and payment concern before any action is taken."
+  },
+  {
+    "id": "DEMO-G02",
+    "title": "Suspicious SMS or phone call",
+    "appliesTo": ["telecom"],
+    "when": "Applies when the report concerns a suspicious SMS, text message, or phone call.",
+    "thisOrganisation": "Assess the reported messages with a human reviewer. Do not infer SIM swapping. Do not assume the provider sent the message.",
+    "otherOrganisation": "A bank handover is allowed only when the report also includes an account or payment concern. Otherwise no bank handover.",
+    "humanJudgement": "A person must review the message details before any service action is taken."
+  },
+  {
+    "id": "DEMO-G03",
+    "title": "Human support and limited information",
+    "appliesTo": ["bank", "telecom"],
+    "when": "Applies when the person reports pressure or urgency, or when the information is not enough to identify a concern.",
+    "thisOrganisation": "Offer human support. Do not generate an organisation handover.",
+    "otherOrganisation": "No organisation handover is generated from this guideline.",
+    "humanJudgement": "A person speaks with the affected person and agrees the next step."
+  },
+  {
+    "id": "DEMO-G04",
+    "title": "Supplier email payment change",
+    "appliesTo": ["bank"],
+    "when": "Applies when a supplier sends changed payment details by email.",
+    "thisOrganisation": "Assess the payment and check the change through an existing contact before acting.",
+    "otherOrganisation": "Do not generate a telecom handover when the report has no SMS or phone call.",
+    "humanJudgement": "A person must verify the payment and the supplier details before any action is taken."
+  }
+]
