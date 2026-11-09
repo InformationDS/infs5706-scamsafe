@@ -4,6 +4,7 @@
 
 - [统一方案](FOUNDATION_PROPOSAL.md)：已确认技术、模块边界、外部条件与官方依据。
 - [运行说明](RUNBOOK.md)：安装、配置、启动、固定 origin、检查和失败处理。
+- [课程工作台使用指南](COURSE_WORKBENCH_GUIDE.md)：课程页入口、模型配置、完整操作流程、验证与已知限制。
 - [共享契约](CONTRACTS.md)：实际结构、函数、HTTP 接口及未实现业务。
 - [就绪盘点](../project/FOUNDATION_READINESS.md)：各方向实际具备条件与阻塞。
 - [业务逐项确认](../product/examples/BASELINE_CONFIRMATION.md)：当前已批准范围与边界；实际正文及配置见[批准基准](../product/examples/APPROVED_BASELINE.md)。

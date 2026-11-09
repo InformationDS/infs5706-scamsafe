@@ -13,6 +13,7 @@
 | 工作包准备 | [WORK_PACKAGE](project/WORK_PACKAGE.md) | A |
 | 文件交付 | [CONTRIBUTING](../CONTRIBUTING.md) | 成员 |
 | 启动与失败处理 | [RUNBOOK](architecture/RUNBOOK.md) | 实际运行时 |
+| 课程工作台使用 | [COURSE_WORKBENCH_GUIDE](architecture/COURSE_WORKBENCH_GUIDE.md) | 演示者、验收者 |
 | 实际接口与公共边界 | [CONTRACTS](architecture/CONTRACTS.md) | 模块开发按需查；运行模块接口由A01实际交付 |
 | 检查覆盖 | [tests/README](../tests/README.md) | 成员做局部检查；A集成后F集中执行 |
 | 实际证据 | [evidence](../evidence/README.md) | 按任务与批次查 |

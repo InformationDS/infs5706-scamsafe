@@ -15,6 +15,7 @@ import { createApp } from '../server/src/app';
 import { ApiError } from '../server/src/model';
 import type { CourseTurnRunner } from '../server/src/course-turn';
 import {
+  ROLES,
   applyCourseProposal,
   type CourseCase,
   type CourseTurnRequest,
@@ -22,7 +23,11 @@ import {
 } from '../shared/course-case';
 
 type CourseExample = { id: string; name: string; text: string };
+type CourseGuideline = { id: string; title: string; appliesTo: string[] };
 const examples = JSON.parse(await readFile('data/course/examples.json', 'utf8')) as CourseExample[];
+const courseGuidelines = JSON.parse(
+  await readFile('data/course/guidelines.json', 'utf8'),
+) as CourseGuideline[];
 
 function exampleText(id: string): string {
   const example = examples.find((candidate) => candidate.id === id);
@@ -480,6 +485,12 @@ try {
   });
   const resultTab = (name: 'Case overview' | 'Guidance' | 'Materials') =>
     panel.getByRole('button', { name, exact: true });
+  const leftScroll = panel.locator('.course-scroll');
+  const roundQuestions = leftScroll.getByRole('group', { name: 'Round questions' });
+  const currentQuestionBar = conversation.getByRole('group', { name: 'Current question' });
+  const roleSummary = page.getByRole('region', { name: 'Current employee role' });
+  const remainingGaps = leftScroll.getByRole('region', { name: 'Remaining gaps' });
+  const turnSummary = conversation.getByRole('region', { name: 'This turn' });
   const materialTab = (name: 'Case summary' | 'For the person' | 'Handover draft') =>
     page
       .getByRole('group', { name: 'Material views' })
@@ -556,6 +567,7 @@ try {
         (await page.getByRole('heading', { name: 'Who is receiving this report?' }).count()) > 0,
       'a cleared course case',
     );
+    assert.equal(await turnSummary.count(), 0, 'New case clears the This turn summary');
   }
 
   async function factValue(label: string): Promise<string | null> {
@@ -579,6 +591,71 @@ try {
     const handled = panel.getByText(/^\d+ of \d+ handled$/);
     assert.ok((await handled.count()) > 0, 'a question progress label should be visible');
     return (await handled.first().innerText()).trim();
+  }
+
+  /** The pending card must expose every question in the round, not only the active one. */
+  async function assertQuestionListVisible(): Promise<void> {
+    const expected = [
+      {
+        id: 'Q1',
+        text: 'What amount was paid, and in which currency?',
+        purpose: 'Confirm the payment amount and currency',
+      },
+      {
+        id: 'Q2',
+        text: 'Did the supplier confirm the new payment details separately?',
+        purpose: 'Check the supplier change through a separate contact',
+      },
+      {
+        id: 'Q3',
+        text: 'What is the current transaction status?',
+        purpose: 'Confirm whether the payment is pending or completed',
+      },
+    ];
+    assert.equal(await leftScroll.getByRole('group', { name: 'Round questions' }).count(), 1);
+    assert.equal(await panel.locator('.course-scroll').count(), 1, 'the results column has one scroll container');
+    const nestedScrollers = await leftScroll.evaluate((root) =>
+      Array.from(root.querySelectorAll<HTMLElement>('*')).filter((element) => {
+        const overflowY = window.getComputedStyle(element).overflowY;
+        return (
+          (overflowY === 'auto' || overflowY === 'scroll') &&
+          element.scrollHeight > element.clientHeight + 1
+        );
+      }).length,
+    );
+    assert.equal(nestedScrollers, 0, 'the results column must not have a nested scroll container');
+    assert.equal(await leftScroll.getByLabel('Contact channel', { exact: true }).count(), 1);
+    assert.equal(await roundQuestions.locator('.course-question-item').count(), 3);
+    for (const item of expected) {
+      await roundQuestions.getByText(item.id, { exact: true }).waitFor();
+      await roundQuestions.getByText(item.text, { exact: true }).waitFor();
+      await roundQuestions.getByText(item.purpose, { exact: true }).waitFor();
+    }
+    await roundQuestions
+      .getByText('Numbered answers follow this list: 1 → Q1, 2 → Q2, 3 → Q3.', { exact: true })
+      .waitFor();
+    const activeItem = roundQuestions.locator('.course-question-item-active');
+    assert.equal(await activeItem.count(), 1, 'exactly the active question is highlighted');
+    await activeItem.getByText('Q1', { exact: true }).waitFor();
+    await activeItem.getByText('Pending', { exact: true }).waitFor();
+
+    assert.equal(
+      await conversation.locator('.course-question-item').count(),
+      0,
+      'the conversation must not hold the full question list',
+    );
+    const currentBarBox = await currentQuestionBar.boundingBox();
+    assert.ok(currentBarBox && currentBarBox.height <= 120, 'the current-question bar stays compact');
+    await currentQuestionBar.getByText('Question 1 of 3', { exact: true }).waitFor();
+    await currentQuestionBar
+      .getByText('What amount was paid, and in which currency?', { exact: true })
+      .waitFor();
+    for (const name of ["Don't know", 'Skip question', 'End questions']) {
+      assert.equal(await currentQuestionBar.getByRole('button', { name, exact: true }).count(), 1);
+    }
+
+    await roleSummary.getByText(ROLES.bank.title, { exact: true }).waitFor();
+    await roleSummary.getByText(ROLES.bank.responsibilities, { exact: true }).waitFor();
   }
 
   async function bubbleTexts(label: 'Case assistant' | 'Request failed'): Promise<string[]> {
@@ -612,7 +689,40 @@ try {
   }
 
   await page.goto(`${origin}/?view=course`);
-  await page.getByRole('heading', { name: 'A clearer next step for every case.' }).waitFor();
+  const banner = page.locator('.course-top');
+  await banner.waitFor();
+  assert.equal(await page.getByText('A clearer next step for every case.').count(), 0);
+  assert.equal(await page.getByText('Fictional course case').count(), 0);
+  await roleSummary.getByText(ROLES.bank.title, { exact: true }).waitFor();
+  await roleSummary.getByText(ROLES.bank.responsibilities, { exact: true }).waitFor();
+
+  const bannerBox = await banner.boundingBox();
+  const initialLeftPanelBox = await panel.boundingBox();
+  const initialConversationBox = await conversation.boundingBox();
+  assert.ok(bannerBox && initialLeftPanelBox && initialConversationBox);
+  const initialLayout = await page.evaluate(() => ({
+    scrollHeight: document.documentElement.scrollHeight,
+    bodyScrollHeight: document.body.scrollHeight,
+    innerHeight: window.innerHeight,
+  }));
+  assert.ok(
+    initialLayout.scrollHeight <= initialLayout.innerHeight + 1 &&
+      initialLayout.bodyScrollHeight <= initialLayout.innerHeight + 1,
+    'the desktop course page must not scroll vertically',
+  );
+  assert.ok(
+    Math.abs(initialLeftPanelBox.height - initialConversationBox.height) <= 1,
+    'the results and conversation panels must have the same height',
+  );
+  const availableHeight = initialLayout.innerHeight - bannerBox.height;
+  assert.ok(
+    initialLeftPanelBox.height >= availableHeight * 0.9,
+    'the panels must use most of the space below the banner',
+  );
+  assert.ok(
+    initialLeftPanelBox.y + initialLeftPanelBox.height >= initialLayout.innerHeight - 32,
+    'the panels must reach close to the viewport bottom',
+  );
 
   // ---------------------------------------------------------------- Flow A: payment example
   // Checks 1-4, 10-13, 16 and 17 (download content) on the supplier payment narrative.
@@ -622,9 +732,21 @@ try {
   assert.equal(await factValue('Claimed identity'), 'A supplier');
   assert.equal(await factValue('Reported action'), 'New payment details requested');
   assert.equal(await factValue('Evidence the person can provide'), 'The email');
+  await leftScroll.getByRole('heading', { name: 'Event', exact: true }).waitFor();
+  await leftScroll.getByRole('heading', { name: 'Support', exact: true }).waitFor();
+  assert.equal(await leftScroll.getByLabel('Reported amount', { exact: true }).count(), 0);
+  await remainingGaps.waitFor();
+  assert.match(await remainingGaps.innerText(), /Question 1 is still pending/);
   await waitForPanelText('Suspected payment redirection');
   const initialReply = await lastBubbleText('Case assistant');
   assert.match(initialReply, /Next:/);
+  await assertQuestionListVisible();
+  await turnSummary.waitFor();
+  const initialTurn = await turnSummary.innerText();
+  assert.match(initialTurn, /Recorded updates/);
+  assert.match(initialTurn, /Contact channel: Email/);
+  assert.match(initialTurn, /Still unclear/);
+  assert.match(initialTurn, /Question 1 is still pending/);
   pass('1', 'payment example analysis shows facts on the left and the reply contains Next:');
 
   assert.match(initialReply, /I have 3 questions/);
@@ -639,11 +761,14 @@ try {
   const queryReply = await lastBubbleText('Case assistant');
   assert.match(queryReply, /Question 1 of 3/);
   assert.match(queryReply, /Next:/);
+  await turnSummary.getByText('No case facts changed', { exact: true }).waitFor();
+  assert.match(await turnSummary.innerText(), /Question 1 is still pending/);
   pass('3', 'What is the current amount? keeps facts and progress and replies with the current question or next step');
 
   await sendText(CORRECTION_TEXT);
   assert.equal(await factValue('Reported amount'), '200');
   assert.equal(await factValue('Currency'), 'AUD');
+  await leftScroll.getByRole('heading', { name: 'Money', exact: true }).waitFor();
   await runGenerate('Generate materials');
   const summaryAfterCorrection = await materialText();
   assert.match(summaryAfterCorrection, /FICTIONAL COURSE CASE/);
@@ -731,6 +856,7 @@ try {
   await loadExample('supplier-payment');
   await submitTurn(200);
   assert.equal(await factValue('Reported amount'), null);
+  await assertQuestionListVisible();
   await sendText(MULTI_ANSWER_TEXT);
   assert.equal(await factValue('Reported amount'), '500');
   assert.equal(await factValue('Currency'), 'AUD');
@@ -768,14 +894,37 @@ try {
   await resultTab('Case overview').click();
   const conversationBeforeTabs = await conversation.innerText();
   const progressBeforeTabs = await progressLabel();
+  assert.equal(await roundQuestions.count(), 1, 'the round questions must be in the left scroll container');
+  assert.equal(
+    await conversation.locator('.course-question-item').count(),
+    0,
+    'the conversation panel must not contain the full round question list',
+  );
   for (const tabName of ['Guidance', 'Materials', 'Case overview'] as const) {
     await resultTab(tabName).click();
     assert.equal(await conversation.innerText(), conversationBeforeTabs, `conversation on ${tabName}`);
+    assert.equal(await roundQuestions.count(), 1, `round questions remain in the left scroll on ${tabName}`);
+    assert.equal(await currentQuestionBar.count(), 1, `current question bar remains on ${tabName}`);
+    if (tabName === 'Guidance') {
+      await leftScroll.getByText('Audience: This organisation', { exact: true }).waitFor();
+      await leftScroll.getByText('Audience: Human judgement', { exact: true }).waitFor();
+      const guideline = courseGuidelines.find((candidate) => candidate.id === 'DEMO-G04');
+      assert.ok(guideline, 'DEMO-G04 must exist in data/course/guidelines.json');
+      const appliesTo = guideline.appliesTo
+        .map((role) => (role === 'bank' ? 'Bank' : role === 'telecom' ? 'Telecom' : role))
+        .join('/');
+      await leftScroll
+        .getByText(`Guideline: ${guideline.id} — ${guideline.title}; Applies to: ${appliesTo}`, {
+          exact: true,
+        })
+        .first()
+        .waitFor();
+    }
   }
   assert.equal(await progressLabel(), progressBeforeTabs);
   pass('9', 'switching Case overview, Guidance and Materials keeps conversation text and progress');
 
-  await button("Don't know").click();
+  await currentQuestionBar.getByRole('button', { name: "Don't know", exact: true }).click();
   await waitUntil(
     async () =>
       (await conversation
@@ -784,15 +933,20 @@ try {
     'the unknown-question reply',
   );
   assert.equal(await progressLabel(), 'Question 2 of 3');
-  await conversation.getByText('Question 2 of 3', { exact: true }).waitFor();
-  await conversation
+  await roundQuestions.getByText('Question 2 of 3', { exact: true }).waitFor();
+  await roundQuestions
     .getByText('Did the supplier confirm the new payment details separately?', { exact: true })
     .waitFor();
+  assert.equal(
+    await roundQuestions.locator('.course-question-item-active .course-question-id').innerText(),
+    'Q2',
+  );
+  await roundQuestions.locator('.course-question-item').first().getByText('Unknown', { exact: true }).waitFor();
   assert.equal(await factValue('Reported amount'), null);
   assert.equal(await factValue('Currency'), null);
   assert.equal(await factValue('Transaction status'), null);
 
-  await button('Skip question').click();
+  await currentQuestionBar.getByRole('button', { name: 'Skip question', exact: true }).click();
   await waitUntil(
     async () =>
       (await conversation
@@ -801,9 +955,14 @@ try {
     'the skipped-question reply',
   );
   assert.equal(await progressLabel(), 'Question 3 of 3');
-  await conversation.getByText('Question 3 of 3', { exact: true }).waitFor();
+  await roundQuestions.getByText('Question 3 of 3', { exact: true }).waitFor();
+  assert.equal(
+    await roundQuestions.locator('.course-question-item-active .course-question-id').innerText(),
+    'Q3',
+  );
+  await roundQuestions.locator('.course-question-item').nth(1).getByText('Skipped', { exact: true }).waitFor();
 
-  await button('End questions').click();
+  await currentQuestionBar.getByRole('button', { name: 'End questions', exact: true }).click();
   await waitUntil(
     async () =>
       (await conversation
@@ -812,6 +971,8 @@ try {
     'the end-questions reply',
   );
   assert.equal(await progressLabel(), '3 of 3 handled');
+  assert.equal(await roundQuestions.count(), 0, 'the round question list hides after End questions');
+  assert.equal(await currentQuestionBar.count(), 0, 'the current question bar hides after End questions');
   assert.ok((await panel.innerText()).includes('Clarification ended.'));
   assert.equal(await factValue('Reported amount'), null);
   assert.equal(await factValue('Currency'), null);
@@ -825,6 +986,8 @@ try {
   await submitTurn(200);
   assert.equal(await factValue('Vulnerability or support need'), 'feeling overwhelmed');
   await waitForPanelText('Insufficient information');
+  await remainingGaps.waitFor();
+  await leftScroll.getByText('No remaining gaps.', { exact: true }).waitFor();
   await runGenerate('Generate materials');
   const supportSummary = await materialText();
   assert.match(supportSummary, /overwhelmed/i);
@@ -855,6 +1018,7 @@ try {
   assert.equal(failedTurn.status(), 502);
   assert.ok(turnRequests > requestsBeforeFailure);
   assert.equal(await draft.inputValue(), unmappedNarrative);
+  assert.equal(await turnSummary.count(), 0, 'a failed turn clears the This turn summary');
   await waitUntil(
     async () => (await conversation.getByText('Request failed', { exact: true }).count()) > 0,
     'the failed turn message',
@@ -897,8 +1061,38 @@ try {
   assert.equal(await factValue('Reported amount'), '2000');
   assert.equal(await factValue('Currency'), 'AUD');
   assert.equal(await factValue('Contact channel'), 'Text message');
+  await leftScroll.getByRole('heading', { name: 'Money', exact: true }).waitFor();
+  const transactionStatusInput = leftScroll.getByLabel('Transaction status', { exact: true });
+  await transactionStatusInput.waitFor();
+  assert.equal(await transactionStatusInput.inputValue(), '');
+  const unknownBadge = leftScroll.locator('.course-fact-status').filter({ hasText: 'Unknown' });
+  assert.equal(await unknownBadge.count(), 1);
+  assert.equal(await unknownBadge.first().isVisible(), true);
+  assert.match(await remainingGaps.innerText(), /Transaction status is unknown/);
   await waitForPanelText('Suspected phishing');
   pass('extra', 'all three example narratives (payment, support, SMS) are handled by the fake runner');
+
+  // Long-running request notice: delay the HTTP response past the 10s UI threshold.
+  const slowNotice = page
+    .getByRole('status')
+    .filter({ hasText: 'The model is taking longer than usual. Please wait.' });
+  await page.route('**/api/course/turn', async (route) => {
+    await new Promise((resolveDelay) => setTimeout(resolveDelay, 11_500));
+    await route.continue();
+  });
+  const requestsBeforeSlowTurn = turnRequests;
+  const slowResponsePromise = page.waitForResponse(
+    (response) =>
+      response.url().endsWith('/api/course/turn') && response.request().method() === 'POST',
+  );
+  await draft.fill(QUERY_TEXT);
+  await primary.click();
+  await slowNotice.waitFor({ timeout: 12_500 });
+  assert.equal((await slowResponsePromise).status(), 200);
+  await waitIdle();
+  assert.equal(turnRequests, requestsBeforeSlowTurn + 1, 'the slow request is not retried automatically');
+  await waitUntil(async () => (await slowNotice.count()) === 0, 'the slow notice to clear');
+  await page.unroute('**/api/course/turn');
 
   assert.deepEqual(pageErrors, [], 'the page must not raise uncaught errors');
   console.log(

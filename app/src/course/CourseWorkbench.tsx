@@ -16,6 +16,7 @@ import {
   type RoleId,
 } from '../../../shared/course-case';
 import examples from '../../../data/course/examples.json';
+import guidelines from '../../../data/course/guidelines.json';
 import './course.css';
 
 export type CourseTurnSuccess = {
@@ -64,6 +65,16 @@ const MATERIAL_FILENAMES: Record<MaterialPart, string> = {
   handover: 'scamsafe-handover.md',
 };
 
+const GUIDELINE_BY_ID = new Map(guidelines.map((guideline) => [guideline.id, guideline]));
+
+const GUIDELINE_APPLIES_LABELS: Record<string, string> = {
+  bank: 'Bank',
+  telecom: 'Telecom',
+};
+
+const SLOW_NOTICE_DELAY_MS = 10_000;
+const SLOW_NOTICE_MESSAGE = 'The model is taking longer than usual. Please wait.';
+
 const RESULT_TABS = [
   { id: 'overview', label: 'Case overview' },
   { id: 'guidance', label: 'Guidance' },
@@ -76,6 +87,30 @@ const ATTENTION_LABELS: Record<CourseCase['attention'][number]['kind'], string> 
   urgency: 'Urgency',
   vulnerability: 'Vulnerability',
   'human-support': 'Human support',
+};
+
+const QUESTION_STATUS_LABELS: Record<CourseCase['questions'][number]['status'], string> = {
+  pending: 'Pending',
+  answered: 'Answered',
+  unknown: 'Unknown',
+  skipped: 'Skipped',
+  'not-applicable': 'Not applicable',
+};
+
+const FACT_GROUP_ORDER = ['event', 'money', 'account', 'current', 'support'] as const;
+
+const FACT_GROUP_LABELS: Record<CourseCase['facts'][number]['group'], string> = {
+  event: 'Event',
+  money: 'Money',
+  account: 'Account',
+  current: 'Current',
+  support: 'Support',
+};
+
+const AUDIENCE_LABELS: Record<CourseCase['recommendations'][number]['audience'], string> = {
+  'this-organisation': 'This organisation',
+  'other-organisation': 'Other organisation',
+  'human-judgement': 'Human judgement',
 };
 
 class CourseApiError extends Error {
@@ -142,6 +177,58 @@ function messageLabel(message: CourseMessage): string {
   return message.status === 'failed' ? 'Employee · not sent' : 'Employee';
 }
 
+type TurnSummary = {
+  updates: string[];
+  gaps: string[];
+};
+
+function factSummaryValue(fact: CourseCase['facts'][number]): string {
+  if (fact.status === 'unknown') return 'Unknown';
+  return fact.value ?? 'Unknown';
+}
+
+/** Program-generated summary of the case changes in one successful turn. */
+function buildTurnUpdates(before: CourseCase, after: CourseCase): string[] {
+  const updates: string[] = [];
+  for (const fact of after.facts) {
+    const previous = before.facts.find((candidate) => candidate.key === fact.key);
+    if (!previous) continue;
+    const changed =
+      previous.value !== fact.value ||
+      previous.status !== fact.status ||
+      previous.uncertainty !== fact.uncertainty ||
+      JSON.stringify(previous.pendingConflict) !== JSON.stringify(fact.pendingConflict);
+    if (changed) updates.push(`${fact.label}: ${factSummaryValue(fact)}`);
+  }
+  for (const question of after.questions) {
+    const previous = before.questions.find((candidate) => candidate.id === question.id);
+    if (previous && previous.status !== question.status) {
+      updates.push(
+        `${question.id}: ${QUESTION_STATUS_LABELS[previous.status]} → ${QUESTION_STATUS_LABELS[question.status]}`,
+      );
+    }
+  }
+  return updates;
+}
+
+/** Current unclear information without evidence text. */
+function buildStillUnclear(courseCase: CourseCase): string[] {
+  const gaps: string[] = [];
+  for (const fact of courseCase.facts) {
+    if (fact.status === 'unknown') gaps.push(`${fact.label} is unknown.`);
+    if (fact.uncertainty) gaps.push(`${fact.label} is uncertain: ${fact.uncertainty}`);
+    if (fact.pendingConflict) {
+      gaps.push(`${fact.label} has an unresolved new statement: ${fact.pendingConflict.value}`);
+    }
+  }
+  courseCase.questions.forEach((question, index) => {
+    if (question.status === 'pending') {
+      gaps.push(`Question ${index + 1} is still pending: ${question.text}`);
+    }
+  });
+  return gaps;
+}
+
 /** Append a local assistant message using the same message id sequence as the shared case. */
 function appendAssistantMessage(courseCase: CourseCase, text: string): CourseCase {
   const next = structuredClone(courseCase);
@@ -158,7 +245,10 @@ export function CourseWorkbench() {
   const [busy, setBusy] = useState(false);
   const [materialTab, setMaterialTab] = useState<MaterialPart>('summary');
   const [toast, setToast] = useState('');
+  const [turnSummary, setTurnSummary] = useState<TurnSummary | null>(null);
+  const [slowNotice, setSlowNotice] = useState(false);
   const toastTimer = useRef<number | undefined>(undefined);
+  const slowTimer = useRef<number | undefined>(undefined);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const materialRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -184,6 +274,47 @@ export function CourseWorkbench() {
     courseCase.attention.length > 0 ||
     courseCase.questions.length > 0 ||
     Boolean(firstUserMessage);
+  const factGroups = FACT_GROUP_ORDER.map((group) => ({
+    group,
+    label: FACT_GROUP_LABELS[group],
+    facts: facts.filter((fact) => fact.group === group),
+  })).filter((entry) => entry.facts.length > 0);
+  const remainingGaps: Array<{ key: string; text: string }> = [];
+  for (const fact of courseCase.facts) {
+    if (fact.status === 'unknown') {
+      remainingGaps.push({ key: `unknown:${fact.key}`, text: `${fact.label} is unknown.` });
+    }
+    if (fact.uncertainty) {
+      remainingGaps.push({
+        key: `uncertainty:${fact.key}`,
+        text: `${fact.label} is uncertain: ${fact.uncertainty}`,
+      });
+    }
+    if (fact.pendingConflict) {
+      remainingGaps.push({
+        key: `conflict:${fact.key}`,
+        text: `${fact.label} has an unresolved new statement: ${fact.pendingConflict.value}`,
+      });
+    }
+  }
+  courseCase.questions.forEach((question, index) => {
+    if (question.status === 'pending') {
+      remainingGaps.push({
+        key: `question:${question.id}`,
+        text: `Question ${index + 1} is still pending: ${question.text}`,
+      });
+    } else if (question.status === 'unknown') {
+      remainingGaps.push({
+        key: `question:${question.id}`,
+        text: `Question ${index + 1} was answered as unknown: ${question.text}`,
+      });
+    } else if (question.status === 'skipped') {
+      remainingGaps.push({
+        key: `question:${question.id}`,
+        text: `Question ${index + 1} was skipped: ${question.text}`,
+      });
+    }
+  });
   const materialTabs = courseCase.materials.handover !== null
     ? [...MATERIAL_PARTS, HANDOVER_PART]
     : [...MATERIAL_PARTS];
@@ -199,8 +330,20 @@ export function CourseWorkbench() {
     toastTimer.current = window.setTimeout(() => setToast(''), 5000);
   }
 
+  function startSlowNotice() {
+    window.clearTimeout(slowTimer.current);
+    slowTimer.current = window.setTimeout(() => setSlowNotice(true), SLOW_NOTICE_DELAY_MS);
+  }
+
+  function stopSlowNotice() {
+    if (slowTimer.current !== undefined) window.clearTimeout(slowTimer.current);
+    slowTimer.current = undefined;
+    setSlowNotice(false);
+  }
+
   function switchRole(role: RoleId) {
     if (busy || hasUserMessage || role === courseCase.role.id) return;
+    setTurnSummary(null);
     setCourseCase(createCourseCase(role));
   }
 
@@ -216,6 +359,7 @@ export function CourseWorkbench() {
     if (busy) return;
     const empty = courseCase.messages.length === 0 && draft.trim() === '';
     if (!empty && !window.confirm(NEW_CASE_CONFIRMATION)) return;
+    setTurnSummary(null);
     setCourseCase(createCourseCase(courseCase.role.id));
     setDraft('');
     setTab('overview');
@@ -230,10 +374,12 @@ export function CourseWorkbench() {
       return;
     }
     const retryMessageId = retryTarget?.id ?? null;
+    const before = courseCase;
     setBusy(true);
+    startSlowNotice();
     try {
       const result = await postCourseTurn({
-        case: courseCase,
+        case: before,
         userText: text,
         purpose: 'message',
         replaceExisting: false,
@@ -241,7 +387,12 @@ export function CourseWorkbench() {
       });
       setCourseCase(result.case);
       setDraft('');
+      setTurnSummary({
+        updates: buildTurnUpdates(before, result.case),
+        gaps: buildStillUnclear(result.case),
+      });
     } catch (error) {
+      setTurnSummary(null);
       const message = failureMessage(error);
       setCourseCase(
         recordFailedTurn(courseCase, {
@@ -251,6 +402,7 @@ export function CourseWorkbench() {
         }),
       );
     } finally {
+      stopSlowNotice();
       setBusy(false);
     }
   }
@@ -334,6 +486,7 @@ export function CourseWorkbench() {
     if (replaceExisting && !window.confirm(REGENERATE_CONFIRMATION)) return;
     setTab('materials');
     setBusy(true);
+    startSlowNotice();
     try {
       const result = await postCourseTurn({
         case: courseCase,
@@ -344,8 +497,10 @@ export function CourseWorkbench() {
       });
       setCourseCase(result.case);
     } catch (error) {
+      setTurnSummary(null);
       showToast(failureMessage(error));
     } finally {
+      stopSlowNotice();
       setBusy(false);
     }
   }
@@ -373,17 +528,6 @@ export function CourseWorkbench() {
       </header>
 
       <main className="course-main">
-        <div className="course-heading">
-          <div>
-            <p className="course-eyebrow">Case results</p>
-            <h1>A clearer next step for every case.</h1>
-            <p className="course-muted">
-              Turn a reported experience into a shared understanding and a useful handover.
-            </p>
-          </div>
-          <span className="course-pill course-pill-soft">Fictional course case</span>
-        </div>
-
         <div className="course-workspace">
           <section className="course-panel" aria-label="Case information and results">
             <nav className="course-tabs" aria-label="Case result views">
@@ -401,6 +545,48 @@ export function CourseWorkbench() {
             </nav>
 
             <div className="course-scroll">
+              <section className="course-role-summary" role="region" aria-label="Current employee role">
+                <p className="course-eyebrow">Current employee role</p>
+                <h2>{courseCase.role.title}</h2>
+                <p className="course-role-responsibilities">{courseCase.role.responsibilities}</p>
+              </section>
+
+              {activeQuestion && (
+                <section className="course-round-questions" role="group" aria-label="Round questions">
+                  <p className="course-question-progress">
+                    Question {pendingIndex + 1} of {courseCase.questions.length}
+                  </p>
+                  <p className="course-question-mapping">
+                    Numbered answers follow this list:{' '}
+                    {courseCase.questions
+                      .map((question, index) => `${index + 1} → ${question.id}`)
+                      .join(', ')}
+                    .
+                  </p>
+                  <p className="course-question-focus">Current purpose: {activeQuestion.purpose}</p>
+                  <ol className="course-question-list" aria-label="All questions in this round">
+                    {courseCase.questions.map((question, index) => (
+                      <li
+                        key={question.id}
+                        className={`course-question-item${
+                          index === pendingIndex ? ' course-question-item-active' : ''
+                        }`}
+                        aria-current={index === pendingIndex ? 'step' : undefined}
+                      >
+                        <div className="course-question-item-head">
+                          <span className="course-question-id">{question.id}</span>
+                          <span className="course-question-status">
+                            {QUESTION_STATUS_LABELS[question.status]}
+                          </span>
+                        </div>
+                        <p className="course-question-item-text">{question.text}</p>
+                        <p className="course-question-item-purpose">{question.purpose}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              )}
+
               {tab === 'overview' && (
                 <>
                   {!hasUserMessage && (
@@ -474,32 +660,42 @@ export function CourseWorkbench() {
                   {facts.length > 0 && (
                     <section className="course-section">
                       <h2>Reported facts</h2>
-                      <div className="course-facts">
-                        {facts.map((fact) => (
-                          <label className="course-fact" key={fact.key}>
-                            <span className="course-fact-label">{fact.label}</span>
-                            <input
-                              className="course-fact-input"
-                              aria-label={fact.label}
-                              key={`${fact.key}:${fact.status}:${fact.origin}:${fact.value ?? ''}:${
-                                fact.uncertainty ?? ''
-                              }:${fact.pendingConflict?.value ?? ''}`}
-                              defaultValue={fact.value ?? ''}
-                              disabled={busy}
-                              onBlur={(event) => editFact(fact.key, event.currentTarget)}
-                            />
-                            {fact.uncertainty && (
-                              <span className="course-note">Uncertain report: {fact.uncertainty}</span>
-                            )}
-                            {fact.pendingConflict && (
-                              <span className="course-note course-note-conflict">
-                                New statement: {fact.pendingConflict.value}. The current value is kept
-                                until the conflict is reviewed.
-                              </span>
-                            )}
-                          </label>
-                        ))}
-                      </div>
+                      {factGroups.map((group) => (
+                        <div className="course-fact-group" key={group.group}>
+                          <h3 className="course-fact-group-title">{group.label}</h3>
+                          <div className="course-facts">
+                            {group.facts.map((fact) => (
+                              <label className="course-fact" key={fact.key}>
+                                <span className="course-fact-head">
+                                  <span className="course-fact-label">{fact.label}</span>
+                                  {fact.status === 'unknown' && (
+                                    <span className="course-fact-status">Unknown</span>
+                                  )}
+                                </span>
+                                <input
+                                  className="course-fact-input"
+                                  aria-label={fact.label}
+                                  key={`${fact.key}:${fact.status}:${fact.origin}:${fact.value ?? ''}:${
+                                    fact.uncertainty ?? ''
+                                  }:${fact.pendingConflict?.value ?? ''}`}
+                                  defaultValue={fact.value ?? ''}
+                                  disabled={busy}
+                                  onBlur={(event) => editFact(fact.key, event.currentTarget)}
+                                />
+                                {fact.uncertainty && (
+                                  <span className="course-note">Uncertain report: {fact.uncertainty}</span>
+                                )}
+                                {fact.pendingConflict && (
+                                  <span className="course-note course-note-conflict">
+                                    New statement: {fact.pendingConflict.value}. The current value is kept
+                                    until the conflict is reviewed.
+                                  </span>
+                                )}
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
                     </section>
                   )}
 
@@ -514,6 +710,19 @@ export function CourseWorkbench() {
                       {courseCase.questionsEnded && <p className="course-muted">Clarification ended.</p>}
                     </section>
                   )}
+
+                  <section className="course-section" aria-label="Remaining gaps">
+                    <h2>Remaining gaps</h2>
+                    {remainingGaps.length === 0 ? (
+                      <p className="course-empty">No remaining gaps.</p>
+                    ) : (
+                      <ul className="course-gaps-list">
+                        {remainingGaps.map((gap) => (
+                          <li key={gap.key}>{gap.text}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </section>
 
                   {firstUserMessage && (
                     <section className="course-section">
@@ -554,17 +763,31 @@ export function CourseWorkbench() {
                     <p className="course-empty">{EMPTY_GUIDANCE_MESSAGE}</p>
                   ) : (
                     <div className="course-list">
-                      {courseCase.recommendations.map((recommendation) => (
-                        <article className="course-card course-recommendation" key={recommendation.id}>
-                          <div className="course-recommendation-meta">
-                            <span className="course-pill">{recommendation.organisation}</span>
-                            <span className="course-meta">Priority: {recommendation.priority}</span>
-                            <span className="course-meta">{recommendation.guidelineId}</span>
-                          </div>
-                          <h3 className="course-recommendation-action">{recommendation.action}</h3>
-                          <p className="course-card-text">{recommendation.reason}</p>
-                        </article>
-                      ))}
+                      {courseCase.recommendations.map((recommendation) => {
+                        const guideline = GUIDELINE_BY_ID.get(recommendation.guidelineId);
+                        return (
+                          <article className="course-card course-recommendation" key={recommendation.id}>
+                            <div className="course-recommendation-meta">
+                              <span className="course-pill">{recommendation.organisation}</span>
+                              <span className="course-meta">Priority: {recommendation.priority}</span>
+                              <span className="course-meta">
+                                Audience: {AUDIENCE_LABELS[recommendation.audience]}
+                              </span>
+                              <span className="course-meta">{recommendation.guidelineId}</span>
+                            </div>
+                            {guideline && (
+                              <p className="course-recommendation-source">
+                                Guideline: {guideline.id} — {guideline.title}; Applies to:{' '}
+                                {guideline.appliesTo
+                                  .map((role) => GUIDELINE_APPLIES_LABELS[role] ?? role)
+                                  .join('/')}
+                              </p>
+                            )}
+                            <h3 className="course-recommendation-action">{recommendation.action}</h3>
+                            <p className="course-card-text">{recommendation.reason}</p>
+                          </article>
+                        );
+                      })}
                     </div>
                   )}
                 </section>
@@ -675,17 +898,72 @@ export function CourseWorkbench() {
                   <p className="course-bubble-text">{message.text}</p>
                 </div>
               ))}
+              {turnSummary && (
+                <section className="course-turn-summary" role="region" aria-label="This turn">
+                  <p className="course-turn-summary-title">This turn</p>
+                  <div className="course-turn-summary-block">
+                    <p className="course-turn-summary-label">Recorded updates</p>
+                    {turnSummary.updates.length > 0 ? (
+                      <ul className="course-turn-summary-list">
+                        {turnSummary.updates.map((update, index) => (
+                          <li key={`${update}:${index}`}>{update}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="course-turn-summary-empty">No case facts changed</p>
+                    )}
+                  </div>
+                  <div className="course-turn-summary-block">
+                    <p className="course-turn-summary-label">Still unclear</p>
+                    {turnSummary.gaps.length > 0 ? (
+                      <ul className="course-turn-summary-list">
+                        {turnSummary.gaps.map((gap, index) => (
+                          <li key={`${gap}:${index}`}>{gap}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="course-turn-summary-empty">No recorded gaps</p>
+                    )}
+                  </div>
+                </section>
+              )}
             </div>
 
             <div className="course-chat-actions">
+              {slowNotice && (
+                <p className="course-slow-notice" role="status">
+                  {SLOW_NOTICE_MESSAGE}
+                </p>
+              )}
+              <div className="course-shortcuts">
+                <button
+                  type="button"
+                  className="course-button course-small"
+                  onClick={viewGuidance}
+                  disabled={busy}
+                >
+                  View guidance
+                </button>
+                <button
+                  type="button"
+                  className="course-button course-small"
+                  onClick={() => void generateMaterials()}
+                  disabled={busy}
+                >
+                  {courseCase.materials.status === 'not-generated'
+                    ? 'Generate materials'
+                    : 'Regenerate materials'}
+                </button>
+              </div>
               {activeQuestion && (
-                <div className="course-question" aria-label="Current question">
-                  <p className="course-question-progress">
-                    Question {pendingIndex + 1} of {courseCase.questions.length}
-                  </p>
-                  <p className="course-question-text">{activeQuestion.text}</p>
-                  <p className="course-question-purpose">{activeQuestion.purpose}</p>
-                  <div className="course-question-buttons">
+                <div className="course-current-question" role="group" aria-label="Current question">
+                  <div className="course-current-question-copy">
+                    <p className="course-current-question-progress">
+                      Question {pendingIndex + 1} of {courseCase.questions.length}
+                    </p>
+                    <p className="course-current-question-text">{activeQuestion.text}</p>
+                  </div>
+                  <div className="course-current-question-buttons">
                     <button
                       type="button"
                       className="course-button course-small"
@@ -713,26 +991,6 @@ export function CourseWorkbench() {
                   </div>
                 </div>
               )}
-              <div className="course-shortcuts">
-                <button
-                  type="button"
-                  className="course-button course-small"
-                  onClick={viewGuidance}
-                  disabled={busy}
-                >
-                  View guidance
-                </button>
-                <button
-                  type="button"
-                  className="course-button course-small"
-                  onClick={() => void generateMaterials()}
-                  disabled={busy}
-                >
-                  {courseCase.materials.status === 'not-generated'
-                    ? 'Generate materials'
-                    : 'Regenerate materials'}
-                </button>
-              </div>
             </div>
 
             <div className="course-composer">
