@@ -1,0 +1,79 @@
+1
+00:00:00,000 --> 00:00:04,000
+Select the bank employee role in ScamSafe.
+
+
+2
+00:00:04,000 --> 00:00:12,000
+Load this fictional report of an impersonation text, disclosed credentials,
+and an unfamiliar two-thousand-dollar debit.
+
+3
+00:00:12,000 --> 00:00:16,000
+Submit the report for AI analysis.
+AI processing time shortened.
+
+4
+00:00:16,000 --> 00:00:21,000
+The AI structures the report
+and asks three targeted questions.
+
+5
+00:00:21,000 --> 00:00:26,000
+Suspected phishing is linked to the reported text,
+credentials, and debit.
+
+6
+00:00:26,000 --> 00:00:31,500
+Facts appear in structured fields.
+Transaction status remains unknown.
+
+7
+00:00:31,500 --> 00:00:36,500
+Select “Don’t know” when the transaction status is unavailable.
+
+
+8
+00:00:36,500 --> 00:00:41,500
+End the remaining questions.
+Unresolved gaps remain in the case.
+
+9
+00:00:41,500 --> 00:00:50,000
+Review the bank’s suggested response and its fictional guideline reference.
+Account and payment concerns require human review.
+
+10
+00:00:50,000 --> 00:00:53,000
+Generate materials from the current case.
+AI processing time shortened.
+
+11
+00:00:53,000 --> 00:00:59,000
+Review the case summary,
+including reported facts and unresolved information.
+
+12
+00:00:59,000 --> 00:01:05,000
+The explanation for the affected person
+summarises the report and suggests next steps.
+
+13
+00:01:05,000 --> 00:01:12,000
+The telecom handover focuses on the suspicious text message.
+Review the draft before using it.
+
+14
+00:01:12,000 --> 00:01:18,000
+Edit the summary to flag transaction status for follow-up.
+The materials remain drafts.
+
+15
+00:01:18,000 --> 00:01:22,500
+Confirm the reviewed materials
+to enable copying and downloading.
+
+16
+00:01:22,500 --> 00:01:29,000
+Download the summary.
+The employee decides the next action through existing organisational processes.

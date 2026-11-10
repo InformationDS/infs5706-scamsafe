@@ -1,0 +1,258 @@
+{
+  "role": {
+    "id": "telecom",
+    "title": "Telecom intake officer",
+    "responsibilities": "Understand reported suspicious calls or messages. Prepare a local summary and a bank handover only when the report includes an account or payment concern. Do not change a phone service or assume the provider sent the message."
+  },
+  "phase": "open",
+  "facts": [
+    {
+      "key": "contactChannel",
+      "label": "Contact channel",
+      "group": "event",
+      "value": "Phone calls",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "repeated calls",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "contactTime",
+      "label": "Contact time",
+      "group": "event",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "claimedIdentity",
+      "label": "Claimed identity",
+      "group": "event",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "reportedAction",
+      "label": "Reported action",
+      "group": "event",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "amount",
+      "label": "Reported amount",
+      "group": "money",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "currency",
+      "label": "Currency",
+      "group": "money",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "transactionStatus",
+      "label": "Transaction status",
+      "group": "money",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "involvedOrganisation",
+      "label": "Organisation involved",
+      "group": "money",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "sharedInformation",
+      "label": "Information shared",
+      "group": "account",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "affectedService",
+      "label": "Affected service",
+      "group": "account",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "observedIssue",
+      "label": "Observed issue",
+      "group": "account",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "stillInContact",
+      "label": "Still in contact",
+      "group": "current",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "actionsTaken",
+      "label": "Actions already taken",
+      "group": "current",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "organisationsContacted",
+      "label": "Organisations already contacted",
+      "group": "current",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "evidenceAvailable",
+      "label": "Evidence the person can provide",
+      "group": "support",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "urgencyCue",
+      "label": "Urgency cue",
+      "group": "support",
+      "value": "Pressure to act immediately",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "act immediately",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "vulnerabilityCue",
+      "label": "Vulnerability or support need",
+      "group": "support",
+      "value": "Feeling overwhelmed",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "feel overwhelmed",
+      "origin": "narrative",
+      "pendingConflict": null
+    }
+  ],
+  "questions": [],
+  "questionsEnded": false,
+  "types": [
+    {
+      "label": "Insufficient information",
+      "reason": "This candidate reflects the reported description and remains unverified.",
+      "evidence": "cannot yet describe what they wanted"
+    }
+  ],
+  "attention": [
+    {
+      "kind": "vulnerability",
+      "text": "The person reported feeling overwhelmed.",
+      "evidence": "feel overwhelmed"
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "R1",
+      "guidelineId": "DEMO-G03",
+      "organisation": "SYN Telecom B",
+      "priority": "now",
+      "audience": "this-organisation",
+      "action": "Ask a human reviewer to assess the reported concern within the receiving team remit.",
+      "reason": "The stated facts require human judgement before any action."
+    }
+  ],
+  "materials": {
+    "status": "draft",
+    "employeeEdited": false,
+    "summary": "FICTIONAL COURSE CASE\nReceiving role: Telecom intake officer\n\nCASE SUMMARY\nThe person described the reported concern. The facts and gaps below remain for human review.\n\nCANDIDATE TYPES\n- Insufficient information: This candidate reflects the reported description and remains unverified.\n\nREPORTED FACTS\n- Contact channel: Phone calls\n- Urgency cue: Pressure to act immediately\n- Vulnerability or support need: Feeling overwhelmed\n\nCLARIFIED INFORMATION\n- No additional information was clarified.\n\nREMAINING GAPS\n- No remaining gaps were recorded.\n\nNEXT STEP\n- Ask a human reviewer to assess the reported concern within the receiving team remit. (SYN Telecom B; now)\n\nBasis: fictional DEMO-G03.\nLocal draft only. No action or referral has been completed.",
+    "personExplanation": "EXPLANATION FOR THE AFFECTED PERSON\n\nThank you for telling us what happened.\n\nYou described a concern and we recorded your report without claiming it is verified.\n\nYou told us: Feeling overwhelmed.\n\nWhat you can do next:\n- You can review the recorded information with a human reviewer.\n\nSupport: You can ask someone you trust to support you.",
+    "handover": null
+  },
+  "messages": [
+    {
+      "id": "m1",
+      "role": "user",
+      "text": "I feel overwhelmed and under pressure after repeated calls telling me to act immediately. I cannot yet describe what they wanted. This is a fictional support report.",
+      "status": "complete"
+    },
+    {
+      "id": "m2",
+      "role": "assistant",
+      "text": "Your report has been recorded for human assessment.\n\nNext: review the case facts, view guidance, or generate materials.",
+      "status": "complete"
+    },
+    {
+      "id": "m3",
+      "role": "user",
+      "text": "Generate materials",
+      "status": "complete"
+    },
+    {
+      "id": "m4",
+      "role": "assistant",
+      "text": "The current record is preserved.\n\nNext: review and edit the drafts on the left, then Confirm materials to enable copy or download.",
+      "status": "complete"
+    }
+  ],
+  "messageSeq": 5
+}

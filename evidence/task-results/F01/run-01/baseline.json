@@ -1,0 +1,19 @@
+{
+  "request_date_sydney": "2026-11-10",
+  "recorded_at_utc": "2026-11-10T08:12:03.708133+00:00",
+  "source_branch": "origin/refactor/full-rebuild",
+  "baseline": "26e7d78aab97f98832b7b7b3040c91e87046c3e9",
+  "test_branch": "codex/full-rebuild-validation",
+  "previous_branch_preserved": "codex/d01-integration-review",
+  "workdir": "/Users/wenlinsheng/Documents/ChatGPT/INFS5706 Team Work",
+  "system": "macOS-15.7.3-arm64-arm-64bit",
+  "macOS": "15.7.3",
+  "node": "v24.22.1",
+  "mode": "fake-provider, browser and contract; no configured live model",
+  "production_changes": false,
+  "script_sha256": {
+    "new-suite.ts": "e01ad0c9b55d7c3424ac8a0412373e2bc70340942c0c88eee8bcd470b7b73bbb",
+    "new-cases.json": "13ef0e39141da457bbf10e2e970c6d0e5d7e49763c6b5fea562437b258aa5a64",
+    "boundary-replay.ts": "1ca68b9bbc3d8f155538395c1698ae5f5c5660ffa8e2e6e9f43b471e28a0d02b"
+  }
+}

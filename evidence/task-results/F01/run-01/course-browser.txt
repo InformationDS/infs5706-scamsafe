@@ -1,0 +1,28 @@
+mode=fake-model: course page at http://127.0.0.1:53240/?view=course uses the injected courseTurn runner; no provider is contacted.
+[fake-model] check 1 passed: payment example analysis shows facts on the left and the reply contains Next:
+[fake-model] check 2 passed: the first reply to the proposal with questions contains I have and questions
+[fake-model] check 3 passed: What is the current amount? keeps facts and progress and replies with the current question or next step
+[fake-model] check 4 passed: the correction shows 200 on the left and the generated summary reports amount 200
+[fake-model] check 13 passed: the supplier payment bank case has no handover draft and no telecom recipient
+[fake-model] check 10 passed: editing a fact after drafting keeps the employee sentence and disables download
+[fake-model] check 11 passed: cancelling regeneration keeps the manual sentence and accepting replaces the draft
+[fake-model] check 12 passed: editing after confirmation clears Materials confirmed and disables download
+[fake-model] check 16 passed: confirmed download equals the textarea (clipboard: compared)
+[fake-model] check 5 passed: one numbered multi-answer records 500 AUD and Pending, marks Q2 unknown and shows 3 of 3
+[fake-model] check 6 passed: the uncertainty sentence keeps the recorded amount and adds an uncertain note
+[fake-model] check 7 passed: asking about the amount with a pending question keeps the question and mentions materials
+[fake-model] check 9 passed: switching Case overview, Guidance and Materials keeps conversation text and progress
+[fake-model] check 8 passed: Don't know, Skip question and End questions keep the remaining items visible without guessing facts
+[fake-model] check 14 passed: the support summary keeps overwhelmed and the person explanation has no staff should or Unknown Unknown
+[fake-model] check 15 passed: a runner failure keeps the textarea text and Retry resends the same narrative
+[fake-model] check extra passed: all three example narratives (payment, support, SMS) are handled by the fake runner
+{
+  "status": "passed",
+  "mode": "fake-model",
+  "note": "Injected courseTurn runner; this is not real-model acceptance.",
+  "checks": 17,
+  "clipboard": "compared",
+  "chromium": "156.0.8078.4",
+  "pageErrors": [],
+  "viewport": "1440x900"
+}

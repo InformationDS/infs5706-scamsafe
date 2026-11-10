@@ -1,0 +1,887 @@
+{
+  "mode": "fake-provider through real runCourseTurn/HTTP and browser; NOT real-model semantic acceptance",
+  "cases": 6,
+  "roles": [
+    "bank",
+    "telecom"
+  ],
+  "checks": [
+    {
+      "id": "N01-bank-busy-0",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N01-bank-analysis",
+      "label": "fresh report, role, facts and current next step",
+      "status": "passed"
+    },
+    {
+      "id": "N01-bank-role-ui",
+      "label": "role responsibilities and role picker reflect active case",
+      "status": "passed"
+    },
+    {
+      "id": "N01-bank-guidance-ui",
+      "label": "guidance facts and role differences render without losing conversation",
+      "status": "passed"
+    },
+    {
+      "id": "N01-bank-busy-1",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N01-bank-handover",
+      "label": "only appropriate receiving institution gets a handover",
+      "status": "passed"
+    },
+    {
+      "id": "N01-bank-materials",
+      "label": "materials contain current facts, unknowns and fictional summary marker",
+      "status": "passed"
+    },
+    {
+      "id": "N01-bank-export-Case summary",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N01-bank-export-For the person",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N01-bank-cancel-new",
+      "label": "cancel new case retains the existing materials",
+      "status": "passed"
+    },
+    {
+      "id": "N01-bank-new-case",
+      "label": "new case clears facts, drafts and messages",
+      "status": "passed"
+    },
+    {
+      "id": "N01-telecom-busy-2",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N01-telecom-analysis",
+      "label": "fresh report, role, facts and current next step",
+      "status": "passed"
+    },
+    {
+      "id": "N01-telecom-role-ui",
+      "label": "role responsibilities and role picker reflect active case",
+      "status": "passed"
+    },
+    {
+      "id": "N01-telecom-guidance-ui",
+      "label": "guidance facts and role differences render without losing conversation",
+      "status": "passed"
+    },
+    {
+      "id": "N01-telecom-busy-3",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N01-telecom-handover",
+      "label": "only appropriate receiving institution gets a handover",
+      "status": "passed"
+    },
+    {
+      "id": "N01-telecom-materials",
+      "label": "materials contain current facts, unknowns and fictional summary marker",
+      "status": "passed"
+    },
+    {
+      "id": "N01-telecom-export-Case summary",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N01-telecom-export-For the person",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N01-telecom-export-Handover draft",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N01-telecom-cancel-new",
+      "label": "cancel new case retains the existing materials",
+      "status": "passed"
+    },
+    {
+      "id": "N01-telecom-new-case",
+      "label": "new case clears facts, drafts and messages",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-busy-4",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-analysis",
+      "label": "fresh report, role, facts and current next step",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-role-ui",
+      "label": "role responsibilities and role picker reflect active case",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-busy-5",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-query",
+      "label": "query and model-proposed answers do not alter facts or question progress",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-busy-6",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-busy-7",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-uncertainty",
+      "label": "explicit correction wins; uncertainty retains amount and records gap",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-busy-8",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-multi-answer",
+      "label": "numbered answers close only their questions and retain unknown",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-busy-9",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-busy-10",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-retry",
+      "label": "invalid output retains input; retry reuses failed message identity",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-guidance-ui",
+      "label": "guidance facts and role differences render without losing conversation",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-busy-11",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-handover",
+      "label": "only appropriate receiving institution gets a handover",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-materials",
+      "label": "materials contain current facts, unknowns and fictional summary marker",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-export-Case summary",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-export-For the person",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-export-Handover draft",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-edit-lock",
+      "label": "editing removes confirmation and blocks copy/download",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-stale",
+      "label": "fact edits preserve employee wording while disabling confirmation",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-cancel-regenerate",
+      "label": "cancelled regeneration preserves text without a provider request",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-busy-12",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-regenerate",
+      "label": "confirmed replacement reflects employee fact edit",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-cancel-new",
+      "label": "cancel new case retains the existing materials",
+      "status": "passed"
+    },
+    {
+      "id": "N02-bank-new-case",
+      "label": "new case clears facts, drafts and messages",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-busy-13",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-analysis",
+      "label": "fresh report, role, facts and current next step",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-role-ui",
+      "label": "role responsibilities and role picker reflect active case",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-busy-14",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-query",
+      "label": "query and model-proposed answers do not alter facts or question progress",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-busy-15",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-busy-16",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-uncertainty",
+      "label": "explicit correction wins; uncertainty retains amount and records gap",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-busy-17",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-multi-answer",
+      "label": "numbered answers close only their questions and retain unknown",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-busy-18",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-busy-19",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-retry",
+      "label": "invalid output retains input; retry reuses failed message identity",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-guidance-ui",
+      "label": "guidance facts and role differences render without losing conversation",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-busy-20",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-handover",
+      "label": "only appropriate receiving institution gets a handover",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-materials",
+      "label": "materials contain current facts, unknowns and fictional summary marker",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-export-Case summary",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-export-For the person",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-export-Handover draft",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-edit-lock",
+      "label": "editing removes confirmation and blocks copy/download",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-stale",
+      "label": "fact edits preserve employee wording while disabling confirmation",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-cancel-regenerate",
+      "label": "cancelled regeneration preserves text without a provider request",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-busy-21",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-regenerate",
+      "label": "confirmed replacement reflects employee fact edit",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-cancel-new",
+      "label": "cancel new case retains the existing materials",
+      "status": "passed"
+    },
+    {
+      "id": "N02-telecom-new-case",
+      "label": "new case clears facts, drafts and messages",
+      "status": "passed"
+    },
+    {
+      "id": "N03-bank-busy-22",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N03-bank-analysis",
+      "label": "fresh report, role, facts and current next step",
+      "status": "passed"
+    },
+    {
+      "id": "N03-bank-role-ui",
+      "label": "role responsibilities and role picker reflect active case",
+      "status": "passed"
+    },
+    {
+      "id": "N03-bank-guidance-ui",
+      "label": "guidance facts and role differences render without losing conversation",
+      "status": "passed"
+    },
+    {
+      "id": "N03-bank-busy-23",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N03-bank-handover",
+      "label": "only appropriate receiving institution gets a handover",
+      "status": "passed"
+    },
+    {
+      "id": "N03-bank-materials",
+      "label": "materials contain current facts, unknowns and fictional summary marker",
+      "status": "passed"
+    },
+    {
+      "id": "N03-bank-export-Case summary",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N03-bank-export-For the person",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N03-bank-export-Handover draft",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N03-bank-cancel-new",
+      "label": "cancel new case retains the existing materials",
+      "status": "passed"
+    },
+    {
+      "id": "N03-bank-new-case",
+      "label": "new case clears facts, drafts and messages",
+      "status": "passed"
+    },
+    {
+      "id": "N03-telecom-busy-24",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N03-telecom-analysis",
+      "label": "fresh report, role, facts and current next step",
+      "status": "passed"
+    },
+    {
+      "id": "N03-telecom-role-ui",
+      "label": "role responsibilities and role picker reflect active case",
+      "status": "passed"
+    },
+    {
+      "id": "N03-telecom-guidance-ui",
+      "label": "guidance facts and role differences render without losing conversation",
+      "status": "passed"
+    },
+    {
+      "id": "N03-telecom-busy-25",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N03-telecom-handover",
+      "label": "only appropriate receiving institution gets a handover",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'HANDOVER DRAFT\\n' +\n+   'Recipient: SYN Bank A intake team\\n' +\n+   '\\n' +\n+   'REPORTED FACTS\\n' +\n+   '- Contact channel: Phone call\\n' +\n+   '- Affected service: Mobile phone\\n' +\n+   '- Observed issue: Repeated nuisance calls\\n' +\n+   '\\n' +\n+   'Reason: The receiving team can assess the relevant reported concern.\\n' +\n+   'Request: Please review the relevant facts and confirm whether further assessment is appropriate.\\n' +\n+   '\\n' +\n+   'Local draft only. No action or referral has been completed.'\n- null\n",
+      "details": {
+        "expected": null,
+        "actual": "HANDOVER DRAFT\nRecipient: SYN Bank A intake team\n\nREPORTED FACTS\n- Contact channel: Phone call\n- Affected service: Mobile phone\n- Observed issue: Repeated nuisance calls\n\nReason: The receiving team can assess the relevant reported concern.\nRequest: Please review the relevant facts and confirm whether further assessment is appropriate.\n\nLocal draft only. No action or referral has been completed."
+      }
+    },
+    {
+      "id": "N03-telecom-materials",
+      "label": "materials contain current facts, unknowns and fictional summary marker",
+      "status": "passed"
+    },
+    {
+      "id": "N03-telecom-export-Case summary",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N03-telecom-export-For the person",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N03-telecom-export-Handover draft",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N03-telecom-cancel-new",
+      "label": "cancel new case retains the existing materials",
+      "status": "passed"
+    },
+    {
+      "id": "N03-telecom-new-case",
+      "label": "new case clears facts, drafts and messages",
+      "status": "passed"
+    },
+    {
+      "id": "N04-bank-busy-26",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N04-bank-analysis",
+      "label": "fresh report, role, facts and current next step",
+      "status": "passed"
+    },
+    {
+      "id": "N04-bank-role-ui",
+      "label": "role responsibilities and role picker reflect active case",
+      "status": "passed"
+    },
+    {
+      "id": "N04-bank-guidance-ui",
+      "label": "guidance facts and role differences render without losing conversation",
+      "status": "passed"
+    },
+    {
+      "id": "N04-bank-busy-27",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N04-bank-handover",
+      "label": "only appropriate receiving institution gets a handover",
+      "status": "passed"
+    },
+    {
+      "id": "N04-bank-materials",
+      "label": "materials contain current facts, unknowns and fictional summary marker",
+      "status": "passed"
+    },
+    {
+      "id": "N04-bank-export-Case summary",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N04-bank-export-For the person",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N04-bank-cancel-new",
+      "label": "cancel new case retains the existing materials",
+      "status": "passed"
+    },
+    {
+      "id": "N04-bank-new-case",
+      "label": "new case clears facts, drafts and messages",
+      "status": "passed"
+    },
+    {
+      "id": "N04-telecom-busy-28",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N04-telecom-analysis",
+      "label": "fresh report, role, facts and current next step",
+      "status": "passed"
+    },
+    {
+      "id": "N04-telecom-role-ui",
+      "label": "role responsibilities and role picker reflect active case",
+      "status": "passed"
+    },
+    {
+      "id": "N04-telecom-guidance-ui",
+      "label": "guidance facts and role differences render without losing conversation",
+      "status": "passed"
+    },
+    {
+      "id": "N04-telecom-busy-29",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N04-telecom-handover",
+      "label": "only appropriate receiving institution gets a handover",
+      "status": "passed"
+    },
+    {
+      "id": "N04-telecom-materials",
+      "label": "materials contain current facts, unknowns and fictional summary marker",
+      "status": "passed"
+    },
+    {
+      "id": "N04-telecom-export-Case summary",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N04-telecom-export-For the person",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N04-telecom-cancel-new",
+      "label": "cancel new case retains the existing materials",
+      "status": "passed"
+    },
+    {
+      "id": "N04-telecom-new-case",
+      "label": "new case clears facts, drafts and messages",
+      "status": "passed"
+    },
+    {
+      "id": "N05-bank-busy-30",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N05-bank-analysis",
+      "label": "fresh report, role, facts and current next step",
+      "status": "passed"
+    },
+    {
+      "id": "N05-bank-role-ui",
+      "label": "role responsibilities and role picker reflect active case",
+      "status": "passed"
+    },
+    {
+      "id": "N05-bank-guidance-ui",
+      "label": "guidance facts and role differences render without losing conversation",
+      "status": "passed"
+    },
+    {
+      "id": "N05-bank-busy-31",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N05-bank-handover",
+      "label": "only appropriate receiving institution gets a handover",
+      "status": "passed"
+    },
+    {
+      "id": "N05-bank-materials",
+      "label": "materials contain current facts, unknowns and fictional summary marker",
+      "status": "passed"
+    },
+    {
+      "id": "N05-bank-export-Case summary",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N05-bank-export-For the person",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N05-bank-export-Handover draft",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N05-bank-cancel-new",
+      "label": "cancel new case retains the existing materials",
+      "status": "passed"
+    },
+    {
+      "id": "N05-bank-new-case",
+      "label": "new case clears facts, drafts and messages",
+      "status": "passed"
+    },
+    {
+      "id": "N05-telecom-busy-32",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N05-telecom-analysis",
+      "label": "fresh report, role, facts and current next step",
+      "status": "passed"
+    },
+    {
+      "id": "N05-telecom-role-ui",
+      "label": "role responsibilities and role picker reflect active case",
+      "status": "passed"
+    },
+    {
+      "id": "N05-telecom-guidance-ui",
+      "label": "guidance facts and role differences render without losing conversation",
+      "status": "passed"
+    },
+    {
+      "id": "N05-telecom-busy-33",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N05-telecom-handover",
+      "label": "only appropriate receiving institution gets a handover",
+      "status": "passed"
+    },
+    {
+      "id": "N05-telecom-materials",
+      "label": "materials contain current facts, unknowns and fictional summary marker",
+      "status": "passed"
+    },
+    {
+      "id": "N05-telecom-export-Case summary",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N05-telecom-export-For the person",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N05-telecom-export-Handover draft",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N05-telecom-cancel-new",
+      "label": "cancel new case retains the existing materials",
+      "status": "passed"
+    },
+    {
+      "id": "N05-telecom-new-case",
+      "label": "new case clears facts, drafts and messages",
+      "status": "passed"
+    },
+    {
+      "id": "N06-bank-busy-34",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N06-bank-analysis",
+      "label": "fresh report, role, facts and current next step",
+      "status": "passed"
+    },
+    {
+      "id": "N06-bank-role-ui",
+      "label": "role responsibilities and role picker reflect active case",
+      "status": "passed"
+    },
+    {
+      "id": "N06-bank-guidance-ui",
+      "label": "guidance facts and role differences render without losing conversation",
+      "status": "passed"
+    },
+    {
+      "id": "N06-bank-busy-35",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N06-bank-handover",
+      "label": "only appropriate receiving institution gets a handover",
+      "status": "passed"
+    },
+    {
+      "id": "N06-bank-materials",
+      "label": "materials contain current facts, unknowns and fictional summary marker",
+      "status": "passed"
+    },
+    {
+      "id": "N06-bank-export-Case summary",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N06-bank-export-For the person",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N06-bank-cancel-new",
+      "label": "cancel new case retains the existing materials",
+      "status": "passed"
+    },
+    {
+      "id": "N06-bank-new-case",
+      "label": "new case clears facts, drafts and messages",
+      "status": "passed"
+    },
+    {
+      "id": "N06-telecom-busy-36",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N06-telecom-analysis",
+      "label": "fresh report, role, facts and current next step",
+      "status": "passed"
+    },
+    {
+      "id": "N06-telecom-role-ui",
+      "label": "role responsibilities and role picker reflect active case",
+      "status": "passed"
+    },
+    {
+      "id": "N06-telecom-guidance-ui",
+      "label": "guidance facts and role differences render without losing conversation",
+      "status": "passed"
+    },
+    {
+      "id": "N06-telecom-busy-37",
+      "label": "busy controls prevent duplicate submissions",
+      "status": "passed"
+    },
+    {
+      "id": "N06-telecom-handover",
+      "label": "only appropriate receiving institution gets a handover",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'HANDOVER DRAFT\\n' +\n+   'Recipient: SYN Bank A intake team\\n' +\n+   '\\n' +\n+   'REPORTED FACTS\\n' +\n+   '- Contact channel: Paper letter\\n' +\n+   '- Reported amount: 120\\n' +\n+   '- Currency: EUR\\n' +\n+   '\\n' +\n+   'Reason: The receiving team can assess the relevant reported concern.\\n' +\n+   'Request: Please review the relevant facts and confirm whether further assessment is appropriate.\\n' +\n+   '\\n' +\n+   'Local draft only. No action or referral has been completed.'\n- null\n",
+      "details": {
+        "expected": null,
+        "actual": "HANDOVER DRAFT\nRecipient: SYN Bank A intake team\n\nREPORTED FACTS\n- Contact channel: Paper letter\n- Reported amount: 120\n- Currency: EUR\n\nReason: The receiving team can assess the relevant reported concern.\nRequest: Please review the relevant facts and confirm whether further assessment is appropriate.\n\nLocal draft only. No action or referral has been completed."
+      }
+    },
+    {
+      "id": "N06-telecom-materials",
+      "label": "materials contain current facts, unknowns and fictional summary marker",
+      "status": "passed"
+    },
+    {
+      "id": "N06-telecom-export-Case summary",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N06-telecom-export-For the person",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N06-telecom-export-Handover draft",
+      "label": "copy and Markdown bytes match the selected material",
+      "status": "passed"
+    },
+    {
+      "id": "N06-telecom-cancel-new",
+      "label": "cancel new case retains the existing materials",
+      "status": "passed"
+    },
+    {
+      "id": "N06-telecom-new-case",
+      "label": "new case clears facts, drafts and messages",
+      "status": "passed"
+    },
+    {
+      "id": "ENV-01",
+      "label": "unconfigured real course service returns safe 503 with no model call",
+      "status": "passed"
+    },
+    {
+      "id": "UI-ERRORS",
+      "label": "no uncaught browser errors",
+      "status": "passed"
+    }
+  ],
+  "passed": 170,
+  "failed": 2,
+  "errors": [],
+  "providerCalls": 38,
+  "externalProviderCalls": 0,
+  "liveStatus": "not executed: no local model configuration",
+  "browser": "156.0.8078.4"
+}

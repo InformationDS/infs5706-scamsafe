@@ -1,0 +1,235 @@
+{
+  "scope": "New synthetic protocol/UI cases; scripted fake provider, not semantic model acceptance; no production guideline changes",
+  "cases": [
+    {
+      "id": "N01",
+      "name": "Supplier email with NZD pending payment",
+      "text": "A fictional supplier emailed changed account details. I paid 4350 NZD and the transfer is pending. There was no text message or phone call. I kept the email.",
+      "facts": [
+        [
+          "contactChannel",
+          "Email",
+          "emailed"
+        ],
+        [
+          "claimedIdentity",
+          "A fictional supplier",
+          "fictional supplier"
+        ],
+        [
+          "amount",
+          "4350",
+          "4350"
+        ],
+        [
+          "currency",
+          "NZD",
+          "NZD"
+        ],
+        [
+          "transactionStatus",
+          "Pending",
+          "pending"
+        ],
+        [
+          "evidenceAvailable",
+          "Email copy",
+          "kept the email"
+        ]
+      ],
+      "type": "Suspected payment redirection",
+      "typeEvidence": "changed account details",
+      "guideline": "DEMO-G04",
+      "recipient": {
+        "bank": null,
+        "telecom": "bank"
+      }
+    },
+    {
+      "id": "N02",
+      "name": "Cross-institution SMS with query/correction/multiple answers",
+      "text": "A fictional SMS claimed to be SYN Bank A. I entered a banking password and saw an unfamiliar debit of 86 GBP. Its status is not known. I still have the message.",
+      "facts": [
+        [
+          "contactChannel",
+          "SMS",
+          "SMS"
+        ],
+        [
+          "claimedIdentity",
+          "SYN Bank A",
+          "SYN Bank A"
+        ],
+        [
+          "sharedInformation",
+          "Banking password",
+          "banking password"
+        ],
+        [
+          "amount",
+          "86",
+          "86"
+        ],
+        [
+          "currency",
+          "GBP",
+          "GBP"
+        ],
+        [
+          "transactionStatus",
+          null,
+          "not known"
+        ],
+        [
+          "evidenceAvailable",
+          "Message on phone",
+          "still have the message"
+        ]
+      ],
+      "type": "Suspected phishing",
+      "typeEvidence": "entered a banking password",
+      "guideline": "DEMO-G01",
+      "questions": true,
+      "recipient": {
+        "bank": "telecom",
+        "telecom": "bank"
+      }
+    },
+    {
+      "id": "N03",
+      "name": "Telecom-only nuisance calls without account or payment concern",
+      "text": "A fictional caller repeatedly calls my mobile phone with unwanted sales messages. The observed issue is repeated nuisance calls. I did not discuss an account or payment and did not provide any information.",
+      "facts": [
+        [
+          "contactChannel",
+          "Phone call",
+          "calls my mobile phone"
+        ],
+        [
+          "affectedService",
+          "Mobile phone",
+          "mobile phone"
+        ],
+        [
+          "observedIssue",
+          "Repeated nuisance calls",
+          "repeated nuisance calls"
+        ]
+      ],
+      "type": "Other",
+      "typeEvidence": "unwanted sales messages",
+      "guideline": "DEMO-G02",
+      "recipient": {
+        "bank": "telecom",
+        "telecom": null
+      }
+    },
+    {
+      "id": "N04",
+      "name": "Pressure and vulnerability without sufficient scam details",
+      "text": "I feel overwhelmed and under pressure after repeated calls telling me to act immediately. I cannot yet describe what they wanted. This is a fictional support report.",
+      "facts": [
+        [
+          "contactChannel",
+          "Phone calls",
+          "repeated calls"
+        ],
+        [
+          "vulnerabilityCue",
+          "Feeling overwhelmed",
+          "feel overwhelmed"
+        ],
+        [
+          "urgencyCue",
+          "Pressure to act immediately",
+          "act immediately"
+        ]
+      ],
+      "type": "Insufficient information",
+      "typeEvidence": "cannot yet describe what they wanted",
+      "guideline": "DEMO-G03",
+      "recipient": {
+        "bank": null,
+        "telecom": null
+      }
+    },
+    {
+      "id": "N05",
+      "name": "Chinese cross-institution narrative",
+      "text": "这是虚构测试：我收到冒充SYN Bank A的短信，输入了银行密码。后来发现246 CNY的陌生扣款，状态不确定。我保留了短信，没有联系银行。",
+      "facts": [
+        [
+          "contactChannel",
+          "SMS",
+          "短信"
+        ],
+        [
+          "claimedIdentity",
+          "SYN Bank A",
+          "SYN Bank A"
+        ],
+        [
+          "sharedInformation",
+          "Banking password",
+          "银行密码"
+        ],
+        [
+          "amount",
+          "246",
+          "246"
+        ],
+        [
+          "currency",
+          "CNY",
+          "CNY"
+        ],
+        [
+          "transactionStatus",
+          null,
+          "状态不确定"
+        ],
+        [
+          "evidenceAvailable",
+          "SMS retained",
+          "保留了短信"
+        ]
+      ],
+      "type": "Suspected phishing",
+      "typeEvidence": "冒充SYN Bank A的短信",
+      "guideline": "DEMO-G01",
+      "recipient": {
+        "bank": "telecom",
+        "telecom": "bank"
+      }
+    },
+    {
+      "id": "N06",
+      "name": "No applicable guidance with a reported account concern",
+      "text": "For this fictional unusual case I received a paper letter and reported an account-related debit of 120 EUR. There is no suitable demonstration guideline for the described situation; preserve a factual summary and ask for human judgement.",
+      "facts": [
+        [
+          "contactChannel",
+          "Paper letter",
+          "paper letter"
+        ],
+        [
+          "amount",
+          "120",
+          "120"
+        ],
+        [
+          "currency",
+          "EUR",
+          "EUR"
+        ]
+      ],
+      "type": "Other",
+      "typeEvidence": "unusual case",
+      "guideline": null,
+      "recipient": {
+        "bank": null,
+        "telecom": null
+      }
+    }
+  ]
+}

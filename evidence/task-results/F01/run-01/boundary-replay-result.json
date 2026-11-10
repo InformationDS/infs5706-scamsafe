@@ -1,0 +1,597 @@
+{
+  "mode": "fake-provider through real HTTP and runCourseTurn",
+  "results": [
+    {
+      "id": "N03-telecom-null-handover",
+      "label": "model explicitly returns null for all handover sentences and reference; no unsupported recipient draft",
+      "status": "failed",
+      "http": 200,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'HANDOVER DRAFT\\n' +\n+   'Recipient: SYN Bank A intake team\\n' +\n+   '\\n' +\n+   'REPORTED FACTS\\n' +\n+   '- Contact channel: Phone call\\n' +\n+   '- Affected service: Mobile phone\\n' +\n+   '- Observed issue: Repeated nuisance calls\\n' +\n+   '\\n' +\n+   \"Reason: Please assess the reported concern within your organisation's responsibilities.\\n\" +\n+   '\\n' +\n+   'Local draft only. No action or referral has been completed.'\n- null\n",
+      "actual": {
+        "case": {
+          "role": {
+            "id": "telecom",
+            "title": "Telecom intake officer",
+            "responsibilities": "Understand reported suspicious calls or messages. Prepare a local summary and a bank handover only when the report includes an account or payment concern. Do not change a phone service or assume the provider sent the message."
+          },
+          "phase": "open",
+          "facts": [
+            {
+              "key": "contactChannel",
+              "label": "Contact channel",
+              "group": "event",
+              "value": "Phone call",
+              "status": "known",
+              "uncertainty": null,
+              "evidence": "calls my mobile phone",
+              "origin": "narrative",
+              "pendingConflict": null
+            },
+            {
+              "key": "contactTime",
+              "label": "Contact time",
+              "group": "event",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "claimedIdentity",
+              "label": "Claimed identity",
+              "group": "event",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "reportedAction",
+              "label": "Reported action",
+              "group": "event",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "amount",
+              "label": "Reported amount",
+              "group": "money",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "currency",
+              "label": "Currency",
+              "group": "money",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "transactionStatus",
+              "label": "Transaction status",
+              "group": "money",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "involvedOrganisation",
+              "label": "Organisation involved",
+              "group": "money",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "sharedInformation",
+              "label": "Information shared",
+              "group": "account",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "affectedService",
+              "label": "Affected service",
+              "group": "account",
+              "value": "Mobile phone",
+              "status": "known",
+              "uncertainty": null,
+              "evidence": "mobile phone",
+              "origin": "narrative",
+              "pendingConflict": null
+            },
+            {
+              "key": "observedIssue",
+              "label": "Observed issue",
+              "group": "account",
+              "value": "Repeated nuisance calls",
+              "status": "known",
+              "uncertainty": null,
+              "evidence": "repeated nuisance calls",
+              "origin": "narrative",
+              "pendingConflict": null
+            },
+            {
+              "key": "stillInContact",
+              "label": "Still in contact",
+              "group": "current",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "actionsTaken",
+              "label": "Actions already taken",
+              "group": "current",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "organisationsContacted",
+              "label": "Organisations already contacted",
+              "group": "current",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "evidenceAvailable",
+              "label": "Evidence the person can provide",
+              "group": "support",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "urgencyCue",
+              "label": "Urgency cue",
+              "group": "support",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "vulnerabilityCue",
+              "label": "Vulnerability or support need",
+              "group": "support",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            }
+          ],
+          "questions": [],
+          "questionsEnded": false,
+          "types": [
+            {
+              "label": "Other",
+              "reason": "This candidate reflects the reported description and remains unverified.",
+              "evidence": "unwanted sales messages"
+            }
+          ],
+          "attention": [],
+          "recommendations": [
+            {
+              "id": "R1",
+              "guidelineId": "DEMO-G02",
+              "organisation": "SYN Telecom B",
+              "priority": "now",
+              "audience": "this-organisation",
+              "action": "Ask a human reviewer to assess the reported concern within the receiving team remit.",
+              "reason": "The stated facts require human judgement before any action."
+            }
+          ],
+          "materials": {
+            "status": "draft",
+            "employeeEdited": false,
+            "summary": "FICTIONAL COURSE CASE\nReceiving role: Telecom intake officer\n\nCASE SUMMARY\nThe recorded facts need human review.\n\nCANDIDATE TYPES\n- Other: This candidate reflects the reported description and remains unverified.\n\nREPORTED FACTS\n- Contact channel: Phone call\n- Affected service: Mobile phone\n- Observed issue: Repeated nuisance calls\n\nCLARIFIED INFORMATION\n- No additional information was clarified.\n\nREMAINING GAPS\n- No remaining gaps were recorded.\n\nNEXT STEP\n- Ask a human reviewer to assess the reported concern within the receiving team remit. (SYN Telecom B; now)\n\nBasis: fictional DEMO-G02.\nLocal draft only. No action or referral has been completed.",
+            "personExplanation": "EXPLANATION FOR THE AFFECTED PERSON\n\nThank you for telling us what happened.\n\nYou reported a concern.\n\nWhat you can do next:\n- You can review the record with a human.",
+            "handover": "HANDOVER DRAFT\nRecipient: SYN Bank A intake team\n\nREPORTED FACTS\n- Contact channel: Phone call\n- Affected service: Mobile phone\n- Observed issue: Repeated nuisance calls\n\nReason: Please assess the reported concern within your organisation's responsibilities.\n\nLocal draft only. No action or referral has been completed."
+          },
+          "messages": [
+            {
+              "id": "m1",
+              "role": "user",
+              "text": "A fictional caller repeatedly calls my mobile phone with unwanted sales messages. The observed issue is repeated nuisance calls. I did not discuss an account or payment and did not provide any information.",
+              "status": "complete"
+            },
+            {
+              "id": "m2",
+              "role": "assistant",
+              "text": "Your report has been recorded for human assessment.\n\nNext: review the case facts, view guidance, or generate materials.",
+              "status": "complete"
+            },
+            {
+              "id": "m3",
+              "role": "user",
+              "text": "Generate materials",
+              "status": "complete"
+            },
+            {
+              "id": "m4",
+              "role": "assistant",
+              "text": "The current record is preserved.\n\nNext: review and edit the drafts on the left, then Confirm materials to enable copy or download.",
+              "status": "complete"
+            },
+            {
+              "id": "m5",
+              "role": "user",
+              "text": "Generate materials",
+              "status": "complete"
+            },
+            {
+              "id": "m6",
+              "role": "assistant",
+              "text": "Materials for review.\n\nNext: review and edit the drafts on the left, then Confirm materials to enable copy or download.",
+              "status": "complete"
+            }
+          ],
+          "messageSeq": 7
+        },
+        "assistantText": "Materials for review.\n\nNext: review and edit the drafts on the left, then Confirm materials to enable copy or download.",
+        "requestId": "7c7f2558-f994-4456-8a72-509a68289ee9"
+      }
+    },
+    {
+      "id": "N06-telecom-null-handover",
+      "label": "model explicitly returns null for all handover sentences and reference; no unsupported recipient draft",
+      "status": "failed",
+      "http": 200,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'HANDOVER DRAFT\\n' +\n+   'Recipient: SYN Bank A intake team\\n' +\n+   '\\n' +\n+   'REPORTED FACTS\\n' +\n+   '- Contact channel: Paper letter\\n' +\n+   '- Reported amount: 120\\n' +\n+   '- Currency: EUR\\n' +\n+   '\\n' +\n+   \"Reason: Please assess the reported concern within your organisation's responsibilities.\\n\" +\n+   '\\n' +\n+   'Local draft only. No action or referral has been completed.'\n- null\n",
+      "actual": {
+        "case": {
+          "role": {
+            "id": "telecom",
+            "title": "Telecom intake officer",
+            "responsibilities": "Understand reported suspicious calls or messages. Prepare a local summary and a bank handover only when the report includes an account or payment concern. Do not change a phone service or assume the provider sent the message."
+          },
+          "phase": "open",
+          "facts": [
+            {
+              "key": "contactChannel",
+              "label": "Contact channel",
+              "group": "event",
+              "value": "Paper letter",
+              "status": "known",
+              "uncertainty": null,
+              "evidence": "paper letter",
+              "origin": "narrative",
+              "pendingConflict": null
+            },
+            {
+              "key": "contactTime",
+              "label": "Contact time",
+              "group": "event",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "claimedIdentity",
+              "label": "Claimed identity",
+              "group": "event",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "reportedAction",
+              "label": "Reported action",
+              "group": "event",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "amount",
+              "label": "Reported amount",
+              "group": "money",
+              "value": "120",
+              "status": "known",
+              "uncertainty": null,
+              "evidence": "120",
+              "origin": "narrative",
+              "pendingConflict": null
+            },
+            {
+              "key": "currency",
+              "label": "Currency",
+              "group": "money",
+              "value": "EUR",
+              "status": "known",
+              "uncertainty": null,
+              "evidence": "EUR",
+              "origin": "narrative",
+              "pendingConflict": null
+            },
+            {
+              "key": "transactionStatus",
+              "label": "Transaction status",
+              "group": "money",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "involvedOrganisation",
+              "label": "Organisation involved",
+              "group": "money",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "sharedInformation",
+              "label": "Information shared",
+              "group": "account",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "affectedService",
+              "label": "Affected service",
+              "group": "account",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "observedIssue",
+              "label": "Observed issue",
+              "group": "account",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "stillInContact",
+              "label": "Still in contact",
+              "group": "current",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "actionsTaken",
+              "label": "Actions already taken",
+              "group": "current",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "organisationsContacted",
+              "label": "Organisations already contacted",
+              "group": "current",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "evidenceAvailable",
+              "label": "Evidence the person can provide",
+              "group": "support",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "urgencyCue",
+              "label": "Urgency cue",
+              "group": "support",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            },
+            {
+              "key": "vulnerabilityCue",
+              "label": "Vulnerability or support need",
+              "group": "support",
+              "value": null,
+              "status": "unset",
+              "uncertainty": null,
+              "evidence": null,
+              "origin": "unset",
+              "pendingConflict": null
+            }
+          ],
+          "questions": [],
+          "questionsEnded": false,
+          "types": [
+            {
+              "label": "Other",
+              "reason": "This candidate reflects the reported description and remains unverified.",
+              "evidence": "unusual case"
+            }
+          ],
+          "attention": [],
+          "recommendations": [],
+          "materials": {
+            "status": "draft",
+            "employeeEdited": false,
+            "summary": "FICTIONAL COURSE CASE\nReceiving role: Telecom intake officer\n\nCASE SUMMARY\nThe recorded facts need human review.\n\nCANDIDATE TYPES\n- Other: This candidate reflects the reported description and remains unverified.\n\nREPORTED FACTS\n- Contact channel: Paper letter\n- Reported amount: 120\n- Currency: EUR\n\nCLARIFIED INFORMATION\n- No additional information was clarified.\n\nREMAINING GAPS\n- No remaining gaps were recorded.\n\nNEXT STEP\n- No next step was suggested.\n\nBasis: fictional no guideline recorded.\nLocal draft only. No action or referral has been completed.",
+            "personExplanation": "EXPLANATION FOR THE AFFECTED PERSON\n\nThank you for telling us what happened.\n\nYou reported a concern.\n\nRecorded amount: 120.\nRecorded currency: EUR.\n\nWhat you can do next:\n- You can review the record with a human.",
+            "handover": "HANDOVER DRAFT\nRecipient: SYN Bank A intake team\n\nREPORTED FACTS\n- Contact channel: Paper letter\n- Reported amount: 120\n- Currency: EUR\n\nReason: Please assess the reported concern within your organisation's responsibilities.\n\nLocal draft only. No action or referral has been completed."
+          },
+          "messages": [
+            {
+              "id": "m1",
+              "role": "user",
+              "text": "For this fictional unusual case I received a paper letter and reported an account-related debit of 120 EUR. There is no suitable demonstration guideline for the described situation; preserve a factual summary and ask for human judgement.",
+              "status": "complete"
+            },
+            {
+              "id": "m2",
+              "role": "assistant",
+              "text": "Your report has been recorded for human assessment.\n\nNext: review the case facts, view guidance, or generate materials.",
+              "status": "complete"
+            },
+            {
+              "id": "m3",
+              "role": "user",
+              "text": "Generate materials",
+              "status": "complete"
+            },
+            {
+              "id": "m4",
+              "role": "assistant",
+              "text": "The current record is preserved.\n\nNext: review and edit the drafts on the left, then Confirm materials to enable copy or download.",
+              "status": "complete"
+            },
+            {
+              "id": "m5",
+              "role": "user",
+              "text": "Generate materials",
+              "status": "complete"
+            },
+            {
+              "id": "m6",
+              "role": "assistant",
+              "text": "Materials for review.\n\nNext: review and edit the drafts on the left, then Confirm materials to enable copy or download.",
+              "status": "complete"
+            }
+          ],
+          "messageSeq": 7
+        },
+        "assistantText": "Materials for review.\n\nNext: review and edit the drafts on the left, then Confirm materials to enable copy or download.",
+        "requestId": "eb0f7b9b-e550-4255-9372-42859ed0b089"
+      }
+    },
+    {
+      "id": "bank-old-amount",
+      "label": "old model amount cannot replace employee-edited 23",
+      "status": "passed",
+      "http": 200
+    },
+    {
+      "id": "bank-unconfirmed-replace",
+      "label": "unconfirmed material replacement is blocked before provider call",
+      "status": "passed",
+      "http": 409
+    },
+    {
+      "id": "bank-bad-source",
+      "label": "fabricated source evidence rejects whole model proposal",
+      "status": "passed",
+      "http": 502
+    },
+    {
+      "id": "bank-four-questions",
+      "label": "out-of-contract fourth question rejects proposal",
+      "status": "passed",
+      "http": 502
+    },
+    {
+      "id": "telecom-old-amount",
+      "label": "old model amount cannot replace employee-edited 23",
+      "status": "passed",
+      "http": 200
+    },
+    {
+      "id": "telecom-unconfirmed-replace",
+      "label": "unconfirmed material replacement is blocked before provider call",
+      "status": "passed",
+      "http": 409
+    },
+    {
+      "id": "telecom-bad-source",
+      "label": "fabricated source evidence rejects whole model proposal",
+      "status": "passed",
+      "http": 502
+    },
+    {
+      "id": "telecom-four-questions",
+      "label": "out-of-contract fourth question rejects proposal",
+      "status": "passed",
+      "http": 502
+    }
+  ],
+  "passed": 8,
+  "failed": 2,
+  "providerCalls": 8,
+  "externalProviderCalls": 0
+}

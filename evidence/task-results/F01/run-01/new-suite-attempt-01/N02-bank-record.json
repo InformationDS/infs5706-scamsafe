@@ -1,0 +1,355 @@
+{
+  "role": {
+    "id": "bank",
+    "title": "Bank intake officer",
+    "responsibilities": "Understand reported account, payment and credential concerns. Prepare a local summary and only the handovers supported by the report. Do not freeze an account or promise a refund."
+  },
+  "phase": "open",
+  "facts": [
+    {
+      "key": "contactChannel",
+      "label": "Contact channel",
+      "group": "event",
+      "value": "SMS",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "SMS",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "contactTime",
+      "label": "Contact time",
+      "group": "event",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "claimedIdentity",
+      "label": "Claimed identity",
+      "group": "event",
+      "value": "SYN Bank A",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "SYN Bank A",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "reportedAction",
+      "label": "Reported action",
+      "group": "event",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "amount",
+      "label": "Reported amount",
+      "group": "money",
+      "value": "23",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "19",
+      "origin": "employee-edit",
+      "pendingConflict": null
+    },
+    {
+      "key": "currency",
+      "label": "Currency",
+      "group": "money",
+      "value": "GBP",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "GBP",
+      "origin": "employee-edit",
+      "pendingConflict": null
+    },
+    {
+      "key": "transactionStatus",
+      "label": "Transaction status",
+      "group": "money",
+      "value": "Pending",
+      "status": "known",
+      "uncertainty": "not known",
+      "evidence": "Pending",
+      "origin": "answer",
+      "pendingConflict": null
+    },
+    {
+      "key": "involvedOrganisation",
+      "label": "Organisation involved",
+      "group": "money",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "sharedInformation",
+      "label": "Information shared",
+      "group": "account",
+      "value": "Banking password",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "banking password",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "affectedService",
+      "label": "Affected service",
+      "group": "account",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "observedIssue",
+      "label": "Observed issue",
+      "group": "account",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "stillInContact",
+      "label": "Still in contact",
+      "group": "current",
+      "value": "No",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "No further contact",
+      "origin": "answer",
+      "pendingConflict": null
+    },
+    {
+      "key": "actionsTaken",
+      "label": "Actions already taken",
+      "group": "current",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "organisationsContacted",
+      "label": "Organisations already contacted",
+      "group": "current",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "evidenceAvailable",
+      "label": "Evidence the person can provide",
+      "group": "support",
+      "value": "Message deleted",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "message was deleted",
+      "origin": "answer",
+      "pendingConflict": null
+    },
+    {
+      "key": "urgencyCue",
+      "label": "Urgency cue",
+      "group": "support",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "vulnerabilityCue",
+      "label": "Vulnerability or support need",
+      "group": "support",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "Is contact continuing?",
+      "purpose": "Clarify current contact",
+      "relatedKeys": [
+        "stillInContact"
+      ],
+      "status": "answered",
+      "answerText": "No further contact"
+    },
+    {
+      "id": "Q2",
+      "text": "What is the current debit status?",
+      "purpose": "Clarify reported debit status",
+      "relatedKeys": [
+        "transactionStatus"
+      ],
+      "status": "answered",
+      "answerText": "Pending"
+    },
+    {
+      "id": "Q3",
+      "text": "Have you contacted an organisation?",
+      "purpose": "Clarify existing support",
+      "relatedKeys": [
+        "organisationsContacted"
+      ],
+      "status": "unknown",
+      "answerText": null
+    }
+  ],
+  "questionsEnded": false,
+  "types": [
+    {
+      "label": "Suspected phishing",
+      "reason": "This candidate reflects the reported description and remains unverified.",
+      "evidence": "entered a banking password"
+    }
+  ],
+  "attention": [],
+  "recommendations": [
+    {
+      "id": "R1",
+      "guidelineId": "DEMO-G01",
+      "organisation": "SYN Bank A",
+      "priority": "now",
+      "audience": "this-organisation",
+      "action": "Ask a human reviewer to assess the reported concern within the receiving team remit.",
+      "reason": "The stated facts require human judgement before any action."
+    }
+  ],
+  "materials": {
+    "status": "draft",
+    "employeeEdited": false,
+    "summary": "FICTIONAL COURSE CASE\nReceiving role: Bank intake officer\n\nCASE SUMMARY\nThe person described the reported concern. The facts and gaps below remain for human review.\n\nCANDIDATE TYPES\n- Suspected phishing: This candidate reflects the reported description and remains unverified.\n\nREPORTED FACTS\n- Contact channel: SMS\n- Claimed identity: SYN Bank A\n- Reported amount: 23\n- Currency: GBP\n- Transaction status: Pending\n- Information shared: Banking password\n- Still in contact: No\n- Organisations already contacted: Unknown\n- Evidence the person can provide: Message deleted\n\nCLARIFIED INFORMATION\n- Question 1: No further contact\n- Question 2: Pending\n\nREMAINING GAPS\n- Question 3 was answered as unknown: Have you contacted an organisation?\n- Transaction status needs confirmation: not known\n- Organisations already contacted has not been recorded.\n\nNEXT STEP\n- Ask a human reviewer to assess the reported concern within the receiving team remit. (SYN Bank A; now)\n\nBasis: fictional DEMO-G01.\nLocal draft only. No action or referral has been completed.",
+    "personExplanation": "EXPLANATION FOR THE AFFECTED PERSON\n\nThank you for telling us what happened.\n\nYou described a concern and we recorded your report without claiming it is verified.\n\nRecorded amount: 23.\nRecorded currency: GBP.\nRecorded transaction status: Pending.\n\nWhat you can do next:\n- You can review the recorded information with a human reviewer.\n\nSupport: You can ask someone you trust to support you.",
+    "handover": "HANDOVER DRAFT\nRecipient: SYN Telecom B intake team\n\nREPORTED FACTS\n- Contact channel: SMS\n- Claimed identity: SYN Bank A\n- Reported amount: 23\n- Currency: GBP\n- Transaction status: Pending\n- Information shared: Banking password\n- Still in contact: No\n- Organisations already contacted: Unknown\n- Evidence the person can provide: Message deleted\n\nReason: The receiving team can assess the relevant reported concern.\nRequest: Please review the relevant facts and confirm whether further assessment is appropriate.\n\nBasis: fictional DEMO-G02.\n\nLocal draft only. No action or referral has been completed."
+  },
+  "messages": [
+    {
+      "id": "m1",
+      "role": "user",
+      "text": "A fictional SMS claimed to be SYN Bank A. I entered a banking password and saw an unfamiliar debit of 86 GBP. Its status is not known. I still have the message.",
+      "status": "complete"
+    },
+    {
+      "id": "m2",
+      "role": "assistant",
+      "text": "Your report has been recorded for human assessment.\n\nI have 3 questions to clarify this case, covering Clarify current contact; Clarify reported debit status; Clarify existing support. You can answer more than one, say you do not know, skip a question, or end early.\n\nNext: Question 1 of 3: Is contact continuing? You can answer, ask about the case, say you do not know, skip, or end clarification.",
+      "status": "complete"
+    },
+    {
+      "id": "m3",
+      "role": "user",
+      "text": "Is the amount 13 GBP?",
+      "status": "complete"
+    },
+    {
+      "id": "m4",
+      "role": "assistant",
+      "text": "The recorded amount remains unchanged; this is a question.\n\nNext: Question 1 of 3: Is contact continuing? You can answer, ask about the case, say you do not know, skip, or end clarification.",
+      "status": "complete"
+    },
+    {
+      "id": "m5",
+      "role": "user",
+      "text": "The correct amount is 19 GBP, not 86.",
+      "status": "complete"
+    },
+    {
+      "id": "m6",
+      "role": "assistant",
+      "text": "The amount is corrected to the amount you explicitly supplied.\n\nNext: Question 1 of 3: Is contact continuing? You can answer, ask about the case, say you do not know, skip, or end clarification.",
+      "status": "complete"
+    },
+    {
+      "id": "m7",
+      "role": "user",
+      "text": "I cannot confirm whether the amount is exact.",
+      "status": "complete"
+    },
+    {
+      "id": "m8",
+      "role": "assistant",
+      "text": "The current record is preserved.\n\nNext: Question 1 of 3: Is contact continuing? You can answer, ask about the case, say you do not know, skip, or end clarification.",
+      "status": "complete"
+    },
+    {
+      "id": "m9",
+      "role": "user",
+      "text": "1: No further contact; 2: Pending; 3: I do not know.",
+      "status": "complete"
+    },
+    {
+      "id": "m10",
+      "role": "assistant",
+      "text": "The first two answers are recorded and the third remains unknown.\n\nNext: you can add or correct information, view guidance, or generate materials.",
+      "status": "complete"
+    },
+    {
+      "id": "m11",
+      "role": "user",
+      "text": "The message was deleted.",
+      "status": "complete"
+    },
+    {
+      "id": "m13",
+      "role": "assistant",
+      "text": "The current record is preserved.\n\nNext: you can add or correct information, view guidance, or generate materials.",
+      "status": "complete"
+    },
+    {
+      "id": "m14",
+      "role": "user",
+      "text": "Generate materials",
+      "status": "complete"
+    },
+    {
+      "id": "m15",
+      "role": "assistant",
+      "text": "The current record is preserved.\n\nNext: review and edit the drafts on the left, then Confirm materials to enable copy or download.",
+      "status": "complete"
+    },
+    {
+      "id": "m16",
+      "role": "user",
+      "text": "Generate materials",
+      "status": "complete"
+    },
+    {
+      "id": "m17",
+      "role": "assistant",
+      "text": "The current record is preserved.\n\nNext: review and edit the drafts on the left, then Confirm materials to enable copy or download.",
+      "status": "complete"
+    }
+  ],
+  "messageSeq": 18
+}

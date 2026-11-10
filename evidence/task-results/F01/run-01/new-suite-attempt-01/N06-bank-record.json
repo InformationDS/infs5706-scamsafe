@@ -1,0 +1,242 @@
+{
+  "role": {
+    "id": "bank",
+    "title": "Bank intake officer",
+    "responsibilities": "Understand reported account, payment and credential concerns. Prepare a local summary and only the handovers supported by the report. Do not freeze an account or promise a refund."
+  },
+  "phase": "open",
+  "facts": [
+    {
+      "key": "contactChannel",
+      "label": "Contact channel",
+      "group": "event",
+      "value": "Paper letter",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "paper letter",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "contactTime",
+      "label": "Contact time",
+      "group": "event",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "claimedIdentity",
+      "label": "Claimed identity",
+      "group": "event",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "reportedAction",
+      "label": "Reported action",
+      "group": "event",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "amount",
+      "label": "Reported amount",
+      "group": "money",
+      "value": "120",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "120",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "currency",
+      "label": "Currency",
+      "group": "money",
+      "value": "EUR",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "EUR",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "transactionStatus",
+      "label": "Transaction status",
+      "group": "money",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "involvedOrganisation",
+      "label": "Organisation involved",
+      "group": "money",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "sharedInformation",
+      "label": "Information shared",
+      "group": "account",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "affectedService",
+      "label": "Affected service",
+      "group": "account",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "observedIssue",
+      "label": "Observed issue",
+      "group": "account",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "stillInContact",
+      "label": "Still in contact",
+      "group": "current",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "actionsTaken",
+      "label": "Actions already taken",
+      "group": "current",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "organisationsContacted",
+      "label": "Organisations already contacted",
+      "group": "current",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "evidenceAvailable",
+      "label": "Evidence the person can provide",
+      "group": "support",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "urgencyCue",
+      "label": "Urgency cue",
+      "group": "support",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "vulnerabilityCue",
+      "label": "Vulnerability or support need",
+      "group": "support",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    }
+  ],
+  "questions": [],
+  "questionsEnded": false,
+  "types": [
+    {
+      "label": "Other",
+      "reason": "This candidate reflects the reported description and remains unverified.",
+      "evidence": "unusual case"
+    }
+  ],
+  "attention": [],
+  "recommendations": [],
+  "materials": {
+    "status": "draft",
+    "employeeEdited": false,
+    "summary": "FICTIONAL COURSE CASE\nReceiving role: Bank intake officer\n\nCASE SUMMARY\nThe person described the reported concern. The facts and gaps below remain for human review.\n\nCANDIDATE TYPES\n- Other: This candidate reflects the reported description and remains unverified.\n\nREPORTED FACTS\n- Contact channel: Paper letter\n- Reported amount: 120\n- Currency: EUR\n\nCLARIFIED INFORMATION\n- No additional information was clarified.\n\nREMAINING GAPS\n- No remaining gaps were recorded.\n\nNEXT STEP\n- No next step was suggested.\n\nBasis: fictional no guideline recorded.\nLocal draft only. No action or referral has been completed.",
+    "personExplanation": "EXPLANATION FOR THE AFFECTED PERSON\n\nThank you for telling us what happened.\n\nYou described a concern and we recorded your report without claiming it is verified.\n\nRecorded amount: 120.\nRecorded currency: EUR.\n\nWhat you can do next:\n- You can review the recorded information with a human reviewer.\n\nSupport: You can ask someone you trust to support you.",
+    "handover": null
+  },
+  "messages": [
+    {
+      "id": "m1",
+      "role": "user",
+      "text": "For this fictional unusual case I received a paper letter and reported an account-related debit of 120 EUR. There is no suitable demonstration guideline for the described situation; preserve a factual summary and ask for human judgement.",
+      "status": "complete"
+    },
+    {
+      "id": "m2",
+      "role": "assistant",
+      "text": "Your report has been recorded for human assessment.\n\nNext: review the case facts, view guidance, or generate materials.",
+      "status": "complete"
+    },
+    {
+      "id": "m3",
+      "role": "user",
+      "text": "Generate materials",
+      "status": "complete"
+    },
+    {
+      "id": "m4",
+      "role": "assistant",
+      "text": "The current record is preserved.\n\nNext: review and edit the drafts on the left, then Confirm materials to enable copy or download.",
+      "status": "complete"
+    }
+  ],
+  "messageSeq": 5
+}

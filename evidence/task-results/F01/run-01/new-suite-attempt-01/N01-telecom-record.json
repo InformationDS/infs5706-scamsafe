@@ -1,0 +1,252 @@
+{
+  "role": {
+    "id": "telecom",
+    "title": "Telecom intake officer",
+    "responsibilities": "Understand reported suspicious calls or messages. Prepare a local summary and a bank handover only when the report includes an account or payment concern. Do not change a phone service or assume the provider sent the message."
+  },
+  "phase": "open",
+  "facts": [
+    {
+      "key": "contactChannel",
+      "label": "Contact channel",
+      "group": "event",
+      "value": "Email",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "emailed",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "contactTime",
+      "label": "Contact time",
+      "group": "event",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "claimedIdentity",
+      "label": "Claimed identity",
+      "group": "event",
+      "value": "A fictional supplier",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "fictional supplier",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "reportedAction",
+      "label": "Reported action",
+      "group": "event",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "amount",
+      "label": "Reported amount",
+      "group": "money",
+      "value": "4350",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "4350",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "currency",
+      "label": "Currency",
+      "group": "money",
+      "value": "NZD",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "NZD",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "transactionStatus",
+      "label": "Transaction status",
+      "group": "money",
+      "value": "Pending",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "pending",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "involvedOrganisation",
+      "label": "Organisation involved",
+      "group": "money",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "sharedInformation",
+      "label": "Information shared",
+      "group": "account",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "affectedService",
+      "label": "Affected service",
+      "group": "account",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "observedIssue",
+      "label": "Observed issue",
+      "group": "account",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "stillInContact",
+      "label": "Still in contact",
+      "group": "current",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "actionsTaken",
+      "label": "Actions already taken",
+      "group": "current",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "organisationsContacted",
+      "label": "Organisations already contacted",
+      "group": "current",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "evidenceAvailable",
+      "label": "Evidence the person can provide",
+      "group": "support",
+      "value": "Email copy",
+      "status": "known",
+      "uncertainty": null,
+      "evidence": "kept the email",
+      "origin": "narrative",
+      "pendingConflict": null
+    },
+    {
+      "key": "urgencyCue",
+      "label": "Urgency cue",
+      "group": "support",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    },
+    {
+      "key": "vulnerabilityCue",
+      "label": "Vulnerability or support need",
+      "group": "support",
+      "value": null,
+      "status": "unset",
+      "uncertainty": null,
+      "evidence": null,
+      "origin": "unset",
+      "pendingConflict": null
+    }
+  ],
+  "questions": [],
+  "questionsEnded": false,
+  "types": [
+    {
+      "label": "Suspected payment redirection",
+      "reason": "This candidate reflects the reported description and remains unverified.",
+      "evidence": "changed account details"
+    }
+  ],
+  "attention": [],
+  "recommendations": [
+    {
+      "id": "R1",
+      "guidelineId": "DEMO-G04",
+      "organisation": "SYN Bank A",
+      "priority": "now",
+      "audience": "other-organisation",
+      "action": "Ask a human reviewer to assess the reported concern within the receiving team remit.",
+      "reason": "The stated facts require human judgement before any action."
+    }
+  ],
+  "materials": {
+    "status": "draft",
+    "employeeEdited": false,
+    "summary": "FICTIONAL COURSE CASE\nReceiving role: Telecom intake officer\n\nCASE SUMMARY\nThe person described the reported concern. The facts and gaps below remain for human review.\n\nCANDIDATE TYPES\n- Suspected payment redirection: This candidate reflects the reported description and remains unverified.\n\nREPORTED FACTS\n- Contact channel: Email\n- Claimed identity: A fictional supplier\n- Reported amount: 4350\n- Currency: NZD\n- Transaction status: Pending\n- Evidence the person can provide: Email copy\n\nCLARIFIED INFORMATION\n- No additional information was clarified.\n\nREMAINING GAPS\n- No remaining gaps were recorded.\n\nNEXT STEP\n- Ask a human reviewer to assess the reported concern within the receiving team remit. (SYN Bank A; now)\n\nBasis: fictional DEMO-G04.\nLocal draft only. No action or referral has been completed.",
+    "personExplanation": "EXPLANATION FOR THE AFFECTED PERSON\n\nThank you for telling us what happened.\n\nYou described a concern and we recorded your report without claiming it is verified.\n\nRecorded amount: 4350.\nRecorded currency: NZD.\nRecorded transaction status: Pending.\n\nWhat you can do next:\n- You can review the recorded information with a human reviewer.\n\nSupport: You can ask someone you trust to support you.",
+    "handover": "HANDOVER DRAFT\nRecipient: SYN Bank A intake team\n\nREPORTED FACTS\n- Contact channel: Email\n- Claimed identity: A fictional supplier\n- Reported amount: 4350\n- Currency: NZD\n- Transaction status: Pending\n- Evidence the person can provide: Email copy\n\nReason: The receiving team can assess the relevant reported concern.\nRequest: Please review the relevant facts and confirm whether further assessment is appropriate.\n\nBasis: fictional DEMO-G01.\n\nLocal draft only. No action or referral has been completed."
+  },
+  "messages": [
+    {
+      "id": "m1",
+      "role": "user",
+      "text": "A fictional supplier emailed changed account details. I paid 4350 NZD and the transfer is pending. There was no text message or phone call. I kept the email.",
+      "status": "complete"
+    },
+    {
+      "id": "m2",
+      "role": "assistant",
+      "text": "Your report has been recorded for human assessment.\n\nNext: review the case facts, view guidance, or generate materials.",
+      "status": "complete"
+    },
+    {
+      "id": "m3",
+      "role": "user",
+      "text": "Generate materials",
+      "status": "complete"
+    },
+    {
+      "id": "m4",
+      "role": "assistant",
+      "text": "The current record is preserved.\n\nNext: review and edit the drafts on the left, then Confirm materials to enable copy or download.",
+      "status": "complete"
+    }
+  ],
+  "messageSeq": 5
+}
