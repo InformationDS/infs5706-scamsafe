@@ -1,41 +1,7 @@
-# 成员文件交付步骤
+# Contributing to the final course prototype
 
-当前采用文件交A。任务从[任务入口](docs/project/TASKS.md)进入，责任见[团队规则](docs/project/TEAM_EXECUTION.md)。成员不自行提交、推送、建PR或部署。
+The active branch is `refactor/full-rebuild`. Historical branches remain on GitHub. Check the current branch and local changes before editing, preserve existing contributions, and keep shared case contracts consistent.
 
-## A发放工作包
+Follow the current user-authorised scope. Describe changed behaviour, verification and remaining limitations in commits or pull requests. Credentials and local case history must not be committed. Install with `npm ci`; build with `npm run build`. Targeted course checks are `npx tsx --test tests/course-case.test.ts tests/course-turn.test.ts`. The optional browser suite uses a fake model, not live-model acceptance.
 
-1. 按[工作包清单](docs/project/WORK_PACKAGE.md)确认成员、系统、副本、允许范围及基线，提供完整副本。成员收到解压后回报实际绝对路径，再确认正式开工；不猜另一台电脑路径。
-2. 提供完整项目副本及锁文件，排除node_modules、dist、.env、local和机器缓存。不要只给尚未发布新增文件的远端链接。
-3. A01实际验证四模块独立入口、模拟端口与固定输入后，同一批发给B/C/D/E；成员不等待其他模块实现。A02集成后再把实际完整流程说明及副本交F。未来入口未实现不写已就绪。
-4. 每个允许文件记录发放时SHA256；新建产物记“本卡创建”。A在PowerShell使用Get-FileHash -Algorithm SHA256 -LiteralPath并填实际路径，macOS使用shasum -a 256并填实际路径。哈希用于识别副本，不由成员解释技术影响。
-5. B/C/D/E各自独占模块路径和有作用域的样式，不改公共schema、主页面、全局CSS或package。A收齐后集中集成；后续缺陷回原卡集中修复，统一副本交F复测。
-
-## 成员执行
-
-1. 将卡交给agent，核对工作包字段。只读指定条款和文件，记录本机路径，不猜另一台电脑路径。
-2. 按RUNBOOK安装和启动；缺Node、缺文件、命令失败、基线不符或有未交接修改时，保留现场，把原始错误交A。
-3. 按卡内顺序修改允许范围，不自行安装额外依赖或扩大文件范围。
-4. 成员亲自观察各检查行，在任务卡唯一执行记录填写通过／失败／未执行及证据；不把agent生成文件当作本人观察。
-
-## 收集并交回
-
-让agent在当前副本的local/delivery/本卡编号/下整理：
-
-```text
-local/delivery/本卡编号/
-  MANIFEST.md
-  changed-files/       只放本卡改动，保留项目相对路径
-  evidence/            本卡截图、脱敏日志、导出文件
-```
-
-1. 对照A发放副本检查差异。有Git时可只读查看git diff，未跟踪文件也逐个列出；不能认为git diff覆盖所有新增文件。无Git基线时与发放副本比较，不自行初始化仓库。
-2. 将实际修改的允许文件复制到changed-files/，保留相对路径；包括更新后的本任务卡。不交完整项目覆盖包。
-3. 将evidence/task-results/本卡编号/中本次执行证据复制到evidence/，保留批次目录。密钥、.env、local中的其他文件、实际个人信息及缓存不交付。
-4. 按[清单模板](docs/project/DELIVERY_MANIFEST.md)填写MANIFEST.md。清单只索引文件、基线和唯一执行记录，不维护第二份状态。
-5. 成员按A实际指定的渠道人工交回，agent不自动对外发送。
-
-A接收后核对副本编号、基线及允许差异，逐项集成并检查。冲突由A处理；不整份替换项目。后续修复另建执行批次，保留首次失败。
-
-## 完成与验收
-
-任务实际状态只在指定卡或Issue记录，STATUS由A汇总。内容稿、代码修改、检查报告与产品通过分别判断。报告真实完整可被接收，其中的产品失败仍待修复。A检查技术，F按固定步骤独立观察。
+The README records the team's original allocation and collaboration practice. Superseded task cards and prior working procedures can be recovered from the archive branches listed there.

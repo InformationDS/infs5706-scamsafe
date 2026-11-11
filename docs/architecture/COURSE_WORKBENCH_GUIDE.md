@@ -51,7 +51,7 @@ npm run dev
 
 ### 2.2 通过根目录 `.env` 配置（可选）
 
-在仓库根目录的 `.env`（已被 Git 忽略）中设置：
+在仓库根目录的 `.env`（已被 Git 忽略；新克隆可参考 `.env.example`）中设置：
 
 ```text
 MODEL_MODE=live
@@ -310,7 +310,7 @@ npx tsx tests/course-browser.ts
 
 ## 7. 已知限制
 
-已确认的机构边界问题及当前未修复决定见[课程原型已知问题记录](../project/COURSE_KNOWN_ISSUES.md)。其中 F01-001 是电信纯骚扰电话被错误生成银行交接，F01-002 是无交接依据时的降级行为；演示时不得把它们当作通过项。
+已确认的机构边界问题及当前未修复决定见[课程原型已知问题记录](../project/COURSE_KNOWN_ISSUES.md)。其中 F01-001 是电信纯骚扰电话被错误生成银行交接，F01-002（无交接依据时的降级行为）与 F01-003 已于 2026-11-11 修复并有回归测试；F01-001 仍为 Open，不得标记为通过。
 
 - 中文输入没有被完整验收；PRD 仍写着输入支持中英文，界面和材料使用英文。
 - 电信角色的真实模型案例尚未单独验收；目前规则和 fake-model 检查覆盖电信角色。
@@ -324,7 +324,7 @@ npx tsx tests/course-browser.ts
 
 - [产品需求 PRD](../product/PRD.md)
 - [课程原型实施方案与批次](../project/COURSE_PROTOTYPE_IMPLEMENTATION_PLAN.md)
-- [本地运行说明](RUNBOOK.md)
+- [本地运行说明](../../README.md)
 - [课程页面组件](../../app/src/course/CourseWorkbench.tsx)
 - [课程页面样式](../../app/src/course/course.css)
 - [课程对话提示词](../../server/prompts/course-turn.txt)

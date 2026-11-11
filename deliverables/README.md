@@ -1,17 +1,10 @@
-# 演示与提交材料
+# Demonstration materials
 
-## 六人展示 HTML
+## Current videos — 12 November 2026
 
-- [ScamSafe 六人展示中文版](presentation/ScamSafe_六人展示_中文版.html)，包含配套截图，并引用本目录已收录的英文 AI 配音无字幕视频。完整下载仓库后，可用浏览器打开 HTML 展示。
+- `demo-video-20261112-70s/`: 70-second English prototype demonstration, with and without subtitles, plus SRT.
+- `demo-video-20261112-presentation/`: conversational English presentation videos, narration text and SRT.
+- `presentation/`: Chinese six-person HTML presentation and screenshots.
+- `demo-video-20261110/`: earlier finished demo versions retained because the HTML presentation links to them.
 
-## 演示视频（2026-11-10）
-
-- [英文字幕版](demo-video-20261110/ScamSafe_Prototype_Demo_English.mp4)，对应[字幕文件](demo-video-20261110/ScamSafe_English_Subtitles.srt)。
-- [英文 AI 配音及字幕版](demo-video-20261110/ScamSafe_Prototype_Demo_English_AI_Voice.mp4)，对应[字幕文件](demo-video-20261110/ScamSafe_English_AI_Voice_Subtitles.srt)。
-- [英文 AI 配音无字幕版](demo-video-20261110/ScamSafe_Prototype_Demo_English_AI_Voice_No_Subtitles.mp4)。
-
-三个成片版本分别保留，试音文件已清理。制作脚本和原始录像保存在本机 `local/demo-video-20261110/`。
-
-## 提交范围
-
-作业需要 PPT／PPTX、60–90 秒 MP4／MOV 演示，以及教师可访问的原型链接或构建材料；以原始作业指南为依据。此索引列出已有视频，完整提交包的齐备性与原型链接可访问性仍需另行核对。构建材料应能说明代码、提示、指引和配置版本。
+The assignment requires a PPT/PPTX, a separate 60–90-second prototype video, and a working link or construction-material export. The presence of these files alone does not establish that all submission requirements are met. Video production inputs are preserved on GitHub in `archive/development-assets-20261112`, under `archived-local/integration/demo-video-20261110/`. Reinstallable speech-tool dependencies are excluded.

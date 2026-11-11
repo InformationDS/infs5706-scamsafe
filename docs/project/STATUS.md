@@ -1,31 +1,36 @@
-# 当前集成状态
+# Current final-project status
 
-维护人：A。2026-11-05在integration/test-fixes合并E01/13ed32d并完成主页面、编辑保护及来源交接适配，B/C/D/E共用同一案件。A02技术整合及两条合成流程自动检查已完成，F01/F02独立检查及A03交付待执行。操作见[原型说明](../architecture/PROTOTYPE_RUNBOOK.md)，证据和来源见[集成记录](INTEGRATION_TEST_FIXES.md)，模块动态结果仍记对应卡。
+Updated: 12 November 2026 (Sydney). Active branch: `refactor/full-rebuild`. This replaces the older integration/test-fixes status summary; earlier records remain in Git history and the archive branches below.
 
-最终检查于2026-11-06收尾，完整89项及主页面流程以2026-11-05/run-07批次为准，先前失败和复测批次保留。
+## Current application
 
-## 实际已有基础
+Run `npm ci`, then `npm run dev`, and open `http://127.0.0.1:5173/?view=course`. For a built local run, use `npm run build`, `npm start`, and `http://127.0.0.1:4310/?view=course`. The root URL retains the older integrated interface and model settings.
 
-Windows/macOS本地技术基础、MiMo OpenAI兼容配置入口、IndexedDB与JSON备份、文件交A已获确认。现有页面、本地服务、Zod结构、十个固定模拟状态、单例保存恢复、模型适配器、模拟审核及基础输出已建立；根目录npm run dev，或npm run build后npm start。操作见[RUNBOOK](../architecture/RUNBOOK.md)，既有实际结果见[验证证据](../../evidence/preparation/README.md)。
+The course page supports bank and telecom roles, live-model case analysis, grouped editable facts, clarification, guidance and reviewed Markdown materials. It keeps one case in memory; refresh recovery, course-page history, PDF export, real institutional actions and production deployment are outside its current scope. Older routes retain storage and PDF components; their presence does not add those capabilities to the course page.
 
-本轮有限合成岗位、两个接收方、EX-G01–03 v1、T09／EXAMPLE-01输入及参考预期已获内容批准，实际配置在data/business/，GET /api/business提供读取，npm run check:business检查结构、哈希及引用。来源快照和pending负向数据不是当前批准登记。
+Local `.env` configuration is retained and excluded from GitHub. Fresh clones can use `.env.example` or the application settings to configure their own provider. The key supplied separately for assessment expires at the end of November 2026, as stated by the project owner; provider-side expiry was not independently verified.
 
-根页面已接通B输入／更正／补问、C分析、D建议决定、E摘要／草稿／最终审核／复制／双格式输出，复用A01存储。最新89项检查通过，启用全部四模块实际浏览器，0跳过；主页面5组完整流程、原宿主7组及outputs公共11组通过。E压力验证4份PDF共17页完成渲染观察，168个HTML文本块提取完整，同版本重试渲染一致。训练首次核对保留simulated=true；自动化最终审核使用明确测试标识，实际人类验收另记。
+## Known limitations and checks
 
-## 尚未实现
+- F01-001 remains open: generic telecom nuisance-call facts can select an unsupported bank handover recipient when otherwise valid handover fields exist.
+- F01-002 and F01-003 have committed fixes and regression tests on this branch.
+- Cleanup verification: all 53 tests in `tests/course-case.test.ts` passed; `npm run build` passed; the repository document/source-preservation check passed with 184 Markdown documents and 471 local links before the status refresh.
+- Earlier verification of the same application source in the assessment copy passed 60 course case/turn tests with a local fake provider. Those results do not constitute live-model or human acceptance.
+- The cleanup does not call the supplied live provider. Complete Chinese-input, dual-role live-model and formal human acceptance remain unverified.
 
-当前可开展合成T09和无指引完整流程人工测试。真实模型自由叙述效果、F独立验收、完整15例、macOS与第二电脑待验证。D仍限唯一批准岗位和三条教学指引，跨指引版本迁移待实现；PDF复杂扩展语法和极高单表格行未验证。公共接口及工作编辑保护见[模块契约](../architecture/MODULE_CONTRACTS.md)。
+## Preservation and local organisation
 
-## 当前分工与下一步
+The final project stays at `GroupAssignment-integration`. Historical branches are saved on GitHub under their original names. The November 4 review files were committed to `codex/d01-integration-review`, and the ahead documentation commit was pushed to `docs/team-execution-rules`.
 
-1. 当前用户授权先整合可用部分，不因B/E缺失等待；已保留C/D原提交，原main及工作目录未变。
-2. 四模块已接入，按原型操作说明进行人工测试，再由F01记录独立问题。
-3. 修复后集中交F02复测，再进行A03交付。
+| Preservation branch | Contents |
+|---|---|
+| `archive/full-rebuild-before-cleanup-20261112` | Complete pre-cleanup snapshot, including original Chinese documents and evidence. |
+| `archive/development-assets-20261112` | 263 source/material files: raw video, production scripts, audio/subtitle assets, documentation scripts and synthetic test probes/logs. Reinstallable speech-tool dependencies are excluded. |
+| `archive/workbench-before-rollback-20261106` | Tracked state from the historical rollback stash. |
+| `archive/workbench-untracked-20261106` | Companion untracked files from that stash. |
 
-团队两台Windows、四台macOS，成员映射由A后续确认，不要求截止日期。成员接收副本后记录本机路径；不把所有电脑验证、完整十五例或协作审计作为首个原型集成的前置。未验证项目如实说明，不声称全部PRD通过。
+Local consolidation retains only the final branch checkout and removes the old main/review working copies after remote preservation is confirmed. Disposable items include reinstallable dependency caches, generated temporary business-check copies and remotely archived production scratch files. The final `.env` and installed application dependencies are retained for local use.
 
-## 产品约定
+Historical specifications, evidence and mock-ups remain as references, rather than current product scope or a task queue. This avoids discarding potentially relevant records. `docs/README.md` identifies current documentation. Course folders, the individual assignment, separate presentation materials and the existing assessment package are outside the cleanup scope.
 
-PRD为行为依据，字段字典为语义依据。人工编辑采用保留原内容、Employee edited及重审；风险提示只用有限合成依据、不评分；未保存新建／切换采用保存后继续、放弃后继续、取消，保存失败留原案。这些目标规则未因本轮分工调整自动实现。导入未保存内容的组合规则未定时，不开放覆盖操作，仍需先确定产品规则。
-
-当前会话已授权fetch、独立worktree、集成、本地提交及测试分支推送。实际人类和F验收结果按任务记录补充。
+The separate assessment ZIP, checksum and manifest have not been regenerated. Its README was revised separately, so its existing manifest is not a current checksum of that edited folder.
