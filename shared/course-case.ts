@@ -897,18 +897,40 @@ function composePersonExplanation(
   return lines.join('\n');
 }
 
+type HandoverBasis = {
+  guidelineId: GuidelineId;
+  reason: string;
+  request: string;
+};
+
+/**
+ * A handover needs a complete, model-supplied basis. The program decides the
+ * recipient from the facts, but it never invents a reason, a request or a
+ * guideline for that recipient.
+ */
+function handoverBasis(
+  pieces: NonNullable<TurnProposal['materials']>,
+): HandoverBasis | null {
+  const guidelineId =
+    typeof pieces.handoverGuidelineId === 'string' ? pieces.handoverGuidelineId.trim() : '';
+  const reason = pieces.handoverReason?.trim() ?? '';
+  const request = pieces.handoverRequest?.trim() ?? '';
+  if (!guidelineId || !reason || !request) return null;
+  if (!(GUIDELINE_IDS as readonly string[]).includes(guidelineId)) return null;
+  return { guidelineId: guidelineId as GuidelineId, reason, request };
+}
+
 function composeHandover(
   courseCase: CourseCase,
   pieces: NonNullable<TurnProposal['materials']>,
   recipient: 'bank' | 'telecom' | null,
 ): string | null {
   if (recipient === null) return null;
+  const basis = handoverBasis(pieces);
+  if (basis === null) return null;
   const team =
     recipient === 'telecom' ? 'SYN Telecom B intake team' : 'SYN Bank A intake team';
-  const reason =
-    pieces.handoverReason && !/\d/.test(pieces.handoverReason)
-      ? pieces.handoverReason
-      : GENERIC_HANDOVER_REASON;
+  const reason = /\d/.test(basis.reason) ? GENERIC_HANDOVER_REASON : basis.reason;
   const factLines = materialFactLines(courseCase);
   const lines = [
     'HANDOVER DRAFT',
@@ -918,11 +940,10 @@ function composeHandover(
     ...(factLines.length > 0 ? factLines : ['- No facts were recorded.']),
     '',
     `Reason: ${reason}`,
+    `Request: ${basis.request}`,
+    '',
+    `Basis: fictional ${basis.guidelineId}.`,
   ];
-  if (pieces.handoverRequest) lines.push(`Request: ${pieces.handoverRequest}`);
-  if (pieces.handoverGuidelineId) {
-    lines.push('', `Basis: fictional ${pieces.handoverGuidelineId}.`);
-  }
   lines.push('', 'Local draft only. No action or referral has been completed.');
   return lines.join('\n');
 }
@@ -1111,6 +1132,7 @@ export function applyCourseProposal(
     isMessage &&
     !keepsAnalysis &&
     !isControlIntent &&
+    !next.questionsEnded &&
     next.questions.length === 0 &&
     proposal.proposedQuestions.length > 0
   ) {

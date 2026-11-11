@@ -1,0 +1,15 @@
+Let's see how a bank employee handles this fictional report of a suspicious text and an unfamiliar debit.
+
+Once we submit it, the AI organises the facts, suggests phishing, and asks three focused questions.
+
+Notice the transaction status is unknown. We can select “Don’t know” and continue, keeping that gap visible.
+
+Next, let's review the guidance and its fictional source. The account concern still needs human judgement.
+
+Now we can generate a case summary, bringing together the report and the remaining gaps.
+
+We also get a plain-language explanation to help the affected person understand the suggested next steps.
+
+The telecom handover focuses on the suspicious message. We can review and edit the drafts before confirming.
+
+Finally, we confirm and download the materials. The employee decides what happens next through existing organisational processes.

@@ -50,7 +50,7 @@ contactChannel, contactTime, claimedIdentity, reportedAction, amount, currency, 
 - Do not copy a password, a verification code or another secret verbatim into a fact. Record only the category of information, for example `sharedInformation` = "banking password and one-time code".
 
 ## Understanding the latest text (`understoodAs`)
-- `initial-report`: the first description of what happened. Return arrays for `types`, `attention` and `recommendations` (not null) and up to three `proposedQuestions` numbered Q1, Q2, Q3 in order if the case has no questions.
+- `initial-report`: the first description of what happened. Return arrays for `types`, `attention` and `recommendations` (not null) and up to three `proposedQuestions` numbered Q1, Q2, Q3 in order if the case has no questions and `questionProgress.ended` is false.
 - `answer`: the latest text answers the pending question.
 - `multi-answer`: the latest text answers several current questions at once.
 - `query`: the latest text asks about the saved case without adding or correcting information. Return `factChanges` and `questionUpdates` empty, and `types`, `attention`, `recommendations` all null.
@@ -68,7 +68,8 @@ contactChannel, contactTime, claimedIdentity, reportedAction, amount, currency, 
 - "Not sure" or "I do not know" is `unknown`, never a negative fact value.
 - If you mark a current question `unknown`, `skipped` or `not-applicable`, do not also record a known value for any of that question's `relatedKeys` in the same turn. Keep the existing value or record an uncertainty instead.
 - `paid` alone does not mean the transaction status is completed. If item 3 already reports `Pending`, keep the transaction status `Pending`.
-- Only propose new questions when the input has no questions and `purpose` is "message". Number them from Q1 in order and keep each question short and about one fact.
+- Only propose new questions when the input has no questions, `questionProgress.ended` is false and `purpose` is "message". Number them from Q1 in order and keep each question short and about one fact.
+- When `questionProgress.ended` is true, `proposedQuestions` must be empty and you must not restart clarification. If new questions are needed, a new round must be started explicitly; this prototype does not reopen a round automatically.
 - If the person asks to skip or end, do not also answer questions.
 
 ## Analysis fields for a message turn
@@ -93,7 +94,7 @@ The program builds the drafts when `purpose` is "generate". In that turn:
 - `summaryNarrative` is a short qualitative sentence. Do not repeat amounts or numbers there; the program adds the recorded facts.
 - `personWhatHappened` and every `personNextSteps` entry are written for the affected person, using "you". This is the only part of the output that addresses the affected person as "you"; do not use that voice in `reply`. Do not write instructions for staff, and never start a step with "ask", "tell", "record" or "instruct".
 - `personSupport` is null when no support sentence is needed.
-- `handoverReason`, `handoverRequest` and `handoverGuidelineId` are null when the case does not support a handover. For a payment email with no SMS or phone call, `handoverReason` is null and there is no telecom handover.
+- `handoverReason`, `handoverRequest` and `handoverGuidelineId` are null when the case does not support a handover. Provide all three together or leave all three null; the program creates a handover only when all three are present and the guideline id is one of the supplied guidelines. For a payment email with no SMS or phone call, `handoverReason` is null and there is no telecom handover.
 - Never write "Unknown Unknown" and never state a fact value that is not in the case.
 
 ## Example of the returned shape

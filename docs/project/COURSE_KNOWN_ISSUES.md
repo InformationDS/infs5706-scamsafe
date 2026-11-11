@@ -1,6 +1,6 @@
 # 课程原型已知问题记录
 
-本文件记录已确认但当前**不实施修复**的课程原型问题，目的是保留事实、影响范围、教学用法和生产化修复建议。这里的问题不等同于已通过项。
+本文件记录课程原型中已确认的问题及处理状态。F01-001 当前**不实施修复**，保留为教学案例；F01-002 与 F01-003 已在 2026-11-11 修复。记录保留原始事实、影响范围、证据和生产化建议。
 
 ## F01-001 · 电信纯骚扰电话被错误生成银行交接
 
@@ -87,13 +87,14 @@ observedIssue = Repeated nuisance calls
   - 通过 `composeMaterials` 验证无 `Handover`。
 - 同步更新实施方案中的交接资格说明。
 
-## F01-002 · 无建议/无交接依据时仍生成交接稿
+## F01-002 · 无建议/无交接依据时仍生成交接稿（已修复 2026-11-11）
 
 | 字段 | 内容 |
 |---|---|
-| 状态 | **Open / 待产品确认，本轮不修复** |
+| 状态 | **Fixed / 2026-11-11（保守规则）** |
 | 优先级 | P2（稳健性/产品规则） |
 | 首次记录 | 2026-11-10 |
+| 修复文件 | `shared/course-case.ts`、`tests/course-case.test.ts`、`server/prompts/course-turn.txt` |
 | 相关角色 | Telecom（N06 电信案例） |
 
 ### 问题描述
@@ -120,18 +121,54 @@ handoverGuidelineId = null
 - [N06 案例记录](../../evidence/task-results/F01/run-01/new-suite-attempt-01/N06-telecom-record.json)
 - [最小 HTTP 复现结果](../../evidence/task-results/F01/run-01/boundary-replay-result.json)
 
-### 建议方案（待确认）
+### 修复（2026-11-11）
 
-保守方案：`composeHandover` 仅在 `handoverGuidelineId`、`handoverReason`、`handoverRequest` 均非空且指引适用时生成交接；否则 `handover = null`，保留摘要和当事人说明，不生成可导出的机构稿。删除无依据的通用理由兜底。
+采用保守方案：
 
-若产品希望允许程序降级补全，必须显示无模型依据的明确警告，并禁止直接确认/导出；但这需要单独的产品决定，不能默认为通过。
+- `composeHandover` 仅在以下三项同时有效时生成交接稿：`handoverGuidelineId` 为受支持的指引编号、`handoverReason` 非空、`handoverRequest` 非空（后两者 trim 后判断）。任一缺失、空白或指引编号无效时 `handover = null`，即使 `handoverRecipient` 返回 `bank`/`telecom`。
+- 删除“`handoverReason` 为 null 时自动补通用理由”的兜底；保留“依据有效且原因含数字时用程序通用句替换”的既有规则。
+- `handoverRecipient` 的 F01-001 行为未改变。
+- 提示词补充：三项交接依据必须同时给出，或同时为 null。
+- 回归测试：`a handover needs a guideline, a reason and a request from the model` 覆盖三项全 null、分别缺一项、空白字段、未知指引、三项有效（含 Basis）以及 generate/confirm 纯函数路径。
+
+## F01-003 · 追问结束后仍可被后续补充重新开启问题（已修复 2026-11-11）
+
+| 字段 | 内容 |
+|---|---|
+| 状态 | **Fixed / 2026-11-11** |
+| 优先级 | P2（状态一致性） |
+| 首次记录 | 2026-11-11 |
+| 修复文件 | `shared/course-case.ts`、`server/prompts/course-turn.txt`、`tests/course-case.test.ts` |
+| 相关角色 | Bank / Telecom |
+
+### 问题描述
+
+`questionsEnded = true` 后，用户再发送补充（`understoodAs = supplement`）且模型返回 `proposedQuestions` 时，程序仍接受 Q1..Q3 并把它们设为 pending，已经结束的追问被重新开启。问题轮结束时若原有问题仍保留，也会出现“已结束但仍新增问题”的状态不一致。
+
+### 根因
+
+`applyCourseProposal` 接受 `proposedQuestions` 的条件只检查 `next.questions.length === 0`，未检查 `next.questionsEnded`。提示词也只写“输入没有问题”时才提议新问题，未约束 `questionProgress.ended`。
+
+### 修复
+
+- `applyCourseProposal` 增加 `!next.questionsEnded` 条件：追问结束后忽略后续补充中的 `proposedQuestions`，保持 `questions` 与 `questionsEnded` 不变，不产生 Q1/pending。
+- 提示词 `course-turn.txt` 增加状态约束：`questionProgress.ended` 为 true 时 `proposedQuestions` 必须为空，不重新开启追问；如需新问题必须明确开始新一轮，本原型不自动重开。
+- 回归测试：
+  - 零问题并结束追问后提交带 `proposedQuestions` 的 supplement → `questions` 仍为空、`questionsEnded` 仍为 true；
+  - 已有问题轮结束后不新增问题（对照）；
+  - 正常新案仍可接受 Q1..Q3。
+
+### 证据
+
+- 代码复核：`shared/course-case.ts` 的 `applyCourseProposal` 问题接受分支。
+- 回归测试：`tests/course-case.test.ts` 中 `ending clarification with no questions is not reopened by a supplement`、`a supplement after an ended question round adds no new questions`、`a new case still accepts Q1 to Q3 from an initial report`。
 
 ## 范围与验收声明
 
-- 上述问题保留失败证据，不把失败改绿。
-- 本记录不修改 PRD、程序、提示词或模型配置。
-- F01-001/F01-002 存在时，双角色机构边界与完整 PRD 不能标记为全部通过。
-- 真实模型、中文理解和正式人类 F 验收仍未执行；fake provider 结果只证明给定响应下的程序行为。
+- F01-001 保留失败证据，不把失败改绿，仍为 Open。
+- F01-002、F01-003 已修复并有回归测试；本次修复只改 `shared/course-case.ts`、`server/prompts/course-turn.txt`、`tests/course-case.test.ts` 与本文档，未改 PRD、`data/course`、`server/src` 或 UI 行为。
+- F01-001 存在时，双角色机构边界与完整 PRD 不能标记为全部通过。
+- 真实模型、中文理解和正式人类 F 验收仍未执行；fake provider 与纯函数结果只证明给定响应下的程序行为。
 
 ## 相关记录
 

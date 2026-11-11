@@ -27,6 +27,7 @@ import {
   type CourseQuestion,
   type CourseRecommendation,
   type FactKey,
+  type GuidelineId,
   type TurnProposal,
 } from '../shared/course-case';
 
@@ -1127,6 +1128,138 @@ test('proposed questions must start at Q1 and are ignored once questions exist',
   assert.equal(result.questions[0].text, 'What was the amount?');
 });
 
+test('ending clarification with no questions is not reopened by a supplement', () => {
+  const base = openCase();
+  const ended = callProposal(
+    base,
+    makeMessageInput('End the questions.', {
+      understoodAs: 'end-request',
+      reply: 'Clarification ended.',
+    }),
+  );
+  assert.deepEqual(ended.questions, []);
+  assert.equal(ended.questionsEnded, true);
+
+  const result = callProposal(
+    ended,
+    makeMessageInput('One more thing: I also received a call.', {
+      understoodAs: 'supplement',
+      reply: 'The extra call was noted.',
+      proposedQuestions: [
+        {
+          id: 'Q1',
+          text: 'When did the call happen?',
+          purpose: 'Clarify the call time',
+          relatedKeys: ['contactTime'],
+        },
+        {
+          id: 'Q2',
+          text: 'What did the caller ask for?',
+          purpose: 'Clarify the caller request',
+          relatedKeys: ['reportedAction'],
+        },
+      ],
+    }),
+  );
+
+  assert.deepEqual(result.questions, []);
+  assert.equal(result.questionsEnded, true);
+  assert.doesNotMatch(result.messages[result.messages.length - 1].text, /I have \d+ questions/);
+});
+
+test('a supplement after an ended question round adds no new questions', () => {
+  const base = openCase();
+  base.questions.push(
+    pendingQuestion('Q1'),
+    pendingQuestion('Q2', 'Did the payment go through?', 'Clarify the payment'),
+  );
+  const ended = callClientAction(base, 'end');
+  assert.deepEqual(
+    ended.questions.map((question) => question.status),
+    ['skipped', 'skipped'],
+  );
+  assert.equal(ended.questionsEnded, true);
+
+  const result = callProposal(
+    ended,
+    makeMessageInput('I have more information about the payment.', {
+      understoodAs: 'supplement',
+      reply: 'The extra information was noted.',
+      proposedQuestions: [
+        {
+          id: 'Q1',
+          text: 'What amount was involved?',
+          purpose: 'Clarify the amount',
+          relatedKeys: ['amount'],
+        },
+        {
+          id: 'Q2',
+          text: 'Was the payment completed?',
+          purpose: 'Clarify the transaction status',
+          relatedKeys: ['transactionStatus'],
+        },
+        {
+          id: 'Q3',
+          text: 'Do you still have the message?',
+          purpose: 'Clarify the evidence',
+          relatedKeys: ['evidenceAvailable'],
+        },
+      ],
+    }),
+  );
+
+  assert.deepEqual(
+    result.questions.map((question) => [question.id, question.status]),
+    [
+      ['Q1', 'skipped'],
+      ['Q2', 'skipped'],
+    ],
+  );
+  assert.equal(result.questionsEnded, true);
+  assert.equal(result.questions.some((question) => question.status === 'pending'), false);
+});
+
+test('a new case still accepts Q1 to Q3 from an initial report', () => {
+  const result = callProposal(
+    createCourseCase('bank'),
+    makeMessageInput('A narrative about a message.', {
+      understoodAs: 'initial-report',
+      reply: 'The initial report was recorded.',
+      types: [],
+      attention: [],
+      recommendations: [],
+      proposedQuestions: [
+        {
+          id: 'Q1',
+          text: 'What amount was involved?',
+          purpose: 'Clarify the amount',
+          relatedKeys: ['amount'],
+        },
+        {
+          id: 'Q2',
+          text: 'Was the payment completed?',
+          purpose: 'Clarify the transaction status',
+          relatedKeys: ['transactionStatus'],
+        },
+        {
+          id: 'Q3',
+          text: 'Do you still have the message?',
+          purpose: 'Clarify the evidence',
+          relatedKeys: ['evidenceAvailable'],
+        },
+      ],
+    }),
+  );
+
+  assert.deepEqual(
+    result.questions.map((question) => question.id),
+    ['Q1', 'Q2', 'Q3'],
+  );
+  assert.ok(result.questions.every((question) => question.status === 'pending'));
+  assert.equal(result.questionsEnded, false);
+  assert.match(result.messages[1].text, /I have 3 questions/);
+});
+
 test('an initial report must supply all three analysis arrays', () => {
   const base = createCourseCase('bank');
   expectProposalContractError(
@@ -1697,12 +1830,17 @@ test('handoverRecipient only crosses a bank report to telecom and a telecom repo
   assert.equal(callHandoverRecipient(bankSms), 'telecom');
   const telecomHandover = callComposeMaterials(
     bankSms,
-    materialPieces({ handoverReason: 'The message asked for a one-time code.' }),
+    materialPieces({
+      handoverReason: 'The message asked for a one-time code.',
+      handoverRequest: 'Please check the reported message.',
+      handoverGuidelineId: 'DEMO-G02',
+    }),
   ).handover;
   assert.ok(telecomHandover);
   assert.match(telecomHandover, /^HANDOVER DRAFT/);
   assert.match(telecomHandover, /Recipient: SYN Telecom B intake team/);
   assert.match(telecomHandover, /Reason: The message asked for a one-time code\./);
+  assert.match(telecomHandover, /Basis: fictional DEMO-G02\./);
 
   const phoneOnlyBank = openCase();
   recordFact(phoneOnlyBank, 'contactChannel', 'Phone call');
@@ -1722,6 +1860,7 @@ test('handoverRecipient only crosses a bank report to telecom and a telecom repo
     materialPieces({
       handoverReason: 'The amount 2,000 AUD was reported.',
       handoverRequest: 'Please review the reported payment.',
+      handoverGuidelineId: 'DEMO-G01',
     }),
   ).handover;
   assert.ok(bankHandover);
@@ -1731,6 +1870,7 @@ test('handoverRecipient only crosses a bank report to telecom and a telecom repo
     /Please assess the reported concern within your organisation's responsibilities\./,
   );
   assert.doesNotMatch(bankHandover, /The amount 2,000 AUD was reported/);
+  assert.match(bankHandover, /Basis: fictional DEMO-G01\./);
 
   const noTelecomClue = createCourseCase('telecom');
   noTelecomClue.phase = 'open';
@@ -1772,6 +1912,94 @@ test('handoverRecipient only crosses a bank report to telecom and a telecom repo
     },
   ];
   assert.equal(callHandoverRecipient(bankClueOnly), null);
+});
+
+test('a handover needs a guideline, a reason and a request from the model', () => {
+  const telecomCase = phishingCase('telecom');
+  assert.equal(callHandoverRecipient(telecomCase), 'bank');
+
+  const allNull = callComposeMaterials(telecomCase, materialPieces()).handover;
+  assert.equal(allNull, null);
+
+  const missingGuideline = callComposeMaterials(
+    telecomCase,
+    materialPieces({
+      handoverReason: 'The report describes an unfamiliar debit.',
+      handoverRequest: 'Please review the reported payment.',
+    }),
+  ).handover;
+  assert.equal(missingGuideline, null);
+
+  const missingReason = callComposeMaterials(
+    telecomCase,
+    materialPieces({
+      handoverRequest: 'Please review the reported payment.',
+      handoverGuidelineId: 'DEMO-G01',
+    }),
+  ).handover;
+  assert.equal(missingReason, null);
+
+  const missingRequest = callComposeMaterials(
+    telecomCase,
+    materialPieces({
+      handoverReason: 'The report describes an unfamiliar debit.',
+      handoverGuidelineId: 'DEMO-G01',
+    }),
+  ).handover;
+  assert.equal(missingRequest, null);
+
+  const blankBasis = callComposeMaterials(
+    telecomCase,
+    materialPieces({
+      handoverReason: '   ',
+      handoverRequest: '   ',
+      handoverGuidelineId: '   ' as unknown as GuidelineId,
+    }),
+  ).handover;
+  assert.equal(blankBasis, null);
+
+  const unknownGuideline = callComposeMaterials(
+    telecomCase,
+    materialPieces({
+      handoverReason: 'The report describes an unfamiliar debit.',
+      handoverRequest: 'Please review the reported payment.',
+      handoverGuidelineId: 'DEMO-G99' as unknown as GuidelineId,
+    }),
+  ).handover;
+  assert.equal(unknownGuideline, null);
+
+  const complete = callComposeMaterials(
+    telecomCase,
+    materialPieces({
+      handoverReason: 'The report describes an unfamiliar debit.',
+      handoverRequest: 'Please review the reported payment.',
+      handoverGuidelineId: 'DEMO-G01',
+    }),
+  ).handover;
+  assert.ok(complete);
+  assert.match(complete, /^HANDOVER DRAFT/);
+  assert.match(complete, /Recipient: SYN Bank A intake team/);
+  assert.match(complete, /Reason: The report describes an unfamiliar debit\./);
+  assert.match(complete, /Request: Please review the reported payment\./);
+  assert.match(complete, /Basis: fictional DEMO-G01\./);
+
+  const generatedWithoutBasis = generate(telecomCase, materialPieces());
+  assert.equal(generatedWithoutBasis.materials.status, 'draft');
+  assert.match(generatedWithoutBasis.materials.summary, /^FICTIONAL COURSE CASE/);
+  assert.equal(generatedWithoutBasis.materials.handover, null);
+  const confirmedWithoutBasis = callConfirmMaterials(generatedWithoutBasis);
+  assert.equal(confirmedWithoutBasis.materials.status, 'confirmed');
+  assert.equal(confirmedWithoutBasis.materials.handover, null);
+
+  const generatedWithBasis = generate(
+    telecomCase,
+    materialPieces({
+      handoverReason: 'The report describes an unfamiliar debit.',
+      handoverRequest: 'Please review the reported payment.',
+      handoverGuidelineId: 'DEMO-G01',
+    }),
+  );
+  assert.ok(generatedWithBasis.materials.handover);
 });
 
 test('support case keeps the vulnerability text and drops staff instructions from the person material', () => {
