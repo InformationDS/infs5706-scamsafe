@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ScamSafe · 六人展示中文版</title>
+<style>
+:root { --ink:#173c38; --green:#235e57; --muted:#657771; --paper:#fafbf8; --line:#d3dfd8; --accent:#aa7332; }
+* { box-sizing:border-box; }
+body { margin:0; background:#e9efea; color:var(--ink); font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif; }
+button { font:inherit; cursor:pointer; }
+button:focus-visible,a:focus-visible { outline:3px solid #b78940; outline-offset:3px; }
+button:disabled { opacity:.4; cursor:default; }
+.toolbar { max-width:1328px; margin:auto; padding:18px 24px; display:flex; justify-content:space-between; align-items:center; gap:15px; }
+.brand { font-size:18px; font-weight:700; }
+.brand span { font-size:13px; margin-left:14px; color:var(--muted); font-weight:400; }
+.actions { display:flex; gap:8px; }
+.actions button,.nav>button { padding:8px 12px; border:1px solid #c3d2c8; border-radius:5px; background:#fff; color:var(--ink); }
+.actions button[aria-pressed="true"] { background:var(--green); color:white; }
+.stage { max-width:1280px; margin:auto; overflow:hidden; background:#153c36; box-shadow:0 14px 44px #173c3820; }
+.viewport { position:relative; overflow:hidden; }
+.deck { width:1280px; height:720px; transform-origin:top left; }
+.slide { display:none; width:1280px; height:720px; padding:34px 52px 55px; position:relative; background:var(--paper); overflow:hidden; }
+.slide.active { display:block; }
+.eyebrow { margin:0 0 10px; color:var(--green); font-size:15px; letter-spacing:1.5px; font-weight:700; }
+h1,h2,h3,p,figure { margin:0; }
+h1 { font-size:44px; line-height:1.3; letter-spacing:-1px; }
+h2 { font-size:39px; line-height:1.25; letter-spacing:-1px; margin-bottom:24px; }
+h3 { font-size:24px; line-height:1.45; }
+p { font-size:21px; line-height:1.65; }
+.footer { position:absolute; left:52px; right:52px; bottom:23px; border-top:1px solid var(--line); padding-top:12px; display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--muted); }
+.footer strong { color:var(--ink); font-weight:500; }
+.page-number { color:var(--green); font-size:17px; font-weight:700; }
+.cover { background:#153c36; color:#fff; }
+.cover .eyebrow { color:#a3cfbd; }
+.cover .footer { border-color:#4d7064; color:#a9c7b8; }
+.cover .footer strong,.cover .page-number { color:#d4e7da; }
+.cover-grid { display:grid; grid-template-columns:330px 1fr; gap:36px; margin-top:26px; align-items:start; }
+.cover h1 { font-size:45px; margin-bottom:22px; }
+.cover .subtitle { color:#b9d6c6; font-size:20px; line-height:1.7; }
+.case-line { margin-top:26px; border-top:1px solid #557665; padding-top:20px; font-size:24px; line-height:1.8; }
+.case-line b { color:#efd4a8; font-size:29px; }
+.cover .case-note { color:#b9d6c6; font-size:17px; margin-top:18px; }
+figure img { display:block; width:100%; height:auto; }
+.screenshot { border:1px solid var(--line); background:#fff; overflow:hidden; }
+.cover .screenshot { border-color:#638675; }
+.cover .screenshot img { height:410px; object-fit:contain; background:#f1f5f0; }
+figcaption { font-size:14px; color:var(--muted); line-height:1.6; margin-top:8px; }
+.cover figcaption { color:#b9d6c6; }
+.cover-focus { font-size:20px; line-height:1.7; margin-top:20px; padding-left:18px; border-left:3px solid #d1ad71; }
+.video-grid { display:grid; grid-template-columns:888px 1fr; gap:24px; }
+.player { position:relative; width:888px; height:499.5px; background:#102c28; }
+video { display:block; width:100%; height:100%; object-fit:contain; background:#102c28; }
+.caption { position:absolute; left:20px; right:20px; bottom:51px; text-align:center; pointer-events:none; }
+.caption span { background:#071d18e8; color:white; font-family:Arial,sans-serif; font-size:18px; line-height:1.45; padding:5px 10px; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
+.caption:empty { display:none; }
+.video-aside { padding-top:4px; }
+.video-aside p { font-size:20px; line-height:1.55; padding:11px 0; border-bottom:1px solid var(--line); }
+.video-aside .number { display:block; color:var(--accent); font-size:14px; margin-bottom:8px; }
+.caption-toggle { margin-top:16px; padding:8px 10px; font-size:14px; background:transparent; color:var(--green); border:1px solid var(--line); border-radius:4px; }
+.video-aside .video-meta { font-size:13px; color:var(--muted); line-height:1.7; margin-top:13px; }
+.analysis-grid { display:grid; grid-template-columns:735px 1fr; gap:36px; }
+.detail-title { font-size:17px; color:var(--green); margin-bottom:8px; font-weight:700; }
+.candidate img { height:148px; object-fit:contain; background:#fff; }
+.facts { margin-top:18px; }
+.facts img { height:240px; object-fit:contain; background:#fff; }
+.explain { padding-top:4px; }
+.explain section { border-top:1px solid var(--line); padding:17px 0; }
+.explain h3 { font-size:23px; margin-bottom:8px; }
+.explain p { color:var(--muted); font-size:20px; line-height:1.65; }
+.explain .main-point { color:var(--ink); font-size:22px; }
+.unknown-grid { display:grid; grid-template-columns:770px 1fr; gap:34px; }
+.unknown-grid .full-frame img { height:320px; object-fit:contain; background:#fff; }
+.controls-wide { margin-top:12px; }
+.controls-wide img { width:570px; height:auto; margin:auto; }
+.unknown-detail { margin-top:20px; }
+.unknown-detail img { width:100%; }
+.unknown-grid .explain p { font-size:20px; }
+.unknown-grid .explain section { padding:14px 0; }
+.statement { margin-top:18px; font-size:21px; line-height:1.5; color:var(--green); }
+.org-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+.org-grid h3 { margin-bottom:8px; }
+.org-grid .description { font-size:18px; color:var(--muted); margin-bottom:14px; }
+.guidance-shot img { height:163px; object-fit:contain; }
+.handover-shot img { height:254px; object-fit:contain; background:#fff; }
+.org-foot { margin-top:20px; font-size:20px; line-height:1.65; }
+.org-foot strong { color:var(--green); }
+.org-grid .guidance-extra { margin-top:20px; border-top:1px solid var(--line); padding-top:17px; }
+.org-grid .guidance-extra p { font-size:20px; line-height:1.65; }
+.org-grid .boundary { margin-top:12px; font-size:16px; color:var(--muted); }
+.review-grid { display:grid; grid-template-columns:440px 360px 1fr; gap:26px; }
+.review-grid h3 { font-size:21px; margin-bottom:11px; }
+.review-before img { height:245px; object-fit:contain; background:#fff; }
+.review-after img { height:322px; object-fit:contain; background:#fff; }
+.review-grid .right { border-left:1px solid var(--line); padding-left:22px; }
+.review-grid p { font-size:19px; line-height:1.65; }
+.review-grid .right h3 { margin-top:0; }
+.review-grid .right p { margin-bottom:17px; }
+.review-grid .limit { font-size:16px; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; }
+.review-caption { margin-top:16px; font-size:19px!important; }
+.metrics { margin-top:20px; border-top:2px solid var(--green); padding-top:13px; font-size:18px; line-height:1.6; }
+.metrics strong { color:var(--green); margin-right:13px; }
+.nav { max-width:1280px; margin:auto; padding:14px 0; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.dots { display:flex; gap:9px; }
+.dots button { border:0; width:34px; height:34px; background:transparent; border-radius:50%; color:var(--muted); }
+.dots button.active { background:var(--green); color:white; }
+.nav-hint { color:var(--muted); font-size:13px; }
+.notes { max-width:1280px; margin:0 auto 35px; padding:28px 34px; background:white; border-radius:7px; }
+.notes[hidden] { display:none; }
+.notes h2 { font-size:24px; margin-bottom:15px; letter-spacing:0; }
+.notes h3 { font-size:18px; color:var(--green); margin:20px 0 10px; }
+.notes p { font-size:17px; line-height:1.95; margin-bottom:9px; }
+.notes .meta,.notes .reminder { font-size:14px; color:var(--muted); }
+.notes .reminder { border-top:1px solid var(--line); padding-top:14px; margin-top:20px; }
+.notes table { border-collapse:collapse; width:100%; font-size:15px; line-height:1.7; }
+.notes td,.notes th { text-align:left; padding:11px; border-bottom:1px solid var(--line); vertical-align:top; }
+.notes th { background:#eef4ee; }
+.notes a { color:var(--green); }
+.stage:fullscreen { max-width:none; width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; background:#102c28; }
+.stage:fullscreen .viewport { flex:none; }
+@media(max-width:750px) { .toolbar{padding:13px 10px;align-items:flex-start}.brand span{display:block;margin:5px 0 0}.actions{gap:4px}.actions button{font-size:12px;padding:7px}.nav{padding:12px}.nav-hint{display:none}.notes{margin:0 10px 25px;padding:22px 18px}.notes table{font-size:13px}.notes td,.notes th{padding:7px} }
+@media print { @page{size:landscape;margin:0}.toolbar,.nav,.notes{display:none!important}.stage,.viewport{width:auto!important;height:auto!important;overflow:visible;max-width:none;box-shadow:none}.deck{transform:none!important;width:100%!important;height:auto!important}.slide,.slide.active{display:block;break-after:page;width:1280px;height:720px}video{display:none}.player{background:center/contain no-repeat url('assets/frame-08.png')}.caption,.caption-toggle{display:none} }
+
+/* Role diagram and the three employee review activities. */
+.intro h2 { margin-bottom:9px; }
+.intro-summary { font-size:20px; line-height:1.6; margin-bottom:18px; color:var(--muted); }
+.collaboration { position:relative; width:1176px; height:412px; }
+.role-columns { display:grid; grid-template-columns:340px 340px 340px; gap:78px; }
+.role-panel { height:344px; border:1px solid; border-radius:14px; padding:17px; }
+.role-panel.human { color:#28678e; background:#f0f7fc; border-color:#bdd3e4; }
+.role-panel.program { color:#28715d; background:#f0f8f2; border-color:#bfd9c9; }
+.role-panel.model { color:#6b5399; background:#f6f3fb; border-color:#d4c9e8; }
+.role-heading { display:flex; align-items:center; gap:14px; margin-bottom:14px; }
+.role-heading svg { width:64px; height:64px; flex:none; }
+.role-heading h3 { font-size:27px; line-height:1.3; }
+.role-heading small { display:block; margin-top:5px; font-size:14px; font-weight:400; color:var(--muted); letter-spacing:.4px; }
+.role-task { padding:13px 15px; background:#ffffffdc; border:1px solid #d9e2df; border-radius:9px; margin-top:12px; }
+.role-task strong { display:block; font-size:21px; margin-bottom:5px; }
+.role-task p { color:#344d52; font-size:18px; line-height:1.55; }
+.flow-connectors { position:absolute; left:0; top:0; width:1176px; height:344px; overflow:visible; pointer-events:none; }
+.flow-legend { display:grid; grid-template-columns:repeat(4,1fr); gap:17px; margin-top:17px; font-size:17px; color:#45615b; }
+.flow-legend b { display:inline-flex; align-items:center; justify-content:center; border-radius:50%; width:24px; height:24px; background:#e3ece7; color:var(--green); margin-right:7px; font-size:14px; }
+.intro-conclusion { font-size:20px; line-height:1.6; border-top:1px solid var(--line); padding-top:13px; }
+.review-track { position:absolute; left:52px; right:52px; bottom:70px; display:flex; align-items:center; gap:23px; border-top:1px solid var(--line); padding-top:12px; font-size:15px; color:#8b9991; }
+.review-track .label { color:var(--muted); margin-right:10px; }
+.review-track .selected { color:var(--green); font-weight:700; }
+.review-track .divider { color:#bbc8bf; }
+.information-grid { display:grid; grid-template-columns:750px 1fr; gap:34px; }
+.information-grid .candidate img { height:116px; object-fit:contain; }
+.information-grid .facts { margin-top:12px; }
+.information-grid .facts img { height:216px; object-fit:contain; }
+.information-grid .controls-inline { margin-top:11px; display:flex; align-items:center; gap:16px; }
+.information-grid .controls-inline img { width:365px; height:auto; }
+.information-grid .controls-inline span { font-size:16px; line-height:1.6; color:var(--muted); }
+.information-grid .explain section { padding:12px 0; }
+.information-grid .explain p { font-size:19px; }
+.information-grid .explain h3 { font-size:22px; }
+.org-review .guidance-extra { margin-top:14px; padding-top:13px; }
+.org-review .guidance-extra p { font-size:19px; }
+.org-review .org-foot { font-size:18px; margin-top:13px; }
+.org-review .handover-shot img { height:230px; }
+.material-review .review-grid { grid-template-columns:430px 350px 1fr; gap:25px; }
+.material-review .review-before img { height:245px; }
+.material-review .review-after img { height:306px; }
+.material-review .review-caption { font-size:18px!important; }
+.material-review .right p { font-size:18px; margin-bottom:15px; }
+.material-review .right h3 { font-size:21px; }
+.material-review .material-purpose { color:var(--muted); font-size:16px!important; }
+.limits-table { border-collapse:collapse; width:100%; table-layout:fixed; margin-top:4px; }
+.limits-table th { text-align:left; padding:0 20px 15px 0; border-bottom:2px solid var(--green); color:var(--green); font-size:22px; }
+.limits-table td { vertical-align:top; padding:18px 20px 17px 0; border-bottom:1px solid var(--line); font-size:20px; line-height:1.55; }
+.limits-table th:first-child,.limits-table td:first-child { width:230px; }
+.limits-table th:nth-child(2),.limits-table td:nth-child(2) { width:455px; padding-left:20px; }
+.limits-table th:last-child,.limits-table td:last-child { padding-left:24px; }
+.limits-table td:first-child { font-weight:700; color:var(--green); }
+.evidence-boundary { margin-top:22px; border-left:3px solid #a88953; padding-left:17px; font-size:20px; line-height:1.65; }
+
+</style>
+</head>
+<body>
+<header class="toolbar"><div class="brand">ScamSafe <span>中文展示 · 协作原理与持续人工核对</span></div><div class="actions"><button id="notes-toggle" aria-pressed="true">排练讲稿</button><button id="overview-button">六人分工</button><button id="fullscreen-button">全屏展示</button></div></header>
+<main>
+<div class="stage" id="stage"><div class="viewport" id="viewport"><div class="deck" id="deck">
+<section class="slide intro active" aria-label="第1页 原型组成与协作方式">
+<div class="eyebrow">SCAMSAFE ALLIANCE · 一线接报辅助工作台</div><h2>模型、程序与员工如何配合</h2><p class="intro-summary">面向银行与电信机构一线员工，协助整理案件、发现缺口，并准备建议与交接材料。</p>
+<div class="collaboration" role="img" aria-label="协作流程，员工向程序提交叙述和补充，程序向模型提供案件上下文，模型向程序返回分析与草稿，程序向员工展示更新后的结果，员工持续核对和决定">
+<div class="role-columns">
+<div class="role-panel human"><div class="role-heading"><svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="35" fill="#e1eff9"/><path d="M13 61v-8c0-11 9-18 21-18s19 7 19 18v8" fill="#b1d2e9" stroke="#28678e" stroke-width="2.4"/><path d="M23 23c0-10 5-15 12-15s13 5 13 15v7H23z" fill="#204a69"/><ellipse cx="35" cy="26" rx="10" ry="12" fill="#ffe1bd" stroke="#28678e" stroke-width="2"/><path d="M24 20c8 2 14-1 17-6" fill="none" stroke="#204a69" stroke-width="4"/><rect x="41" y="39" width="23" height="27" rx="4" fill="white" stroke="#28678e" stroke-width="2.4"/><path d="m46 52 4 4 8-9" fill="none" stroke="#328e6c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>人类员工<small>核对与决定</small></h3></div><div class="role-task"><strong>输入与核对</strong><p>录入叙述、检查字段<br>补充更正、处理未知</p></div><div class="role-task"><strong>判断与审核</strong><p>核对建议、编辑材料<br>确认材料、决定后续</p></div></div>
+<div class="role-panel program"><div class="role-heading"><svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="35" fill="#e0f0e5"/><rect x="9" y="15" width="54" height="37" rx="5" fill="white" stroke="#28715d" stroke-width="2.5"/><path d="M11 24h50" stroke="#28715d" stroke-width="2"/><circle cx="16" cy="20" r="1.3" fill="#28715d"/><circle cx="22" cy="20" r="1.3" fill="#28715d"/><path d="m26 32-7 6 7 6m20-12 7 6-7 6m-6-14-6 17" fill="none" stroke="#28715d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 53v8m12-8v8m-19 1h26" fill="none" stroke="#28715d" stroke-width="3" stroke-linecap="round"/></svg><h3>程序<small>校验与状态管理</small></h3></div><div class="role-task"><strong>上下文与校验</strong><p>组装案件、角色与指引<br>校验模型返回结构</p></div><div class="role-task"><strong>同步状态与输出</strong><p>维护字段、问题与草稿<br>管理确认、复制与下载</p></div></div>
+<div class="role-panel model"><div class="role-heading"><svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="35" fill="#e9e3f5"/><path d="M36 13V7" stroke="#6b5399" stroke-width="2.5"/><circle cx="36" cy="6" r="3" fill="#ae99d4" stroke="#6b5399" stroke-width="2"/><rect x="14" y="17" width="44" height="38" rx="14" fill="white" stroke="#6b5399" stroke-width="2.5"/><rect x="21" y="25" width="30" height="19" rx="9" fill="#594a7d"/><circle cx="29" cy="34" r="3" fill="#c4e7ee"/><circle cx="43" cy="34" r="3" fill="#c4e7ee"/><path d="M29 49h14M9 30v12m54-12v12M24 60h24" stroke="#6b5399" stroke-width="2.5" stroke-linecap="round"/></svg><h3>大语言模型<small>理解与起草</small></h3></div><div class="role-task"><strong>理解与提取</strong><p>理解叙述、整理事实<br>识别缺口、提出补问</p></div><div class="role-task"><strong>建议与起草</strong><p>结合角色和演示指引<br>组织建议与材料草稿</p></div></div>
+</div>
+<svg class="flow-connectors" viewBox="0 0 1176 344" aria-hidden="true"><defs><marker id="flow-forward" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 7 3.5 0 7Z" fill="#426f83"/></marker><marker id="flow-return" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 7 3.5 0 7Z" fill="#7c70a0"/></marker></defs><g fill="none" stroke-width="2.8"><path d="M345 155H411" stroke="#426f83" marker-end="url(#flow-forward)"/><path d="M763 155H829" stroke="#426f83" marker-end="url(#flow-forward)"/><path d="M411 269H345" stroke="#7c70a0" stroke-dasharray="5 4" marker-end="url(#flow-return)"/><path d="M829 269H763" stroke="#7c70a0" stroke-dasharray="5 4" marker-end="url(#flow-return)"/></g><g font-family="Arial,sans-serif" font-size="16" font-weight="700" text-anchor="middle"><g fill="#426f83"><text x="378" y="143">1</text><text x="796" y="143">2</text></g><g fill="#7c70a0"><text x="796" y="257">3</text><text x="378" y="257">4</text></g></g></svg>
+<div class="flow-legend"><span><b>1</b>提交叙述、回答或更正</span><span><b>2</b>提供当前上下文</span><span><b>3</b>返回分析与草稿</span><span><b>4</b>展示更新后的结果</span></div>
+</div>
+<p class="intro-conclusion">人工参与贯穿信息核对、建议判断和材料审核，员工持续决定下一步。</p><div class="footer"><strong>成员 1 · 组成与协作原理 · 55 秒</strong><span class="page-number">01 / 06</span></div></section>
+<section class="slide" aria-label="第2页 完整原型演示"><div class="eyebrow">完整运行过程</div><h2>原型演示</h2><div class="video-grid"><div class="player"><video id="demo-video" controls preload="metadata" playsinline poster="assets/frame-08.png" aria-label="ScamSafe完整原型演示，含英文AI配音"><source src="../demo-video-20261110/ScamSafe_Prototype_Demo_English_AI_Voice_No_Subtitles.mp4" type="video/mp4">请使用支持 MP4 播放的浏览器。</video><div id="video-caption" class="caption" aria-live="off"></div></div><div class="video-aside"><p><span class="number">观察 01</span>模型生成了<br>哪些内容</p><p><span class="number">观察 02</span>程序如何呈现<br>和管理结果</p><p><span class="number">观察 03</span>员工在哪里<br>核对与决定</p><button class="caption-toggle" id="caption-toggle" aria-pressed="true">英文字幕 · 开</button><div class="video-meta">英文 AI 配音 · 约 89 秒<br>案例与指引均为虚构<br>模型等待过程已在视频中缩短</div></div></div><div class="footer"><strong>成员 2 · 引导与承接 15 秒 + 视频约 89 秒</strong><span class="page-number">02 / 06</span></div></section>
+<section class="slide" aria-label="第3页 信息提取后的人工核对与补问"><div class="eyebrow">视频解析 · 00:16–00:41.5</div><h2>信息提取后的人工核对与补问</h2><div class="information-grid"><div><figure><div class="detail-title">01　核对候选类型及其依据</div><div class="screenshot candidate"><img src="assets/detail-candidate.png" alt="疑似网络钓鱼及基于案件叙述的理由，供员工核对"></div></figure><figure class="facts"><div class="detail-title">02　对照叙述检查字段与缺口</div><div class="screenshot"><img src="assets/detail-facts.png" alt="金额2000 AUD，交易状态未知，供员工逐项核对"></div></figure><div class="controls-inline"><img src="assets/detail-controls.png" alt="不知道、跳过或结束问题，由员工控制补问"><span>员工选择如何继续补问<br>视频 00:31–00:41.5</span></div></div><div class="explain"><section><h3>第一次分析后开始核对</h3><p>金额和币种是否一致？<br>类型判断是否有叙述依据？</p></section><section><h3>补充与更正</h3><p>发现遗漏或错误时，<br>员工继续补充、核实和更正。</p></section><section><h3>保留未知事项</h3><p>视频中选择“不知道”，<br>交易状态继续保持未知。</p></section></div></div><div class="review-track"><span class="label">人工持续参与</span><span class="selected">信息核对</span><span class="divider">／</span><span class="">建议判断</span><span class="divider">／</span><span class="">材料确认</span></div><div class="footer"><strong>成员 3 · 信息核对与补问 · 50 秒</strong><span class="page-number">03 / 06</span></div></section>
+<section class="slide org-review" aria-label="第4页 处理建议中的人工判断与机构协作"><div class="eyebrow">视频解析 · 00:45 / 01:08</div><h2>处理建议中的人工判断与机构协作</h2><div class="org-grid"><div><h3>银行评估账户与付款担忧</h3><p class="description">建议标明机构、人工评估事项与演示指引</p><figure><div class="screenshot guidance-shot"><img src="assets/detail-guidance.png" alt="银行建议及DEMO-G01引用，要求人工评估账户及付款担忧"></div><figcaption>视频 00:45 · 银行处理建议</figcaption></figure><div class="guidance-extra"><p><strong>员工核对</strong><br>是否符合案件信息与本机构职责？<br>是否需要专员或其他机构参与？</p></div></div><div><h3>电信接收短信相关协助请求</h3><p class="description">员工检查交接原因、接收方及相关事实</p><figure><div class="screenshot handover-shot"><img src="assets/detail-handover.png" alt="发给虚构电信团队的交接草稿，供员工核对接收方与内容"></div><figcaption>视频 01:08 · 电信交接草稿</figcaption></figure></div></div><p class="org-foot"><strong>嵌入接报流程</strong>　员工审核后，经认可渠道交接；机构采用前确认指引、权限与数据授权。</p><div class="review-track"><span class="label">人工持续参与</span><span class="">信息核对</span><span class="divider">／</span><span class="selected">建议判断</span><span class="divider">／</span><span class="">材料确认</span></div><div class="footer"><strong>成员 4 · 建议判断与机构协作 · 50 秒</strong><span class="page-number">04 / 06</span></div></section>
+<section class="slide material-review" aria-label="第5页 材料编辑确认与后续使用"><div class="eyebrow">视频解析 · 01:12–01:29</div><h2>材料编辑、确认与后续使用</h2><div class="review-grid"><div><h3>01　补充人工跟进备注</h3><figure><div class="screenshot review-before"><img src="assets/detail-review.png" alt="员工在草稿摘要中加入交易状态需要跟进的备注"></div><figcaption>视频 01:15 · 员工编辑，材料保持草稿</figcaption></figure><p class="review-caption">“交易状态需要后续跟进”<br>从信息缺口进入待办说明。</p></div><div><h3>02　确认后开放输出</h3><figure><div class="screenshot review-after"><img src="assets/detail-confirmed.png" alt="员工确认材料后，系统开放复制与下载"></div><figcaption>视频 01:26 · 确认状态与下载入口</figcaption></figure></div><div class="right"><h3>员工检查</h3><p>事实与待确认事项<br>表述与接收方</p><h3>员工决定</h3><p>编辑并确认材料<br>按机构流程使用</p><p class="material-purpose">摘要保留案件信息<br>当事人说明支持沟通<br>交接稿支持机构衔接</p></div></div><div class="review-track"><span class="label">人工持续参与</span><span class="">信息核对</span><span class="divider">／</span><span class="">建议判断</span><span class="divider">／</span><span class="selected">材料确认</span></div><div class="footer"><strong>成员 5 · 材料审核与确认 · 45 秒</strong><span class="page-number">05 / 06</span></div></section>
+<section class="slide" aria-label="第6页 不足局限与后续验证"><div class="eyebrow">原型评价</div><h2>不足、局限与后续验证</h2><table class="limits-table"><thead><tr><th>局限所在</th><th>当前边界</th><th>后续验证</th></tr></thead><tbody><tr><td>场景与指引覆盖</td><td>虚构案例与有限演示指引，<br>覆盖场景较少。</td><td>扩展诈骗类型、复杂案件<br>与无适用指引的情况。</td></tr><tr><td>模型结果可靠性</td><td>提取和建议可能出现遗漏、<br>错误或不适用的内容。</td><td>检查字段准确性、建议依据<br>与错误处理。</td></tr><tr><td>人工核对效果</td><td>依赖员工的经验、注意力<br>与对审核责任的理解。</td><td>观察能否发现错误，<br>评估草稿修改量。</td></tr><tr><td>机构落地与收益</td><td>真实机构流程衔接和<br>实际工作收益仍待验证。</td><td>受控试用，评估权限、交接、<br>字段遗漏与材料准备时间。</td></tr></tbody></table><p class="evidence-boundary">现有视频展示了一次案件处理流程，可靠性与实际工作收益仍需进一步评估。</p><div class="footer"><strong>成员 6 · 不足与局限 · 35 秒</strong><span class="page-number">06 / 06</span></div></section>
+</div></div></div>
+<nav class="nav" aria-label="幻灯片导航"><button id="prev">上一页</button><div class="dots" id="dots"></div><span class="nav-hint">方向键切页 · F 全屏 · N 讲稿</span><button id="next">下一页</button></nav>
+<aside class="notes" id="notes" aria-live="polite"></aside>
+</main>
+<script>
+const subtitleCues=[{"start": 0.0, "end": 4.0, "text": "Select the bank employee role in ScamSafe."}, {"start": 4.0, "end": 12.0, "text": "Load this fictional report of an impersonation text, disclosed credentials, and an unfamiliar two-thousand-dollar debit."}, {"start": 12.0, "end": 16.0, "text": "Submit the report for AI analysis. AI processing time shortened."}, {"start": 16.0, "end": 21.0, "text": "The AI structures the report and asks three targeted questions."}, {"start": 21.0, "end": 26.0, "text": "Suspected phishing is linked to the reported text, credentials, and debit."}, {"start": 26.0, "end": 31.5, "text": "Facts appear in structured fields. Transaction status remains unknown."}, {"start": 31.5, "end": 36.5, "text": "Select “Don’t know” when the transaction status is unavailable."}, {"start": 36.5, "end": 41.5, "text": "End the remaining questions. Unresolved gaps remain in the case."}, {"start": 41.5, "end": 50.0, "text": "Review the bank’s suggested response and its fictional guideline reference. Account and payment concerns require human review."}, {"start": 50.0, "end": 53.0, "text": "Generate materials from the current case. AI processing time shortened."}, {"start": 53.0, "end": 59.0, "text": "Review the case summary, including reported facts and unresolved information."}, {"start": 59.0, "end": 65.0, "text": "The explanation for the affected person summarises the report and suggests next steps."}, {"start": 65.0, "end": 72.0, "text": "The telecom handover focuses on the suspicious text message. Review the draft before using it."}, {"start": 72.0, "end": 78.0, "text": "Edit the summary to flag transaction status for follow-up. The materials remain drafts."}, {"start": 78.0, "end": 82.5, "text": "Confirm the reviewed materials to enable copying and downloading."}, {"start": 82.5, "end": 89.0, "text": "Download the summary. The employee decides the next action through existing organisational processes."}];
+const scripts=[
+ {
+  "name": "成员 1",
+  "role": "原型组成与协作方式",
+  "time": "55 秒",
+  "speech": [
+   "大家好，ScamSafe面向银行和电信机构的一线员工，帮助整理案件、发现缺口，并准备建议与交接材料。",
+   "这张图展示三个部分怎样配合。员工提交叙述、回答或更正。程序组装当前案件、角色和指引，交给大语言模型。模型理解叙述、提取信息、提出补问，并组织建议与草稿。",
+   "结果返回程序后，程序检查结构，更新字段、问题和材料状态，再呈现给员工。员工从第一次分析后就开始核对，继续补充、更正和判断建议，并在输出前编辑和确认材料。下一次补充会进入同样的协作过程。",
+   "接下来请看完整运行。"
+  ],
+  "cue": "按图中1、2、3、4讲清信息流动，然后强调人工核对贯穿始终。",
+  "evidence": "协作图说明组件职责与交互关系，依据课程PRD与实现方案；具体运行见第2页视频。"
+ },
+ {
+  "name": "成员 2",
+  "role": "完整视频引导与承接",
+  "time": "讲解 15 秒 + 视频约 89 秒",
+  "speech": [
+   "【播放前】请关注模型生成了什么、程序怎样管理结果，以及员工在哪些地方核对和决定。",
+   "【点击播放完整视频，使用现有英文AI配音。】",
+   "【播放后】下面结合三个关键环节，进一步解释这套协作方式。"
+  ],
+  "cue": "负责声音、播放与结束后的翻页。视频89.12秒，时间需从点击播放起计。",
+  "evidence": "完整视频89.12秒，英文字幕与配套AI配音SRT同步。"
+ },
+ {
+  "name": "成员 3",
+  "role": "信息核对与补问",
+  "time": "50 秒",
+  "speech": [
+   "人工核对从第一次分析后开始。员工对照当事人的叙述，检查两千澳元金额、币种和交易状态，也检查疑似网络钓鱼的理由是否有叙述依据。",
+   "如果发现遗漏或错误，员工可以继续补充和更正。视频中实际展示的是交易状态无法确认，员工选择不知道，然后结束剩余补问。系统保留金额，并继续呈现未知信息。",
+   "结束补问后，这些缺口仍需后续核实，并进入材料审核。员工因此能够清楚区分目前掌握的信息和仍待确认的事项。下一页介绍员工怎样判断建议。"
+  ],
+  "cue": "对应字段、判断依据与补问按钮讲解。字段更正是可用能力，当前视频主要展示不知道与结束补问。",
+  "evidence": "00:16–00:31.5展示分析与字段；00:31.5–00:41.5展示不知道和结束其余补问。"
+ },
+ {
+  "name": "成员 4",
+  "role": "建议判断与机构协作",
+  "time": "50 秒",
+  "speech": [
+   "员工随后需要判断建议是否适用。左边是银行建议，附有虚构指引引用，要求人工评估账户与付款担忧。员工要核对它是否符合案件事实和当前机构职责。",
+   "右边是电信交接草稿。员工还需要检查为什么交接、接收方是谁，以及哪些事实需要对方继续核实。",
+   "我们设想在柜台、电话或在线接报中使用工作台。员工审核后，通过机构认可的渠道交接，接收方依据自己的权限处理。正式采用前，各机构需要确认适用指引、升级条件和数据授权。"
+  ],
+  "cue": "先讲建议的人工判断，再讲跨机构衔接与采用条件。",
+  "evidence": "00:45银行处理建议与DEMO-G01；01:08电信接收方与交接草稿。"
+ },
+ {
+  "name": "成员 5",
+  "role": "材料审核与确认",
+  "time": "45 秒",
+  "speech": [
+   "前面核对的信息和判断最终进入材料。这里，员工在摘要中加入交易状态需要后续跟进的备注。材料仍处于草稿状态，确认后才开放复制和下载。",
+   "员工检查事实、未明确事项、表述和接收方，并决定怎样通过机构流程使用材料。摘要支持案件记录，给当事人的说明支持沟通，交接稿支持机构衔接。",
+   "这与第三页的未知状态相对应。人工参与从信息核对延续到建议判断和材料确认，员工持续决定下一步。最后介绍当前局限。"
+  ],
+  "cue": "指向跟进备注、草稿状态与确认后输出。把前面的未知信息与最终材料联系起来。",
+  "evidence": "01:12–01:18编辑；01:18–01:22.5确认；01:22.5–01:29下载。"
+ },
+ {
+  "name": "成员 6",
+  "role": "不足与后续验证",
+  "time": "35 秒",
+  "speech": [
+   "目前有四方面局限。案例与指引覆盖有限，模型仍可能遗漏信息或给出不适用的建议。人工核对效果也依赖员工经验和注意力，需要观察员工能否发现错误。",
+   "后续应扩展场景，检查字段和建议质量，并在受控试用中验证权限、交接流程、草稿修改量及材料准备时间。",
+   "现有视频展示了一次案件处理流程，可靠性和实际工作收益还需要进一步评估。谢谢。"
+  ],
+  "cue": "覆盖场景、模型、人工与机构落地四个方面，明确后续验证。",
+  "evidence": "局限与验证方向属于对原型范围的评价；视频说明单次流程，不构成整体模型质量或机构验收。"
+ }
+];
+const slides=[...document.querySelectorAll('.slide')];
+const stage=document.getElementById('stage');
+const viewport=document.getElementById('viewport');
+const deck=document.getElementById('deck');
+const notes=document.getElementById('notes');
+const video=document.getElementById('demo-video');
+const caption=document.getElementById('video-caption');
+const dots=document.getElementById('dots');
+let current=0;
+let overview=false;
+let captionsEnabled=true;
+function updateCaption(){
+ const cue=subtitleCues.find(item=>video.currentTime>=item.start&&video.currentTime<item.end);
+ caption.replaceChildren();
+ if(captionsEnabled&&cue){const span=document.createElement('span');span.textContent=cue.text;caption.append(span)}
+}
+function renderNotes(){
+ if(overview){
+  notes.innerHTML='<h2>六人分工与时间安排</h2><p class="meta">成员编号为姓名占位。每人负责一页，现场讲解250秒，加89.12秒视频，预计5分39秒，预留约21秒切页缓冲。</p><table><thead><tr><th>成员</th><th>负责内容</th><th>计划时间</th></tr></thead><tbody>'+scripts.map((entry,index)=>`<tr><td>${entry.name}</td><td>第${index+1}页 · ${entry.role}</td><td>${entry.time}</td></tr>`).join('')+'</tbody></table><h3>共同准备</h3><p>成员2负责播放视频、检查声音和视频结束后的承接。全员熟悉完整方案，并准备回答组件分工、信息缺口、机构责任和人工核对方面的问题。所有时间需通过完整彩排校准。</p><p class="reminder">现场按课程规定脱稿展示与答辩。讲稿区用于排练，全屏展示只显示幻灯片。</p>';
+  return;
+ }
+ const entry=scripts[current];
+ notes.innerHTML=`<h2>第${current+1}页 · ${entry.name}讲稿</h2><p class="meta">${entry.role} / ${entry.time}</p>`+entry.speech.map(text=>`<p>${text}</p>`).join('')+`<h3>排练提示</h3><p>${entry.cue}</p><h3>对应视频证据</h3><p>${entry.evidence}</p>`;
+ if(current===1){
+  notes.innerHTML+='<h3>视频原有字幕</h3><table><thead><tr><th>时间</th><th>原有英文字幕</th></tr></thead><tbody>'+subtitleCues.map(cue=>`<tr><td>${formatTime(cue.start)}–${formatTime(cue.end)}</td><td>${cue.text}</td></tr>`).join('')+'</tbody></table>';
+ }
+ if(current===5){notes.innerHTML+='<h3>事实与证据范围</h3><p>截图直接取自现有视频，支持说明这一案件的界面状态与操作过程。技术分工依据当前课程PRD。单段录屏不构成模型质量或整体产品验收。使用成效属于后续评估目标。</p><p><a href="../../docs/product/PRD.md">课程PRD</a> · <a href="../../references/assignment/Assessment_Guide.md">作业要求摘录</a></p>'}
+ notes.innerHTML+='<p class="reminder">排练材料。现场展示与答辩禁止使用演讲者备注、提示卡、手机等辅助工具，课程规定的合理调整除外。</p>';
+}
+function formatTime(seconds){return Math.floor(seconds/60).toString().padStart(2,'0')+':'+Math.floor(seconds%60).toString().padStart(2,'0')}
+function showSlide(index){
+ const next=Math.max(0,Math.min(slides.length-1,index));
+ if(current===1&&next!==1)video.pause();
+ current=next;overview=false;
+ slides.forEach((slide,i)=>{slide.classList.toggle('active',i===current);slide.setAttribute('aria-hidden',String(i!==current))});
+ [...dots.children].forEach((button,i)=>{button.classList.toggle('active',i===current);button.setAttribute('aria-current',i===current?'page':'false')});
+ document.getElementById('prev').disabled=current===0;
+ document.getElementById('next').disabled=current===slides.length-1;
+ history.replaceState(null,'',`#slide-${current+1}`);
+ renderNotes();
+}
+function resize(){const width=document.fullscreenElement?Math.min(window.innerWidth,window.innerHeight*16/9):stage.clientWidth;viewport.style.width=width+'px';viewport.style.height=width*9/16+'px';deck.style.transform=`scale(${width/1280})`}
+function toggleNotes(){notes.hidden=!notes.hidden;document.getElementById('notes-toggle').setAttribute('aria-pressed',String(!notes.hidden))}
+async function toggleFullscreen(){try{if(document.fullscreenElement){await document.exitFullscreen()}else{await stage.requestFullscreen()}}catch{document.getElementById('fullscreen-button').textContent='请用浏览器全屏'}resize()}
+function applyHash(){const match=/^#slide-([1-6])$/.exec(location.hash);showSlide(match?Number(match[1])-1:0)}
+scripts.forEach((entry,index)=>{const button=document.createElement('button');button.textContent=index+1;button.setAttribute('aria-label',`第${index+1}页，${entry.role}`);button.addEventListener('click',()=>showSlide(index));dots.append(button)});
+document.getElementById('prev').addEventListener('click',()=>showSlide(current-1));
+document.getElementById('next').addEventListener('click',()=>showSlide(current+1));
+document.getElementById('notes-toggle').addEventListener('click',toggleNotes);
+document.getElementById('overview-button').addEventListener('click',()=>{overview=!overview;notes.hidden=false;document.getElementById('notes-toggle').setAttribute('aria-pressed','true');renderNotes();notes.scrollIntoView({behavior:'smooth',block:'start'})});
+document.getElementById('fullscreen-button').addEventListener('click',toggleFullscreen);
+document.getElementById('caption-toggle').addEventListener('click',event=>{captionsEnabled=!captionsEnabled;event.currentTarget.textContent='英文字幕 · '+(captionsEnabled?'开':'关');event.currentTarget.setAttribute('aria-pressed',String(captionsEnabled));updateCaption()});
+video.addEventListener('timeupdate',updateCaption);video.addEventListener('seeked',updateCaption);
+video.addEventListener('error',()=>{const message=document.querySelector('.video-meta');message.textContent='视频无法读取。请将HTML与assets文件夹放在同一目录后重新打开。'});
+document.addEventListener('keydown',event=>{if(event.altKey||event.ctrlKey||event.metaKey||['VIDEO','INPUT','TEXTAREA','SELECT'].includes(event.target.tagName))return;if(['ArrowRight','PageDown'].includes(event.key)){event.preventDefault();showSlide(current+1)}if(['ArrowLeft','PageUp'].includes(event.key)){event.preventDefault();showSlide(current-1)}if(event.key.toLowerCase()==='n')toggleNotes();if(event.key.toLowerCase()==='f')toggleFullscreen()});
+window.addEventListener('resize',resize);window.addEventListener('hashchange',applyHash);document.addEventListener('fullscreenchange',resize);
+applyHash();resize();
+</script>
+</body>
+</html>

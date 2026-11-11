@@ -1,5 +1,9 @@
 # 演示与提交材料
 
+## 六人展示 HTML
+
+- [ScamSafe 六人展示中文版](presentation/ScamSafe_六人展示_中文版.html)，包含配套截图，并引用本目录已收录的英文 AI 配音无字幕视频。完整下载仓库后，可用浏览器打开 HTML 展示。
+
 ## 演示视频（2026-11-10）
 
 - [英文字幕版](demo-video-20261110/ScamSafe_Prototype_Demo_English.mp4)，对应[字幕文件](demo-video-20261110/ScamSafe_English_Subtitles.srt)。
