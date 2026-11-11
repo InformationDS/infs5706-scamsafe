@@ -14,7 +14,7 @@ Local `.env` configuration is retained and excluded from GitHub. Fresh clones ca
 
 - F01-001 remains open: generic telecom nuisance-call facts can select an unsupported bank handover recipient when otherwise valid handover fields exist.
 - F01-002 and F01-003 have committed fixes and regression tests on this branch.
-- Cleanup verification: all 53 tests in `tests/course-case.test.ts` passed; `npm run build` passed; the repository document/source-preservation check passed with 184 Markdown documents and 471 local links before the status refresh.
+- Final independent checkout verification: `npm run build` passed; all 60 tests in `tests/course-case.test.ts` and `tests/course-turn.test.ts` passed with a local fake provider. The repository document/source-preservation check passed with 163 Markdown documents and 466 local links. Git object connectivity passed. The relocated application served the built page and health endpoint with HTTP 200; no live-provider request was sent.
 - Earlier verification of the same application source in the assessment copy passed 60 course case/turn tests with a local fake provider. Those results do not constitute live-model or human acceptance.
 - The cleanup does not call the supplied live provider. Complete Chinese-input, dual-role live-model and formal human acceptance remain unverified.
 
@@ -29,7 +29,7 @@ The final project stays at `GroupAssignment-integration`. Historical branches ar
 | `archive/workbench-before-rollback-20261106` | Tracked state from the historical rollback stash. |
 | `archive/workbench-untracked-20261106` | Companion untracked files from that stash. |
 
-Local consolidation retains only the final branch checkout and removes the old main/review working copies after remote preservation is confirmed. Disposable items include reinstallable dependency caches, generated temporary business-check copies and remotely archived production scratch files. The final `.env` and installed application dependencies are retained for local use.
+Local consolidation is complete: only the `refactor/full-rebuild` branch and one independent working directory remain locally. The old `GroupAssignment` and `GroupAssignment-review-20261104` working directories, their dependency caches and temporary business-check copies, and the archived production scratch files have been removed after remote preservation was confirmed. All 263 archived source/material files matched their original bytes. The final `.env`, installed application dependencies and a successful local build are retained for use at the unchanged `GroupAssignment-integration` path.
 
 Historical specifications, evidence and mock-ups remain as references, rather than current product scope or a task queue. This avoids discarding potentially relevant records. `docs/README.md` identifies current documentation. Course folders, the individual assignment, separate presentation materials and the existing assessment package are outside the cleanup scope.
 
