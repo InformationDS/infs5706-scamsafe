@@ -1,0 +1,70 @@
+[
+  {
+    "name": "intro",
+    "time": 0.488
+  },
+  {
+    "name": "input",
+    "time": 3.577
+  },
+  {
+    "name": "analysis-start",
+    "time": 8.587
+  },
+  {
+    "name": "analysis-result",
+    "time": 40.494
+  },
+  {
+    "name": "type",
+    "time": 44.595
+  },
+  {
+    "name": "unknown",
+    "time": 48.628
+  },
+  {
+    "name": "question",
+    "time": 52.652
+  },
+  {
+    "name": "question-unknown",
+    "time": 55.697
+  },
+  {
+    "name": "guidance",
+    "time": 58.79
+  },
+  {
+    "name": "generate-start",
+    "time": 64.876
+  },
+  {
+    "name": "summary",
+    "time": 98.762
+  },
+  {
+    "name": "person",
+    "time": 102.873
+  },
+  {
+    "name": "handover",
+    "time": 106.902
+  },
+  {
+    "name": "edit",
+    "time": 110.991
+  },
+  {
+    "name": "confirm",
+    "time": 115.019
+  },
+  {
+    "name": "download",
+    "time": 118.5
+  },
+  {
+    "name": "end",
+    "time": 123.57
+  }
+]

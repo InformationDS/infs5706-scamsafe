@@ -1,0 +1,21 @@
+{
+  "moduleMounted": true,
+  "afterSave": {
+    "notice": "Saved after the A01 storage transaction committed.",
+    "saved": false
+  },
+  "afterFirstCheck": {
+    "saved": false,
+    "reviews": [
+      {
+        "stage": "first",
+        "simulated": true
+      }
+    ]
+  },
+  "afterRefresh": {
+    "saved": true
+  },
+  "errors": [],
+  "providerRequests": 0
+}

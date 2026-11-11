@@ -1,0 +1,121 @@
+{
+  "source": "Recorded live-model browser operation, 10 November 2026",
+  "voice": "en-US-AriaNeural",
+  "rate": "-18%",
+  "audioTimeStretch": false,
+  "duration": 70.0,
+  "scenes": [
+    {
+      "scene": 1,
+      "start": 0,
+      "seconds": 3.0,
+      "spoken": "Select the bank role.",
+      "audioSeconds": 2.69
+    },
+    {
+      "scene": 2,
+      "start": 3.0,
+      "seconds": 5.36,
+      "spoken": "Load a fictional phishing report with an unfamiliar debit.",
+      "audioSeconds": 5.04
+    },
+    {
+      "scene": 3,
+      "start": 8.36,
+      "seconds": 3.08,
+      "spoken": "Analyse the report.",
+      "audioSeconds": 2.76
+    },
+    {
+      "scene": 4,
+      "start": 11.44,
+      "seconds": 5.44,
+      "spoken": "The AI identifies three clarification questions.",
+      "audioSeconds": 5.11
+    },
+    {
+      "scene": 5,
+      "start": 16.88,
+      "seconds": 3.08,
+      "spoken": "Phishing is suspected.",
+      "audioSeconds": 2.78
+    },
+    {
+      "scene": 6,
+      "start": 19.96,
+      "seconds": 4.24,
+      "spoken": "Transaction status remains unknown.",
+      "audioSeconds": 3.94
+    },
+    {
+      "scene": 7,
+      "start": 24.200000000000003,
+      "seconds": 4.0,
+      "spoken": "Choose \u201cDon\u2019t know\u201d for missing details.",
+      "audioSeconds": 3.7
+    },
+    {
+      "scene": 8,
+      "start": 28.200000000000003,
+      "seconds": 4.04,
+      "spoken": "End questions while retaining gaps.",
+      "audioSeconds": 3.74
+    },
+    {
+      "scene": 9,
+      "start": 32.24,
+      "seconds": 6.6,
+      "spoken": "Review the fictional guidance. Human judgement is required.",
+      "audioSeconds": 6.29
+    },
+    {
+      "scene": 10,
+      "start": 38.84,
+      "seconds": 3.44,
+      "spoken": "Generate case materials.",
+      "audioSeconds": 3.12
+    },
+    {
+      "scene": 11,
+      "start": 42.28,
+      "seconds": 4.48,
+      "spoken": "Check the summary and unresolved information.",
+      "audioSeconds": 4.18
+    },
+    {
+      "scene": 12,
+      "start": 46.760000000000005,
+      "seconds": 4.04,
+      "spoken": "Review the explanation for the person.",
+      "audioSeconds": 3.74
+    },
+    {
+      "scene": 13,
+      "start": 50.800000000000004,
+      "seconds": 5.32,
+      "spoken": "The telecom handover focuses on the suspicious message.",
+      "audioSeconds": 4.99
+    },
+    {
+      "scene": 14,
+      "start": 56.120000000000005,
+      "seconds": 3.68,
+      "spoken": "Edit the draft for follow-up.",
+      "audioSeconds": 3.14
+    },
+    {
+      "scene": 15,
+      "start": 59.800000000000004,
+      "seconds": 3.68,
+      "spoken": "Confirm the reviewed materials.",
+      "audioSeconds": 3.38
+    },
+    {
+      "scene": 16,
+      "start": 63.480000000000004,
+      "seconds": 6.52,
+      "spoken": "Download the summary. The employee decides the next action.",
+      "audioSeconds": 6.19
+    }
+  ]
+}

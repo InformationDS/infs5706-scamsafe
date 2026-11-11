@@ -1,0 +1,14 @@
+✔ re-reading the source retains an employee correction and records a conflicting candidate (11.6157ms)
+✔ transaction targets remain keyed by field and record; unknown stays null (0.2641ms)
+✔ a proposal started before a 250 correction is stale when its delayed response returns (1.5541ms)
+✔ employee type correction survives later analysis and preserves the conflicting type proposal (7.3651ms)
+✔ follow-up questions require first check, remain target-specific, and obey the 3/9 cap (10.102ms)
+✔ ending follow-up skips pending questions and accepts a later answer without reopening or recounting (2.9587ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 815.2569

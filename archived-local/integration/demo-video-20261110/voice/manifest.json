@@ -1,0 +1,130 @@
+[
+  {
+    "scene": 1,
+    "start": 0,
+    "seconds": 4,
+    "audioSeconds": 3.55,
+    "tempo": 1,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 2,
+    "start": 4,
+    "seconds": 8,
+    "audioSeconds": 7.87,
+    "tempo": 1.0220779220779221,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 3,
+    "start": 12,
+    "seconds": 4,
+    "audioSeconds": 3.36,
+    "tempo": 1,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 4,
+    "start": 16,
+    "seconds": 5,
+    "audioSeconds": 4.75,
+    "tempo": 1.0106382978723405,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 5,
+    "start": 21,
+    "seconds": 5,
+    "audioSeconds": 5.45,
+    "tempo": 1.1595744680851063,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 6,
+    "start": 26,
+    "seconds": 5.5,
+    "audioSeconds": 6.17,
+    "tempo": 1.1865384615384615,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 7,
+    "start": 31.5,
+    "seconds": 5,
+    "audioSeconds": 4.3,
+    "tempo": 1,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 8,
+    "start": 36.5,
+    "seconds": 5,
+    "audioSeconds": 5.57,
+    "tempo": 1.1851063829787234,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 9,
+    "start": 41.5,
+    "seconds": 8.5,
+    "audioSeconds": 8.76,
+    "tempo": 1.0682926829268293,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 10,
+    "start": 50.0,
+    "seconds": 3,
+    "audioSeconds": 3.22,
+    "tempo": 1.1925925925925926,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 11,
+    "start": 53.0,
+    "seconds": 6,
+    "audioSeconds": 5.62,
+    "tempo": 1,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 12,
+    "start": 59.0,
+    "seconds": 6,
+    "audioSeconds": 6.12,
+    "tempo": 1.0736842105263158,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 13,
+    "start": 65.0,
+    "seconds": 7,
+    "audioSeconds": 7.3,
+    "tempo": 1.0895522388059702,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 14,
+    "start": 72.0,
+    "seconds": 6,
+    "audioSeconds": 6.98,
+    "tempo": 1.224561403508772,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 15,
+    "start": 78.0,
+    "seconds": 4.5,
+    "audioSeconds": 4.63,
+    "tempo": 1.1023809523809522,
+    "voice": "en-US-AriaNeural"
+  },
+  {
+    "scene": 16,
+    "start": 82.5,
+    "seconds": 6.5,
+    "audioSeconds": 7.44,
+    "tempo": 1.2,
+    "voice": "en-US-AriaNeural"
+  }
+]

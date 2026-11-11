@@ -1,0 +1,35 @@
+import { once } from 'node:events';
+import { writeFile } from 'node:fs/promises';
+import { chromium } from 'playwright';
+import { createApp } from '../../server/src/app';
+import { readConfig } from '../../server/src/config';
+import { ModelSettingsStore } from '../../server/src/model-settings';
+let providerRequests = 0;
+const server = createApp({ settingsStore: new ModelSettingsStore({ config: readConfig({}), persist: () => {} }), fetchImpl: async () => { providerRequests++; throw new Error('No external provider'); } }).listen(0, '127.0.0.1');
+await once(server, 'listening');
+const address = server.address();
+if (!address || typeof address === 'string') throw new Error('No local server');
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage();
+page.setDefaultTimeout(10000);
+const errors: string[] = [];
+page.on('pageerror', error => errors.push(error.message));
+const record = async () => JSON.parse(await page.getByTestId('runtime-record').textContent() ?? '{}');
+const results: Record<string, unknown> = {};
+try {
+ await page.goto(`http://127.0.0.1:${address.port}/?module=intake`);
+ await page.getByRole('status').filter({ hasText: 'No runtime history' }).waitFor();
+ const intake = page.getByRole('region', { name: 'B01 case intake and follow-up' });
+ await intake.waitFor(); results.moduleMounted = true;
+ await intake.getByRole('button', { name: 'Save fact changes', exact: true }).click();
+ await intake.getByRole('status').filter({ hasText: 'Saved after the A01 storage transaction committed' }).waitFor();
+ results.afterSave = { notice: await intake.getByRole('status').innerText(), saved: (await record()).saved };
+ await intake.getByRole('button', { name: 'Complete first fact check', exact: true }).click();
+ await intake.getByRole('status').filter({ hasText: 'First fact check recorded and saved' }).waitFor();
+ results.afterFirstCheck = { saved: (await record()).saved, reviews: (await record()).reviews.map((r: any) => ({ stage: r.stage, simulated: r.simulated })) };
+ await page.reload(); await page.getByRole('status').filter({ hasText: 'Saved runtime case restored' }).waitFor();
+ results.afterRefresh = { saved: (await record()).saved };
+ results.errors = errors; results.providerRequests = providerRequests;
+ console.log(JSON.stringify(results, null, 2));
+ await writeFile('local/review-20261104/b-save-probe-result.json', JSON.stringify(results, null, 2));
+} finally { await browser.close(); server.closeAllConnections(); await new Promise<void>(resolve => server.close(() => resolve())); }

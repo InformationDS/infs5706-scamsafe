@@ -1,0 +1,57 @@
+{
+  "source": "Live-model recording from 10 November 2026",
+  "voice": "en-US-AriaNeural",
+  "rate": "-3%",
+  "audioTimeStretch": false,
+  "seconds": 70.0,
+  "groups": [
+    {
+      "start": 0,
+      "seconds": 9.68,
+      "spoken": "Let's see how a bank employee handles this fictional report of a suspicious text and an unfamiliar debit.",
+      "audioSeconds": 7.01
+    },
+    {
+      "start": 9.68,
+      "seconds": 8.68,
+      "spoken": "Once we submit it, the AI organises the facts, suggests phishing, and asks three focused questions.",
+      "audioSeconds": 7.49
+    },
+    {
+      "start": 18.36,
+      "seconds": 8.68,
+      "spoken": "Notice the transaction status is unknown. We can select \u201cDon\u2019t know\u201d and continue, keeping that gap visible.",
+      "audioSeconds": 8.02
+    },
+    {
+      "start": 27.04,
+      "seconds": 8.2,
+      "spoken": "Next, let's review the guidance and its fictional source. The account concern still needs human judgement.",
+      "audioSeconds": 7.94
+    },
+    {
+      "start": 35.239999999999995,
+      "seconds": 7.68,
+      "spoken": "Now we can generate a case summary, bringing together the report and the remaining gaps.",
+      "audioSeconds": 5.83
+    },
+    {
+      "start": 42.919999999999995,
+      "seconds": 7.68,
+      "spoken": "We also get a plain-language explanation to help the affected person understand the suggested next steps.",
+      "audioSeconds": 7.1
+    },
+    {
+      "start": 50.599999999999994,
+      "seconds": 9.64,
+      "spoken": "The telecom handover focuses on the suspicious message. We can review and edit the drafts before confirming.",
+      "audioSeconds": 7.99
+    },
+    {
+      "start": 60.239999999999995,
+      "seconds": 9.76,
+      "spoken": "Finally, we confirm and download the materials. The employee decides what happens next through existing organisational processes.",
+      "audioSeconds": 9.5
+    }
+  ]
+}

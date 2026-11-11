@@ -1,0 +1,281 @@
+{
+  "case": {
+    "role": {
+      "id": "bank",
+      "title": "Bank intake officer",
+      "responsibilities": "Understand reported account, payment and credential concerns. Prepare a local summary and only the handovers supported by the report. Do not freeze an account or promise a refund."
+    },
+    "phase": "open",
+    "facts": [
+      {
+        "key": "contactChannel",
+        "label": "Contact channel",
+        "group": "event",
+        "value": "text message",
+        "status": "known",
+        "uncertainty": null,
+        "evidence": "text message",
+        "origin": "narrative",
+        "pendingConflict": null
+      },
+      {
+        "key": "contactTime",
+        "label": "Contact time",
+        "group": "event",
+        "value": null,
+        "status": "unset",
+        "uncertainty": null,
+        "evidence": null,
+        "origin": "unset",
+        "pendingConflict": null
+      },
+      {
+        "key": "claimedIdentity",
+        "label": "Claimed identity",
+        "group": "event",
+        "value": "SYN Bank A",
+        "status": "known",
+        "uncertainty": null,
+        "evidence": "SYN Bank A",
+        "origin": "narrative",
+        "pendingConflict": null
+      },
+      {
+        "key": "reportedAction",
+        "label": "Reported action",
+        "group": "event",
+        "value": "opened the link and entered banking password and a one-time code",
+        "status": "known",
+        "uncertainty": null,
+        "evidence": "opened the link and entered my banking password and a one-time code",
+        "origin": "narrative",
+        "pendingConflict": null
+      },
+      {
+        "key": "amount",
+        "label": "Reported amount",
+        "group": "money",
+        "value": "2,000",
+        "status": "known",
+        "uncertainty": null,
+        "evidence": "2,000",
+        "origin": "narrative",
+        "pendingConflict": null
+      },
+      {
+        "key": "currency",
+        "label": "Currency",
+        "group": "money",
+        "value": "AUD",
+        "status": "known",
+        "uncertainty": null,
+        "evidence": "AUD",
+        "origin": "narrative",
+        "pendingConflict": null
+      },
+      {
+        "key": "transactionStatus",
+        "label": "Transaction status",
+        "group": "money",
+        "value": null,
+        "status": "unknown",
+        "uncertainty": "I do not know whether it is pending or completed",
+        "evidence": null,
+        "origin": "unset",
+        "pendingConflict": null
+      },
+      {
+        "key": "involvedOrganisation",
+        "label": "Organisation involved",
+        "group": "money",
+        "value": null,
+        "status": "unset",
+        "uncertainty": null,
+        "evidence": null,
+        "origin": "unset",
+        "pendingConflict": null
+      },
+      {
+        "key": "sharedInformation",
+        "label": "Information shared",
+        "group": "account",
+        "value": "banking password and one-time code",
+        "status": "known",
+        "uncertainty": null,
+        "evidence": "opened the link and entered my banking password and a one-time code",
+        "origin": "narrative",
+        "pendingConflict": null
+      },
+      {
+        "key": "affectedService",
+        "label": "Affected service",
+        "group": "account",
+        "value": null,
+        "status": "unset",
+        "uncertainty": null,
+        "evidence": null,
+        "origin": "unset",
+        "pendingConflict": null
+      },
+      {
+        "key": "observedIssue",
+        "label": "Observed issue",
+        "group": "account",
+        "value": "unfamiliar AUD 2,000 debit",
+        "status": "known",
+        "uncertainty": null,
+        "evidence": "unfamiliar AUD 2,000 debit",
+        "origin": "narrative",
+        "pendingConflict": null
+      },
+      {
+        "key": "stillInContact",
+        "label": "Still in contact",
+        "group": "current",
+        "value": null,
+        "status": "unset",
+        "uncertainty": null,
+        "evidence": null,
+        "origin": "unset",
+        "pendingConflict": null
+      },
+      {
+        "key": "actionsTaken",
+        "label": "Actions already taken",
+        "group": "current",
+        "value": null,
+        "status": "unset",
+        "uncertainty": null,
+        "evidence": null,
+        "origin": "unset",
+        "pendingConflict": null
+      },
+      {
+        "key": "organisationsContacted",
+        "label": "Organisations already contacted",
+        "group": "current",
+        "value": "none",
+        "status": "known",
+        "uncertainty": null,
+        "evidence": "have not contacted the bank or mobile provider yet",
+        "origin": "narrative",
+        "pendingConflict": null
+      },
+      {
+        "key": "evidenceAvailable",
+        "label": "Evidence the person can provide",
+        "group": "support",
+        "value": "text message on phone",
+        "status": "known",
+        "uncertainty": null,
+        "evidence": "I have the message on my phone",
+        "origin": "narrative",
+        "pendingConflict": null
+      },
+      {
+        "key": "urgencyCue",
+        "label": "Urgency cue",
+        "group": "support",
+        "value": null,
+        "status": "unset",
+        "uncertainty": null,
+        "evidence": null,
+        "origin": "unset",
+        "pendingConflict": null
+      },
+      {
+        "key": "vulnerabilityCue",
+        "label": "Vulnerability or support need",
+        "group": "support",
+        "value": null,
+        "status": "unset",
+        "uncertainty": null,
+        "evidence": null,
+        "origin": "unset",
+        "pendingConflict": null
+      }
+    ],
+    "questions": [
+      {
+        "id": "Q1",
+        "text": "Do you know whether the unfamiliar debit is pending or completed?",
+        "purpose": "Clarifies whether the reported debit has settled or is still pending.",
+        "relatedKeys": [
+          "transactionStatus"
+        ],
+        "status": "pending",
+        "answerText": null
+      },
+      {
+        "id": "Q2",
+        "text": "Is the sender still in contact, or did you reply to the message?",
+        "purpose": "Establishes whether the sender can still contact the affected person.",
+        "relatedKeys": [
+          "stillInContact"
+        ],
+        "status": "pending",
+        "answerText": null
+      },
+      {
+        "id": "Q3",
+        "text": "When did you receive the text message and notice the debit?",
+        "purpose": "Records the timing of the message and the later debit.",
+        "relatedKeys": [
+          "contactTime"
+        ],
+        "status": "pending",
+        "answerText": null
+      }
+    ],
+    "questionsEnded": false,
+    "types": [
+      {
+        "label": "Suspected phishing",
+        "reason": "A text message with a link led to banking password and one-time code entry, followed by an unfamiliar debit.",
+        "evidence": "opened the link and entered my banking password and a one-time code"
+      }
+    ],
+    "attention": [
+      {
+        "kind": "urgency",
+        "text": "Credential entry followed by an unfamiliar debit needs prompt review.",
+        "evidence": "unfamiliar AUD 2,000 debit"
+      }
+    ],
+    "recommendations": [
+      {
+        "id": "R1",
+        "guidelineId": "DEMO-G01",
+        "organisation": "Bank",
+        "priority": "now",
+        "audience": "this-organisation",
+        "action": "Assess the reported account and payment concern with a human reviewer; do not promise an account freeze or refund.",
+        "reason": "The report includes credentials entered after a link and an unfamiliar debit."
+      }
+    ],
+    "materials": {
+      "status": "not-generated",
+      "employeeEdited": false,
+      "summary": "",
+      "personExplanation": "",
+      "handover": null
+    },
+    "messages": [
+      {
+        "id": "m1",
+        "role": "user",
+        "text": "I received a text message claiming to be SYN Bank A. I opened the link and entered my banking password and a one-time code. Later I noticed an unfamiliar AUD 2,000 debit. I do not know whether it is pending or completed. I have the message on my phone and have not contacted the bank or mobile provider yet.",
+        "status": "complete"
+      },
+      {
+        "id": "m2",
+        "role": "assistant",
+        "text": "The latest text is an initial report about a text message claiming to be SYN Bank A, a link that was opened, banking password and one-time code details entered, and a later unfamiliar AUD 2,000 debit. This supports a suspected phishing concern with an account/payment review. Recorded the text-message channel, claimed identity, reported action, shared-information category, amount and currency, observed issue, that the debit status is unknown, that the bank and mobile provider have not been contacted, and that the message is on the phone. Still unclear: whether the debit is pending or completed, whether contact with the sender continues, and when the message and debit occurred.\n\nI have 3 questions to clarify this case, covering Clarifies whether the reported debit has settled or is still pending.; Establishes whether the sender can still contact the affected person.; Records the timing of the message and the later debit.. You can answer more than one, say you do not know, skip a question, or end early.\n\nNext: Question 1 of 3: Do you know whether the unfamiliar debit is pending or completed? You can answer, ask about the case, say you do not know, skip, or end clarification.",
+        "status": "complete"
+      }
+    ],
+    "messageSeq": 3
+  },
+  "assistantText": "The latest text is an initial report about a text message claiming to be SYN Bank A, a link that was opened, banking password and one-time code details entered, and a later unfamiliar AUD 2,000 debit. This supports a suspected phishing concern with an account/payment review. Recorded the text-message channel, claimed identity, reported action, shared-information category, amount and currency, observed issue, that the debit status is unknown, that the bank and mobile provider have not been contacted, and that the message is on the phone. Still unclear: whether the debit is pending or completed, whether contact with the sender continues, and when the message and debit occurred.\n\nI have 3 questions to clarify this case, covering Clarifies whether the reported debit has settled or is still pending.; Establishes whether the sender can still contact the affected person.; Records the timing of the message and the later debit.. You can answer more than one, say you do not know, skip a question, or end early.\n\nNext: Question 1 of 3: Do you know whether the unfamiliar debit is pending or completed? You can answer, ask about the case, say you do not know, skip, or end clarification.",
+  "requestId": "97b65605-4140-4890-95a0-305c528fb710"
+}
